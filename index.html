@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grand Tour 2026</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root { --bg: #fdfdfd; --primary: #111; --accent: #007aff; --card-shadow: 0 10px 30px rgba(0,0,0,0.08); }
+        body { font-family: -apple-system, sans-serif; background: var(--bg); color: var(--primary); margin: 0; padding-bottom: 50px; }
+        .hero { position: relative; height: 300px; overflow: hidden; color: white; display: flex; align-items: flex-end; padding: 20px; background-size: cover; background-position: center; }
+        .hero::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to top, rgba(0,0,0,0.6), transparent); }
+        .hero-content { position: relative; z-index: 1; }
+        .section-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 700; margin-bottom: 4px; display: block; }
+        
+        .card-container { padding: 20px; max-width: 800px; margin: 0 auto; }
+        .nav-btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 20px; background: var(--primary); color: white; border-radius: 50px; text-decoration: none; font-size: 0.85rem; font-weight: 600; margin-top: 15px; transition: 0.2s; }
+        .nav-btn:active { transform: scale(0.96); }
+
+        .itinerary-list { list-style: none; padding: 0; margin: 20px 0; }
+        .itinerary-item { display: flex; gap: 15px; margin-bottom: 20px; align-items: flex-start; }
+        .day-num { width: 40px; font-weight: 800; color: #ddd; font-size: 1.2rem; }
+        .day-content h4 { margin: 0; font-size: 1rem; }
+        .day-content p { margin: 4px 0 0; font-size: 0.85rem; color: #666; }
+    </style>
+</head>
+<body>
+
+    <div class="hero" style="background-image: url('http://googleusercontent.com/image_collection/image_retrieval/11667852960675521330_0');">
+        <div class="hero-content">
+            <span class="section-label">Stop 1 • May 16-20</span>
+            <h1>Lisbon</h1>
+            <a href="https://www.google.com/maps/search/?api=1&query=Moxy+Lisbon+City" class="nav-btn">
+                <i class="fa-solid fa-map"></i> Navigate to Hotel
+            </a>
+        </div>
+    </div>
+    <div class="card-container">
+        <div class="itinerary-list">
+            <div class="itinerary-item">
+                <div class="day-num">17</div>
+                <div class="day-content">
+                    <h4>Arrival & Check-in</h4>
+                    <p>Recover from flight AC812. Walk the Avenida da Liberdade.</p>
+                </div>
+            </div>
+            <div class="itinerary-item">
+                <div class="day-num">18</div>
+                <div class="day-content">
+                    <h4>Alfama & Castelo</h4>
+                    <p>Historic district walking. Look for fado dinner spots.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="hero" style="background-image: url('http://googleusercontent.com/image_collection/image_retrieval/17210645149506392263_0');">
+        <div class="hero-content">
+            <span class="section-label">Stop 2 • May 20-24</span>
+            <h1>The Algarve</h1>
+            <a href="https://www.google.com/maps/search/?api=1&query=Pine+Cliffs+Ocean+Suites" class="nav-btn">
+                <i class="fa-solid fa-location-arrow"></i> Driving Directions
+            </a>
+        </div>
+    </div>
+    <div class="card-container">
+        <div class="itinerary-list">
+            <div class="itinerary-item">
+                <div class="day-num">20</div>
+                <div class="day-content">
+                    <h4>Coastline Drive</h4>
+                    <p>Pick up Avis rental. Head south to Pine Cliffs.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="hero" style="background-image: url('http://googleusercontent.com/image_collection/image_retrieval/11494456301604876347_0');">
+        <div class="hero-content">
+            <span class="section-label">Stop 3 • May 24-27</span>
+            <h1>Andalusia</h1>
+            <a href="https://www.google.com/maps/dir/?api=1&origin=Pine+Cliffs+Algarve&destination=AC+Hotel+Cordoba" class="nav-btn">
+                <i class="fa-solid fa-car"></i> Start Road Trip
+            </a>
+        </div>
+    </div>
+    <div class="card-container">
+        <div class="itinerary-list">
+            <div class="itinerary-item">
+                <div class="day-num">24</div>
+                <div class="day-content">
+                    <h4>Córdoba Patios</h4>
+                    <p>Explore the flower-filled courtyards and the Mezquita.</p>
+                </div>
+            </div>
+            <div class="itinerary-item">
+                <div class="day-num">25</div>
+                <div class="day-content">
+                    <h4>Granada Arrival</h4>
+                    <p>Drive to the foot of the Sierra Nevada. Sunset view of the Alhambra.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="hero" style="background-image: url('http://googleusercontent.com/image_collection/image_retrieval/3351589791596041752_0');">
+        <div class="hero-content">
+            <span class="section-label">Stop 4 • May 27-30</span>
+            <h1>Barcelona</h1>
+            <a href="https://www.google.com/maps/search/?api=1&query=Le+Meridien+Barcelona" class="nav-btn">
+                <i class="fa-solid fa-building"></i> Hotel Info
+            </a>
+        </div>
+    </div>
+    <div class="card-container">
+        <div class="itinerary-list">
+            <div class="itinerary-item">
+                <div class="day-num">28</div>
+                <div class="day-content">
+                    <h4>Gaudí Year Tour</h4>
+                    <p>Visit the Sagrada Família (Check 100th-anniversary exhibits).</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
