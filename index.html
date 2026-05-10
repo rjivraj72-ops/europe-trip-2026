@@ -7,73 +7,66 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         :root { --accent: #007aff; --booked: #28a745; --grey: #8e8e93; --flight: #5856d6; }
-        body { font-family: -apple-system, sans-serif; margin: 0; background: #f2f2f7; color: #1c1c1e; }
-        .container { max-width: 500px; margin: 0 auto; background: white; min-height: 100vh; padding-bottom: 50px; }
+        body { font-family: -apple-system, sans-serif; margin: 0; background: #f2f2f7; color: #1c1c1e; padding-bottom: 60px; }
+        .container { max-width: 500px; margin: 0 auto; background: white; min-height: 100vh; box-shadow: 0 0 30px rgba(0,0,0,0.1); }
         
-        /* HEADER */
-        .header { padding: 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; }
+        .header { padding: 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; background: #fff; position: sticky; top: 0; z-index: 100; }
         .rate-pill { color: var(--booked); font-weight: 800; font-size: 0.75rem; background: #eef9f2; padding: 4px 10px; border-radius: 20px; }
 
-        /* MAP PLACEHOLDER */
-        .map-container { width: 100%; height: 350px; background: #e5e5ea; border-bottom: 1px solid #ddd; position: relative; }
-        .map-container iframe { width: 100%; height: 100%; border: 0; }
-
-        /* FLIGHTS */
         .flight-hub { background: #f2f2f7; padding: 15px; border-bottom: 1px solid #ddd; }
         .flight-card { background: white; border-radius: 12px; padding: 12px; display: flex; justify-content: space-between; align-items: center; text-decoration: none; color: inherit; border: 1px solid #e5e5ea; margin-bottom: 8px; }
         .flight-no { color: var(--flight); font-weight: 800; font-size: 0.85rem; }
 
-        /* WEATHER */
-        .weather-hub { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; padding: 10px 15px; background: white; border-bottom: 1px solid #eee; }
-        .w-small { text-align: center; font-size: 0.65rem; font-weight: 800; color: var(--grey); }
+        .weather-hub { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; padding: 12px 15px; background: white; border-bottom: 1px solid #eee; }
+        .w-small { text-align: center; font-size: 0.65rem; font-weight: 800; color: var(--grey); line-height: 1.4; }
 
-        /* CITY CARDS */
-        .hero { height: 220px; background-size: cover; background-position: center; display: flex; align-items: flex-end; padding: 20px; color: white; position: relative; margin-top: 10px; }
-        .hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); }
-        .hero h2 { position: relative; z-index: 1; margin: 0; font-size: 1.8rem; font-weight: 800; }
+        .hero { height: 240px; background-size: cover; background-position: center; display: flex; align-items: flex-end; padding: 20px; color: white; position: relative; margin-top: 10px; }
+        .hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.85), transparent); }
+        .hero h2 { position: relative; z-index: 1; margin: 0; font-size: 2rem; font-weight: 800; }
 
-        .card { padding: 15px; margin: 0 15px 20px; border-radius: 16px; background: #fff; border: 1px solid #eee; box-shadow: 0 4px 10px rgba(0,0,0,0.03); margin-top: -10px; position: relative; z-index: 2; }
-        .item { display: flex; align-items: center; gap: 10px; margin: 8px 0; font-size: 0.95rem; }
-        .item i { color: var(--accent); width: 20px; text-align: center; }
-        .note { font-size: 0.75rem; color: var(--grey); margin-left: 30px; font-style: italic; }
+        .card { padding: 18px; margin: 0 15px 25px; border-radius: 20px; background: #fff; border: 1px solid #eee; box-shadow: 0 5px 15px rgba(0,0,0,0.04); margin-top: -15px; position: relative; z-index: 2; }
+        .item { display: flex; align-items: center; gap: 12px; margin: 10px 0; font-size: 0.95rem; font-weight: 500; }
+        .item i { color: var(--accent); width: 22px; text-align: center; }
+        .note { font-size: 0.8rem; color: var(--grey); margin-left: 34px; font-style: italic; background: #f8f8f8; padding: 5px 10px; border-radius: 8px; display: inline-block; }
+        
+        .gallery-title { padding: 20px 20px 10px; font-weight: 900; font-size: 1.4rem; letter-spacing: -0.5px; }
     </style>
 </head>
 <body>
 
 <div class="container">
     <div class="header">
-        <div style="font-weight: 900;">JIVRAJ EUROPE 2026</div>
+        <div style="font-weight: 900; letter-spacing: -0.5px;">EUROPE 2026</div>
         <div id="currency-rate" class="rate-pill">1 EUR = -- CAD</div>
     </div>
 
-    <div class="map-container">
-        <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1_G-Your-Map-ID-Here"></iframe>
-    </div>
-
     <div class="flight-hub">
-        <div style="font-size: 0.65rem; font-weight: 800; color: var(--grey); text-transform: uppercase; margin-bottom: 10px;">Live Flight Status</div>
         <a href="https://www.google.com/search?q=AC812+flight+status" target="_blank" class="flight-card">
-            <span style="font-size: 0.85rem; font-weight: 600;">YVR ➔ LIS</span>
-            <span class="flight-no">AC812 <i class="fa-solid fa-chevron-right"></i></span>
+            <span style="font-size: 0.85rem; font-weight: 700;">Vancouver ➔ Lisbon</span>
+            <span class="flight-no">AC812 <i class="fa-solid fa-chevron-right" style="font-size: 0.7rem;"></i></span>
+        </a>
+        <a href="https://www.google.com/search?q=VY2013+flight+status" target="_blank" class="flight-card">
+            <span style="font-size: 0.85rem; font-weight: 700;">Granada ➔ Barcelona</span>
+            <span class="flight-no">VY2013 <i class="fa-solid fa-chevron-right" style="font-size: 0.7rem;"></i></span>
         </a>
     </div>
 
     <div class="weather-hub">
-        <div class="w-small" id="w1">LIS --°</div>
-        <div class="w-small" id="w2">ALG --°</div>
-        <div class="w-small" id="w3">COR --°</div>
-        <div class="w-small" id="w4">BCN --°</div>
+        <div class="w-small" id="w1">LIS<br>--°</div>
+        <div class="w-small" id="w2">ALG<br>--°</div>
+        <div class="w-small" id="w3">COR<br>--°</div>
+        <div class="w-small" id="w4">BCN<br>--°</div>
     </div>
 
-    <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1543783232-af41fe6d154b?auto=format&fit=crop&w=800&q=80');">
+    <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1543783232-af41fe6d154b?auto=format&fit=crop&w=1000&q=80');">
         <h2>Lisbon</h2>
     </div>
     <div class="card">
         <div class="item"><i class="fa-solid fa-hotel"></i> Moxy Lisbon City</div>
-        <div class="item"><i class="fa-solid fa-mosque"></i> Ismaili Centre Tour</div>
+        <div class="item"><i class="fa-solid fa-mosque"></i> Ismaili Centre Guided Tour</div>
     </div>
 
-    <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1516496636080-14fb876e029d?auto=format&fit=crop&w=800&q=80');">
+    <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1516496636080-14fb876e029d?auto=format&fit=crop&w=1000&q=80');">
         <h2>The Algarve</h2>
     </div>
     <div class="card">
@@ -82,7 +75,7 @@
         <div class="note">Time: 11:00 AM - 12:30 PM</div>
     </div>
 
-    <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1595121655184-2826a7f8054a?auto=format&fit=crop&w=800&q=80');">
+    <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1595121655184-2826a7f8054a?auto=format&fit=crop&w=1000&q=80');">
         <h2>Andalusia</h2>
     </div>
     <div class="card">
@@ -92,7 +85,7 @@
         <div class="note">Entry shift: 3:30 PM</div>
     </div>
 
-    <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1511527661048-7fe73d85e9a4?auto=format&fit=crop&w=800&q=80');">
+    <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1511527661048-7fe73d85e9a4?auto=format&fit=crop&w=1000&q=80');">
         <h2>Barcelona</h2>
     </div>
     <div class="card">
@@ -100,8 +93,8 @@
         <div class="item"><i class="fa-solid fa-church"></i> Sagrada Família</div>
     </div>
 
-    <div style="padding: 20px; font-weight: 900; font-size: 1.3rem;">TRIP MOMENTS</div>
-    <div id="gallery" style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 0 15px;"></div>
+    <div class="gallery-title">Trip Moments</div>
+    <div id="gallery" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 0 15px;"></div>
 </div>
 
 <script>
@@ -115,13 +108,13 @@
         } catch(e) {}
     }
 
-    async function updateW(city, id) {
+    async function updateW(city, id, label) {
         try {
             const r = await fetch(`https://api.weatherapi.com/v1/current.json?key=${weatherApi}&q=${city}`);
             const d = await r.json();
             const cond = d.current.condition.text.toLowerCase();
             let e = "☀️"; if(cond.includes("cloud")) e="☁️"; if(cond.includes("rain")) e="🌧️";
-            document.getElementById(id).innerHTML = `${city.toUpperCase().substring(0,3)} ${e} ${Math.round(d.current.temp_c)}°`;
+            document.getElementById(id).innerHTML = `${label}<br>${e} ${Math.round(d.current.temp_c)}°`;
         } catch(e) {}
     }
 
@@ -133,7 +126,7 @@
             f.reverse().forEach(file => {
                 if (file.name.match(/\.(jpg|jpeg|png)$/i)) {
                     const d = document.createElement('div');
-                    d.style.height="150px"; d.style.borderRadius="12px"; d.style.overflow="hidden"; d.style.background="#eee";
+                    d.style.height="160px"; d.style.borderRadius="16px"; d.style.overflow="hidden"; d.style.background="#f1f1f1";
                     d.innerHTML = `<img src="${file.download_url}" style="width:100%; height:100%; object-fit:cover;">`;
                     g.appendChild(d);
                 }
@@ -142,7 +135,7 @@
     }
 
     updateRates();
-    updateW("Lisbon","w1"); updateW("Albufeira","w2"); updateW("Cordoba","w3"); updateW("Barcelona","w4");
+    updateW("Lisbon","w1","LIS"); updateW("Albufeira","w2","ALG"); updateW("Cordoba","w3","COR"); updateW("Barcelona","w4","BCN");
     loadGallery();
 </script>
 </body>
