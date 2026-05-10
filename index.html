@@ -3,213 +3,129 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Jivraj Mission Control 2026</title>
+    <title>Jivraj Tour Hub</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        :root { --bg: #f8f9fa; --primary: #1a1a1a; --accent: #007aff; --booked: #28a745; --grey: #6c757d; --urgent: #d32f2f; }
-        body { font-family: -apple-system, system-ui, sans-serif; color: var(--primary); margin: 0; background-color: var(--bg); padding-bottom: 80px; }
+        :root { --bg: #f8f9fa; --primary: #1a1a1a; --accent: #007aff; --booked: #28a745; --grey: #6c757d; }
+        body { font-family: -apple-system, system-ui, sans-serif; color: var(--primary); margin: 0; background-color: var(--bg); padding-bottom: 50px; }
         .container { max-width: 500px; margin: 0 auto; background: white; min-height: 100vh; box-shadow: 0 0 30px rgba(0,0,0,0.1); }
+        .header { padding: 20px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; background: white; position: sticky; top: 0; z-index: 100; }
         
-        /* HEADER */
-        .header { padding: 20px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; background: #fff; position: sticky; top: 0; z-index: 100; }
-        .weather-text { font-weight: 800; font-size: 0.9rem; }
+        /* WEATHER GRID */
+        .weather-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; padding: 15px; background: #f1f1f1; margin: 15px; border-radius: 16px; }
+        .weather-item { background: white; padding: 10px; border-radius: 12px; text-align: center; border: 1px solid #eee; font-size: 0.8rem; font-weight: 700; }
 
-        /* CARDS */
-        .card { background: white; border-radius: 16px; padding: 15px; margin: 15px; border: 1px solid #eee; box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
-        .card-header { font-size: 0.7rem; font-weight: 800; color: var(--grey); text-transform: uppercase; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
-        .booking-badge { background: #eef9f2; color: var(--booked); padding: 4px 8px; border-radius: 6px; font-size: 0.65rem; }
-        
-        .activity { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 12px; }
-        .activity i { color: var(--accent); width: 20px; margin-top: 3px; text-align: center; }
-        .activity-details { flex: 1; }
-        .time { font-weight: 700; font-size: 0.9rem; display: block; }
-        .title { font-size: 0.95rem; display: block; margin-bottom: 2px; }
-        .note { font-size: 0.8rem; color: var(--grey); font-style: italic; }
-
-        /* URGENT NOTICE */
-        .urgent-box { background: #fff8f8; border: 1px solid #ffcccc; border-radius: 12px; padding: 10px; margin-top: 10px; color: var(--urgent); font-size: 0.75rem; line-height: 1.3; }
-
-        /* HERO IMAGES */
-        .city-hero { height: 220px; background-size: cover; background-position: center; display: flex; align-items: flex-end; padding: 20px; color: white; position: relative; margin: 15px; border-radius: 20px; overflow: hidden; }
+        /* HERO SECTIONS */
+        .city-hero { height: 240px; background-size: cover; background-position: center; display: flex; align-items: flex-end; padding: 20px; color: white; position: relative; margin: 15px; border-radius: 20px; overflow: hidden; background-color: #333; }
         .city-hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); }
         .city-hero h2 { position: relative; z-index: 1; margin: 0; font-size: 1.8rem; font-weight: 800; }
 
-        .nav-btn { display: inline-flex; align-items: center; gap: 6px; color: var(--accent); text-decoration: none; font-size: 0.8rem; font-weight: 700; margin-top: 5px; }
+        .card { background: white; border-radius: 16px; padding: 15px; border: 1px solid #eee; margin: 0 15px 20px; }
+        .activity-item { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; font-size: 0.9rem; }
+        .activity-item i { color: var(--accent); width: 18px; text-align: center; }
+
+        /* PHOTO GALLERY */
+        .gallery-header { padding: 10px 20px; font-weight: 800; font-size: 1.2rem; }
+        .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 0 15px; }
+        .photo-card { background: #eee; border-radius: 12px; overflow: hidden; height: 150px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+        .photo-card img { width: 100%; height: 100%; object-fit: cover; }
     </style>
 </head>
 <body>
 
 <div class="container">
     <div class="header">
-        <div id="weather" class="weather-text">Connecting...</div>
+        <div style="font-weight: 900;">Jivraj Europe 2026</div>
         <div style="font-size: 0.7rem; font-weight: 800; color: var(--booked);">1 EUR = 1.48 CAD</div>
     </div>
 
-    <div class="card" style="background: #f1f1f1;">
-        <div class="card-header">Departure • May 16</div>
-        <div class="activity">
-            <i class="fa-solid fa-plane"></i>
-            <div class="activity-details">
-                <span class="time">11:30 AM</span>
-                <span class="title">AC812 · YVR ➔ LIS</span>
-                <a href="https://www.google.com/search?q=AC812+flight+status" class="nav-btn">Track Flight</a>
-            </div>
-        </div>
+    <div class="weather-grid" id="weather-hub">
+        <div class="weather-item" id="w-lis">LIS ☀️ --°</div>
+        <div class="weather-item" id="w-alg">ALG ☀️ --°</div>
+        <div class="weather-item" id="w-and">AND ☀️ --°</div>
+        <div class="weather-item" id="w-bcn">BCN ☀️ --°</div>
     </div>
 
-    <div class="city-hero" style="background-image: url('https://images.unsplash.com/photo-1543783232-af41fe6d154b?auto=format&fit=crop&w=800');">
+    <div class="city-hero" style="background-image: url('https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?q=80&w=800&auto=format&fit=crop');">
         <h2>Lisbon</h2>
     </div>
     <div class="card">
-        <div class="card-header">Stay • May 16-19 <span class="booking-badge">CONFIRMED</span></div>
-        <div class="activity">
-            <i class="fa-solid fa-hotel"></i>
-            <div class="activity-details">
-                <span class="title">Moxy Lisbon City</span>
-                <a href="https://www.google.com/maps/dir/?api=1&destination=Moxy+Lisbon+City" class="nav-btn">Navigate</a>
-            </div>
-        </div>
+        <div class="activity-item"><i class="fa-solid fa-hotel"></i> Moxy Lisbon City</div>
+        <div class="activity-item"><i class="fa-solid fa-mosque"></i> Ismaili Centre Tour</div>
     </div>
 
-    <div class="card" style="border-left: 5px solid var(--accent);">
-        <div class="card-header">Transportation <span class="booking-badge">AVIS</span></div>
-        <div class="activity">
-            <i class="fa-solid fa-car"></i>
-            <div class="activity-details">
-                <span class="time">May 19 (12:00 PM) – May 27 (12:00 PM)</span>
-                <span class="title">Compact Elite (Ioniq 5 or similar)</span>
-                <span class="note">Itinerary: 73380345107413</span>
-            </div>
-        </div>
-    </div>
-
-    <div class="city-hero" style="background-image: url('https://images.unsplash.com/photo-1559064500-47407038e2f8?auto=format&fit=crop&w=800');">
-        <h2>The Algarve</h2>
+    <div class="city-hero" style="background-image: url('https://images.unsplash.com/photo-1559064500-47407038e2f8?q=80&w=800&auto=format&fit=crop');">
+        <h2>Algarve</h2>
     </div>
     <div class="card">
-        <div class="card-header">Activity • May 21 <span class="booking-badge">CONFIRMED</span></div>
-        <div class="activity">
-            <i class="fa-solid fa-sailboat"></i>
-            <div class="activity-details">
-                <span class="time">11:00 AM – 12:30 PM</span>
-                <span class="title">Benagil Grottoes Kayak Experience</span>
-                <span class="note">Location: Carvoeiro Beach</span>
-            </div>
-        </div>
+        <div class="activity-item"><i class="fa-solid fa-umbrella-beach"></i> Pine Cliffs Resort</div>
     </div>
 
-    <div class="card">
-        <div class="card-header">Activity • May 25 <span class="booking-badge">CONFIRMED</span></div>
-        <div class="activity">
-            <i class="fa-solid fa-archway"></i>
-            <div class="activity-details">
-                <span class="time">10:00 AM</span>
-                <span class="title">Mosque-Cathedral Guided Tour</span>
-                <span class="note">English · 75 Minutes · 4 Adults</span>
-            </div>
-        </div>
-    </div>
-
-    <div class="city-hero" style="background-image: url('https://images.unsplash.com/photo-1595121655184-2826a7f8054a?auto=format&fit=crop&w=800');">
-        <h2>Granada</h2>
+    <div class="city-hero" style="background-image: url('https://images.unsplash.com/photo-1595121655184-2826a7f8054a?q=80&w=800&auto=format&fit=crop');">
+        <h2>Andalusia</h2>
     </div>
     <div class="card">
-        <div class="card-header">Activity • May 26 <span class="booking-badge">CONFIRMED</span></div>
-        <div class="activity">
-            <i class="fa-solid fa-fort-awesome"></i>
-            <div class="activity-details">
-                <span class="time">12:00 PM</span>
-                <span class="title">Alhambra & Nasrid Palaces Tour</span>
-                <span class="note">3 Hours · Entry Tickets Included</span>
-            </div>
-        </div>
-        <div class="activity" style="margin-top: 15px; border-top: 1px solid #eee; padding-top: 15px;">
-            <i class="fa-solid fa-hot-tub-person"></i>
-            <div class="activity-details">
-                <span class="time">4:00 PM (Entry at 3:30 PM)</span>
-                <span class="title">Hammam Al Ándalus</span>
-                <span class="note">Code: 711632GRX · MIMMA60</span>
-                <div class="urgent-box">
-                    <strong>ACCESS UPDATE:</strong> Entrance via Carrera del Darro, crossing Cabrera Bridge.
-                </div>
-            </div>
-        </div>
+        <div class="activity-item"><i class="fa-solid fa-archway"></i> Mosque-Cathedral</div>
+        <div class="activity-item"><i class="fa-solid fa-fort-awesome"></i> Alhambra Tour</div>
     </div>
 
-    <div class="card" style="background: #fff8e1;">
-        <div class="card-header">Internal Flight • May 27 <span class="booking-badge" style="background:#fff;">Vueling</span></div>
-        <div class="activity">
-            <i class="fa-solid fa-plane-up"></i>
-            <div class="activity-details">
-                <span class="time">2:10 PM – 3:40 PM</span>
-                <span class="title">GRX ➔ BCN · Code: IH K S S C</span>
-            </div>
-        </div>
-    </div>
-
-    <div class="city-hero" style="background-image: url('https://images.unsplash.com/photo-1511527661048-7fe73d85e9a4?auto=format&fit=crop&w=800');">
+    <div class="city-hero" style="background-image: url('https://images.unsplash.com/photo-1511527661048-7fe73d85e9a4?q=80&w=800&auto=format&fit=crop');">
         <h2>Barcelona</h2>
     </div>
     <div class="card">
-        <div class="card-header">Stay • May 27-30</div>
-        <div class="activity">
-            <i class="fa-solid fa-hotel"></i>
-            <div class="activity-details">
-                <span class="title">Le Méridien Barcelona</span>
-                <a href="https://www.google.com/maps/dir/?api=1&destination=Le+Meridien+Barcelona" class="nav-btn">Navigate</a>
-            </div>
+        <div class="activity-item"><i class="fa-solid fa-bed"></i> Le Méridien Barcelona</div>
+    </div>
+
+    <div class="gallery-header">Trip Moments</div>
+    <div class="gallery" id="auto-gallery">
         </div>
-    </div>
-
-    <div class="card" style="background: #f1f1f1; margin-bottom: 50px;">
-        <div class="card-header">Return • May 30</div>
-        <div class="activity">
-            <i class="fa-solid fa-plane-arrival"></i>
-            <div class="activity-details">
-                <span class="time">1:15 PM</span>
-                <span class="title">AC821 · BCN ➔ YVR</span>
-            </div>
-        </div>
-    </div>
-
-    <div style="padding: 20px; text-align: center;">
-        <div style="font-weight: 800; font-size: 1.2rem;">Trip Moments</div>
-        <div id="auto-gallery" style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px;"></div>
-    </div>
-
 </div>
 
 <script>
-    async function getWeather() {
-        const apiKey = 'ff6e4e362f0a4231841165933261005'; 
-        const today = new Date();
-        const city = today.getDate() >= 27 ? "Barcelona" : "Lisbon";
+    const apiKey = 'ff6e4e362f0a4231841165933261005';
+
+    async function fetchWeather(city, id) {
         try {
-            const res = await fetch(`https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}`);
+            const res = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&days=1`);
             const data = await res.json();
-            document.getElementById('weather').innerHTML = `<i class="fa-solid fa-sun"></i> ${data.current.temp_c}°C in ${city}`;
-        } catch (e) { document.getElementById('weather').innerHTML = "Ready for Takeoff"; }
+            const temp = Math.round(data.current.temp_c);
+            const high = Math.round(data.forecast.forecastday[0].day.maxtemp_c);
+            const low = Math.round(data.forecast.forecastday[0].day.mintemp_c);
+            const cond = data.current.condition.text.toLowerCase();
+            
+            let emoji = "☀️";
+            if(cond.includes("cloud")) emoji = "☁️";
+            if(cond.includes("rain")) emoji = "🌧️";
+
+            document.getElementById(id).innerHTML = `${city.substring(0,3).toUpperCase()} ${emoji}<br>${temp}° (H:${high}° L:${low}°)`;
+        } catch (e) { }
     }
 
-    async function loadPhotos() {
+    async function loadGallery() {
         const url = `https://api.github.com/repos/rjivraj72/europe-trip-2026/contents/photos`;
         try {
             const response = await fetch(url);
             const files = await response.json();
             const gallery = document.getElementById('auto-gallery');
+            
+            // Show only actual images, newest first
             files.reverse().forEach(file => {
                 if (file.name.match(/\.(jpg|jpeg|png|gif)$/i)) {
-                    const card = document.createElement('div');
-                    card.style.height = "140px"; card.style.background = "#eee"; card.style.borderRadius = "12px"; card.style.overflow = "hidden";
-                    card.innerHTML = `<img src="${file.download_url}" style="width:100%; height:100%; object-fit:cover;">`;
-                    gallery.appendChild(card);
+                    const div = document.createElement('div');
+                    div.className = 'photo-card';
+                    div.innerHTML = `<img src="${file.download_url}" loading="lazy">`;
+                    gallery.appendChild(div);
                 }
             });
-        } catch (e) { }
+        } catch (e) { console.log("Photos not found in /photos folder yet."); }
     }
 
-    getWeather();
-    loadPhotos();
+    // Initialize
+    fetchWeather("Lisbon", "w-lis");
+    fetchWeather("Albufeira", "w-alg");
+    fetchWeather("Cordoba", "w-and");
+    fetchWeather("Barcelona", "w-bcn");
+    loadGallery();
 </script>
 </body>
 </html>
