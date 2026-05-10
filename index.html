@@ -6,95 +6,71 @@
     <title>Jivraj Grand Tour 2026</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        :root { --accent: #007aff; --booked: #28a745; --bg: #f2f2f7; }
+        :root { --accent: #007aff; --booked: #28a745; --bg: #f2f2f7; --grey: #8e8e93; }
         body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; margin: 0; background: var(--bg); color: #1c1c1e; padding-bottom: 50px; }
         .container { max-width: 500px; margin: 0 auto; background: white; min-height: 100vh; box-shadow: 0 0 30px rgba(0,0,0,0.1); }
         .header { padding: 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; background: #fff; position: sticky; top: 0; z-index: 100; }
-
-        /* SCROLLABLE MASTER ITINERARY */
+        
+        /* MASTER ITINERARY SCROLL */
         .itinerary-container { background: #1c1c1e; color: white; padding: 20px; }
-        .scroll-window { 
-            height: 220px; 
-            overflow-y: scroll; 
-            padding: 15px; 
-            background: #2c2c2e; 
-            border-radius: 12px; 
-            border: 1px solid #3a3a3c;
-            -webkit-overflow-scrolling: touch;
-        }
+        .scroll-window { height: 180px; overflow-y: scroll; padding: 15px; background: #2c2c2e; border-radius: 12px; border: 1px solid #3a3a3c; -webkit-overflow-scrolling: touch; }
         .scroll-window::-webkit-scrollbar { width: 6px; display: block; }
         .scroll-window::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 10px; }
-        .row { display: flex; gap: 15px; padding: 12px 0; border-bottom: 1px solid #3a3a3c; align-items: flex-start; }
-        .row:last-child { border: none; }
-        .row-date { font-size: 0.7rem; font-weight: 800; color: var(--accent); text-transform: uppercase; display: block; }
-        .row-text { font-size: 0.9rem; font-weight: 600; line-height: 1.4; }
+        .row { display: flex; gap: 15px; padding: 10px 0; border-bottom: 1px solid #333; }
+        .row-date { font-size: 0.7rem; font-weight: 800; color: var(--accent); text-transform: uppercase; min-width: 50px; }
+        .row-text { font-size: 0.85rem; font-weight: 600; line-height: 1.3; }
 
-        /* STABLE IMAGES */
-        .hero { height: 250px; background-size: cover; background-position: center; display: flex; align-items: flex-end; padding: 20px; color: white; position: relative; margin-top: 20px; background-color: #333; }
-        .hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.85), transparent); }
-        .hero h2 { position: relative; z-index: 1; margin: 0; font-size: 2.2rem; font-weight: 800; letter-spacing: -1px; }
+        /* WEATHER HUB */
+        .weather-hub { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; padding: 15px; background: var(--bg); }
+        .w-btn { background: white; padding: 15px 10px; border-radius: 16px; text-align: center; border: 1px solid #eee; text-decoration: none; color: inherit; }
+        .w-city { font-size: 0.65rem; font-weight: 800; color: var(--grey); text-transform: uppercase; display: block; }
+        .w-temp { font-size: 1.5rem; font-weight: 900; display: block; margin: 4px 0; }
+        .w-label { font-size: 0.55rem; color: var(--accent); font-weight: 800; }
 
-        .card { padding: 20px; margin: -25px 15px 35px; border-radius: 20px; background: #fff; border: 1px solid #eee; box-shadow: 0 8px 25px rgba(0,0,0,0.06); position: relative; z-index: 2; }
-        .item { display: flex; align-items: center; gap: 10px; margin: 8px 0; font-size: 0.95rem; }
-        .item i { color: var(--accent); width: 20px; text-align: center; }
+        /* CITY SECTIONS */
+        .hero { height: 240px; background-size: cover; background-position: center; display: flex; align-items: flex-end; padding: 20px; color: white; position: relative; margin-top: 20px; }
+        .hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); }
+        .hero h2 { position: relative; z-index: 1; margin: 0; font-size: 2rem; font-weight: 800; }
+        .card { padding: 15px; margin: -15px 15px 15px; border-radius: 18px; background: #fff; border: 1px solid #eee; box-shadow: 0 4px 12px rgba(0,0,0,0.05); position: relative; z-index: 2; }
+        .item { display: flex; align-items: center; gap: 10px; margin: 8px 0; font-size: 0.9rem; }
+        .item i { color: var(--accent); width: 18px; text-align: center; }
+
+        /* LANGUAGE CARDS */
+        .lingo { background: #f9f9fb; padding: 10px 15px; border-radius: 12px; margin: 0 15px 25px; border: 1px solid #eee; font-size: 0.85rem; display: flex; justify-content: space-between; }
     </style>
 </head>
 <body>
 
 <div class="container">
     <div class="header">
-        <div style="font-weight: 900; font-size: 1.1rem;">JIVRAJ TOUR 2026</div>
-        <div style="color: var(--booked); font-weight: 800; font-size: 0.75rem;">1 EUR = 1.48 CAD</div>
+        <div style="font-weight: 900;">JIVRAJ TOUR 2026</div>
+        <div id="rate" style="color: var(--booked); font-weight: 800; font-size: 0.75rem;">1 EUR = 1.48 CAD</div>
     </div>
 
     <div class="itinerary-container">
-        <span style="font-size: 0.65rem; font-weight: 800; color: #888; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 12px; display: block;">Full Trip Tracker (Scroll) ↓</span>
         <div class="scroll-window">
-            <div class="row"><div><span class="row-date">May 16</span><span class="row-text">Flight AC812 YVR ➔ LIS • Moxy Lisbon City</span></div></div>
-            <div class="row"><div><span class="row-date">May 18</span><span class="row-text">Guided Tour: Ismaili Centre Lisbon</span></div></div>
-            <div class="row"><div><span class="row-date">May 19</span><span class="row-text">Avis Rental Pick-up • Drive to Algarve</span></div></div>
-            <div class="row"><div><span class="row-date">May 20</span><span class="row-text">Check-in: Pine Cliffs Ocean Suites</span></div></div>
-            <div class="row"><div><span class="row-date">May 21</span><span class="row-text">11:00 AM: Benagil Grottoes Kayaking</span></div></div>
-            <div class="row"><div><span class="row-date">May 24</span><span class="row-text">Drive to Córdoba • Mosque-Cathedral Visit</span></div></div>
-            <div class="row"><div><span class="row-date">May 25</span><span class="row-text">Drive to Granada • Alhambra Prep</span></div></div>
-            <div class="row"><div><span class="row-date">May 26</span><span class="row-text">Alhambra (12:00) • Hammam Spa (4:00)</span></div></div>
-            <div class="row"><div><span class="row-date">May 27</span><span class="row-text">Flight VY2013 GRX ➔ BCN • Le Méridien</span></div></div>
-            <div class="row"><div><span class="row-date">May 30</span><span class="row-text">Flight AC821 BCN ➔ YVR (1:15 PM)</span></div></div>
+            <div class="row"><span class="row-date">May 16</span><span class="row-text">Flight AC812 (YVR➔LIS) • Moxy Lisbon City</span></div>
+            <div class="row"><span class="row-date">May 18</span><span class="row-text">Ismaili Centre Lisbon Guided Tour</span></div>
+            <div class="row"><span class="row-date">May 19</span><span class="row-text">Avis Pick-up • Drive to Algarve • Pine Cliffs</span></div>
+            <div class="row"><span class="row-date">May 21</span><span class="row-text">11:00 AM: Benagil Grottoes Kayak Adventure</span></div>
+            <div class="row"><span class="row-date">May 24</span><span class="row-text">Drive to Cordoba • Mosque-Cathedral Visit</span></div>
+            <div class="row"><span class="row-date">May 26</span><span class="row-text">Granada: Alhambra (12:00) • Hammam Spa (4:00)</span></div>
+            <div class="row"><span class="row-date">May 27</span><span class="row-text">Flight VY2013 (GRX➔BCN) • Le Méridien Barcelona</span></div>
+            <div class="row"><span class="row-date">May 30</span><span class="row-text">Return Flight AC821 (BCN➔YVR) (1:15 PM)</span></div>
         </div>
     </div>
 
-    <div class="hero" style="background-image: url('https://images.pexels.com/photos/672532/pexels-photo-672532.jpeg?auto=compress&cs=tinysrgb&w=800');">
-        <h2>Lisbon</h2>
+    <div class="weather-hub">
+        <a href="https://www.accuweather.com/en/pt/lisbon/274087/daily-weather-forecast/274087" target="_blank" class="w-btn">
+            <span class="w-city">Lisbon</span><span id="w1" class="w-temp">--°</span><span class="w-label">LONG RANGE</span>
+        </a>
+        <a href="https://www.accuweather.com/en/pt/albufeira/273392/daily-weather-forecast/273392" target="_blank" class="w-btn">
+            <span class="w-city">Algarve</span><span id="w2" class="w-temp">--°</span><span class="w-label">LONG RANGE</span>
+        </a>
+        <a href="https://www.accuweather.com/en/es/cordoba/307183/daily-weather-forecast/307183" target="_blank" class="w-btn">
+            <span class="w-city">Andalusia</span><span id="w3" class="w-temp">--°</span><span class="w-label">LONG RANGE</span>
+        </a>
+        <a href="https://www.accuweather.com/en/es/barcelona/307297/daily-weather-forecast/307297" target="_blank" class="w-btn">
+            <span class="w-city">Barcelona</span><span id="w4" class="w-temp">--°</span><span class="w-label">LONG RANGE</span>
+        </a>
     </div>
-    <div class="card">
-        <div class="item"><i class="fa-solid fa-hotel"></i> Moxy Lisbon City</div>
-        <div class="item"><i class="fa-solid fa-mosque"></i> Ismaili Centre Tour</div>
-    </div>
-
-    <div class="hero" style="background-image: url('https://images.pexels.com/photos/2592537/pexels-photo-2592537.jpeg?auto=compress&cs=tinysrgb&w=800');">
-        <h2>Algarve</h2>
-    </div>
-    <div class="card">
-        <div class="item"><i class="fa-solid fa-umbrella-beach"></i> Pine Cliffs Resort</div>
-        <div class="item"><i class="fa-solid fa-water"></i> Benagil Kayak (May 21)</div>
-    </div>
-
-    <div class="hero" style="background-image: url('https://images.pexels.com/photos/10182601/pexels-photo-10182601.jpeg?auto=compress&cs=tinysrgb&w=800');">
-        <h2>Andalusia</h2>
-    </div>
-    <div class="card">
-        <div class="item"><i class="fa-solid fa-archway"></i> Córdoba: Mosque-Cathedral</div>
-        <div class="item"><i class="fa-solid fa-hot-tub-person"></i> Hammam Al Ándalus</div>
-    </div>
-
-    <div class="hero" style="background-image: url('https://images.pexels.com/photos/1388030/pexels-photo-1388030.jpeg?auto=compress&cs=tinysrgb&w=800');">
-        <h2>Barcelona</h2>
-    </div>
-    <div class="card">
-        <div class="item"><i class="fa-solid fa-hotel"></i> Le Méridien Barcelona</div>
-        <div class="item"><i class="fa-solid fa-church"></i> Sagrada Família</div>
-    </div>
-
-</div>
-</body>
-</html>
