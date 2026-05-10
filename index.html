@@ -3,150 +3,130 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Jivraj Tour 2026</title>
+    <title>Jivraj Grand Tour 2026</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        :root { --accent: #007aff; --booked: #28a745; --grey: #8e8e93; }
-        body { font-family: -apple-system, sans-serif; margin: 0; background: #f2f2f7; color: #1c1c1e; padding-bottom: 60px; }
+        :root { --accent: #007aff; --booked: #28a745; --bg: #f2f2f7; }
+        body { font-family: -apple-system, sans-serif; margin: 0; background: var(--bg); color: #1c1c1e; padding-bottom: 50px; }
         .container { max-width: 500px; margin: 0 auto; background: white; min-height: 100vh; box-shadow: 0 0 30px rgba(0,0,0,0.1); }
         
         .header { padding: 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; background: #fff; position: sticky; top: 0; z-index: 100; }
-        .rate-pill { color: var(--booked); font-weight: 800; font-size: 0.9rem; background: #eef9f2; padding: 6px 14px; border-radius: 20px; }
 
-        /* MASTER ITINERARY BOX */
-        .master-itinerary { background: #1c1c1e; color: white; padding: 25px 20px; }
-        .section-label { font-size: 0.7rem; font-weight: 800; color: #888; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 15px; display: block; }
-        .row { display: flex; gap: 15px; padding: 12px 0; border-bottom: 1px solid #333; align-items: flex-start; }
-        .row:last-child { border: none; }
-        .row i { color: var(--accent); margin-top: 4px; font-size: 1.1rem; width: 22px; text-align: center; }
-        .row-date { font-size: 0.75rem; font-weight: 700; color: var(--accent); text-transform: uppercase; display: block; margin-bottom: 2px; }
-        .row-text { font-size: 0.95rem; font-weight: 600; line-height: 1.4; }
+        /* SCROLLABLE MASTER ITINERARY */
+        .master-itinerary-container { background: #1c1c1e; color: white; padding: 20px; }
+        .scroll-window { height: 180px; overflow-y: auto; padding-right: 10px; border-radius: 12px; background: #2c2c2e; padding: 15px; border: 1px solid #3a3a3c; }
+        /* Custom scrollbar for a clean look */
+        .scroll-window::-webkit-scrollbar { width: 4px; }
+        .scroll-window::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 10px; }
 
-        /* LARGE WEATHER BUTTONS */
-        .weather-hub { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; padding: 20px 15px; background: #f2f2f7; }
-        .w-btn { background: white; padding: 22px 10px; border-radius: 22px; text-align: center; border: 1px solid #e5e5ea; box-shadow: 0 4px 12px rgba(0,0,0,0.05); text-decoration: none; color: inherit; }
-        .w-city { font-size: 0.75rem; font-weight: 800; color: var(--grey); text-transform: uppercase; margin-bottom: 5px; display: block; }
-        .w-temp { font-size: 2.2rem; font-weight: 900; letter-spacing: -1px; display: block; line-height: 1; margin: 5px 0; }
-        .w-view { font-size: 0.65rem; font-weight: 800; color: var(--accent); text-transform: uppercase; display: block; margin-top: 5px; }
+        .itinerary-row { display: flex; gap: 15px; padding: 10px 0; border-bottom: 1px solid #3a3a3c; align-items: flex-start; }
+        .itinerary-row:last-child { border: none; }
+        .itinerary-date { font-size: 0.7rem; font-weight: 800; color: var(--accent); text-transform: uppercase; display: block; margin-bottom: 2px; }
+        .itinerary-text { font-size: 0.85rem; font-weight: 600; line-height: 1.4; }
 
-        /* RELIABLE IMAGE HEADERS */
-        .hero { height: 260px; background-size: cover; background-position: center; display: flex; align-items: flex-end; padding: 20px; color: white; position: relative; margin: 20px 15px 0; border-radius: 24px; overflow: hidden; background-color: #333; }
-        .hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); }
-        .hero h2 { position: relative; z-index: 1; margin: 0; font-size: 2.2rem; font-weight: 800; letter-spacing: -1px; }
+        /* FIXED HERO IMAGES */
+        .hero { height: 260px; background-size: cover; background-position: center; display: flex; align-items: flex-end; padding: 20px; color: white; position: relative; margin-top: 15px; }
+        .hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.85), transparent); }
+        .hero h2 { position: relative; z-index: 1; margin: 0; font-size: 2.2rem; font-weight: 800; }
 
-        .card { padding: 20px; margin: -25px 15px 30px; border-radius: 24px; background: #fff; border: 1px solid #eee; box-shadow: 0 8px 20px rgba(0,0,0,0.04); position: relative; z-index: 2; }
-        .item { display: flex; align-items: center; gap: 14px; margin: 12px 0; font-size: 1rem; font-weight: 500; }
-        .item i { color: var(--accent); width: 24px; text-align: center; font-size: 1.2rem; }
+        .card { padding: 20px; margin: -20px 15px 30px; border-radius: 20px; background: #fff; border: 1px solid #eee; box-shadow: 0 8px 20px rgba(0,0,0,0.04); position: relative; z-index: 2; }
     </style>
 </head>
 <body>
 
 <div class="container">
     <div class="header">
-        <div style="font-weight: 900; font-size: 1.2rem;">TRIP HUB</div>
-        <div id="rate" class="rate-pill">1 EUR = -- CAD</div>
+        <div style="font-weight: 900; font-size: 1.1rem;">JIVRAJ TOUR 2026</div>
+        <div style="color: var(--booked); font-weight: 800; font-size: 0.75rem;">1 EUR = 1.48 CAD</div>
     </div>
 
-    <div class="master-itinerary">
-        <span class="section-label">Master Itinerary</span>
-        <div class="row">
-            <i class="fa-solid fa-plane"></i>
-            <div>
-                <span class="row-date">May 16 - May 30</span>
-                <span class="row-text">AC812 (Vancouver) ➔ AC821 (Return)</span>
+    <div class="master-itinerary-container">
+        <span style="font-size: 0.65rem; font-weight: 800; color: #888; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 12px; display: block;">Full Trip Tracker (Scroll)</span>
+        <div class="scroll-window">
+            <div class="itinerary-row">
+                <div class="itinerary-details">
+                    <span class="itinerary-date">May 16</span>
+                    <span class="itinerary-text">Flight AC812 (YVR ➔ LIS) • Check-in Moxy Lisbon</span>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <i class="fa-solid fa-hotel"></i>
-            <div>
-                <span class="row-date">Stays</span>
-                <span class="row-text">Moxy Lisbon · Pine Cliffs · Le Méridien BCN</span>
+            <div class="itinerary-row">
+                <div class="itinerary-details">
+                    <span class="itinerary-date">May 18</span>
+                    <span class="itinerary-text">Guided Tour: Ismaili Centre Lisbon</span>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <i class="fa-solid fa-ticket"></i>
-            <div>
-                <span class="row-date">Activities</span>
-                <span class="row-text">Benagil Kayaking · Alhambra · Hammam Al Ándalus · Ismaili Centre Tour</span>
+            <div class="itinerary-row">
+                <div class="itinerary-details">
+                    <span class="itinerary-date">May 19</span>
+                    <span class="itinerary-text">Pick-up Avis Rental • Drive to Algarve • Pine Cliffs Resort</span>
+                </div>
+            </div>
+            <div class="itinerary-row">
+                <div class="itinerary-details">
+                    <span class="itinerary-date">May 21</span>
+                    <span class="itinerary-text">11:00 AM: Benagil Grottoes Kayak Tour</span>
+                </div>
+            </div>
+            <div class="itinerary-row">
+                <div class="itinerary-details">
+                    <span class="itinerary-date">May 24</span>
+                    <span class="itinerary-text">Drive to Cordoba • Mosque-Cathedral Visit</span>
+                </div>
+            </div>
+            <div class="itinerary-row">
+                <div class="itinerary-details">
+                    <span class="itinerary-date">May 26</span>
+                    <span class="itinerary-text">Granada: Alhambra (12:00) • Hammam Spa (4:00)</span>
+                </div>
+            </div>
+            <div class="itinerary-row">
+                <div class="itinerary-details">
+                    <span class="itinerary-date">May 27</span>
+                    <span class="itinerary-text">Flight VY2013 (GRX ➔ BCN) • Check-in Le Méridien</span>
+                </div>
+            </div>
+            <div class="itinerary-row">
+                <div class="itinerary-details">
+                    <span class="itinerary-date">May 30</span>
+                    <span class="itinerary-text">Return Flight AC821 (BCN ➔ YVR)</span>
+                </div>
             </div>
         </div>
     </div>
 
-    <div class="weather-hub">
-        <a href="https://www.accuweather.com/en/pt/lisbon/274087/daily-weather-forecast/274087" target="_blank" class="w-btn">
-            <span class="w-city">Lisbon</span>
-            <span id="w1" class="w-temp">☀️ --°</span>
-            <span class="w-view">14-Day View</span>
-        </a>
-        <a href="https://www.accuweather.com/en/pt/albufeira/273392/daily-weather-forecast/273392" target="_blank" class="w-btn">
-            <span class="w-city">Algarve</span>
-            <span id="w2" class="w-temp">☀️ --°</span>
-            <span class="w-view">14-Day View</span>
-        </a>
-        <a href="https://www.accuweather.com/en/es/cordoba/307183/daily-weather-forecast/307183" target="_blank" class="w-btn">
-            <span class="w-city">Andalusia</span>
-            <span id="w3" class="w-temp">☀️ --°</span>
-            <span class="w-view">14-Day View</span>
-        </a>
-        <a href="https://www.accuweather.com/en/es/barcelona/307297/daily-weather-forecast/307297" target="_blank" class="w-btn">
-            <span class="w-city">Barcelona</span>
-            <span id="w4" class="w-temp">☀️ --°</span>
-            <span class="w-view">14-Day View</span>
-        </a>
-    </div>
-
-    <div class="hero" style="background-image: url('http://googleusercontent.com/image_collection/image_retrieval/16240454191850937534_0');">
+    <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1543783232-af41fe6d154b?auto=format&fit=crop&w=1000&q=80');">
         <h2>Lisbon</h2>
     </div>
     <div class="card">
-        <div class="item"><i class="fa-solid fa-hotel"></i> Moxy Lisbon City</div>
-        <div class="item"><i class="fa-solid fa-mosque"></i> Ismaili Centre Guided Tour</div>
+        <div style="font-weight: 700;">Stay: Moxy Lisbon City</div>
+        <div style="font-size: 0.9rem; color: #666; margin-top: 5px;">Must-see: Ismaili Centre & Belém Tower.</div>
     </div>
 
-    <div class="hero" style="background-image: url('http://googleusercontent.com/image_collection/image_retrieval/3963170044190847666_0');">
-        <h2>The Algarve</h2>
+    <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1516496636080-14fb876e029d?auto=format&fit=crop&w=1000&q=80');">
+        <h2>Algarve</h2>
     </div>
     <div class="card">
-        <div class="item"><i class="fa-solid fa-umbrella-beach"></i> Pine Cliffs Resort</div>
-        <div class="item"><i class="fa-solid fa-sailboat"></i> Benagil Cave Kayaking</div>
+        <div style="font-weight: 700;">Resort: Pine Cliffs Ocean Suites</div>
+        <div style="font-size: 0.9rem; color: #666; margin-top: 5px;">Event: Benagil Caves Boat/Kayak Tour.</div>
     </div>
 
-    <div class="hero" style="background-image: url('http://googleusercontent.com/image_collection/image_retrieval/1803521356536482139_0');">
+    <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1595121655184-2826a7f8054a?auto=format&fit=crop&w=1000&q=80');">
         <h2>Andalusia</h2>
     </div>
     <div class="card">
-        <div class="item"><i class="fa-solid fa-archway"></i> Mosque-Cathedral (Córdoba)</div>
-        <div class="item"><i class="fa-solid fa-hot-tub-person"></i> Hammam Al Ándalus</div>
+        <div style="font-weight: 700;">Route: Córdoba ➔ Granada</div>
+        <div style="font-size: 0.9rem; color: #666; margin-top: 5px;">Key: Hammam Al Ándalus & Alhambra.</div>
     </div>
 
-    <div class="hero" style="background-image: url('http://googleusercontent.com/image_collection/image_retrieval/9589115963151593574_0');">
+    <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1511527661048-7fe73d85e9a4?auto=format&fit=crop&w=1000&q=80');">
         <h2>Barcelona</h2>
     </div>
     <div class="card">
-        <div class="item"><i class="fa-solid fa-bed"></i> Le Méridien Barcelona</div>
-        <div class="item"><i class="fa-solid fa-church"></i> Sagrada Família</div>
+        <div style="font-weight: 700;">Stay: Le Méridien Barcelona</div>
+        <div style="font-size: 0.9rem; color: #666; margin-top: 5px;">Visit: Sagrada Família & Las Ramblas.</div>
     </div>
+
 </div>
 
-<script>
-    async function loadData() {
-        const key = 'ff6e4e362f0a4231841165933261005';
-        try {
-            const r = await fetch('https://open.er-api.com/v6/latest/EUR');
-            const d = await r.json();
-            document.getElementById('rate').innerHTML = `1 EUR = ${d.rates.CAD.toFixed(2)} CAD`;
-        } catch(e) {}
-        
-        const cities = [['Lisbon','w1'],['Albufeira','w2'],['Cordoba','w3'],['Barcelona','w4']];
-        cities.forEach(async ([c, id]) => {
-            try {
-                const res = await fetch(`https://api.weatherapi.com/v1/current.json?key=${key}&q=${c}`);
-                const data = await res.json();
-                document.getElementById(id).innerHTML = `☀️ ${Math.round(data.current.temp_c)}°`;
-            } catch(e) {}
-        });
-    }
-    loadData();
-</script>
 </body>
 </html>
