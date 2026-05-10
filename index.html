@@ -7,29 +7,37 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         :root { --accent: #007aff; --booked: #28a745; --bg: #f2f2f7; }
-        body { font-family: -apple-system, sans-serif; margin: 0; background: var(--bg); color: #1c1c1e; padding-bottom: 50px; }
+        body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; margin: 0; background: var(--bg); color: #1c1c1e; padding-bottom: 50px; }
         .container { max-width: 500px; margin: 0 auto; background: white; min-height: 100vh; box-shadow: 0 0 30px rgba(0,0,0,0.1); }
         
         .header { padding: 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; background: #fff; position: sticky; top: 0; z-index: 100; }
 
         /* SCROLLABLE MASTER ITINERARY */
-        .master-itinerary-container { background: #1c1c1e; color: white; padding: 20px; }
-        .scroll-window { height: 180px; overflow-y: auto; padding-right: 10px; border-radius: 12px; background: #2c2c2e; padding: 15px; border: 1px solid #3a3a3c; }
-        /* Custom scrollbar for a clean look */
-        .scroll-window::-webkit-scrollbar { width: 4px; }
+        .itinerary-container { background: #1c1c1e; color: white; padding: 20px; }
+        .scroll-window { 
+            height: 200px; 
+            overflow-y: scroll; /* Force scroll visibility */
+            padding: 15px; 
+            background: #2c2c2e; 
+            border-radius: 12px; 
+            border: 1px solid #3a3a3c;
+            -webkit-overflow-scrolling: touch; /* Smooth scroll for iPhone */
+        }
+        /* Make scrollbar visible on mobile */
+        .scroll-window::-webkit-scrollbar { width: 6px; display: block; }
         .scroll-window::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 10px; }
 
-        .itinerary-row { display: flex; gap: 15px; padding: 10px 0; border-bottom: 1px solid #3a3a3c; align-items: flex-start; }
-        .itinerary-row:last-child { border: none; }
-        .itinerary-date { font-size: 0.7rem; font-weight: 800; color: var(--accent); text-transform: uppercase; display: block; margin-bottom: 2px; }
-        .itinerary-text { font-size: 0.85rem; font-weight: 600; line-height: 1.4; }
+        .row { display: flex; gap: 15px; padding: 12px 0; border-bottom: 1px solid #3a3a3c; align-items: flex-start; }
+        .row:last-child { border: none; }
+        .row-date { font-size: 0.7rem; font-weight: 800; color: var(--accent); text-transform: uppercase; display: block; }
+        .row-text { font-size: 0.9rem; font-weight: 600; line-height: 1.4; }
 
-        /* FIXED HERO IMAGES */
-        .hero { height: 260px; background-size: cover; background-position: center; display: flex; align-items: flex-end; padding: 20px; color: white; position: relative; margin-top: 15px; }
+        /* RELIABLE CITY IMAGES */
+        .hero { height: 260px; background-size: cover; background-position: center; display: flex; align-items: flex-end; padding: 20px; color: white; position: relative; margin-top: 20px; }
         .hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.85), transparent); }
         .hero h2 { position: relative; z-index: 1; margin: 0; font-size: 2.2rem; font-weight: 800; }
 
-        .card { padding: 20px; margin: -20px 15px 30px; border-radius: 20px; background: #fff; border: 1px solid #eee; box-shadow: 0 8px 20px rgba(0,0,0,0.04); position: relative; z-index: 2; }
+        .card { padding: 20px; margin: -20px 15px 35px; border-radius: 20px; background: #fff; border: 1px solid #eee; box-shadow: 0 8px 25px rgba(0,0,0,0.06); position: relative; z-index: 2; }
     </style>
 </head>
 <body>
@@ -40,90 +48,64 @@
         <div style="color: var(--booked); font-weight: 800; font-size: 0.75rem;">1 EUR = 1.48 CAD</div>
     </div>
 
-    <div class="master-itinerary-container">
-        <span style="font-size: 0.65rem; font-weight: 800; color: #888; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 12px; display: block;">Full Trip Tracker (Scroll)</span>
+    <div class="itinerary-container">
+        <span style="font-size: 0.65rem; font-weight: 800; color: #888; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 12px; display: block;">Full Trip Tracker (Scroll Down) ↓</span>
         <div class="scroll-window">
-            <div class="itinerary-row">
-                <div class="itinerary-details">
-                    <span class="itinerary-date">May 16</span>
-                    <span class="itinerary-text">Flight AC812 (YVR ➔ LIS) • Check-in Moxy Lisbon</span>
-                </div>
+            <div class="row">
+                <div><span class="row-date">May 16</span><span class="row-text">Flight AC812 (YVR ➔ LIS) • Arrive 11:30 AM • Moxy Lisbon</span></div>
             </div>
-            <div class="itinerary-row">
-                <div class="itinerary-details">
-                    <span class="itinerary-date">May 18</span>
-                    <span class="itinerary-text">Guided Tour: Ismaili Centre Lisbon</span>
-                </div>
+            <div class="row">
+                <div><span class="row-date">May 18</span><span class="row-text">Ismaili Centre Lisbon Guided Tour</span></div>
             </div>
-            <div class="itinerary-row">
-                <div class="itinerary-details">
-                    <span class="itinerary-date">May 19</span>
-                    <span class="itinerary-text">Pick-up Avis Rental • Drive to Algarve • Pine Cliffs Resort</span>
-                </div>
+            <div class="row">
+                <div><span class="row-date">May 19</span><span class="row-text">Pick-up Avis Rental (Compact Elite) • Drive to Algarve</span></div>
             </div>
-            <div class="itinerary-row">
-                <div class="itinerary-details">
-                    <span class="itinerary-date">May 21</span>
-                    <span class="itinerary-text">11:00 AM: Benagil Grottoes Kayak Tour</span>
-                </div>
+            <div class="row">
+                <div><span class="row-date">May 20</span><span class="row-text">Check-in Pine Cliffs Ocean Suites</span></div>
             </div>
-            <div class="itinerary-row">
-                <div class="itinerary-details">
-                    <span class="itinerary-date">May 24</span>
-                    <span class="itinerary-text">Drive to Cordoba • Mosque-Cathedral Visit</span>
-                </div>
+            <div class="row">
+                <div><span class="row-date">May 21</span><span class="row-text">11:00 AM: Benagil Grottoes Kayak Adventure</span></div>
             </div>
-            <div class="itinerary-row">
-                <div class="itinerary-details">
-                    <span class="itinerary-date">May 26</span>
-                    <span class="itinerary-text">Granada: Alhambra (12:00) • Hammam Spa (4:00)</span>
-                </div>
+            <div class="row">
+                <div><span class="row-date">May 24</span><span class="row-text">Drive to Cordoba • Visit Mosque-Cathedral</span></div>
             </div>
-            <div class="itinerary-row">
-                <div class="itinerary-details">
-                    <span class="itinerary-date">May 27</span>
-                    <span class="itinerary-text">Flight VY2013 (GRX ➔ BCN) • Check-in Le Méridien</span>
-                </div>
+            <div class="row">
+                <div><span class="row-date">May 26</span><span class="row-text">Granada: Alhambra (12:00) • Hammam Spa (4:00)</span></div>
             </div>
-            <div class="itinerary-row">
-                <div class="itinerary-details">
-                    <span class="itinerary-date">May 30</span>
-                    <span class="itinerary-text">Return Flight AC821 (BCN ➔ YVR)</span>
-                </div>
+            <div class="row">
+                <div><span class="row-date">May 27</span><span class="row-text">Flight VY2013 (GRX ➔ BCN) • Le Méridien Barcelona</span></div>
+            </div>
+            <div class="row">
+                <div><span class="row-date">May 29</span><span class="row-text">Sagrada Família Morning Visit</span></div>
+            </div>
+            <div class="row">
+                <div><span class="row-date">May 30</span><span class="row-text">Return Flight AC821 (BCN ➔ YVR) • Departure 1:15 PM</span></div>
             </div>
         </div>
     </div>
 
-    <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1543783232-af41fe6d154b?auto=format&fit=crop&w=1000&q=80');">
+    <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1543783232-af41fe6d154b?q=80&w=1000&auto=format&fit=crop');">
         <h2>Lisbon</h2>
     </div>
     <div class="card">
-        <div style="font-weight: 700;">Stay: Moxy Lisbon City</div>
-        <div style="font-size: 0.9rem; color: #666; margin-top: 5px;">Must-see: Ismaili Centre & Belém Tower.</div>
+        <div style="font-weight: 700; font-size: 1.1rem;">Stay: Moxy Lisbon City</div>
+        <div style="font-size: 0.95rem; color: #555; margin-top: 8px;"><i class="fa-solid fa-location-dot" style="color:var(--accent);"></i> Near Picoas Station</div>
     </div>
 
-    <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1516496636080-14fb876e029d?auto=format&fit=crop&w=1000&q=80');">
+    <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1516496636080-14fb876e029d?q=80&w=1000&auto=format&fit=crop');">
         <h2>Algarve</h2>
     </div>
     <div class="card">
-        <div style="font-weight: 700;">Resort: Pine Cliffs Ocean Suites</div>
-        <div style="font-size: 0.9rem; color: #666; margin-top: 5px;">Event: Benagil Caves Boat/Kayak Tour.</div>
+        <div style="font-weight: 700; font-size: 1.1rem;">Resort: Pine Cliffs Resort</div>
+        <div style="font-size: 0.95rem; color: #555; margin-top: 8px;"><i class="fa-solid fa-water" style="color:var(--accent);"></i> Benagil Kayak (May 21)</div>
     </div>
 
-    <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1595121655184-2826a7f8054a?auto=format&fit=crop&w=1000&q=80');">
-        <h2>Andalusia</h2>
-    </div>
-    <div class="card">
-        <div style="font-weight: 700;">Route: Córdoba ➔ Granada</div>
-        <div style="font-size: 0.9rem; color: #666; margin-top: 5px;">Key: Hammam Al Ándalus & Alhambra.</div>
-    </div>
-
-    <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1511527661048-7fe73d85e9a4?auto=format&fit=crop&w=1000&q=80');">
+    <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1511527661048-7fe73d85e9a4?q=80&w=1000&auto=format&fit=crop');">
         <h2>Barcelona</h2>
     </div>
     <div class="card">
-        <div style="font-weight: 700;">Stay: Le Méridien Barcelona</div>
-        <div style="font-size: 0.9rem; color: #666; margin-top: 5px;">Visit: Sagrada Família & Las Ramblas.</div>
+        <div style="font-weight: 700; font-size: 1.1rem;">Stay: Le Méridien</div>
+        <div style="font-size: 0.95rem; color: #555; margin-top: 8px;"><i class="fa-solid fa-plane-arrival" style="color:var(--accent);"></i> Flight VY2013 Check-in</div>
     </div>
 
 </div>
