@@ -6,132 +6,129 @@
     <title>Grand Tour 2026</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        :root { --bg-overlay: rgba(253, 253, 253, 0.96); --primary: #111; --accent: #007aff; --grey: #6c757d; --flight-blue: #1a73e8; }
+        :root { --bg-overlay: rgba(253, 253, 253, 0.96); --primary: #111; --accent: #007aff; --grey: #6c757d; --euro: #27ae60; }
         
-        #login-screen {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: #111; color: white; display: flex; flex-direction: column;
-            align-items: center; justify-content: center; z-index: 9999;
-            font-family: -apple-system, sans-serif;
-        }
-        .pin-input {
-            background: #222; border: 1px solid #444; color: white;
-            font-size: 1.8rem; width: 200px; text-align: center; padding: 12px;
-            border-radius: 12px; margin: 20px 0; letter-spacing: 3px;
-        }
-        .login-btn { background: var(--accent); color: white; border: none; padding: 12px 40px; border-radius: 30px; font-weight: 700; }
-
+        #login-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #111; color: white; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 9999; font-family: -apple-system, sans-serif; }
+        .pin-input { background: #222; border: 1px solid #444; color: white; font-size: 1.8rem; width: 200px; text-align: center; padding: 12px; border-radius: 12px; margin: 20px 0; letter-spacing: 3px; }
+        .login-btn { background: var(--accent); color: white; border: none; padding: 12px 40px; border-radius: 30px; font-weight: 700; cursor: pointer; }
         #main-content { display: none; }
 
-        body { font-family: -apple-system, system-ui, sans-serif; color: var(--primary); margin: 0; padding-bottom: 60px; background-image: url('https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?q=80&w=2000&auto=format&fit=crop'); background-attachment: fixed; background-size: cover; background-position: center; }
+        body { font-family: -apple-system, system-ui, sans-serif; color: var(--primary); margin: 0; padding-bottom: 60px; background-image: url('https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?q=80&w=2000&auto=format&fit=crop'); background-attachment: fixed; background-size: cover; }
         .page-overlay { background: var(--bg-overlay); min-height: 100vh; }
         
-        .weather-bar { background: rgba(242, 242, 247, 0.8); backdrop-filter: blur(10px); margin: 20px; padding: 15px; border-radius: 16px; display: flex; align-items: center; gap: 12px; font-weight: 600; font-size: 0.9rem; }
+        .header-bar { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); sticky; top: 0; z-index: 100; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; }
+        .currency-pill { background: #f2f2f7; padding: 6px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; color: var(--euro); }
 
-        /* Status & Flight Cards */
-        .status-card { background: var(--primary); color: white; margin: 0 20px 15px; padding: 20px; border-radius: 16px; text-align: center; }
-        #status-timer { font-size: 1.4rem; font-weight: 800; }
+        .status-card { background: var(--primary); color: white; margin: 20px; padding: 20px; border-radius: 16px; text-align: center; }
         
-        .flight-tracker { background: white; margin: 0 20px 20px; padding: 15px; border-radius: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-        .flight-btn { display: flex; justify-content: space-between; align-items: center; text-decoration: none; color: var(--primary); padding: 10px 0; border-bottom: 1px solid #eee; }
-        .flight-btn:last-child { border-bottom: none; }
-        .flight-no { background: #e8f0fe; color: var(--flight-blue); padding: 4px 8px; border-radius: 6px; font-weight: 700; font-size: 0.8rem; }
+        .itinerary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 0 20px 30px; }
+        .info-card { background: white; padding: 15px; border-radius: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .card-label { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 1px; color: var(--grey); font-weight: 800; display: block; margin-bottom: 8px; }
 
-        .summary-card { background: white; margin: 0 20px 30px; padding: 20px; border-radius: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-        .summary-title { font-weight: 800; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 1px; color: var(--grey); margin-bottom: 15px; display: block; }
-        .summary-line { display: flex; justify-content: space-between; font-size: 0.9rem; margin-bottom: 8px; padding-bottom: 8px; border-bottom: 1px solid #f0f0f0; }
-
-        .hero { position: relative; height: 320px; overflow: hidden; color: white; display: flex; align-items: flex-end; padding: 25px; background-size: cover; background-position: center; margin-bottom: 10px; }
+        .hero { position: relative; height: 320px; color: white; display: flex; align-items: flex-end; padding: 25px; background-size: cover; background-position: center; margin-top: 20px; }
         .hero::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); }
         .hero-content { position: relative; z-index: 1; width: 100%; }
+
+        .map-preview { height: 120px; background: #eee; border-radius: 12px; margin-top: 15px; overflow: hidden; position: relative; }
+        .map-preview img { width: 100%; height: 100%; object-fit: cover; }
         
-        .nav-btn { display: inline-flex; align-items: center; gap: 10px; padding: 12px 22px; background: white; color: black; border-radius: 50px; text-decoration: none; font-size: 0.85rem; font-weight: 700; box-shadow: 0 4px 12px rgba(0,0,0,0.1); margin-top: 10px; }
-        
-        .gallery-header { padding: 30px 20px 10px; font-weight: 800; font-size: 1.5rem; }
-        .gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; padding: 0 20px; }
-        .photo-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-        .photo-card img { width: 100%; height: 180px; object-fit: cover; display: block; }
+        .lingo-box { background: #f9f9f9; padding: 12px; border-radius: 12px; margin-top: 10px; font-size: 0.8rem; }
+        .lingo-row { display: flex; justify-content: space-between; margin-bottom: 4px; }
+
+        .nav-btn { display: inline-flex; align-items: center; gap: 10px; padding: 10px 18px; background: white; color: black; border-radius: 50px; text-decoration: none; font-size: 0.8rem; font-weight: 700; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-top: 10px; }
     </style>
 </head>
 <body>
 
 <div id="login-screen">
-    <i class="fa-solid fa-plane-up" style="font-size: 3rem; margin-bottom: 20px; color: var(--accent);"></i>
+    <i class="fa-solid fa-earth-europe" style="font-size: 3rem; margin-bottom: 20px; color: var(--accent);"></i>
     <h2>Trip Access</h2>
     <input type="password" id="pinInput" class="pin-input" placeholder="000000" maxlength="6" inputmode="numeric">
     <button onclick="checkPin()" class="login-btn">ENTER</button>
 </div>
 
 <div id="main-content" class="page-overlay">
-    <div class="weather-bar">
-        <i class="fa-solid fa-cloud-sun" style="font-size: 1.5rem; color: var(--accent);"></i>
-        <div id="weatherResult">Updating forecast...</div>
+    <div class="header-bar">
+        <div id="weatherResult" style="font-size: 0.85rem; font-weight: 700;">Loading...</div>
+        <div class="currency-pill" id="currency">1 EUR = 1.48 CAD</div>
     </div>
 
     <div class="status-card">
-        <div id="status-label" style="font-size: 0.7rem; text-transform: uppercase; margin-bottom: 5px; opacity: 0.7;">Countdown to Takeoff</div>
+        <div id="status-label" style="font-size: 0.6rem; text-transform: uppercase; opacity: 0.7;">Countdown</div>
         <div id="status-timer">00:00:00:00</div>
     </div>
 
-    <div class="flight-tracker">
-        <span class="summary-title" style="margin-bottom: 10px;">Live Flight Status</span>
-        <a href="https://www.google.com/search?q=AC812+flight+status" target="_blank" class="flight-btn">
-            <span>YVR ➔ LIS</span>
-            <span class="flight-no">AC812</span>
-        </a>
-        <a href="https://www.google.com/search?q=VY2013+flight+status" target="_blank" class="flight-btn">
-            <span>GRX ➔ BCN</span>
-            <span class="flight-no">VY2013</span>
-        </a>
-        <a href="https://www.google.com/search?q=AC821+flight+status" target="_blank" class="flight-btn">
-            <span>BCN ➔ YVR</span>
-            <span class="flight-no">AC821</span>
-        </a>
-    </div>
-
-    <div class="summary-card">
-        <span class="summary-title">Master Itinerary</span>
-        <div class="summary-line"><span>May 16-20</span> <strong>Lisbon</strong></div>
-        <div class="summary-line"><span>May 20-24</span> <strong>The Algarve</strong></div>
-        <div class="summary-line"><span>May 24-27</span> <strong>Andalusia</strong></div>
-        <div class="summary-line"><span>May 27-30</span> <strong>Barcelona</strong></div>
+    <div class="itinerary-grid">
+        <div class="info-card">
+            <span class="card-label">Live Flights</span>
+            <div style="font-size: 0.85rem; font-weight: 700;">
+                <a href="https://www.google.com/search?q=AC812+flight+status" target="_blank" style="text-decoration:none; color:var(--accent);">AC812 ➔ LIS</a><br>
+                <a href="https://www.google.com/search?q=AC821+flight+status" target="_blank" style="text-decoration:none; color:var(--accent); margin-top:5px; display:inline-block;">AC821 ➔ YVR</a>
+            </div>
+        </div>
+        <div class="info-card">
+            <span class="card-label">Key Dates</span>
+            <div style="font-size: 0.75rem; line-height: 1.4;">
+                <strong>May 25:</strong> Córdoba Tour<br>
+                <strong>May 26:</strong> Alhambra Tour
+            </div>
+        </div>
     </div>
 
     <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?q=80&w=1000&auto=format&fit=crop');">
         <div class="hero-content">
-            <span class="section-label">Stop 1</span>
+            <span class="card-label" style="color:white; opacity:0.8;">May 16 - 19</span>
             <h1>Lisbon</h1>
-            <a href="https://www.google.com/maps/dir/?api=1&destination=Moxy+Lisbon+City" class="nav-btn"><i class="fa-solid fa-location-arrow"></i> Navigate</a>
+        </div>
+    </div>
+    <div style="padding: 20px;">
+        <div class="map-preview">
+            <img src="https://maps.googleapis.com/maps/api/staticmap?center=Lisbon,Portugal&zoom=13&size=600x200&scale=2&key=YOUR_KEY_HERE" alt="Lisbon Map">
+        </div>
+        <div class="lingo-box">
+            <div class="lingo-row"><span>Thank you</span> <strong>Obrigado</strong></div>
+            <div class="lingo-row"><span>The bill</span> <strong>A conta</strong></div>
         </div>
     </div>
 
     <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1544275069-b5cd67776b96?q=80&w=1000&auto=format&fit=crop');">
         <div class="hero-content">
-            <span class="section-label">Stop 2</span>
+            <span class="card-label" style="color:white; opacity:0.8;">May 19 - 24</span>
             <h1>The Algarve</h1>
-            <a href="https://www.google.com/maps/dir/?api=1&destination=Pine+Cliffs+Ocean+Suites" class="nav-btn"><i class="fa-solid fa-car"></i> Navigate</a>
         </div>
+    </div>
+    <div style="padding: 20px;">
+        <span class="card-label">Home Base</span>
+        <div style="font-weight:700; margin-bottom:10px;">Pine Cliffs Ocean Suites</div>
+        <a href="https://www.google.com/maps/dir/?api=1&destination=Pine+Cliffs+Ocean+Suites" class="nav-btn"><i class="fa-solid fa-location-dot"></i> Directions</a>
     </div>
 
     <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1563283296-a29286f03013?q=80&w=1000&auto=format&fit=crop');">
         <div class="hero-content">
-            <span class="section-label">Stop 3</span>
+            <span class="card-label" style="color:white; opacity:0.8;">May 24 - 27</span>
             <h1>Andalusia</h1>
-            <a href="https://www.google.com/maps/dir/?api=1&destination=AC+Hotel+Cordoba" class="nav-btn"><i class="fa-solid fa-map-location-dot"></i> Navigate</a>
         </div>
+    </div>
+    <div style="padding: 20px;">
+        <div class="lingo-box">
+            <div class="lingo-row"><span>Hello</span> <strong>Hola</strong></div>
+            <div class="lingo-row"><span>Where is...?</span> <strong>¿Dónde está...?</strong></div>
+        </div>
+        <a href="https://www.google.com/maps/dir/?api=1&destination=AC+Hotel+Cordoba" class="nav-btn"><i class="fa-solid fa-castle"></i> Alhambra Palace</a>
     </div>
 
     <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1583997051651-8255c713a62a?q=80&w=1000&auto=format&fit=crop');">
         <div class="hero-content">
-            <span class="section-label">Stop 4</span>
+            <span class="card-label" style="color:white; opacity:0.8;">May 27 - 30</span>
             <h1>Barcelona</h1>
-            <a href="https://www.google.com/maps/dir/?api=1&destination=Le+Meridien+Barcelona" class="nav-btn"><i class="fa-solid fa-hotel"></i> Navigate</a>
         </div>
     </div>
+    <div style="padding: 20px;">
+        <span class="card-label">Stay</span>
+        <div style="font-weight:700; margin-bottom:10px;">Le Méridien Barcelona</div>
+        <a href="https://www.google.com/maps/dir/?api=1&destination=Le+Meridien+Barcelona" class="nav-btn"><i class="fa-solid fa-hotel"></i> Open in Maps</a>
+    </div>
 
-    <div class="gallery-header">Moments</div>
-    <div id="loading" style="padding: 20px; font-size: 0.8rem; color: var(--grey);">Syncing photos...</div>
-    <div class="gallery" id="auto-gallery"></div>
 </div>
 
 <script>
@@ -141,11 +138,10 @@
         if (authorizedPins.includes(pinInput)) {
             document.getElementById('login-screen').style.display = 'none';
             document.getElementById('main-content').style.display = 'block';
-            getWeather();
-            loadPhotos();
             startCountdown();
+            getWeather();
         } else {
-            alert('Incorrect PIN');
+            alert('Access Denied');
             document.getElementById('pinInput').value = '';
         }
     }
@@ -155,55 +151,23 @@
         setInterval(function() {
             const now = new Date().getTime();
             const distance = takeoff - now;
-            if (distance > 0) {
-                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const mins = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                const secs = Math.floor((distance % (1000 * 60)) / 1000);
-                document.getElementById("status-timer").innerHTML = days + "d " + hours + "h " + mins + "m " + secs + "s";
-            } else {
-                document.getElementById("status-label").innerHTML = "Trip Progress";
-                document.getElementById("status-timer").innerHTML = "In Transit ✈️";
-            }
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const mins = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const secs = Math.floor((distance % (1000 * 60)) / 1000);
+            document.getElementById("status-timer").innerHTML = days + "d " + hours + "h " + mins + "m " + secs + "s";
         }, 1000);
     }
 
     async function getWeather() {
         const apiKey = 'ff6e4e362f0a4231841165933261005'; 
         const today = new Date();
-        const day = today.getDate();
-        let city = "Lisbon";
-        if (today.getMonth() + 1 === 5) {
-            if (day >= 20 && day < 24) city = "Albufeira";
-            else if (day >= 24 && day < 25) city = "Cordoba";
-            else if (day >= 25 && day < 27) city = "Granada";
-            else if (day >= 27) city = "Barcelona";
-        }
+        const city = today.getDate() >= 27 ? "Barcelona" : "Lisbon";
         try {
             const response = await fetch(`https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}`);
             const data = await response.json();
-            document.getElementById('weatherResult').innerHTML = `<strong>${city}:</strong> ${data.current.temp_c}°C & ${data.current.condition.text}`;
-        } catch (e) { console.log("Weather error"); }
-    }
-
-    async function loadPhotos() {
-        const username = 'rjivraj72'; 
-        const repo = 'europe-trip-2026';
-        const url = `https://api.github.com/repos/${username}/${repo}/contents/photos`;
-        try {
-            const response = await fetch(url);
-            const files = await response.json();
-            const gallery = document.getElementById('auto-gallery');
-            document.getElementById('loading').style.display = 'none';
-            files.reverse().forEach(file => {
-                if (file.name.match(/\.(jpg|jpeg|png|gif)$/i)) {
-                    const card = document.createElement('div');
-                    card.className = 'photo-card';
-                    card.innerHTML = `<img src="${file.download_url}" loading="lazy">`;
-                    gallery.appendChild(card);
-                }
-            });
-        } catch (e) { document.getElementById('loading').innerHTML = "Ready for uploads."; }
+            document.getElementById('weatherResult').innerHTML = `<i class="fa-solid fa-sun"></i> ${city}: ${data.current.temp_c}°C`;
+        } catch (e) { document.getElementById('weatherResult').innerHTML = "Welcome Back"; }
     }
 </script>
 </body>
