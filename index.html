@@ -3,74 +3,807 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#007aff" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#1c1c1e" media="(prefers-color-scheme: dark)">
     <title>Jivraj Grand Tour 2026</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
     <style>
-        :root { --accent: #007aff; --booked: #28a745; --bg: #f2f2f7; --grey: #8e8e93; }
-        body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; margin: 0; background: var(--bg); color: #1c1c1e; padding-bottom: 50px; }
-        .container { max-width: 500px; margin: 0 auto; background: white; min-height: 100vh; box-shadow: 0 0 30px rgba(0,0,0,0.1); }
-        .header { padding: 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; background: #fff; position: sticky; top: 0; z-index: 100; }
-        
-        /* MASTER ITINERARY SCROLL */
+        :root {
+            --accent: #007aff;
+            --booked: #28a745;
+            --bg: #f2f2f7;
+            --grey: #8e8e93;
+            --surface: #ffffff;
+            --surface2: #f9f9fb;
+            --border: #eeeeee;
+            --text: #1c1c1e;
+            --danger: #ff3b30;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #000000;
+                --surface: #1c1c1e;
+                --surface2: #2c2c2e;
+                --border: #3a3a3c;
+                --text: #ffffff;
+            }
+        }
+
+        *, *::before, *::after { box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            background: var(--bg);
+            color: var(--text);
+            padding-bottom: 50px;
+        }
+
+        /* ── PIN OVERLAY ── */
+        #pin-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 999;
+            background: var(--surface);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 28px;
+            padding: 40px 24px;
+        }
+
+        #pin-overlay.hidden { display: none; }
+
+        .pin-icon {
+            width: 72px;
+            height: 72px;
+            border-radius: 20px;
+            background: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .pin-title { font-size: 1.4rem; font-weight: 800; margin: 0; text-align: center; }
+        .pin-sub   { font-size: 0.85rem; color: var(--grey); margin: -16px 0 0; text-align: center; }
+
+        /* PIN dot display */
+        .pin-dots {
+            display: flex;
+            gap: 16px;
+        }
+        .pin-dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            border: 2px solid var(--grey);
+            background: transparent;
+            transition: background 0.15s, border-color 0.15s;
+        }
+        .pin-dot.filled { background: var(--accent); border-color: var(--accent); }
+        .pin-dot.error  { background: var(--danger); border-color: var(--danger); }
+
+        /* Shake animation on wrong PIN */
+        @keyframes shake {
+            0%,100% { transform: translateX(0); }
+            20%      { transform: translateX(-8px); }
+            40%      { transform: translateX(8px); }
+            60%      { transform: translateX(-6px); }
+            80%      { transform: translateX(6px); }
+        }
+        .pin-dots.shake { animation: shake 0.4s ease; }
+
+        /* PIN numpad */
+        .pin-pad {
+            display: grid;
+            grid-template-columns: repeat(3, 72px);
+            grid-template-rows: repeat(4, 72px);
+            gap: 12px;
+        }
+        .pin-key {
+            border: none;
+            background: var(--surface2);
+            border-radius: 50%;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--text);
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+            transition: background 0.1s, transform 0.1s;
+            touch-action: manipulation;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+        .pin-key sub {
+            font-size: 0.45rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            color: var(--grey);
+            margin-top: 2px;
+            text-transform: uppercase;
+        }
+        .pin-key:active { background: #d1d1d6; transform: scale(0.94); }
+        .pin-key.ghost  { background: transparent; cursor: default; }
+        .pin-key.del    { font-size: 1.1rem; }
+
+        .pin-error-msg {
+            font-size: 0.8rem;
+            color: var(--danger);
+            font-weight: 600;
+            min-height: 1.2em;
+            text-align: center;
+        }
+
+        .pin-forgot {
+            background: none;
+            border: none;
+            color: var(--accent);
+            font-size: 0.85rem;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        /* ── MAIN APP ── */
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            background: var(--surface);
+            min-height: 100vh;
+            box-shadow: 0 0 30px rgba(0,0,0,0.1);
+        }
+
+        .header {
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+            background: var(--surface);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-left { display: flex; flex-direction: column; gap: 2px; }
+        .header-title { font-weight: 900; font-size: 0.95rem; }
+        #rate { color: var(--booked); font-weight: 800; font-size: 0.7rem; }
+
+        .lock-btn {
+            background: none;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 6px 10px;
+            color: var(--grey);
+            font-size: 0.75rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: background 0.15s;
+        }
+        .lock-btn:hover { background: var(--bg); }
+
+        /* ── COUNTDOWN TICKER ── */
+        .ticker {
+            background: linear-gradient(135deg, #0062cc, #007aff);
+            color: white;
+            padding: 14px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+        .ticker-label {
+            font-size: 0.65rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            opacity: 0.8;
+        }
+        .ticker-value {
+            font-size: 1.5rem;
+            font-weight: 900;
+            font-variant-numeric: tabular-nums;
+            letter-spacing: -0.02em;
+        }
+        .ticker-sub {
+            font-size: 0.7rem;
+            font-weight: 600;
+            opacity: 0.75;
+            margin-top: 2px;
+        }
+        .ticker-phase {
+            text-align: right;
+            min-width: 100px;
+        }
+        .ticker-phase-name {
+            font-size: 0.85rem;
+            font-weight: 800;
+        }
+        .ticker-phase-label {
+            font-size: 0.6rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            opacity: 0.7;
+        }
+
+        /* ── ITINERARY SCROLL ── */
         .itinerary-container { background: #1c1c1e; color: white; padding: 20px; }
-        .scroll-window { height: 180px; overflow-y: scroll; padding: 15px; background: #2c2c2e; border-radius: 12px; border: 1px solid #3a3a3c; -webkit-overflow-scrolling: touch; }
+        .scroll-window {
+            height: 180px;
+            overflow-y: scroll;
+            padding: 15px;
+            background: #2c2c2e;
+            border-radius: 12px;
+            border: 1px solid #3a3a3c;
+            -webkit-overflow-scrolling: touch;
+        }
         .scroll-window::-webkit-scrollbar { width: 6px; display: block; }
         .scroll-window::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 10px; }
         .row { display: flex; gap: 15px; padding: 10px 0; border-bottom: 1px solid #333; }
+        .row:last-child { border-bottom: none; }
         .row-date { font-size: 0.7rem; font-weight: 800; color: var(--accent); text-transform: uppercase; min-width: 50px; }
         .row-text { font-size: 0.85rem; font-weight: 600; line-height: 1.3; }
+        .row-text a { color: #6fb3ff; text-decoration: none; }
+        .row-text a:hover { text-decoration: underline; }
 
-        /* WEATHER HUB */
+        /* ── WEATHER HUB ── */
         .weather-hub { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; padding: 15px; background: var(--bg); }
-        .w-btn { background: white; padding: 15px 10px; border-radius: 16px; text-align: center; border: 1px solid #eee; text-decoration: none; color: inherit; }
-        .w-city { font-size: 0.65rem; font-weight: 800; color: var(--grey); text-transform: uppercase; display: block; }
-        .w-temp { font-size: 1.5rem; font-weight: 900; display: block; margin: 4px 0; }
+        .w-btn {
+            background: var(--surface);
+            padding: 15px 10px;
+            border-radius: 16px;
+            text-align: center;
+            border: 1px solid var(--border);
+            text-decoration: none;
+            color: var(--text);
+            transition: transform 0.15s;
+        }
+        .w-btn:active { transform: scale(0.97); }
+        .w-city  { font-size: 0.65rem; font-weight: 800; color: var(--grey); text-transform: uppercase; display: block; }
+        .w-temp  { font-size: 1.5rem; font-weight: 900; display: block; margin: 4px 0; }
         .w-label { font-size: 0.55rem; color: var(--accent); font-weight: 800; }
 
-        /* CITY SECTIONS */
-        .hero { height: 240px; background-size: cover; background-position: center; display: flex; align-items: flex-end; padding: 20px; color: white; position: relative; margin-top: 20px; }
-        .hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); }
-        .hero h2 { position: relative; z-index: 1; margin: 0; font-size: 2rem; font-weight: 800; }
-        .card { padding: 15px; margin: -15px 15px 15px; border-radius: 18px; background: #fff; border: 1px solid #eee; box-shadow: 0 4px 12px rgba(0,0,0,0.05); position: relative; z-index: 2; }
+        /* ── CITY SECTIONS ── */
+        .hero {
+            height: 240px;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: flex-end;
+            padding: 20px;
+            color: white;
+            position: relative;
+            margin-top: 20px;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+        }
+        .hero-text { position: relative; z-index: 1; }
+        .hero-dates { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; opacity: 0.8; margin-bottom: 4px; }
+        .hero h2 { margin: 0; font-size: 2rem; font-weight: 800; }
+
+        .card {
+            padding: 15px;
+            margin: -15px 15px 15px;
+            border-radius: 18px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            position: relative;
+            z-index: 2;
+        }
         .item { display: flex; align-items: center; gap: 10px; margin: 8px 0; font-size: 0.9rem; }
         .item i { color: var(--accent); width: 18px; text-align: center; }
 
-        /* LANGUAGE CARDS */
-        .lingo { background: #f9f9fb; padding: 10px 15px; border-radius: 12px; margin: 0 15px 25px; border: 1px solid #eee; font-size: 0.85rem; display: flex; justify-content: space-between; }
+        /* ── LINGO CARDS ── */
+        .lingo {
+            background: var(--surface2);
+            padding: 12px 15px;
+            border-radius: 12px;
+            margin: 0 15px 25px;
+            border: 1px solid var(--border);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        .lingo-pair { display: flex; flex-direction: column; gap: 2px; }
+        .lingo-pair span   { font-size: 0.65rem; color: var(--grey); font-weight: 600; text-transform: uppercase; }
+        .lingo-pair strong { font-size: 0.9rem; color: var(--text); }
     </style>
 </head>
 <body>
+<noscript><p style="text-align:center;padding:20px;color:#666;">Enable JavaScript for live weather, exchange rates, and PIN protection.</p></noscript>
 
-<div class="container">
+<!-- ── PIN OVERLAY ── -->
+<div id="pin-overlay">
+    <div class="pin-icon">✈️</div>
+    <h1 class="pin-title" id="pin-title">Welcome back</h1>
+    <p class="pin-sub" id="pin-sub">Enter your PIN to continue</p>
+    <div class="pin-dots" id="pin-dots">
+        <div class="pin-dot" data-i="0"></div>
+        <div class="pin-dot" data-i="1"></div>
+        <div class="pin-dot" data-i="2"></div>
+        <div class="pin-dot" data-i="3"></div>
+    </div>
+    <div class="pin-error-msg" id="pin-error"></div>
+    <div class="pin-pad" id="pin-pad">
+        <button class="pin-key" data-k="1">1<sub></sub></button>
+        <button class="pin-key" data-k="2">2<sub>ABC</sub></button>
+        <button class="pin-key" data-k="3">3<sub>DEF</sub></button>
+        <button class="pin-key" data-k="4">4<sub>GHI</sub></button>
+        <button class="pin-key" data-k="5">5<sub>JKL</sub></button>
+        <button class="pin-key" data-k="6">6<sub>MNO</sub></button>
+        <button class="pin-key" data-k="7">7<sub>PQRS</sub></button>
+        <button class="pin-key" data-k="8">8<sub>TUV</sub></button>
+        <button class="pin-key" data-k="9">9<sub>WXYZ</sub></button>
+        <button class="pin-key ghost" aria-hidden="true"></button>
+        <button class="pin-key" data-k="0">0</button>
+        <button class="pin-key del" id="pin-del" aria-label="Delete">⌫</button>
+    </div>
+    <button class="pin-forgot" id="pin-forgot">Forgot PIN?</button>
+</div>
+
+<!-- ── MAIN APP ── -->
+<div class="container" id="app">
     <div class="header">
-        <div style="font-weight: 900;">JIVRAJ TOUR 2026</div>
-        <div id="rate" style="color: var(--booked); font-weight: 800; font-size: 0.75rem;">1 EUR = 1.48 CAD</div>
+        <div class="header-left">
+            <div class="header-title">JIVRAJ TOUR 2026</div>
+            <div id="rate">1 EUR = 1.48 CAD</div>
+        </div>
+        <button class="lock-btn" id="lock-btn" aria-label="Lock">
+            <i class="fa-solid fa-lock"></i> Lock
+        </button>
+    </div>
+
+    <!-- LIVE COUNTDOWN TICKER -->
+    <div class="ticker" id="ticker">
+        <div>
+            <div class="ticker-label" id="ticker-label">Departure in</div>
+            <div class="ticker-value" id="ticker-value">--:--:--:--</div>
+            <div class="ticker-sub" id="ticker-sub"></div>
+        </div>
+        <div class="ticker-phase" id="ticker-phase"></div>
     </div>
 
     <div class="itinerary-container">
         <div class="scroll-window">
-            <div class="row"><span class="row-date">May 16</span><span class="row-text">Flight AC812 (YVR➔LIS) • Moxy Lisbon City</span></div>
-            <div class="row"><span class="row-date">May 18</span><span class="row-text">Ismaili Centre Lisbon Guided Tour</span></div>
-            <div class="row"><span class="row-date">May 19</span><span class="row-text">Avis Pick-up • Drive to Algarve • Pine Cliffs</span></div>
-            <div class="row"><span class="row-date">May 21</span><span class="row-text">11:00 AM: Benagil Grottoes Kayak Adventure</span></div>
-            <div class="row"><span class="row-date">May 24</span><span class="row-text">Drive to Cordoba • Mosque-Cathedral Visit</span></div>
-            <div class="row"><span class="row-date">May 26</span><span class="row-text">Granada: Alhambra (12:00) • Hammam Spa (4:00)</span></div>
-            <div class="row"><span class="row-date">May 27</span><span class="row-text">Flight VY2013 (GRX➔BCN) • Le Méridien Barcelona</span></div>
-            <div class="row"><span class="row-date">May 30</span><span class="row-text">Return Flight AC821 (BCN➔YVR) (1:15 PM)</span></div>
+            <div class="row">
+                <span class="row-date">May 16</span>
+                <span class="row-text"><a href="https://www.flightaware.com/live/flight/AC812" target="_blank" rel="noopener noreferrer">AC812</a> (YVR➔LIS) • Moxy Lisbon City</span>
+            </div>
+            <div class="row">
+                <span class="row-date">May 18</span>
+                <span class="row-text">Ismaili Centre Lisbon Guided Tour</span>
+            </div>
+            <div class="row">
+                <span class="row-date">May 19</span>
+                <span class="row-text">Avis Pick-up • Drive to Algarve • Pine Cliffs</span>
+            </div>
+            <div class="row">
+                <span class="row-date">May 21</span>
+                <span class="row-text">11:00 AM: Benagil Grottoes Kayak Adventure</span>
+            </div>
+            <div class="row">
+                <span class="row-date">May 24</span>
+                <span class="row-text">Drive to Cordoba • Mosque-Cathedral Visit</span>
+            </div>
+            <div class="row">
+                <span class="row-date">May 26</span>
+                <span class="row-text">Granada: Alhambra (12:00) • Hammam Spa (4:00)</span>
+            </div>
+            <div class="row">
+                <span class="row-date">May 27</span>
+                <span class="row-text"><a href="https://www.flightaware.com/live/flight/VY2013" target="_blank" rel="noopener noreferrer">VY2013</a> (GRX➔BCN) • Le Méridien Barcelona</span>
+            </div>
+            <div class="row">
+                <span class="row-date">May 30</span>
+                <span class="row-text">Return <a href="https://www.flightaware.com/live/flight/AC821" target="_blank" rel="noopener noreferrer">AC821</a> (BCN➔YVR) (1:15 PM)</span>
+            </div>
         </div>
     </div>
 
     <div class="weather-hub">
-        <a href="https://www.accuweather.com/en/pt/lisbon/274087/daily-weather-forecast/274087" target="_blank" class="w-btn">
-            <span class="w-city">Lisbon</span><span id="w1" class="w-temp">--°</span><span class="w-label">LONG RANGE</span>
+        <a href="https://www.accuweather.com/en/pt/lisbon/274087/daily-weather-forecast/274087" target="_blank" rel="noopener noreferrer" class="w-btn">
+            <span class="w-city">Lisbon</span><span id="w1" class="w-temp">--°</span><span class="w-label">TAP FOR FORECAST</span>
         </a>
-        <a href="https://www.accuweather.com/en/pt/albufeira/273392/daily-weather-forecast/273392" target="_blank" class="w-btn">
-            <span class="w-city">Algarve</span><span id="w2" class="w-temp">--°</span><span class="w-label">LONG RANGE</span>
+        <a href="https://www.accuweather.com/en/pt/albufeira/273392/daily-weather-forecast/273392" target="_blank" rel="noopener noreferrer" class="w-btn">
+            <span class="w-city">Algarve</span><span id="w2" class="w-temp">--°</span><span class="w-label">TAP FOR FORECAST</span>
         </a>
-        <a href="https://www.accuweather.com/en/es/cordoba/307183/daily-weather-forecast/307183" target="_blank" class="w-btn">
-            <span class="w-city">Andalusia</span><span id="w3" class="w-temp">--°</span><span class="w-label">LONG RANGE</span>
+        <a href="https://www.accuweather.com/en/es/cordoba/307183/daily-weather-forecast/307183" target="_blank" rel="noopener noreferrer" class="w-btn">
+            <span class="w-city">Andalusia</span><span id="w3" class="w-temp">--°</span><span class="w-label">TAP FOR FORECAST</span>
         </a>
-        <a href="https://www.accuweather.com/en/es/barcelona/307297/daily-weather-forecast/307297" target="_blank" class="w-btn">
-            <span class="w-city">Barcelona</span><span id="w4" class="w-temp">--°</span><span class="w-label">LONG RANGE</span>
+        <a href="https://www.accuweather.com/en/es/barcelona/307297/daily-weather-forecast/307297" target="_blank" rel="noopener noreferrer" class="w-btn">
+            <span class="w-city">Barcelona</span><span id="w4" class="w-temp">--°</span><span class="w-label">TAP FOR FORECAST</span>
         </a>
     </div>
+
+    <!-- LISBON — Alfama district / tram 28 viewpoint -->
+    <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1573843981267-be1999ff37cd?w=800&auto=format&fit=crop');">
+        <div class="hero-text">
+            <div class="hero-dates">May 16 – 18</div>
+            <h2>Lisbon</h2>
+        </div>
+    </div>
+    <div class="card">
+        <div class="item"><i class="fa-solid fa-hotel"></i> Moxy Lisbon City</div>
+        <div class="item"><i class="fa-solid fa-mosque"></i> Ismaili Centre Tour</div>
+    </div>
+    <div class="lingo">
+        <div class="lingo-pair"><span>Thank you</span><strong>Obrigado</strong></div>
+        <div class="lingo-pair"><span>Where is...?</span><strong>Onde fica...?</strong></div>
+    </div>
+
+    <!-- ALGARVE — Benagil sea cave / Praia da Marinha cliffs -->
+    <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1591102972305-213abaa76d6f?w=800&auto=format&fit=crop');">
+        <div class="hero-text">
+            <div class="hero-dates">May 19 – 23</div>
+            <h2>Algarve</h2>
+        </div>
+    </div>
+    <div class="card">
+        <div class="item"><i class="fa-solid fa-umbrella-beach"></i> Pine Cliffs Resort</div>
+        <div class="item"><i class="fa-solid fa-water"></i> Benagil Kayak</div>
+    </div>
+    <div class="lingo">
+        <div class="lingo-pair"><span>Excuse me</span><strong>Com licença</strong></div>
+        <div class="lingo-pair"><span>How much?</span><strong>Quanto custa?</strong></div>
+    </div>
+
+    <!-- ANDALUSIA — Alhambra palace, Granada -->
+    <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1523528283115-9bf9b1699245?w=800&auto=format&fit=crop');">
+        <div class="hero-text">
+            <div class="hero-dates">May 24 – 26</div>
+            <h2>Andalusia</h2>
+        </div>
+    </div>
+    <div class="card">
+        <div class="item"><i class="fa-solid fa-archway"></i> Mosque-Cathedral (Cordoba)</div>
+        <div class="item"><i class="fa-solid fa-landmark"></i> Alhambra Palace (Granada)</div>
+        <div class="item"><i class="fa-solid fa-hot-tub-person"></i> Hammam Al Ándalus</div>
+    </div>
+    <div class="lingo">
+        <div class="lingo-pair"><span>Hello</span><strong>Hola</strong></div>
+        <div class="lingo-pair"><span>Thank you</span><strong>Gracias</strong></div>
+    </div>
+
+    <!-- BARCELONA — Sagrada Família facade -->
+    <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1539037116277-4db20889f2d4?w=800&auto=format&fit=crop');">
+        <div class="hero-text">
+            <div class="hero-dates">May 27 – 29</div>
+            <h2>Barcelona</h2>
+        </div>
+    </div>
+    <div class="card">
+        <div class="item"><i class="fa-solid fa-hotel"></i> Le Méridien Barcelona</div>
+        <div class="item"><i class="fa-solid fa-church"></i> Sagrada Família</div>
+    </div>
+    <div class="lingo">
+        <div class="lingo-pair"><span>Thank you</span><strong>Gràcies</strong></div>
+        <div class="lingo-pair"><span>Good day</span><strong>Bon dia</strong></div>
+    </div>
+</div>
+
+<script>
+'use strict';
+
+// ── PIN MODULE ──────────────────────────────────────────────────────────────
+(function () {
+    const STORE_KEY   = 'jgt2026_pin';
+    const LOCK_KEY    = 'jgt2026_locked';
+    const FAIL_KEY    = 'jgt2026_fails';
+    const COOL_KEY    = 'jgt2026_cool';
+    const MAX_FAILS   = 5;
+    const COOL_MS     = 30_000;
+    const PIN_LEN     = 4;
+
+    const overlay  = document.getElementById('pin-overlay');
+    const titleEl  = document.getElementById('pin-title');
+    const subEl    = document.getElementById('pin-sub');
+    const dotsEl   = document.getElementById('pin-dots');
+    const errorEl  = document.getElementById('pin-error');
+    const forgotEl = document.getElementById('pin-forgot');
+    const lockBtn  = document.getElementById('lock-btn');
+
+    let buffer   = '';
+    let phase    = 'verify';
+    let setupBuf = '';
+
+    async function sha256(str) {
+        const buf  = new TextEncoder().encode(str);
+        const hash = await crypto.subtle.digest('SHA-256', buf);
+        return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    function savedHash()  { return localStorage.getItem(STORE_KEY); }
+    function isLocked()   { return !!localStorage.getItem(LOCK_KEY); }
+    function failCount()  { return parseInt(localStorage.getItem(FAIL_KEY) || '0', 10); }
+    function coolUntil()  { return parseInt(localStorage.getItem(COOL_KEY) || '0', 10); }
+
+    function showOverlay() {
+        overlay.classList.remove('hidden');
+        document.getElementById('app').style.visibility = 'hidden';
+    }
+    function hideOverlay() {
+        overlay.classList.add('hidden');
+        document.getElementById('app').style.visibility = '';
+        localStorage.removeItem(LOCK_KEY);
+    }
+
+    function renderDots(count, error = false) {
+        const dots = dotsEl.querySelectorAll('.pin-dot');
+        dots.forEach((d, i) => {
+            d.classList.toggle('filled', i < count && !error);
+            d.classList.toggle('error', i < count && error);
+        });
+    }
+
+    function shakeAndClear(msg) {
+        renderDots(PIN_LEN, true);
+        dotsEl.classList.add('shake');
+        errorEl.textContent = msg;
+        dotsEl.addEventListener('animationend', () => {
+            dotsEl.classList.remove('shake');
+            buffer = '';
+            renderDots(0);
+        }, { once: true });
+    }
+
+    function enterSetupMode() {
+        phase    = 'setup';
+        setupBuf = '';
+        buffer   = '';
+        titleEl.textContent    = 'Create a PIN';
+        subEl.textContent      = 'Choose a 4-digit PIN';
+        forgotEl.style.display = 'none';
+        errorEl.textContent    = '';
+        renderDots(0);
+    }
+
+    function enterVerifyMode() {
+        phase  = 'verify';
+        buffer = '';
+        titleEl.textContent    = 'Welcome back';
+        subEl.textContent      = 'Enter your PIN to continue';
+        forgotEl.style.display = '';
+        errorEl.textContent    = '';
+        renderDots(0);
+    }
+
+    async function handleComplete() {
+        if (phase === 'setup') {
+            setupBuf = buffer;
+            phase    = 'confirm';
+            buffer   = '';
+            titleEl.textContent = 'Confirm PIN';
+            subEl.textContent   = 'Enter the same PIN again';
+            renderDots(0);
+            errorEl.textContent = '';
+            return;
+        }
+
+        if (phase === 'confirm') {
+            if (buffer !== setupBuf) {
+                shakeAndClear("PINs don't match — try again");
+                phase    = 'setup';
+                setupBuf = '';
+                setTimeout(() => {
+                    titleEl.textContent = 'Create a PIN';
+                    subEl.textContent   = 'Choose a 4-digit PIN';
+                }, 450);
+                return;
+            }
+            const hash = await sha256(buffer);
+            localStorage.setItem(STORE_KEY, hash);
+            localStorage.removeItem(FAIL_KEY);
+            localStorage.removeItem(COOL_KEY);
+            hideOverlay();
+            return;
+        }
+
+        // phase === verify
+        const now = Date.now();
+        if (now < coolUntil()) {
+            const secs = Math.ceil((coolUntil() - now) / 1000);
+            shakeAndClear(`Too many attempts — wait ${secs}s`);
+            buffer = '';
+            return;
+        }
+
+        const hash    = await sha256(buffer);
+        const correct = hash === savedHash();
+        if (correct) {
+            localStorage.removeItem(FAIL_KEY);
+            localStorage.removeItem(COOL_KEY);
+            hideOverlay();
+        } else {
+            const fails = failCount() + 1;
+            localStorage.setItem(FAIL_KEY, fails);
+            if (fails >= MAX_FAILS) {
+                localStorage.setItem(COOL_KEY, Date.now() + COOL_MS);
+                localStorage.setItem(FAIL_KEY, 0);
+                shakeAndClear('Too many attempts — locked for 30s');
+            } else {
+                shakeAndClear(`Incorrect PIN (${MAX_FAILS - fails} left)`);
+            }
+        }
+    }
+
+    function press(digit) {
+        const now = Date.now();
+        if (now < coolUntil()) {
+            const secs = Math.ceil((coolUntil() - now) / 1000);
+            errorEl.textContent = `Try again in ${secs}s`;
+            return;
+        }
+        if (buffer.length >= PIN_LEN) return;
+        buffer += digit;
+        errorEl.textContent = '';
+        renderDots(buffer.length);
+        if (buffer.length === PIN_LEN) setTimeout(handleComplete, 100);
+    }
+
+    function del() {
+        if (buffer.length > 0) {
+            buffer = buffer.slice(0, -1);
+            renderDots(buffer.length);
+            errorEl.textContent = '';
+        }
+    }
+
+    document.getElementById('pin-pad').addEventListener('click', e => {
+        const btn = e.target.closest('.pin-key');
+        if (!btn) return;
+        if (btn.id === 'pin-del') { del(); return; }
+        if (btn.dataset.k !== undefined) press(btn.dataset.k);
+    });
+
+    document.addEventListener('keydown', e => {
+        if (overlay.classList.contains('hidden')) return;
+        if (e.key >= '0' && e.key <= '9') press(e.key);
+        if (e.key === 'Backspace') del();
+    });
+
+    forgotEl.addEventListener('click', () => {
+        if (!confirm('Reset PIN? You will need to create a new one.')) return;
+        localStorage.removeItem(STORE_KEY);
+        localStorage.removeItem(FAIL_KEY);
+        localStorage.removeItem(COOL_KEY);
+        enterSetupMode();
+    });
+
+    lockBtn.addEventListener('click', () => {
+        localStorage.setItem(LOCK_KEY, '1');
+        enterVerifyMode();
+        showOverlay();
+    });
+
+    if (!savedHash()) {
+        enterSetupMode();
+        showOverlay();
+    } else {
+        enterVerifyMode();
+        showOverlay();
+    }
+})();
+
+
+// ── COUNTDOWN TICKER ────────────────────────────────────────────────────────
+(function () {
+    const DEPARTURE = new Date('2026-05-16T16:00:00');
+    const RETURN    = new Date('2026-05-30T13:15:00');
+
+    const PHASES = [
+        { name: '✈️ Lisbon',    start: new Date('2026-05-16'), end: new Date('2026-05-18T23:59:59') },
+        { name: '🏖️ Algarve',  start: new Date('2026-05-19'), end: new Date('2026-05-23T23:59:59') },
+        { name: '🕌 Andalusia', start: new Date('2026-05-24'), end: new Date('2026-05-26T23:59:59') },
+        { name: '🏙️ Barcelona', start: new Date('2026-05-27'), end: new Date('2026-05-29T23:59:59') },
+    ];
+
+    const labelEl  = document.getElementById('ticker-label');
+    const valueEl  = document.getElementById('ticker-value');
+    const subEl    = document.getElementById('ticker-sub');
+    const phaseEl  = document.getElementById('ticker-phase');
+    const tickerEl = document.getElementById('ticker');
+
+    function pad(n) { return String(n).padStart(2, '0'); }
+
+    function fmt(ms) {
+        if (ms <= 0) return '00:00:00:00';
+        const totalSecs = Math.floor(ms / 1000);
+        const d = Math.floor(totalSecs / 86400);
+        const h = Math.floor((totalSecs % 86400) / 3600);
+        const m = Math.floor((totalSecs % 3600) / 60);
+        const s = totalSecs % 60;
+        return `${pad(d)}:${pad(h)}:${pad(m)}:${pad(s)}`;
+    }
+
+    function tick() {
+        const now = new Date();
+
+        if (now < DEPARTURE) {
+            const ms = DEPARTURE - now;
+            tickerEl.style.background = 'linear-gradient(135deg, #0062cc, #007aff)';
+            labelEl.textContent = 'Departure in';
+            valueEl.textContent = fmt(ms);
+            subEl.textContent   = 'D : H : M : S';
+            phaseEl.innerHTML   = '<div class="ticker-phase-name">YVR ✈ LIS</div><div class="ticker-phase-label">AC812 · May 16</div>';
+        } else if (now <= RETURN) {
+            const phase = PHASES.find(p => now >= p.start && now <= p.end);
+            tickerEl.style.background = 'linear-gradient(135deg, #1a7a3a, #28a745)';
+
+            if (phase) {
+                const ms           = phase.end - now;
+                const nextPhase    = PHASES[PHASES.indexOf(phase) + 1];
+                labelEl.textContent = 'Leaving in';
+                valueEl.textContent = fmt(ms);
+                subEl.textContent   = 'D : H : M : S';
+                phaseEl.innerHTML   = `<div class="ticker-phase-name">${phase.name}</div><div class="ticker-phase-label">${nextPhase ? `Next: ${nextPhase.name}` : 'Last stop!'}</div>`;
+            } else {
+                labelEl.textContent = 'In transit';
+                valueEl.textContent = '✈️';
+                subEl.textContent   = '';
+                phaseEl.innerHTML   = '';
+            }
+        } else {
+            tickerEl.style.background = 'linear-gradient(135deg, #555, #888)';
+            labelEl.textContent = 'Grand Tour';
+            valueEl.textContent = '🏠 Complete';
+            subEl.textContent   = 'Welcome home, Jivraj family!';
+            phaseEl.innerHTML   = '';
+            clearInterval(interval);
+        }
+    }
+
+    tick();
+    const interval = setInterval(tick, 1000);
+})();
+
+
+// ── LIVE DATA ───────────────────────────────────────────────────────────────
+const weatherKey = 'ff6e4e362f0a4231841165933261005';
+
+async function update() {
+    try {
+        const r = await fetch('https://open.er-api.com/v6/latest/EUR');
+        const d = await r.json();
+        document.getElementById('rate').textContent = `1 EUR = ${d.rates.CAD.toFixed(2)} CAD`;
+    } catch (err) {}
+
+    const cities = [['Lisbon', 'w1'], ['Albufeira', 'w2'], ['Cordoba', 'w3'], ['Barcelona', 'w4']];
+    await Promise.all(cities.map(async ([city, id]) => {
+        try {
+            const res  = await fetch(`https://api.weatherapi.com/v1/current.json?key=${weatherKey}&q=${city}`);
+            const data = await res.json();
+            const code = data.current.condition.code;
+            let icon;
+            if      (code === 1000)                                   icon = '☀️';
+            else if (code === 1003)                                   icon = '⛅';
+            else if (code === 1006 || code === 1009)                  icon = '☁️';
+            else if (code === 1030 || code === 1135 || code === 1147) icon = '🌫️';
+            else if (code >= 1063 && code <= 1087)                    icon = '⛈️';
+            else if (code >= 1150 && code <= 1201)                    icon = '🌧️';
+            else if (code >= 1210 && code <= 1237)                    icon = '🌨️';
+            else if (code >= 1240 && code <= 1282)                    icon = '🌦️';
+            else                                                       icon = '🌡️';
+            document.getElementById(id).textContent = `${icon} ${Math.round(data.current.temp_c)}°`;
+        } catch (err) {}
+    }));
+}
+
+update();
+</script>
+</body>
+</html>
