@@ -6,86 +6,80 @@
     <title>Jivraj Tour 2026</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        :root { --accent: #007aff; --booked: #28a745; --grey: #8e8e93; --flight: #5856d6; }
+        :root { --accent: #007aff; --booked: #28a745; --grey: #8e8e93; }
         body { font-family: -apple-system, sans-serif; margin: 0; background: #f2f2f7; color: #1c1c1e; padding-bottom: 60px; }
         .container { max-width: 500px; margin: 0 auto; background: white; min-height: 100vh; box-shadow: 0 0 30px rgba(0,0,0,0.1); }
         
         .header { padding: 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; background: #fff; position: sticky; top: 0; z-index: 100; }
-        .rate-pill { color: var(--booked); font-weight: 800; font-size: 0.75rem; background: #eef9f2; padding: 4px 10px; border-radius: 20px; }
+        .rate-pill { color: var(--booked); font-weight: 800; font-size: 0.85rem; background: #eef9f2; padding: 6px 12px; border-radius: 20px; }
 
-        .flight-hub { background: #f2f2f7; padding: 15px; border-bottom: 1px solid #ddd; }
-        .flight-card { background: white; border-radius: 12px; padding: 12px; display: flex; justify-content: space-between; align-items: center; text-decoration: none; color: inherit; border: 1px solid #e5e5ea; margin-bottom: 8px; }
-        .flight-no { color: var(--flight); font-weight: 800; font-size: 0.85rem; }
+        /* ENLARGED WEATHER HUB */
+        .weather-hub { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; padding: 20px 15px; background: #f2f2f7; }
+        .w-box { background: white; padding: 15px; border-radius: 16px; text-align: center; border: 1px solid #e5e5ea; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+        .w-city { font-size: 0.75rem; font-weight: 800; color: var(--grey); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; display: block; }
+        .w-temp { font-size: 1.6rem; font-weight: 900; letter-spacing: -1px; }
 
-        .weather-hub { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; padding: 12px 15px; background: white; border-bottom: 1px solid #eee; }
-        .w-small { text-align: center; font-size: 0.65rem; font-weight: 800; color: var(--grey); line-height: 1.4; }
-
-        .hero { height: 240px; background-size: cover; background-position: center; display: flex; align-items: flex-end; padding: 20px; color: white; position: relative; margin-top: 10px; }
+        /* HERO SECTIONS */
+        .hero { height: 260px; background-size: cover; background-position: center; display: flex; align-items: flex-end; padding: 20px; color: white; position: relative; margin-top: 15px; border-radius: 20px; margin-left: 15px; margin-right: 15px; overflow: hidden; background-color: #333; }
         .hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.85), transparent); }
-        .hero h2 { position: relative; z-index: 1; margin: 0; font-size: 2rem; font-weight: 800; }
+        .hero h2 { position: relative; z-index: 1; margin: 0; font-size: 2.2rem; font-weight: 800; letter-spacing: -1px; }
 
-        .card { padding: 18px; margin: 0 15px 25px; border-radius: 20px; background: #fff; border: 1px solid #eee; box-shadow: 0 5px 15px rgba(0,0,0,0.04); margin-top: -15px; position: relative; z-index: 2; }
-        .item { display: flex; align-items: center; gap: 12px; margin: 10px 0; font-size: 0.95rem; font-weight: 500; }
-        .item i { color: var(--accent); width: 22px; text-align: center; }
-        .note { font-size: 0.8rem; color: var(--grey); margin-left: 34px; font-style: italic; background: #f8f8f8; padding: 5px 10px; border-radius: 8px; display: inline-block; }
-        
-        .gallery-title { padding: 20px 20px 10px; font-weight: 900; font-size: 1.4rem; letter-spacing: -0.5px; }
+        .card { padding: 20px; margin: 0 15px 30px; border-radius: 20px; background: #fff; border: 1px solid #eee; box-shadow: 0 5px 15px rgba(0,0,0,0.04); margin-top: -15px; position: relative; z-index: 2; }
+        .item { display: flex; align-items: center; gap: 12px; margin: 12px 0; font-size: 1rem; font-weight: 500; }
+        .item i { color: var(--accent); width: 24px; text-align: center; font-size: 1.1rem; }
     </style>
 </head>
 <body>
 
 <div class="container">
     <div class="header">
-        <div style="font-weight: 900; letter-spacing: -0.5px;">EUROPE 2026</div>
-        <div id="currency-rate" class="rate-pill">1 EUR = -- CAD</div>
-    </div>
-
-    <div class="flight-hub">
-        <a href="https://www.google.com/search?q=AC812+flight+status" target="_blank" class="flight-card">
-            <span style="font-size: 0.85rem; font-weight: 700;">Vancouver ➔ Lisbon</span>
-            <span class="flight-no">AC812 <i class="fa-solid fa-chevron-right" style="font-size: 0.7rem;"></i></span>
-        </a>
-        <a href="https://www.google.com/search?q=VY2013+flight+status" target="_blank" class="flight-card">
-            <span style="font-size: 0.85rem; font-weight: 700;">Granada ➔ Barcelona</span>
-            <span class="flight-no">VY2013 <i class="fa-solid fa-chevron-right" style="font-size: 0.7rem;"></i></span>
-        </a>
+        <div style="font-weight: 900; font-size: 1.1rem; letter-spacing: -0.5px;">JIVRAJ TOUR</div>
+        <div id="rate" class="rate-pill">1 EUR = -- CAD</div>
     </div>
 
     <div class="weather-hub">
-        <div class="w-small" id="w1">LIS<br>--°</div>
-        <div class="w-small" id="w2">ALG<br>--°</div>
-        <div class="w-small" id="w3">COR<br>--°</div>
-        <div class="w-small" id="w4">BCN<br>--°</div>
+        <div class="w-box">
+            <span class="w-city">Lisbon</span>
+            <div id="w1" class="w-temp">☀️ --°</div>
+        </div>
+        <div class="w-box">
+            <span class="w-city">Algarve</span>
+            <div id="w2" class="w-temp">☀️ --°</div>
+        </div>
+        <div class="w-box">
+            <span class="w-city">Cordoba</span>
+            <div id="w3" class="w-temp">☀️ --°</div>
+        </div>
+        <div class="w-box">
+            <span class="w-city">Barcelona</span>
+            <div id="w4" class="w-temp">☀️ --°</div>
+        </div>
     </div>
 
-    <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1543783232-af41fe6d154b?auto=format&fit=crop&w=1000&q=80');">
+    <div class="hero" style="background-image: url('https://source.unsplash.com/1000x800/?lisbon,portugal');">
         <h2>Lisbon</h2>
     </div>
     <div class="card">
         <div class="item"><i class="fa-solid fa-hotel"></i> Moxy Lisbon City</div>
-        <div class="item"><i class="fa-solid fa-mosque"></i> Ismaili Centre Guided Tour</div>
+        <div class="item"><i class="fa-solid fa-mosque"></i> Ismaili Centre Tour</div>
     </div>
 
-    <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1516496636080-14fb876e029d?auto=format&fit=crop&w=1000&q=80');">
+    <div class="hero" style="background-image: url('https://source.unsplash.com/1000x800/?algarve,cliffs');">
         <h2>The Algarve</h2>
     </div>
     <div class="card">
         <div class="item"><i class="fa-solid fa-umbrella-beach"></i> Pine Cliffs Resort</div>
-        <div class="item"><i class="fa-solid fa-sailboat"></i> Benagil Cave Kayaking</div>
-        <div class="note">Time: 11:00 AM - 12:30 PM</div>
     </div>
 
-    <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1595121655184-2826a7f8054a?auto=format&fit=crop&w=1000&q=80');">
+    <div class="hero" style="background-image: url('https://source.unsplash.com/1000x800/?cordoba,spain');">
         <h2>Andalusia</h2>
     </div>
     <div class="card">
-        <div class="item"><i class="fa-solid fa-archway"></i> Mosque-Cathedral (Córdoba)</div>
-        <div class="item"><i class="fa-solid fa-fort-awesome"></i> Alhambra & Nasrid Palaces</div>
-        <div class="item"><i class="fa-solid fa-hot-tub-person"></i> Hammam Al Ándalus</div>
-        <div class="note">Entry shift: 3:30 PM</div>
+        <div class="item"><i class="fa-solid fa-archway"></i> Mosque-Cathedral</div>
+        <div class="item"><i class="fa-solid fa-fort-awesome"></i> Alhambra Tour</div>
     </div>
 
-    <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1511527661048-7fe73d85e9a4?auto=format&fit=crop&w=1000&q=80');">
+    <div class="hero" style="background-image: url('https://source.unsplash.com/1000x800/?barcelona,gaudi');">
         <h2>Barcelona</h2>
     </div>
     <div class="card">
@@ -93,50 +87,49 @@
         <div class="item"><i class="fa-solid fa-church"></i> Sagrada Família</div>
     </div>
 
-    <div class="gallery-title">Trip Moments</div>
-    <div id="gallery" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 0 15px;"></div>
+    <div style="padding: 25px 20px 10px; font-weight: 900; font-size: 1.5rem; letter-spacing: -0.5px;">Trip Moments</div>
+    <div id="gallery" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 0 15px;"></div>
 </div>
 
 <script>
-    const weatherApi = 'ff6e4e362f0a4231841165933261005';
-
-    async function updateRates() {
+    async function updateData() {
+        const key = 'ff6e4e362f0a4231841165933261005';
+        
+        // Live Rate
         try {
             const r = await fetch('https://open.er-api.com/v6/latest/EUR');
             const d = await r.json();
-            document.getElementById('currency-rate').innerHTML = `1 EUR = ${d.rates.CAD.toFixed(2)} CAD`;
+            document.getElementById('rate').innerHTML = `1 EUR = ${d.rates.CAD.toFixed(2)} CAD`;
         } catch(e) {}
-    }
+        
+        // Large Weather
+        const cities = [['Lisbon','w1'],['Albufeira','w2'],['Cordoba','w3'],['Barcelona','w4']];
+        cities.forEach(async ([c, id]) => {
+            try {
+                const res = await fetch(`https://api.weatherapi.com/v1/current.json?key=${key}&q=${c}`);
+                const data = await res.json();
+                const cond = data.current.condition.text.toLowerCase();
+                let e = "☀️"; if(cond.includes("cloud")) e="☁️"; if(cond.includes("rain")) e="🌧️";
+                document.getElementById(id).innerHTML = `${e} ${Math.round(data.current.temp_c)}°`;
+            } catch(e) {}
+        });
 
-    async function updateW(city, id, label) {
+        // Photo Gallery
         try {
-            const r = await fetch(`https://api.weatherapi.com/v1/current.json?key=${weatherApi}&q=${city}`);
-            const d = await r.json();
-            const cond = d.current.condition.text.toLowerCase();
-            let e = "☀️"; if(cond.includes("cloud")) e="☁️"; if(cond.includes("rain")) e="🌧️";
-            document.getElementById(id).innerHTML = `${label}<br>${e} ${Math.round(d.current.temp_c)}°`;
-        } catch(e) {}
-    }
-
-    async function loadGallery() {
-        try {
-            const r = await fetch(`https://api.github.com/repos/rjivraj72/europe-trip-2026/contents/photos`);
-            const f = await r.json();
+            const res = await fetch(`https://api.github.com/repos/rjivraj72/europe-trip-2026/contents/photos`);
+            const files = await res.json();
             const g = document.getElementById('gallery');
-            f.reverse().forEach(file => {
-                if (file.name.match(/\.(jpg|jpeg|png)$/i)) {
+            files.reverse().forEach(f => {
+                if (f.name.match(/\.(jpg|jpeg|png)$/i)) {
                     const d = document.createElement('div');
-                    d.style.height="160px"; d.style.borderRadius="16px"; d.style.overflow="hidden"; d.style.background="#f1f1f1";
-                    d.innerHTML = `<img src="${file.download_url}" style="width:100%; height:100%; object-fit:cover;">`;
+                    d.style.height="180px"; d.style.borderRadius="20px"; d.style.overflow="hidden"; d.style.background="#f1f1f1";
+                    d.innerHTML = `<img src="${f.download_url}" style="width:100%; height:100%; object-fit:cover;">`;
                     g.appendChild(d);
                 }
             });
         } catch(e) {}
     }
-
-    updateRates();
-    updateW("Lisbon","w1","LIS"); updateW("Albufeira","w2","ALG"); updateW("Cordoba","w3","COR"); updateW("Barcelona","w4","BCN");
-    loadGallery();
+    updateData();
 </script>
 </body>
 </html>
