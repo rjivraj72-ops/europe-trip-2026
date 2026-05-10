@@ -7,25 +7,86 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         :root { --bg: #f8f9fa; --primary: #1a1a1a; --accent: #007aff; --booked: #28a745; --grey: #6c757d; }
-        
-        body { font-family: -apple-system, system-ui, sans-serif; color: var(--primary); margin: 0; background-color: var(--bg); }
-        .container { max-width: 500px; margin: 0 auto; background: white; min-height: 100vh; padding-bottom: 50px; box-shadow: 0 0 30px rgba(0,0,0,0.05); }
-        
-        /* HEADER & WEATHER */
+        body { font-family: -apple-system, system-ui, sans-serif; color: var(--primary); margin: 0; background-color: var(--bg); padding-bottom: 50px; }
+        .container { max-width: 500px; margin: 0 auto; background: white; min-height: 100vh; box-shadow: 0 0 30px rgba(0,0,0,0.1); }
         .header { padding: 20px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
-        
-        /* FLIGHT TRACKER */
         .flight-card { background: #f1f1f1; margin: 15px; padding: 15px; border-radius: 16px; display: flex; justify-content: space-between; align-items: center; text-decoration: none; color: inherit; }
-        .flight-info { font-size: 0.85rem; font-weight: 700; }
-        .status-tag { background: var(--accent); color: white; font-size: 0.65rem; padding: 3px 8px; border-radius: 10px; text-transform: uppercase; }
-
-        /* CITY SECTION */
         .city-hero { height: 260px; background-size: cover; background-position: center; display: flex; align-items: flex-end; padding: 20px; color: white; position: relative; margin: 15px; border-radius: 20px; overflow: hidden; background-color: #333; }
         .city-hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); }
         .city-hero h2 { position: relative; z-index: 1; margin: 0; font-size: 2rem; font-weight: 800; }
-
         .day-section { padding: 0 15px 20px; }
-        .day-card { background: white; border-radius: 16px; padding: 15px; border: 1px solid #eee; box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
+        .day-card { background: white; border-radius: 16px; padding: 15px; border: 1px solid #eee; }
         .date-header { font-size: 0.75rem; font-weight: 800; color: var(--grey); text-transform: uppercase; margin-bottom: 10px; display: flex; justify-content: space-between; }
         .activity-item { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; font-size: 0.95rem; }
-        .activity-item i { color:
+        .activity-item i { color: var(--accent); width: 20px; text-align: center; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <div id="weather" style="font-weight: 800;">Jivraj Tour 2026</div>
+        <div style="font-size: 0.7rem; font-weight: 800; color: var(--booked);">1 EUR = 1.48 CAD</div>
+    </div>
+
+    <a href="https://www.google.com/search?q=AC812+flight+status" target="_blank" class="flight-card">
+        <div style="font-size: 0.85rem; font-weight: 700;">AC812 · YVR ➔ LIS</div>
+        <i class="fa-solid fa-plane"></i>
+    </a>
+
+    <div class="city-hero" style="background-image: url('https://images.unsplash.com/photo-1543783232-af41fe6d154b?auto=format&fit=crop&w=800');">
+        <h2>Lisbon</h2>
+    </div>
+    <div class="day-section">
+        <div class="day-card">
+            <div class="date-header">May 16 - 20</div>
+            <div class="activity-item"><i class="fa-solid fa-hotel"></i> Moxy Lisbon City</div>
+            <div class="activity-item"><i class="fa-solid fa-mosque"></i> Ismaili Centre Tour</div>
+        </div>
+    </div>
+
+    <div class="city-hero" style="background-image: url('https://images.unsplash.com/photo-1559064500-47407038e2f8?auto=format&fit=crop&w=800');">
+        <h2>The Algarve</h2>
+    </div>
+    <div class="day-section">
+        <div class="day-card">
+            <div class="date-header">May 20 - 24</div>
+            <div class="activity-item"><i class="fa-solid fa-umbrella-beach"></i> Pine Cliffs Resort</div>
+        </div>
+    </div>
+
+    <div class="city-hero" style="background-image: url('https://images.unsplash.com/photo-1595121655184-2826a7f8054a?auto=format&fit=crop&w=800');">
+        <h2>Andalusia</h2>
+    </div>
+    <div class="day-section">
+        <div class="day-card">
+            <div class="date-header">May 24 - 27</div>
+            <div class="activity-item"><i class="fa-solid fa-archway"></i> Mosque-Cathedral</div>
+            <div class="activity-item"><i class="fa-solid fa-fort-awesome"></i> Alhambra Tour</div>
+        </div>
+    </div>
+
+    <div class="city-hero" style="background-image: url('https://images.unsplash.com/photo-1523531294919-4bcd7c65e216?auto=format&fit=crop&w=800');">
+        <h2>Barcelona</h2>
+    </div>
+    <div class="day-section">
+        <div class="day-card">
+            <div class="date-header">May 27 - 30</div>
+            <div class="activity-item"><i class="fa-solid fa-bed"></i> Le Méridien Barcelona</div>
+        </div>
+    </div>
+</div>
+
+<script>
+    async function getWeather() {
+        const apiKey = 'ff6e4e362f0a4231841165933261005'; 
+        try {
+            const res = await fetch(`https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=Lisbon`);
+            const data = await res.json();
+            document.getElementById('weather').innerHTML = `${data.current.temp_c}°C in Lisbon`;
+        } catch (e) { console.log("Weather failed"); }
+    }
+    getWeather();
+</script>
+</body>
+</html>
