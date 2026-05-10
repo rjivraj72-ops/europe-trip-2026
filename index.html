@@ -3,128 +3,146 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Jivraj Tour Hub</title>
+    <title>Jivraj Tour 2026</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        :root { --bg: #f8f9fa; --primary: #1a1a1a; --accent: #007aff; --booked: #28a745; --grey: #6c757d; }
-        body { font-family: -apple-system, system-ui, sans-serif; color: var(--primary); margin: 0; background-color: var(--bg); padding-bottom: 50px; }
-        .container { max-width: 500px; margin: 0 auto; background: white; min-height: 100vh; box-shadow: 0 0 30px rgba(0,0,0,0.1); }
-        .header { padding: 20px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; background: white; position: sticky; top: 0; z-index: 100; }
+        :root { --accent: #007aff; --booked: #28a745; --grey: #8e8e93; --flight: #5856d6; }
+        body { font-family: -apple-system, sans-serif; margin: 0; background: #f2f2f7; color: #1c1c1e; }
+        .container { max-width: 500px; margin: 0 auto; background: white; min-height: 100vh; padding-bottom: 50px; }
         
-        /* WEATHER GRID */
-        .weather-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; padding: 15px; background: #f1f1f1; margin: 15px; border-radius: 16px; }
-        .weather-item { background: white; padding: 10px; border-radius: 12px; text-align: center; border: 1px solid #eee; font-size: 0.8rem; font-weight: 700; }
+        /* HEADER */
+        .header { padding: 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; }
+        .rate-pill { color: var(--booked); font-weight: 800; font-size: 0.75rem; background: #eef9f2; padding: 4px 10px; border-radius: 20px; }
 
-        /* HERO SECTIONS */
-        .city-hero { height: 240px; background-size: cover; background-position: center; display: flex; align-items: flex-end; padding: 20px; color: white; position: relative; margin: 15px; border-radius: 20px; overflow: hidden; background-color: #333; }
-        .city-hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); }
-        .city-hero h2 { position: relative; z-index: 1; margin: 0; font-size: 1.8rem; font-weight: 800; }
+        /* MAP PLACEHOLDER */
+        .map-container { width: 100%; height: 350px; background: #e5e5ea; border-bottom: 1px solid #ddd; position: relative; }
+        .map-container iframe { width: 100%; height: 100%; border: 0; }
 
-        .card { background: white; border-radius: 16px; padding: 15px; border: 1px solid #eee; margin: 0 15px 20px; }
-        .activity-item { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; font-size: 0.9rem; }
-        .activity-item i { color: var(--accent); width: 18px; text-align: center; }
+        /* FLIGHTS */
+        .flight-hub { background: #f2f2f7; padding: 15px; border-bottom: 1px solid #ddd; }
+        .flight-card { background: white; border-radius: 12px; padding: 12px; display: flex; justify-content: space-between; align-items: center; text-decoration: none; color: inherit; border: 1px solid #e5e5ea; margin-bottom: 8px; }
+        .flight-no { color: var(--flight); font-weight: 800; font-size: 0.85rem; }
 
-        /* PHOTO GALLERY */
-        .gallery-header { padding: 10px 20px; font-weight: 800; font-size: 1.2rem; }
-        .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 0 15px; }
-        .photo-card { background: #eee; border-radius: 12px; overflow: hidden; height: 150px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
-        .photo-card img { width: 100%; height: 100%; object-fit: cover; }
+        /* WEATHER */
+        .weather-hub { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; padding: 10px 15px; background: white; border-bottom: 1px solid #eee; }
+        .w-small { text-align: center; font-size: 0.65rem; font-weight: 800; color: var(--grey); }
+
+        /* CITY CARDS */
+        .hero { height: 220px; background-size: cover; background-position: center; display: flex; align-items: flex-end; padding: 20px; color: white; position: relative; margin-top: 10px; }
+        .hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); }
+        .hero h2 { position: relative; z-index: 1; margin: 0; font-size: 1.8rem; font-weight: 800; }
+
+        .card { padding: 15px; margin: 0 15px 20px; border-radius: 16px; background: #fff; border: 1px solid #eee; box-shadow: 0 4px 10px rgba(0,0,0,0.03); margin-top: -10px; position: relative; z-index: 2; }
+        .item { display: flex; align-items: center; gap: 10px; margin: 8px 0; font-size: 0.95rem; }
+        .item i { color: var(--accent); width: 20px; text-align: center; }
+        .note { font-size: 0.75rem; color: var(--grey); margin-left: 30px; font-style: italic; }
     </style>
 </head>
 <body>
 
 <div class="container">
     <div class="header">
-        <div style="font-weight: 900;">Jivraj Europe 2026</div>
-        <div style="font-size: 0.7rem; font-weight: 800; color: var(--booked);">1 EUR = 1.48 CAD</div>
+        <div style="font-weight: 900;">JIVRAJ EUROPE 2026</div>
+        <div id="currency-rate" class="rate-pill">1 EUR = -- CAD</div>
     </div>
 
-    <div class="weather-grid" id="weather-hub">
-        <div class="weather-item" id="w-lis">LIS ☀️ --°</div>
-        <div class="weather-item" id="w-alg">ALG ☀️ --°</div>
-        <div class="weather-item" id="w-and">AND ☀️ --°</div>
-        <div class="weather-item" id="w-bcn">BCN ☀️ --°</div>
+    <div class="map-container">
+        <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1_G-Your-Map-ID-Here"></iframe>
     </div>
 
-    <div class="city-hero" style="background-image: url('https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?q=80&w=800&auto=format&fit=crop');">
+    <div class="flight-hub">
+        <div style="font-size: 0.65rem; font-weight: 800; color: var(--grey); text-transform: uppercase; margin-bottom: 10px;">Live Flight Status</div>
+        <a href="https://www.google.com/search?q=AC812+flight+status" target="_blank" class="flight-card">
+            <span style="font-size: 0.85rem; font-weight: 600;">YVR ➔ LIS</span>
+            <span class="flight-no">AC812 <i class="fa-solid fa-chevron-right"></i></span>
+        </a>
+    </div>
+
+    <div class="weather-hub">
+        <div class="w-small" id="w1">LIS --°</div>
+        <div class="w-small" id="w2">ALG --°</div>
+        <div class="w-small" id="w3">COR --°</div>
+        <div class="w-small" id="w4">BCN --°</div>
+    </div>
+
+    <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1543783232-af41fe6d154b?auto=format&fit=crop&w=800&q=80');">
         <h2>Lisbon</h2>
     </div>
     <div class="card">
-        <div class="activity-item"><i class="fa-solid fa-hotel"></i> Moxy Lisbon City</div>
-        <div class="activity-item"><i class="fa-solid fa-mosque"></i> Ismaili Centre Tour</div>
+        <div class="item"><i class="fa-solid fa-hotel"></i> Moxy Lisbon City</div>
+        <div class="item"><i class="fa-solid fa-mosque"></i> Ismaili Centre Tour</div>
     </div>
 
-    <div class="city-hero" style="background-image: url('https://images.unsplash.com/photo-1559064500-47407038e2f8?q=80&w=800&auto=format&fit=crop');">
-        <h2>Algarve</h2>
+    <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1516496636080-14fb876e029d?auto=format&fit=crop&w=800&q=80');">
+        <h2>The Algarve</h2>
     </div>
     <div class="card">
-        <div class="activity-item"><i class="fa-solid fa-umbrella-beach"></i> Pine Cliffs Resort</div>
+        <div class="item"><i class="fa-solid fa-umbrella-beach"></i> Pine Cliffs Resort</div>
+        <div class="item"><i class="fa-solid fa-sailboat"></i> Benagil Cave Kayaking</div>
+        <div class="note">Time: 11:00 AM - 12:30 PM</div>
     </div>
 
-    <div class="city-hero" style="background-image: url('https://images.unsplash.com/photo-1595121655184-2826a7f8054a?q=80&w=800&auto=format&fit=crop');">
+    <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1595121655184-2826a7f8054a?auto=format&fit=crop&w=800&q=80');">
         <h2>Andalusia</h2>
     </div>
     <div class="card">
-        <div class="activity-item"><i class="fa-solid fa-archway"></i> Mosque-Cathedral</div>
-        <div class="activity-item"><i class="fa-solid fa-fort-awesome"></i> Alhambra Tour</div>
+        <div class="item"><i class="fa-solid fa-archway"></i> Mosque-Cathedral (Córdoba)</div>
+        <div class="item"><i class="fa-solid fa-fort-awesome"></i> Alhambra & Nasrid Palaces</div>
+        <div class="item"><i class="fa-solid fa-hot-tub-person"></i> Hammam Al Ándalus</div>
+        <div class="note">Entry shift: 3:30 PM</div>
     </div>
 
-    <div class="city-hero" style="background-image: url('https://images.unsplash.com/photo-1511527661048-7fe73d85e9a4?q=80&w=800&auto=format&fit=crop');">
+    <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1511527661048-7fe73d85e9a4?auto=format&fit=crop&w=800&q=80');">
         <h2>Barcelona</h2>
     </div>
     <div class="card">
-        <div class="activity-item"><i class="fa-solid fa-bed"></i> Le Méridien Barcelona</div>
+        <div class="item"><i class="fa-solid fa-bed"></i> Le Méridien Barcelona</div>
+        <div class="item"><i class="fa-solid fa-church"></i> Sagrada Família</div>
     </div>
 
-    <div class="gallery-header">Trip Moments</div>
-    <div class="gallery" id="auto-gallery">
-        </div>
+    <div style="padding: 20px; font-weight: 900; font-size: 1.3rem;">TRIP MOMENTS</div>
+    <div id="gallery" style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 0 15px;"></div>
 </div>
 
 <script>
-    const apiKey = 'ff6e4e362f0a4231841165933261005';
+    const weatherApi = 'ff6e4e362f0a4231841165933261005';
 
-    async function fetchWeather(city, id) {
+    async function updateRates() {
         try {
-            const res = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&days=1`);
-            const data = await res.json();
-            const temp = Math.round(data.current.temp_c);
-            const high = Math.round(data.forecast.forecastday[0].day.maxtemp_c);
-            const low = Math.round(data.forecast.forecastday[0].day.mintemp_c);
-            const cond = data.current.condition.text.toLowerCase();
-            
-            let emoji = "☀️";
-            if(cond.includes("cloud")) emoji = "☁️";
-            if(cond.includes("rain")) emoji = "🌧️";
+            const r = await fetch('https://open.er-api.com/v6/latest/EUR');
+            const d = await r.json();
+            document.getElementById('currency-rate').innerHTML = `1 EUR = ${d.rates.CAD.toFixed(2)} CAD`;
+        } catch(e) {}
+    }
 
-            document.getElementById(id).innerHTML = `${city.substring(0,3).toUpperCase()} ${emoji}<br>${temp}° (H:${high}° L:${low}°)`;
-        } catch (e) { }
+    async function updateW(city, id) {
+        try {
+            const r = await fetch(`https://api.weatherapi.com/v1/current.json?key=${weatherApi}&q=${city}`);
+            const d = await r.json();
+            const cond = d.current.condition.text.toLowerCase();
+            let e = "☀️"; if(cond.includes("cloud")) e="☁️"; if(cond.includes("rain")) e="🌧️";
+            document.getElementById(id).innerHTML = `${city.toUpperCase().substring(0,3)} ${e} ${Math.round(d.current.temp_c)}°`;
+        } catch(e) {}
     }
 
     async function loadGallery() {
-        const url = `https://api.github.com/repos/rjivraj72/europe-trip-2026/contents/photos`;
         try {
-            const response = await fetch(url);
-            const files = await response.json();
-            const gallery = document.getElementById('auto-gallery');
-            
-            // Show only actual images, newest first
-            files.reverse().forEach(file => {
-                if (file.name.match(/\.(jpg|jpeg|png|gif)$/i)) {
-                    const div = document.createElement('div');
-                    div.className = 'photo-card';
-                    div.innerHTML = `<img src="${file.download_url}" loading="lazy">`;
-                    gallery.appendChild(div);
+            const r = await fetch(`https://api.github.com/repos/rjivraj72/europe-trip-2026/contents/photos`);
+            const f = await r.json();
+            const g = document.getElementById('gallery');
+            f.reverse().forEach(file => {
+                if (file.name.match(/\.(jpg|jpeg|png)$/i)) {
+                    const d = document.createElement('div');
+                    d.style.height="150px"; d.style.borderRadius="12px"; d.style.overflow="hidden"; d.style.background="#eee";
+                    d.innerHTML = `<img src="${file.download_url}" style="width:100%; height:100%; object-fit:cover;">`;
+                    g.appendChild(d);
                 }
             });
-        } catch (e) { console.log("Photos not found in /photos folder yet."); }
+        } catch(e) {}
     }
 
-    // Initialize
-    fetchWeather("Lisbon", "w-lis");
-    fetchWeather("Albufeira", "w-alg");
-    fetchWeather("Cordoba", "w-and");
-    fetchWeather("Barcelona", "w-bcn");
+    updateRates();
+    updateW("Lisbon","w1"); updateW("Albufeira","w2"); updateW("Cordoba","w3"); updateW("Barcelona","w4");
     loadGallery();
 </script>
 </body>
