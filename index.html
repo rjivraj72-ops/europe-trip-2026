@@ -6,9 +6,8 @@
     <title>Grand Tour 2026</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        :root { --bg-overlay: rgba(253, 253, 253, 0.94); --primary: #111; --accent: #007aff; --grey: #6c757d; }
+        :root { --bg-overlay: rgba(253, 253, 253, 0.96); --primary: #111; --accent: #007aff; --grey: #6c757d; }
         
-        /* LOGIN SCREEN STYLES */
         #login-screen {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: #111; color: white; display: flex; flex-direction: column;
@@ -20,24 +19,29 @@
             font-size: 1.8rem; width: 200px; text-align: center; padding: 12px;
             border-radius: 12px; margin: 20px 0; letter-spacing: 3px;
         }
-        .login-btn {
-            background: var(--accent); color: white; border: none;
-            padding: 12px 40px; border-radius: 30px; font-weight: 700; cursor: pointer;
-        }
+        .login-btn { background: var(--accent); color: white; border: none; padding: 12px 40px; border-radius: 30px; font-weight: 700; }
 
-        /* MAIN SITE STYLES (Hidden by default) */
         #main-content { display: none; }
 
         body { font-family: -apple-system, system-ui, sans-serif; color: var(--primary); margin: 0; padding-bottom: 60px; background-image: url('https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?q=80&w=2000&auto=format&fit=crop'); background-attachment: fixed; background-size: cover; background-position: center; }
         .page-overlay { background: var(--bg-overlay); min-height: 100vh; }
+        
+        .weather-bar { background: rgba(242, 242, 247, 0.8); backdrop-filter: blur(10px); margin: 20px; padding: 15px; border-radius: 16px; display: flex; align-items: center; gap: 12px; font-weight: 600; font-size: 0.9rem; }
+
+        /* Summary Section */
+        .summary-card { background: white; margin: 0 20px 30px; padding: 20px; border-radius: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .summary-title { font-weight: 800; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 1px; color: var(--grey); margin-bottom: 15px; display: block; }
+        .summary-line { display: flex; justify-content: space-between; font-size: 0.9rem; margin-bottom: 8px; padding-bottom: 8px; border-bottom: 1px solid #f0f0f0; }
+
+        /* City Sections */
         .hero { position: relative; height: 320px; overflow: hidden; color: white; display: flex; align-items: flex-end; padding: 25px; background-size: cover; background-position: center; margin-bottom: 10px; }
-        .hero::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to top, rgba(0,0,0,0.7), transparent); }
+        .hero::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); }
         .hero-content { position: relative; z-index: 1; width: 100%; }
         .section-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 700; margin-bottom: 8px; display: block; opacity: 0.9; }
         h1 { font-size: 2.2rem; margin: 0 0 10px 0; font-weight: 800; letter-spacing: -1px; }
-        .weather-bar { background: rgba(242, 242, 247, 0.8); backdrop-filter: blur(10px); margin: 20px; padding: 15px; border-radius: 16px; display: flex; align-items: center; gap: 12px; font-weight: 600; font-size: 0.9rem; }
-        .card-container { padding: 0 20px; max-width: 700px; margin: 0 auto; }
+
         .nav-btn { display: inline-flex; align-items: center; gap: 10px; padding: 12px 22px; background: white; color: black; border-radius: 50px; text-decoration: none; font-size: 0.85rem; font-weight: 700; box-shadow: 0 4px 12px rgba(0,0,0,0.1); margin-top: 10px; }
+        
         .gallery-header { padding: 30px 20px 10px; font-weight: 800; font-size: 1.5rem; }
         .gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; padding: 0 20px; }
         .photo-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
@@ -60,49 +64,64 @@
         <div id="weatherResult">Updating forecast...</div>
     </div>
 
-    <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1580319119421-4796395ec474?q=80&w=2000&auto=format&fit=crop');">
+    <div class="summary-card">
+        <span class="summary-title">Master Itinerary</span>
+        <div class="summary-line"><span>May 16-20</span> <strong>Lisbon</strong></div>
+        <div class="summary-line"><span>May 20-24</span> <strong>The Algarve</strong></div>
+        <div class="summary-line"><span>May 24-25</span> <strong>Córdoba</strong></div>
+        <div class="summary-line"><span>May 25-27</span> <strong>Granada</strong></div>
+        <div class="summary-line"><span>May 27-30</span> <strong>Barcelona</strong></div>
+    </div>
+
+    <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?q=80&w=1000&auto=format&fit=crop');">
         <div class="hero-content">
-            <span class="section-label">May 16 - 20</span>
+            <span class="section-label">Stop 1 • Portugal</span>
             <h1>Lisbon</h1>
-            <a href="https://www.google.com/maps/dir/?api=1&destination=Moxy+Lisbon+City" class="nav-btn"><i class="fa-solid fa-location-arrow"></i> Navigate</a>
+            <a href="https://www.google.com/maps/dir/?api=1&destination=Moxy+Lisbon+City" class="nav-btn">
+                <i class="fa-solid fa-location-arrow"></i> Navigate to Hotel
+            </a>
         </div>
     </div>
 
-    <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=2000&auto=format&fit=crop');">
+    <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1544275069-b5cd67776b96?q=80&w=1000&auto=format&fit=crop');">
         <div class="hero-content">
-            <span class="section-label">May 20 - 24</span>
+            <span class="section-label">Stop 2 • Coastal</span>
             <h1>The Algarve</h1>
-            <a href="https://www.google.com/maps/dir/?api=1&destination=Pine+Cliffs+Ocean+Suites" class="nav-btn"><i class="fa-solid fa-car"></i> Navigate</a>
+            <a href="https://www.google.com/maps/dir/?api=1&destination=Pine+Cliffs+Ocean+Suites" class="nav-btn">
+                <i class="fa-solid fa-car"></i> Drive to Resort
+            </a>
         </div>
     </div>
 
-    <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1563283296-a29286f03013?q=80&w=2000&auto=format&fit=crop');">
+    <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1563283296-a29286f03013?q=80&w=1000&auto=format&fit=crop');">
         <div class="hero-content">
-            <span class="section-label">May 24 - 27</span>
+            <span class="section-label">Stop 3 • Spain</span>
             <h1>Andalusia</h1>
-            <a href="https://www.google.com/maps/dir/?api=1&destination=AC+Hotel+Cordoba" class="nav-btn"><i class="fa-solid fa-map-location-dot"></i> Navigate</a>
+            <a href="https://www.google.com/maps/dir/?api=1&destination=AC+Hotel+Cordoba" class="nav-btn">
+                <i class="fa-solid fa-map-location-dot"></i> Road to Córdoba
+            </a>
         </div>
     </div>
 
-    <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1583997051651-8255c713a62a?q=80&w=2000&auto=format&fit=crop');">
+    <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1583997051651-8255c713a62a?q=80&w=1000&auto=format&fit=crop');">
         <div class="hero-content">
-            <span class="section-label">May 27 - 30</span>
+            <span class="section-label">Stop 4 • Final</span>
             <h1>Barcelona</h1>
-            <a href="https://www.google.com/maps/dir/?api=1&destination=Le+Meridien+Barcelona" class="nav-btn"><i class="fa-solid fa-hotel"></i> Navigate</a>
+            <a href="https://www.google.com/maps/dir/?api=1&destination=Le+Meridien+Barcelona" class="nav-btn">
+                <i class="fa-solid fa-hotel"></i> To Le Méridien
+            </a>
         </div>
     </div>
 
     <div class="gallery-header">Moments</div>
-    <div id="loading" style="padding: 20px; font-size: 0.8rem; color: var(--grey);">Syncing photos...</div>
+    <div id="loading" style="padding: 20px; font-size: 0.8rem; color: var(--grey);">Checking for new photos...</div>
     <div class="gallery" id="auto-gallery"></div>
 </div>
 
 <script>
-    // SECURITY LOGIC
     function checkPin() {
         const pinInput = document.getElementById('pinInput').value;
         const authorizedPins = ['040411', '081706', '710921', '720909'];
-
         if (authorizedPins.includes(pinInput)) {
             document.getElementById('login-screen').style.display = 'none';
             document.getElementById('main-content').style.display = 'block';
@@ -114,7 +133,6 @@
         }
     }
 
-    // WEATHER LOGIC
     async function getWeather() {
         const apiKey = 'ff6e4e362f0a4231841165933261005'; 
         const today = new Date();
@@ -133,18 +151,15 @@
         } catch (e) { document.getElementById('weatherResult').innerHTML = "Forecast ready."; }
     }
 
-    // GALLERY LOGIC
     async function loadPhotos() {
         const username = 'rjivraj72'; 
         const repo = 'europe-trip-2026';
         const url = `https://api.github.com/repos/${username}/${repo}/contents/photos`;
-        
         try {
             const response = await fetch(url);
             const files = await response.json();
             const gallery = document.getElementById('auto-gallery');
             document.getElementById('loading').style.display = 'none';
-            
             files.reverse().forEach(file => {
                 if (file.name.match(/\.(jpg|jpeg|png|gif)$/i)) {
                     const card = document.createElement('div');
