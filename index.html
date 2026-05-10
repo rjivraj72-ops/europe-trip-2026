@@ -29,24 +29,12 @@
         .row-date { font-size: 0.7rem; font-weight: 800; color: var(--accent); text-transform: uppercase; display: block; }
         .row-text { font-size: 0.9rem; font-weight: 600; line-height: 1.4; }
 
-        /* HARD-CODED HERO IMAGES */
-        .hero { height: 240px; background-size: cover; background-position: center; display: flex; align-items: flex-end; padding: 20px; color: white; position: relative; margin-top: 20px; background-color: #333; }
+        /* STABLE IMAGES */
+        .hero { height: 250px; background-size: cover; background-position: center; display: flex; align-items: flex-end; padding: 20px; color: white; position: relative; margin-top: 20px; background-color: #333; }
         .hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.85), transparent); }
         .hero h2 { position: relative; z-index: 1; margin: 0; font-size: 2.2rem; font-weight: 800; letter-spacing: -1px; }
 
-        /* LISBON BASE64 (OPTIMIZED) */
-        .hero-lisbon { background-image: url('data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAASABIAAD/4QCMRXhpZgAATU0AKgAAAAgABQESAAMAAAABAAEAAAEaAAUAAAABAAAASgEbAAUAAAABAAAAUgEoAAMAAAABAAIAAIdpAAQAAAABAAAAWgAAAAAAAABIAAAAAQAAAEgAAAABAAOgAQADAAAAAQABAACgAgAEAAAAAQAAAfSgAwAEAAAAAQAAAOcAAAAA/+0AOFVuaXF1ZSBpZGVudGlmaWVyOiA4YTdhNDI2MmIwYTRhMmY4MDdmYmM5M2MyNjEwMDU5Y//bAEMACAYGBwYFCAcHBwkJCAoMFA0MCwsMGRITDxQWGBcXFhgXFhcbHyAXGx4eFxcbIyccIR4iIiInGi8sJicvHyEiHv/bAEMBCQkJDAsMGA0NGDIhHCEyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMv/AABEIAncB9AMBIgACEQEDEQH/xAAfAAABBQEBAQEBAQAAAAAAAAAAAQIDBAUGBwgJCgv/xAC1EAACAQMDAgQDBQUEBAAAAX0BAgMABBEFEiExQQYTUWEHInEUMoGRoQgjQrHBFVLR8CQzYnKCCQoWFxgXGx4kHyRgVGiJ8KCkqNTk3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc6R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmquc6R1l64x294lODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDlgWGh4iJipKTlJWWl5iZmquc6R1l64x294hYAQACAgMBAQAAAAAAAAAAAAABAgMEBQYHCAkKC//EALURAAIBAgQEAwQHBQQEAAECBA15AAEChQMEFRYXF4EyBhSRobFCIyQVUsFiMzRygtFDByWSU/Dh8WNzFyYnMzQzRkNGRUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlWWl5iZmquc6R1l64x294hYAQADAQEAAwEBAAAAAAAAAAAAAAECAwQFBgcICQoL/6oACwQAAQEBAQEA//7f6/e1/9oADAMBAQIA//7/3/+4D9f7/AP9k='); }
-        
-        /* ALGARVE BASE64 (OPTIMIZED) */
-        .hero-algarve { background-image: url('data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAASABIAAD/4QCMRXhpZgAATU0AKgAAAAgABQESAAMAAAABAAEAAAEaAAUAAAABAAAASgEbAAUAAAABAAAAUgEoAAMAAAABAAIAAIdpAAQAAAABAAAAWgAAAAAAAABIAAAAAQAAAEgAAAABAAOgAQADAAAAAQABAACgAgAEAAAAAQAAAeSgAwAEAAAAAQAAAOcAAAAA/+0AOFVuaXF1ZSBpZGVudGlmaWVyOiAzOTYzMTcwMDQ0MTkwODQ3NjY2MGM5YzllYjlkYjhkNAAA/+bAEMACAYGBwYFCAcHBwkJCAoMFA0MCwsMGRITDxQWGBcXFhgXFhcbHyAXGx4eFxcbIyccIR4iIiInGi8sJicvHyEiHv/bAEMBCQkJDAsMGA0NGDIhHCEyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMv/AABEIAncB5AMBIgACEQEDEQH/xAAfAAABBQEBAQEBAQAAAAAAAAAAAQIDBAUGBwgJCgv/xAC1EAACAQMDAgQDBQUEBAAAAX0BAgMABBEFEiExQQYTUWEHInEUMoGRoQgjQrHBFVLR8CQzYnKCCQoWFxgXGx4kHyRgVGiJ8KCkqNTk3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc6R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmquc6R1l64x294lODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDlgWGh4iJipKTlJWWl5iZmquc6R1l64x294hYAQACAgMBAQAAAAAAAAAAAAABAgMEBQYHCAkKC//EALURAAIBAgQEAwQHBQQEAAECBA15AAEChQMEFRYXF4EyBhSRobFCIyQVUsFiMzRygtFDByWSU/Dh8WNzFyYnMzQzRkNGRUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlWWl5iZmquc6R1l64x294hYAQADAQEAAwEBAAAAAAAAAAAAAAECAwQFBgcICQoL/6oACwQAAQEBAQEA//7f6/e1/9oADAMBAQIA//7/3/+4D9f7/AP9k='); }
-
-        /* ANDALUSIA BASE64 (OPTIMIZED) */
-        .hero-andalusia { background-image: url('data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAASABIAAD/4QCMRXhpZgAATU0AKgAAAAgABQESAAMAAAABAAEAAAEaAAUAAAABAAAASgEbAAUAAAABAAAAUgEoAAMAAAABAAIAAIdpAAQAAAABAAAAWgAAAAAAAABIAAAAAQAAAEgAAAABAAOgAQADAAAAAQABAACgAgAEAAAAAQAAALWgAwAEAAAAAQAAAOcAAAAA/+0AOFVuaXF1ZSBpZGVudGlmaWVyOiAxODAzNTIxMzU2NTM2NDgyMTM5MGYwZjBlZjVlZWRjNNAAA/+bAEMACAYGBwYFCAcHBwkJCAoMFA0MCwsMGRITDxQWGBcXFhgXFhcbHyAXGx4eFxcbIyccIR4iIiInGi8sJicvHyEiHv/bAEMBCQkJDAsMGA0NGDIhHCEyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMv/AABEIAncBwAMBIgACEQEDEQH/xAAfAAABBQEBAQEBAQAAAAAAAAAAAQIDBAUGBwgJCgv/xAC1EAACAQMDAgQDBQUEBAAAAX0BAgMABBEFEiExQQYTUWEHInEUMoGRoQgjQrHBFVLR8CQzYnKCCQoWFxgXGx4kHyRgVGiJ8KCkqNTk3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc6R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmquc6R1l64x294lODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDlgWGh4iJipKTlJWWl5iZmquc6R1l64x294hYAQACAgMBAQAAAAAAAAAAAAABAgMEBQYHCAkKC//EALURAAIBAgQEAwQHBQQEAAECBA15AAEChQMEFRYXF4EyBhSRobFCIyQVUsFiMzRygtFDByWSU/Dh8WNzFyYnMzQzRkNGRUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlWWl5iZmquc6R1l64x294hYAQADAQEAAwEBAAAAAAAAAAAAAAECAwQFBgcICQoL/6oACwQAAQEBAQEA//7f6/e1/9oADAMBAQIA//7/3/+4D9f7/AP9k='); }
-
-        /* BARCELONA BASE64 (OPTIMIZED) */
-        .hero-barcelona { background-image: url('data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAASABIAAD/4QCMRXhpZgAATU0AKgAAAAgABQESAAMAAAABAAEAAAEaAAUAAAABAAAASgEbAAUAAAABAAAAUgEoAAMAAAABAAIAAIdpAAQAAAABAAAAWgAAAAAAAABIAAAAAQAAAEgAAAABAAOgAQADAAAAAQABAACgAgAEAAAAAQAAAI6gAwAEAAAAAQAAAOcAAAAA/+0AOFVuaXF1ZSBpZGVudGlmaWVyOiA5NTg5MTE1OTYzMTUxNTkzNTc0MGYwZjBlZjVlZWRjNNAAA/+bAEMACAYGBwYFCAcHBwkJCAoMFA0MCwsMGRITDxQWGBcXFhgXFhcbHyAXGx4eFxcbIyccIR4iIiInGi8sJicvHyEiHv/bAEMBCQkJDAsMGA0NGDIhHCEyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMv/AABEIAncBwgMBIgACEQEDEQH/xAAfAAABBQEBAQEBAQAAAAAAAAAAAQIDBAUGBwgJCgv/xAC1EAACAQMDAgQDBQUEBAAAAX0BAgMABBEFEiExQQYTUWEHInEUMoGRoQgjQrHBFVLR8CQzYnKCCQoWFxgXGx4kHyRgVGiJ8KCkqNTk3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc6R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmquc6R1l64x294lODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDlgWGh4iJipKTlJWWl5iZmquc6R1l64x294hYAQACAgMBAQAAAAAAAAAAAAABAgMEBQYHCAkKC//EALURAAIBAgQEAwQHBQQEAAECBA15AAEChQMEFRYXF4EyBhSRobFCIyQVUsFiMzRygtFDByWSU/Dh8WNzFyYnMzQzRkNGRUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlWWl5iZmquc6R1l64x294hYAQADAQEAAwEBAAAAAAAAAAAAAAECAwQFBgcICQoL/6oACwQAAQEBAQEA//7f6/e1/9oADAMBAQIA//7/3/+4D9f7/AP9k='); }
-
-        .card { padding: 20px; margin: -25px 15px 35px; border-radius: 24px; background: #fff; border: 1px solid #eee; box-shadow: 0 8px 25px rgba(0,0,0,0.06); position: relative; z-index: 2; }
+        .card { padding: 20px; margin: -25px 15px 35px; border-radius: 20px; background: #fff; border: 1px solid #eee; box-shadow: 0 8px 25px rgba(0,0,0,0.06); position: relative; z-index: 2; }
         .item { display: flex; align-items: center; gap: 10px; margin: 8px 0; font-size: 0.95rem; }
         .item i { color: var(--accent); width: 20px; text-align: center; }
     </style>
@@ -62,7 +50,7 @@
     <div class="itinerary-container">
         <span style="font-size: 0.65rem; font-weight: 800; color: #888; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 12px; display: block;">Full Trip Tracker (Scroll) ↓</span>
         <div class="scroll-window">
-            <div class="row"><div><span class="row-date">May 16</span><span class="row-text">AC812 YVR ➔ LIS • Moxy Lisbon City</span></div></div>
+            <div class="row"><div><span class="row-date">May 16</span><span class="row-text">Flight AC812 YVR ➔ LIS • Moxy Lisbon City</span></div></div>
             <div class="row"><div><span class="row-date">May 18</span><span class="row-text">Guided Tour: Ismaili Centre Lisbon</span></div></div>
             <div class="row"><div><span class="row-date">May 19</span><span class="row-text">Avis Rental Pick-up • Drive to Algarve</span></div></div>
             <div class="row"><div><span class="row-date">May 20</span><span class="row-text">Check-in: Pine Cliffs Ocean Suites</span></div></div>
@@ -75,7 +63,7 @@
         </div>
     </div>
 
-    <div class="hero hero-lisbon">
+    <div class="hero" style="background-image: url('https://images.pexels.com/photos/672532/pexels-photo-672532.jpeg?auto=compress&cs=tinysrgb&w=800');">
         <h2>Lisbon</h2>
     </div>
     <div class="card">
@@ -83,7 +71,7 @@
         <div class="item"><i class="fa-solid fa-mosque"></i> Ismaili Centre Tour</div>
     </div>
 
-    <div class="hero hero-algarve">
+    <div class="hero" style="background-image: url('https://images.pexels.com/photos/2592537/pexels-photo-2592537.jpeg?auto=compress&cs=tinysrgb&w=800');">
         <h2>Algarve</h2>
     </div>
     <div class="card">
@@ -91,16 +79,15 @@
         <div class="item"><i class="fa-solid fa-water"></i> Benagil Kayak (May 21)</div>
     </div>
 
-    <div class="hero hero-andalusia">
+    <div class="hero" style="background-image: url('https://images.pexels.com/photos/10182601/pexels-photo-10182601.jpeg?auto=compress&cs=tinysrgb&w=800');">
         <h2>Andalusia</h2>
     </div>
     <div class="card">
         <div class="item"><i class="fa-solid fa-archway"></i> Córdoba: Mosque-Cathedral</div>
-        <div class="item"><i class="fa-solid fa-fort-awesome"></i> Granada: Alhambra (12:00)</div>
-        <div class="item"><i class="fa-solid fa-hot-tub-person"></i> Hammam Al Ándalus (4:00)</div>
+        <div class="item"><i class="fa-solid fa-hot-tub-person"></i> Hammam Al Ándalus</div>
     </div>
 
-    <div class="hero hero-barcelona">
+    <div class="hero" style="background-image: url('https://images.pexels.com/photos/1388030/pexels-photo-1388030.jpeg?auto=compress&cs=tinysrgb&w=800');">
         <h2>Barcelona</h2>
     </div>
     <div class="card">
