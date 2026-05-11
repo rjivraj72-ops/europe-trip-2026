@@ -25,6 +25,7 @@
             --danger: #ff3b30;
             --header-h: 65px;
         }
+
         @media (prefers-color-scheme: dark) {
             :root {
                 --bg: #000000;
@@ -34,7 +35,9 @@
                 --text: #ffffff;
             }
         }
+
         *, *::before, *::after { box-sizing: border-box; }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             margin: 0;
@@ -42,6 +45,7 @@
             color: var(--text);
             padding-bottom: 50px;
         }
+
         /* ── PIN OVERLAY ── */
         #pin-overlay {
             position: fixed; inset: 0; z-index: 999;
@@ -98,6 +102,7 @@
         .pin-key.del    { font-size: 1.1rem; }
         .pin-error-msg  { font-size: 0.8rem; color: var(--danger); font-weight: 600; min-height: 1.2em; text-align: center; }
         .pin-forgot     { background: none; border: none; color: var(--accent); font-size: 0.85rem; cursor: pointer; padding: 4px; }
+
         /* ── ADD TO HOME SCREEN BANNER ── */
         #a2hs-banner {
             position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
@@ -119,12 +124,14 @@
             white-space: nowrap; flex-shrink: 0;
         }
         .a2hs-close { background: none; border: none; color: var(--grey); font-size: 1.2rem; cursor: pointer; padding: 4px; flex-shrink: 0; }
+
         /* ── MAIN CONTAINER ── */
         .container {
             max-width: 500px; margin: 0 auto;
             background: var(--surface); min-height: 100vh;
             box-shadow: 0 0 30px rgba(0,0,0,0.1);
         }
+
         /* ── HEADER ── */
         .header {
             height: var(--header-h);
@@ -142,6 +149,7 @@
             display: flex; align-items: center; gap: 5px; transition: background 0.15s;
         }
         .lock-btn:hover { background: var(--bg); }
+
         /* ── TIMEZONE STRIP ── */
         .tz-strip {
             display: grid; grid-template-columns: 1fr 1fr;
@@ -152,6 +160,7 @@
         .tz-label { font-size: 0.6rem; font-weight: 800; color: var(--grey); text-transform: uppercase; letter-spacing: 0.08em; }
         .tz-time  { font-size: 1.1rem; font-weight: 900; font-variant-numeric: tabular-nums; }
         .tz-date  { font-size: 0.65rem; color: var(--grey); font-weight: 600; }
+
         /* ── COUNTDOWN TICKER ── */
         .ticker {
             background: linear-gradient(135deg, #0062cc, #007aff);
@@ -164,6 +173,7 @@
         .ticker-phase { text-align: right; min-width: 100px; }
         .ticker-phase-name  { font-size: 0.85rem; font-weight: 800; }
         .ticker-phase-label { font-size: 0.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; opacity: 0.7; }
+
         /* ── ITINERARY SCROLL ── */
         .itinerary-container { background: #1c1c1e; color: white; padding: 20px; }
         .scroll-window {
@@ -179,6 +189,7 @@
         .row-text { font-size: 0.85rem; font-weight: 600; line-height: 1.3; }
         .row-text a { color: #6fb3ff; text-decoration: none; }
         .row-text a:hover { text-decoration: underline; }
+
         /* ── WEATHER HUB ── */
         .weather-hub { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; padding: 15px; background: var(--bg); }
         .w-btn {
@@ -190,6 +201,7 @@
         .w-city  { font-size: 0.65rem; font-weight: 800; color: var(--grey); text-transform: uppercase; display: block; }
         .w-temp  { font-size: 1.5rem; font-weight: 900; display: block; margin: 4px 0; }
         .w-label { font-size: 0.55rem; color: var(--accent); font-weight: 800; }
+
         /* ── CITY SECTIONS ── */
         .hero {
             height: 240px; background-size: cover; background-position: center;
@@ -203,6 +215,7 @@
         .hero-text { position: relative; z-index: 1; }
         .hero-dates { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; opacity: 0.8; margin-bottom: 4px; }
         .hero h2   { margin: 0; font-size: 2rem; font-weight: 800; }
+
         .card {
             padding: 15px; margin: -15px 15px 8px; border-radius: 18px;
             background: var(--surface); border: 1px solid var(--border);
@@ -212,10 +225,9 @@
         .item i { color: var(--accent); width: 18px; text-align: center; }
         .item a { color: var(--text); text-decoration: none; border-bottom: 1px solid var(--border); }
         .item a:hover { border-bottom-color: var(--accent); color: var(--accent); }
+
         /* ── ACTION BUTTONS ── */
-        .action-row {
-            display: flex; gap: 8px; margin: 0 15px 15px; flex-wrap: wrap;
-        }
+        .action-row { display: flex; gap: 8px; margin: 0 15px 15px; flex-wrap: wrap; }
         .action-btn {
             flex: 1; min-width: 120px;
             display: flex; align-items: center; justify-content: center; gap: 6px;
@@ -227,6 +239,8 @@
         .action-btn:active { transform: scale(0.96); opacity: 0.85; }
         .btn-nearme { background: var(--accent); color: white; }
         .btn-drive  { background: #28a745; color: white; }
+        .btn-fork   { background: #f46f2f; color: white; }
+
         /* ── LINGO CARDS ── */
         .lingo {
             background: var(--surface2); padding: 12px 15px; border-radius: 12px;
@@ -236,60 +250,37 @@
         .lingo-pair { display: flex; flex-direction: column; gap: 2px; }
         .lingo-pair span   { font-size: 0.65rem; color: var(--grey); font-weight: 600; text-transform: uppercase; }
         .lingo-pair strong { font-size: 0.9rem; color: var(--text); }
+
         /* ── DESKTOP TWO-COLUMN LAYOUT ── */
         @media (min-width: 800px) {
             body { padding-bottom: 0; background: var(--bg); }
-            .container {
-                max-width: 1140px;
-                display: flex;
-                flex-direction: column;
-                min-height: 100vh;
-            }
-            /* Header spans full width */
+            .container { max-width: 1140px; display: flex; flex-direction: column; min-height: 100vh; }
             .header { position: sticky; top: 0; z-index: 100; }
-            /* Body splits into sidebar + cities */
-            .desktop-body {
-                display: grid;
-                grid-template-columns: 360px 1fr;
-                flex: 1;
-                align-items: start;
-            }
-            /* Sticky sidebar */
+            .desktop-body { display: grid; grid-template-columns: 360px 1fr; flex: 1; align-items: start; }
             .sidebar {
-                position: sticky;
-                top: var(--header-h);
-                height: calc(100vh - var(--header-h));
-                overflow-y: auto;
+                position: sticky; top: var(--header-h);
+                height: calc(100vh - var(--header-h)); overflow-y: auto;
                 border-right: 1px solid var(--border);
             }
             .sidebar::-webkit-scrollbar { width: 4px; }
             .sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
-            /* Weather hub — keep 2×2 inside narrow sidebar */
             .weather-hub { grid-template-columns: repeat(2, 1fr); }
-            /* Cities — 2×2 grid */
-            .cities {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                align-content: start;
-            }
-            .city-section {
-                border-bottom: 1px solid var(--border);
-                padding-bottom: 8px;
-            }
-            .city-section:nth-child(odd)  { border-right: 1px solid var(--border); }
+            .cities { display: grid; grid-template-columns: 1fr 1fr; align-content: start; }
+            .city-section { border-bottom: 1px solid var(--border); padding-bottom: 8px; }
+            .city-section:nth-child(odd) { border-right: 1px solid var(--border); }
             .city-section:last-child,
             .city-section:nth-last-child(2):nth-child(odd) { border-bottom: none; }
             .hero { height: 200px; margin-top: 0; }
-            .card        { margin: -15px 12px 8px; }
-            .action-row  { margin: 0 12px 12px; }
-            .lingo       { margin: 0 12px 20px; }
-            /* A2HS banner max width on desktop */
+            .card       { margin: -15px 12px 8px; }
+            .action-row { margin: 0 12px 12px; }
+            .lingo      { margin: 0 12px 20px; }
             #a2hs-banner { max-width: 1140px; }
         }
     </style>
 </head>
 <body>
 <noscript><p style="text-align:center;padding:20px;color:#666;">Enable JavaScript for live weather, exchange rates, and PIN protection.</p></noscript>
+
 <!-- ── PIN OVERLAY ── -->
 <div id="pin-overlay">
     <div class="pin-icon">✈️</div>
@@ -318,6 +309,7 @@
     </div>
     <button class="pin-forgot" id="pin-forgot">Forgot PIN?</button>
 </div>
+
 <!-- ── ADD TO HOME SCREEN BANNER ── -->
 <div id="a2hs-banner" class="hidden">
     <div class="a2hs-icon">📲</div>
@@ -328,6 +320,7 @@
     <button class="a2hs-btn" id="a2hs-install">Install</button>
     <button class="a2hs-close" id="a2hs-close" aria-label="Dismiss">✕</button>
 </div>
+
 <!-- ── MAIN APP ── -->
 <div class="container" id="app">
     <div class="header">
@@ -339,7 +332,9 @@
             <i class="fa-solid fa-lock"></i> Lock
         </button>
     </div>
+
     <div class="desktop-body">
+
         <!-- ── SIDEBAR ── -->
         <div class="sidebar">
             <div class="tz-strip">
@@ -354,6 +349,7 @@
                     <span class="tz-date" id="tz-dest-date"></span>
                 </div>
             </div>
+
             <div class="ticker" id="ticker">
                 <div>
                     <div class="ticker-label" id="ticker-label">Departure in</div>
@@ -362,6 +358,7 @@
                 </div>
                 <div class="ticker-phase" id="ticker-phase"></div>
             </div>
+
             <div class="itinerary-container">
                 <div class="scroll-window">
                     <div class="row">
@@ -369,7 +366,7 @@
                         <span class="row-text"><a href="https://www.flightaware.com/live/flight/AC812" target="_blank" rel="noopener noreferrer">AC812</a> (YVR➔LIS) • Moxy Lisbon City</span>
                     </div>
                     <div class="row">
-                        <span class="row-date">May 18</span>
+                        <span class="row-date">May 17</span>
                         <span class="row-text">Ismaili Centre Lisbon Guided Tour</span>
                     </div>
                     <div class="row">
@@ -398,6 +395,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="weather-hub">
                 <a href="https://www.accuweather.com/en/pt/lisbon/274087/daily-weather-forecast/274087" target="_blank" rel="noopener noreferrer" class="w-btn">
                     <span class="w-city">Lisbon</span><span id="w1" class="w-temp">--°</span><span class="w-label">TAP FOR FORECAST</span>
@@ -413,8 +411,10 @@
                 </a>
             </div>
         </div><!-- /sidebar -->
+
         <!-- ── CITIES 2×2 GRID ── -->
         <div class="cities">
+
             <!-- LISBON -->
             <div class="city-section">
                 <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1573843981267-be1999ff37cd?w=800&auto=format&fit=crop');">
@@ -431,12 +431,16 @@
                     <a class="action-btn btn-nearme" href="https://maps.google.com/?q=restaurants+near+Lisbon+city+centre" target="_blank" rel="noopener noreferrer">
                         <i class="fa-solid fa-location-dot"></i> Near Me
                     </a>
+                    <a class="action-btn btn-fork" href="https://www.thefork.com/en/city/lisbon" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-utensils"></i> TheFork
+                    </a>
                 </div>
                 <div class="lingo">
                     <div class="lingo-pair"><span>Thank you</span><strong>Obrigado</strong></div>
                     <div class="lingo-pair"><span>Where is...?</span><strong>Onde fica...?</strong></div>
                 </div>
             </div>
+
             <!-- ALGARVE -->
             <div class="city-section">
                 <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1591102972305-213abaa76d6f?w=800&auto=format&fit=crop');">
@@ -453,6 +457,9 @@
                     <a class="action-btn btn-nearme" href="https://maps.google.com/?q=restaurants+near+Albufeira+Algarve" target="_blank" rel="noopener noreferrer">
                         <i class="fa-solid fa-location-dot"></i> Near Me
                     </a>
+                    <a class="action-btn btn-fork" href="https://www.thefork.com/en/city/albufeira" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-utensils"></i> TheFork
+                    </a>
                     <a class="action-btn btn-drive" href="https://maps.google.com/?saddr=Moxy+Lisbon+City&daddr=Pine+Cliffs+Resort+Algarve" target="_blank" rel="noopener noreferrer">
                         <i class="fa-solid fa-car"></i> Drive from Lisbon
                     </a>
@@ -462,6 +469,7 @@
                     <div class="lingo-pair"><span>How much?</span><strong>Quanto custa?</strong></div>
                 </div>
             </div>
+
             <!-- ANDALUSIA -->
             <div class="city-section">
                 <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1523528283115-9bf9b1699245?w=800&auto=format&fit=crop');">
@@ -479,6 +487,9 @@
                     <a class="action-btn btn-nearme" href="https://maps.google.com/?q=restaurants+near+Cordoba+Spain" target="_blank" rel="noopener noreferrer">
                         <i class="fa-solid fa-location-dot"></i> Near Me
                     </a>
+                    <a class="action-btn btn-fork" href="https://www.thefork.com/en/city/cordoba" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-utensils"></i> TheFork
+                    </a>
                     <a class="action-btn btn-drive" href="https://maps.google.com/?saddr=Pine+Cliffs+Resort+Algarve&daddr=Cordoba+Spain" target="_blank" rel="noopener noreferrer">
                         <i class="fa-solid fa-car"></i> Drive from Algarve
                     </a>
@@ -488,6 +499,7 @@
                     <div class="lingo-pair"><span>Thank you</span><strong>Gracias</strong></div>
                 </div>
             </div>
+
             <!-- BARCELONA -->
             <div class="city-section">
                 <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1539037116277-4db20889f2d4?w=800&auto=format&fit=crop');">
@@ -504,17 +516,23 @@
                     <a class="action-btn btn-nearme" href="https://maps.google.com/?q=restaurants+near+Barcelona+city+centre" target="_blank" rel="noopener noreferrer">
                         <i class="fa-solid fa-location-dot"></i> Near Me
                     </a>
+                    <a class="action-btn btn-fork" href="https://www.thefork.com/en/city/barcelona" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-utensils"></i> TheFork
+                    </a>
                 </div>
                 <div class="lingo">
                     <div class="lingo-pair"><span>Thank you</span><strong>Gràcies</strong></div>
                     <div class="lingo-pair"><span>Good day</span><strong>Bon dia</strong></div>
                 </div>
             </div>
+
         </div><!-- /cities -->
     </div><!-- /desktop-body -->
 </div><!-- /app -->
+
 <script>
 'use strict';
+
 // ── PIN MODULE ──────────────────────────────────────────────────────────────
 (function () {
     const STORE_KEY = 'jgt2026_pin';
@@ -524,6 +542,7 @@
     const MAX_FAILS = 5;
     const COOL_MS   = 30_000;
     const PIN_LEN   = 4;
+
     const overlay  = document.getElementById('pin-overlay');
     const titleEl  = document.getElementById('pin-title');
     const subEl    = document.getElementById('pin-sub');
@@ -531,39 +550,48 @@
     const errorEl  = document.getElementById('pin-error');
     const forgotEl = document.getElementById('pin-forgot');
     const lockBtn  = document.getElementById('lock-btn');
+
     let buffer = '', phase = 'verify', setupBuf = '';
+
     async function sha256(str) {
         const buf  = new TextEncoder().encode(str);
         const hash = await crypto.subtle.digest('SHA-256', buf);
         return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2, '0')).join('');
     }
+
     function savedHash() { return localStorage.getItem(STORE_KEY); }
     function failCount() { return parseInt(localStorage.getItem(FAIL_KEY) || '0', 10); }
     function coolUntil() { return parseInt(localStorage.getItem(COOL_KEY) || '0', 10); }
+
     function showOverlay() { overlay.classList.remove('hidden'); document.getElementById('app').style.visibility = 'hidden'; }
     function hideOverlay() { overlay.classList.add('hidden'); document.getElementById('app').style.visibility = ''; localStorage.removeItem(LOCK_KEY); }
+
     function renderDots(count, error = false) {
         dotsEl.querySelectorAll('.pin-dot').forEach((d, i) => {
             d.classList.toggle('filled', i < count && !error);
             d.classList.toggle('error',  i < count && error);
         });
     }
+
     function shakeAndClear(msg) {
         renderDots(PIN_LEN, true);
         dotsEl.classList.add('shake');
         errorEl.textContent = msg;
         dotsEl.addEventListener('animationend', () => { dotsEl.classList.remove('shake'); buffer = ''; renderDots(0); }, { once: true });
     }
+
     function enterSetupMode() {
         phase = 'setup'; setupBuf = ''; buffer = '';
         titleEl.textContent = 'Create a PIN'; subEl.textContent = 'Choose a 4-digit PIN';
         forgotEl.style.display = 'none'; errorEl.textContent = ''; renderDots(0);
     }
+
     function enterVerifyMode() {
         phase = 'verify'; buffer = '';
         titleEl.textContent = 'Welcome back'; subEl.textContent = 'Enter your PIN to continue';
         forgotEl.style.display = ''; errorEl.textContent = ''; renderDots(0);
     }
+
     async function handleComplete() {
         if (phase === 'setup') {
             setupBuf = buffer; phase = 'confirm'; buffer = '';
@@ -596,13 +624,16 @@
             } else { shakeAndClear(`Incorrect PIN (${MAX_FAILS - fails} left)`); }
         }
     }
+
     function press(digit) {
         if (Date.now() < coolUntil()) { errorEl.textContent = `Try again in ${Math.ceil((coolUntil()-Date.now())/1000)}s`; return; }
         if (buffer.length >= PIN_LEN) return;
         buffer += digit; errorEl.textContent = ''; renderDots(buffer.length);
         if (buffer.length === PIN_LEN) setTimeout(handleComplete, 100);
     }
+
     function del() { if (buffer.length > 0) { buffer = buffer.slice(0,-1); renderDots(buffer.length); errorEl.textContent = ''; } }
+
     document.getElementById('pin-pad').addEventListener('click', e => {
         const btn = e.target.closest('.pin-key'); if (!btn) return;
         if (btn.id === 'pin-del') { del(); return; }
@@ -619,9 +650,12 @@
         enterSetupMode();
     });
     lockBtn.addEventListener('click', () => { localStorage.setItem(LOCK_KEY,'1'); enterVerifyMode(); showOverlay(); });
+
     if (!savedHash()) { enterSetupMode(); showOverlay(); }
     else              { enterVerifyMode(); showOverlay(); }
 })();
+
+
 // ── TIMEZONE STRIP + COUNTDOWN TICKER ──────────────────────────────────────
 (function () {
     const DEPARTURE = new Date('2026-05-16T16:00:00');
@@ -632,6 +666,7 @@
         { name: '🕌 Andalusia', tz: 'Europe/Madrid', flag: '🇪🇸', start: new Date('2026-05-24'), end: new Date('2026-05-26T23:59:59') },
         { name: '🏙️ Barcelona', tz: 'Europe/Madrid', flag: '🇪🇸', start: new Date('2026-05-27'), end: new Date('2026-05-29T23:59:59') },
     ];
+
     const vanTimeEl   = document.getElementById('tz-van');
     const vanDateEl   = document.getElementById('tz-van-date');
     const destLabelEl = document.getElementById('tz-dest-label');
@@ -642,6 +677,7 @@
     const subEl       = document.getElementById('ticker-sub');
     const phaseEl     = document.getElementById('ticker-phase');
     const tickerEl    = document.getElementById('ticker');
+
     function pad(n) { return String(n).padStart(2,'0'); }
     function fmtTime(d,tz) { return d.toLocaleTimeString('en-CA',{timeZone:tz,hour:'2-digit',minute:'2-digit',hour12:false}); }
     function fmtDate(d,tz) { return d.toLocaleDateString('en-CA',{timeZone:tz,weekday:'short',month:'short',day:'numeric'}); }
@@ -650,10 +686,12 @@
         const s = Math.floor(ms/1000);
         return `${pad(Math.floor(s/86400))}:${pad(Math.floor((s%86400)/3600))}:${pad(Math.floor((s%3600)/60))}:${pad(s%60)}`;
     }
+
     function tick() {
         const now = new Date();
         vanTimeEl.textContent = fmtTime(now, 'America/Vancouver');
         vanDateEl.textContent = fmtDate(now, 'America/Vancouver');
+
         const active   = PHASES.find(p => now >= p.start && now <= p.end);
         const destTz   = active ? active.tz   : (now < DEPARTURE ? 'Europe/Lisbon' : 'Europe/Madrid');
         const destFlag = active ? active.flag  : (now < DEPARTURE ? '🇵🇹' : '🇪🇸');
@@ -661,6 +699,7 @@
         destLabelEl.textContent = `${destFlag} ${destCity}`;
         destTimeEl.textContent  = fmtTime(now, destTz);
         destDateEl.textContent  = fmtDate(now, destTz);
+
         if (now < DEPARTURE) {
             tickerEl.style.background = 'linear-gradient(135deg,#0062cc,#007aff)';
             labelEl.textContent = 'Departure in'; valueEl.textContent = fmtCountdown(DEPARTURE-now); subEl.textContent = 'D : H : M : S';
@@ -684,13 +723,17 @@
     tick();
     const interval = setInterval(tick, 1000);
 })();
+
+
 // ── ADD TO HOME SCREEN ──────────────────────────────────────────────────────
 (function () {
     const A2HS_KEY   = 'jgt2026_a2hs';
     const banner     = document.getElementById('a2hs-banner');
     const installBtn = document.getElementById('a2hs-install');
     const closeBtn   = document.getElementById('a2hs-close');
+
     if (localStorage.getItem(A2HS_KEY)) return;
+
     let deferredPrompt = null;
     window.addEventListener('beforeinstallprompt', e => {
         e.preventDefault(); deferredPrompt = e;
@@ -698,6 +741,7 @@
         installBtn.style.display = '';
         banner.classList.remove('hidden');
     });
+
     const isIos   = /iphone|ipad|ipod/i.test(navigator.userAgent);
     const isInApp = window.matchMedia('(display-mode: standalone)').matches;
     if (isIos && !isInApp && !deferredPrompt) {
@@ -705,6 +749,7 @@
         installBtn.style.display = 'none';
         banner.classList.remove('hidden');
     }
+
     installBtn.addEventListener('click', async () => {
         if (!deferredPrompt) return;
         deferredPrompt.prompt();
@@ -714,14 +759,18 @@
     });
     closeBtn.addEventListener('click', () => { banner.classList.add('hidden'); localStorage.setItem(A2HS_KEY,'1'); });
 })();
+
+
 // ── LIVE DATA ───────────────────────────────────────────────────────────────
 const weatherKey = 'ff6e4e362f0a4231841165933261005';
+
 async function update() {
     try {
         const r = await fetch('https://open.er-api.com/v6/latest/EUR');
         const d = await r.json();
         document.getElementById('rate').textContent = `1 EUR = ${d.rates.CAD.toFixed(2)} CAD`;
     } catch (err) {}
+
     const cities = [['Lisbon','w1'],['Albufeira','w2'],['Cordoba','w3'],['Barcelona','w4']];
     await Promise.all(cities.map(async ([city, id]) => {
         try {
@@ -742,6 +791,7 @@ async function update() {
         } catch (err) {}
     }));
 }
+
 update();
 </script>
 </body>
