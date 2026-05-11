@@ -195,6 +195,7 @@
             background: var(--surface); padding: 15px 10px; border-radius: 16px;
             text-align: center; border: 1px solid var(--border);
             text-decoration: none; color: var(--text); transition: transform 0.15s;
+            cursor: pointer;
         }
         .w-btn:active { transform: scale(0.97); }
         .w-city  { font-size: 0.65rem; font-weight: 800; color: var(--grey); text-transform: uppercase; display: block; }
@@ -241,50 +242,35 @@
         .btn-fork   { background: #f46f2f; color: white; }
 
         /* ── LINGO CARDS ── */
-        .lingo-wrap {
-            margin: 0 15px 25px;
-            perspective: 800px;
-        }
+        .lingo-wrap { margin: 0 15px 25px; perspective: 800px; }
         .lingo-inner {
-            position: relative;
-            transform-style: preserve-3d;
-            transition: transform 0.45s ease;
-            cursor: pointer;
-            min-height: 160px;
+            position: relative; transform-style: preserve-3d;
+            transition: transform 0.45s ease; cursor: pointer; min-height: 160px;
         }
         .lingo-wrap.flipped .lingo-inner { transform: rotateY(180deg); }
-
         .lingo-front, .lingo-back {
             border-radius: 12px; border: 1px solid var(--border);
             background: var(--surface2); padding: 12px 15px;
             backface-visibility: hidden; -webkit-backface-visibility: hidden;
         }
-        .lingo-front {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
-        }
+        .lingo-front { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
         .lingo-back {
-            position: absolute; inset: 0;
-            transform: rotateY(180deg);
-            display: flex; flex-direction: column; gap: 10px;
-            justify-content: space-between;
+            position: absolute; inset: 0; transform: rotateY(180deg);
+            display: flex; flex-direction: column; gap: 10px; justify-content: space-between;
         }
-        .lingo-back-phrases {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 8px; flex: 1;
-        }
+        .lingo-back-phrases { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; flex: 1; }
         .lingo-pair { display: flex; flex-direction: column; gap: 2px; }
         .lingo-pair span   { font-size: 0.65rem; color: var(--grey); font-weight: 600; text-transform: uppercase; }
         .lingo-pair strong { font-size: 0.9rem; color: var(--text); }
         .lingo-hint {
             font-size: 0.6rem; color: var(--grey); text-align: center;
-            font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase;
-            margin-top: 2px;
+            font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; margin-top: 2px;
         }
         .lingo-translate {
             display: flex; align-items: center; justify-content: center; gap: 6px;
             background: #4285f4; color: white; border: none; border-radius: 8px;
             padding: 7px 12px; font-size: 0.75rem; font-weight: 700;
-            cursor: pointer; text-decoration: none; margin-top: 2px;
-            transition: opacity 0.15s;
+            cursor: pointer; text-decoration: none; margin-top: 2px; transition: opacity 0.15s;
         }
         .lingo-translate:active { opacity: 0.8; }
 
@@ -434,18 +420,18 @@
             </div>
 
             <div class="weather-hub">
-                <a href="https://www.accuweather.com/en/pt/lisbon/274087/daily-weather-forecast/274087" target="_blank" rel="noopener noreferrer" class="w-btn">
+                <button class="w-btn" onclick="openWeather('https://www.accuweather.com/en/pt/lisbon/274087/daily-weather-forecast/274087')">
                     <span class="w-city">Lisbon</span><span id="w1" class="w-temp">--°</span><span class="w-label">TAP FOR FORECAST</span>
-                </a>
-                <a href="https://www.accuweather.com/en/pt/albufeira/273392/daily-weather-forecast/273392" target="_blank" rel="noopener noreferrer" class="w-btn">
+                </button>
+                <button class="w-btn" onclick="openWeather('https://www.accuweather.com/en/pt/albufeira/273392/daily-weather-forecast/273392')">
                     <span class="w-city">Algarve</span><span id="w2" class="w-temp">--°</span><span class="w-label">TAP FOR FORECAST</span>
-                </a>
-                <a href="https://www.accuweather.com/en/es/cordoba/307183/daily-weather-forecast/307183" target="_blank" rel="noopener noreferrer" class="w-btn">
+                </button>
+                <button class="w-btn" onclick="openWeather('https://www.accuweather.com/en/es/cordoba/307183/daily-weather-forecast/307183')">
                     <span class="w-city">Andalusia</span><span id="w3" class="w-temp">--°</span><span class="w-label">TAP FOR FORECAST</span>
-                </a>
-                <a href="https://www.accuweather.com/en/es/barcelona/307297/daily-weather-forecast/307297" target="_blank" rel="noopener noreferrer" class="w-btn">
+                </button>
+                <button class="w-btn" onclick="openWeather('https://www.accuweather.com/en/es/barcelona/307297/daily-weather-forecast/307297')">
                     <span class="w-city">Barcelona</span><span id="w4" class="w-temp">--°</span><span class="w-label">TAP FOR FORECAST</span>
-                </a>
+                </button>
             </div>
         </div><!-- /sidebar -->
 
@@ -486,9 +472,9 @@
                                 <div class="lingo-pair"><span>Do you speak English?</span><strong>Fala inglês?</strong></div>
                                 <div class="lingo-pair"><span>The bill please</span><strong>A conta, por favor</strong></div>
                             </div>
-                            <a class="lingo-translate" href="https://translate.google.com/?sl=en&tl=pt&op=translate" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">
-                                <i class="fa-solid fa-language"></i> Open Google Translate
-                            </a>
+                            <button class="lingo-translate" onclick="event.stopPropagation(); openTranslate('pt','https://translate.google.com/?sl=en&tl=pt&op=translate')">
+                                <i class="fa-solid fa-language"></i> Google Translate (PT)
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -531,9 +517,9 @@
                                 <div class="lingo-pair"><span>Help!</span><strong>Socorro!</strong></div>
                                 <div class="lingo-pair"><span>A table for two</span><strong>Uma mesa para dois</strong></div>
                             </div>
-                            <a class="lingo-translate" href="https://translate.google.com/?sl=en&tl=pt&op=translate" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">
-                                <i class="fa-solid fa-language"></i> Open Google Translate
-                            </a>
+                            <button class="lingo-translate" onclick="event.stopPropagation(); openTranslate('pt','https://translate.google.com/?sl=en&tl=pt&op=translate')">
+                                <i class="fa-solid fa-language"></i> Google Translate (PT)
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -577,9 +563,9 @@
                                 <div class="lingo-pair"><span>Do you speak English?</span><strong>¿Habla inglés?</strong></div>
                                 <div class="lingo-pair"><span>The bill please</span><strong>La cuenta, por favor</strong></div>
                             </div>
-                            <a class="lingo-translate" href="https://translate.google.com/?sl=en&tl=es&op=translate" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">
-                                <i class="fa-solid fa-language"></i> Open Google Translate
-                            </a>
+                            <button class="lingo-translate" onclick="event.stopPropagation(); openTranslate('es','https://translate.google.com/?sl=en&tl=es&op=translate')">
+                                <i class="fa-solid fa-language"></i> Google Translate (ES)
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -619,9 +605,12 @@
                                 <div class="lingo-pair"><span>Do you speak English?</span><strong>Parla anglès?</strong></div>
                                 <div class="lingo-pair"><span>The bill please</span><strong>El compte, si us plau</strong></div>
                             </div>
-                            <a class="lingo-translate" href="https://translate.google.com/?sl=en&tl=ca&op=translate" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">
-                                <i class="fa-solid fa-language"></i> Open Google Translate
-                            </a>
+                            <button class="lingo-translate" onclick="event.stopPropagation(); openTranslate('ca','https://translate.google.com/?sl=en&tl=ca&op=translate')">
+                                <i class="fa-solid fa-language"></i> Google Translate (CA)
+                            </button>
+                            <button class="lingo-translate" style="background:#34a853;" onclick="event.stopPropagation(); openTranslate('es','https://translate.google.com/?sl=en&tl=es&op=translate')">
+                                <i class="fa-solid fa-language"></i> Google Translate (ES)
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -862,14 +851,23 @@
 })();
 
 
-// ── THEFORK DEEP LINK ──────────────────────────────────────────────────────
+// ── APP DEEP LINKS ──────────────────────────────────────────────────────────
 function openFork(city, webUrl) {
-    const appUrl = `thefork://search?city=${city}`;
-    const start  = Date.now();
-    window.location = appUrl;
-    setTimeout(() => {
-        if (Date.now() - start < 2000) window.open(webUrl, '_blank');
-    }, 1500);
+    const start = Date.now();
+    window.location = `thefork://search?city=${city}`;
+    setTimeout(() => { if (Date.now() - start < 2000) window.open(webUrl, '_blank'); }, 1500);
+}
+
+function openTranslate(lang, webUrl) {
+    const start = Date.now();
+    window.location = `googletranslate://`;
+    setTimeout(() => { if (Date.now() - start < 2000) window.open(webUrl, '_blank'); }, 1500);
+}
+
+function openWeather(webUrl) {
+    const start = Date.now();
+    window.location = `accuweather://`;
+    setTimeout(() => { if (Date.now() - start < 2000) window.open(webUrl, '_blank'); }, 1500);
 }
 
 // ── LIVE DATA ───────────────────────────────────────────────────────────────
