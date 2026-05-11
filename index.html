@@ -194,8 +194,7 @@
         .w-btn {
             background: var(--surface); padding: 15px 10px; border-radius: 16px;
             text-align: center; border: 1px solid var(--border);
-            text-decoration: none; color: var(--text); transition: transform 0.15s;
-            cursor: pointer;
+            color: var(--text); transition: transform 0.15s; cursor: pointer;
         }
         .w-btn:active { transform: scale(0.97); }
         .w-city  { font-size: 0.65rem; font-weight: 800; color: var(--grey); text-transform: uppercase; display: block; }
@@ -420,16 +419,16 @@
             </div>
 
             <div class="weather-hub">
-                <button class="w-btn" onclick="openWeather('https://www.accuweather.com/en/pt/lisbon/274087/daily-weather-forecast/274087')">
+                <button class="w-btn" onclick="openWeather('en/pt/lisbon/274087/daily-weather-forecast/274087','https://www.accuweather.com/en/pt/lisbon/274087/daily-weather-forecast/274087')">
                     <span class="w-city">Lisbon</span><span id="w1" class="w-temp">--°</span><span class="w-label">TAP FOR FORECAST</span>
                 </button>
-                <button class="w-btn" onclick="openWeather('https://www.accuweather.com/en/pt/albufeira/273392/daily-weather-forecast/273392')">
+                <button class="w-btn" onclick="openWeather('en/pt/albufeira/273392/daily-weather-forecast/273392','https://www.accuweather.com/en/pt/albufeira/273392/daily-weather-forecast/273392')">
                     <span class="w-city">Algarve</span><span id="w2" class="w-temp">--°</span><span class="w-label">TAP FOR FORECAST</span>
                 </button>
-                <button class="w-btn" onclick="openWeather('https://www.accuweather.com/en/es/cordoba/307183/daily-weather-forecast/307183')">
+                <button class="w-btn" onclick="openWeather('en/es/cordoba/307183/daily-weather-forecast/307183','https://www.accuweather.com/en/es/cordoba/307183/daily-weather-forecast/307183')">
                     <span class="w-city">Andalusia</span><span id="w3" class="w-temp">--°</span><span class="w-label">TAP FOR FORECAST</span>
                 </button>
-                <button class="w-btn" onclick="openWeather('https://www.accuweather.com/en/es/barcelona/307297/daily-weather-forecast/307297')">
+                <button class="w-btn" onclick="openWeather('en/es/barcelona/307297/daily-weather-forecast/307297','https://www.accuweather.com/en/es/barcelona/307297/daily-weather-forecast/307297')">
                     <span class="w-city">Barcelona</span><span id="w4" class="w-temp">--°</span><span class="w-label">TAP FOR FORECAST</span>
                 </button>
             </div>
@@ -864,9 +863,9 @@ function openTranslate(lang, webUrl) {
     setTimeout(() => { if (Date.now() - start < 2000) window.open(webUrl, '_blank'); }, 1500);
 }
 
-function openWeather(webUrl) {
+function openWeather(path, webUrl) {
     const start = Date.now();
-    window.location = `accuweather://`;
+    window.location = `accuweather://${path}`;
     setTimeout(() => { if (Date.now() - start < 2000) window.open(webUrl, '_blank'); }, 1500);
 }
 
