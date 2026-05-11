@@ -241,14 +241,50 @@
         .btn-fork   { background: #f46f2f; color: white; }
 
         /* ── LINGO CARDS ── */
-        .lingo {
-            background: var(--surface2); padding: 12px 15px; border-radius: 12px;
-            margin: 0 15px 25px; border: 1px solid var(--border);
+        .lingo-wrap {
+            margin: 0 15px 25px;
+            perspective: 800px;
+        }
+        .lingo-inner {
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.45s ease;
+            cursor: pointer;
+        }
+        .lingo-wrap.flipped .lingo-inner { transform: rotateY(180deg); }
+
+        .lingo-front, .lingo-back {
+            border-radius: 12px; border: 1px solid var(--border);
+            background: var(--surface2); padding: 12px 15px;
+            backface-visibility: hidden; -webkit-backface-visibility: hidden;
+        }
+        .lingo-front {
             display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+        }
+        .lingo-back {
+            position: absolute; inset: 0;
+            transform: rotateY(180deg);
+            display: flex; flex-direction: column; gap: 8px;
+        }
+        .lingo-back-phrases {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 6px; flex: 1;
         }
         .lingo-pair { display: flex; flex-direction: column; gap: 2px; }
         .lingo-pair span   { font-size: 0.65rem; color: var(--grey); font-weight: 600; text-transform: uppercase; }
         .lingo-pair strong { font-size: 0.9rem; color: var(--text); }
+        .lingo-hint {
+            font-size: 0.6rem; color: var(--grey); text-align: center;
+            font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase;
+            margin-top: 2px;
+        }
+        .lingo-translate {
+            display: flex; align-items: center; justify-content: center; gap: 6px;
+            background: #4285f4; color: white; border: none; border-radius: 8px;
+            padding: 7px 12px; font-size: 0.75rem; font-weight: 700;
+            cursor: pointer; text-decoration: none; margin-top: 2px;
+            transition: opacity 0.15s;
+        }
+        .lingo-translate:active { opacity: 0.8; }
 
         /* ── DESKTOP TWO-COLUMN LAYOUT ── */
         @media (min-width: 800px) {
@@ -270,9 +306,9 @@
             .city-section:last-child,
             .city-section:nth-last-child(2):nth-child(odd) { border-bottom: none; }
             .hero { height: 200px; margin-top: 0; }
-            .card       { margin: -15px 12px 8px; }
-            .action-row { margin: 0 12px 12px; }
-            .lingo      { margin: 0 12px 20px; }
+            .card        { margin: -15px 12px 8px; }
+            .action-row  { margin: 0 12px 12px; }
+            .lingo-wrap  { margin: 0 12px 20px; }
             #a2hs-banner { max-width: 1140px; }
         }
     </style>
@@ -434,15 +470,31 @@
                         <i class="fa-solid fa-utensils"></i> TheFork
                     </button>
                 </div>
-                <div class="lingo">
-                    <div class="lingo-pair"><span>Thank you</span><strong>Obrigado</strong></div>
-                    <div class="lingo-pair"><span>Where is...?</span><strong>Onde fica...?</strong></div>
+                <div class="lingo-wrap" onclick="this.classList.toggle('flipped')">
+                    <div class="lingo-inner">
+                        <div class="lingo-front">
+                            <div class="lingo-pair"><span>Thank you</span><strong>Obrigado</strong></div>
+                            <div class="lingo-pair"><span>Where is...?</span><strong>Onde fica...?</strong></div>
+                            <div class="lingo-hint" style="grid-column:1/-1">Tap to see more ↓</div>
+                        </div>
+                        <div class="lingo-back">
+                            <div class="lingo-back-phrases">
+                                <div class="lingo-pair"><span>Excuse me</span><strong>Com licença</strong></div>
+                                <div class="lingo-pair"><span>How much?</span><strong>Quanto custa?</strong></div>
+                                <div class="lingo-pair"><span>Do you speak English?</span><strong>Fala inglês?</strong></div>
+                                <div class="lingo-pair"><span>The bill please</span><strong>A conta, por favor</strong></div>
+                            </div>
+                            <a class="lingo-translate" href="https://translate.google.com/?sl=en&tl=pt&op=translate" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">
+                                <i class="fa-solid fa-language"></i> Open Google Translate
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <!-- ALGARVE -->
+            <!-- ALGARVE — Pine Cliffs ochre cliffs / Atlantic ocean -->
             <div class="city-section">
-                <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1591102972305-213abaa76d6f?w=800&auto=format&fit=crop');">
+                <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&auto=format&fit=crop');">
                     <div class="hero-text">
                         <div class="hero-dates">May 19 – 23</div>
                         <h2>Algarve</h2>
@@ -463,15 +515,31 @@
                         <i class="fa-solid fa-car"></i> Drive from Lisbon
                     </a>
                 </div>
-                <div class="lingo">
-                    <div class="lingo-pair"><span>Excuse me</span><strong>Com licença</strong></div>
-                    <div class="lingo-pair"><span>How much?</span><strong>Quanto custa?</strong></div>
+                <div class="lingo-wrap" onclick="this.classList.toggle('flipped')">
+                    <div class="lingo-inner">
+                        <div class="lingo-front">
+                            <div class="lingo-pair"><span>Excuse me</span><strong>Com licença</strong></div>
+                            <div class="lingo-pair"><span>How much?</span><strong>Quanto custa?</strong></div>
+                            <div class="lingo-hint" style="grid-column:1/-1">Tap to see more ↓</div>
+                        </div>
+                        <div class="lingo-back">
+                            <div class="lingo-back-phrases">
+                                <div class="lingo-pair"><span>Thank you</span><strong>Obrigado</strong></div>
+                                <div class="lingo-pair"><span>Where is...?</span><strong>Onde fica...?</strong></div>
+                                <div class="lingo-pair"><span>Help!</span><strong>Socorro!</strong></div>
+                                <div class="lingo-pair"><span>A table for two</span><strong>Uma mesa para dois</strong></div>
+                            </div>
+                            <a class="lingo-translate" href="https://translate.google.com/?sl=en&tl=pt&op=translate" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">
+                                <i class="fa-solid fa-language"></i> Open Google Translate
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <!-- ANDALUSIA -->
+            <!-- ANDALUSIA — Alhambra palace gardens, Granada -->
             <div class="city-section">
-                <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1523528283115-9bf9b1699245?w=800&auto=format&fit=crop');">
+                <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?w=800&auto=format&fit=crop');">
                     <div class="hero-text">
                         <div class="hero-dates">May 24 – 26</div>
                         <h2>Andalusia</h2>
@@ -493,9 +561,25 @@
                         <i class="fa-solid fa-car"></i> Drive from Algarve
                     </a>
                 </div>
-                <div class="lingo">
-                    <div class="lingo-pair"><span>Hello</span><strong>Hola</strong></div>
-                    <div class="lingo-pair"><span>Thank you</span><strong>Gracias</strong></div>
+                <div class="lingo-wrap" onclick="this.classList.toggle('flipped')">
+                    <div class="lingo-inner">
+                        <div class="lingo-front">
+                            <div class="lingo-pair"><span>Hello</span><strong>Hola</strong></div>
+                            <div class="lingo-pair"><span>Thank you</span><strong>Gracias</strong></div>
+                            <div class="lingo-hint" style="grid-column:1/-1">Tap to see more ↓</div>
+                        </div>
+                        <div class="lingo-back">
+                            <div class="lingo-back-phrases">
+                                <div class="lingo-pair"><span>Excuse me</span><strong>Perdona</strong></div>
+                                <div class="lingo-pair"><span>How much?</span><strong>¿Cuánto cuesta?</strong></div>
+                                <div class="lingo-pair"><span>Do you speak English?</span><strong>¿Habla inglés?</strong></div>
+                                <div class="lingo-pair"><span>The bill please</span><strong>La cuenta, por favor</strong></div>
+                            </div>
+                            <a class="lingo-translate" href="https://translate.google.com/?sl=en&tl=es&op=translate" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">
+                                <i class="fa-solid fa-language"></i> Open Google Translate
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -519,9 +603,25 @@
                         <i class="fa-solid fa-utensils"></i> TheFork
                     </button>
                 </div>
-                <div class="lingo">
-                    <div class="lingo-pair"><span>Thank you</span><strong>Gràcies</strong></div>
-                    <div class="lingo-pair"><span>Good day</span><strong>Bon dia</strong></div>
+                <div class="lingo-wrap" onclick="this.classList.toggle('flipped')">
+                    <div class="lingo-inner">
+                        <div class="lingo-front">
+                            <div class="lingo-pair"><span>Thank you</span><strong>Gràcies</strong></div>
+                            <div class="lingo-pair"><span>Good day</span><strong>Bon dia</strong></div>
+                            <div class="lingo-hint" style="grid-column:1/-1">Tap to see more ↓</div>
+                        </div>
+                        <div class="lingo-back">
+                            <div class="lingo-back-phrases">
+                                <div class="lingo-pair"><span>Excuse me</span><strong>Perdona</strong></div>
+                                <div class="lingo-pair"><span>How much?</span><strong>¿Quant costa?</strong></div>
+                                <div class="lingo-pair"><span>Do you speak English?</span><strong>Parla anglès?</strong></div>
+                                <div class="lingo-pair"><span>The bill please</span><strong>El compte, si us plau</strong></div>
+                            </div>
+                            <a class="lingo-translate" href="https://translate.google.com/?sl=en&tl=ca&op=translate" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">
+                                <i class="fa-solid fa-language"></i> Open Google Translate
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
 
