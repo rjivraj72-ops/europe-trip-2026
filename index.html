@@ -864,7 +864,13 @@ function openTranslate(lang, webUrl) {
 }
 
 function openWeather(webUrl) {
-    window.location.href = webUrl;
+    const a = document.createElement('a');
+    a.href = webUrl;
+    a.target = '_blank';
+    a.rel = 'noopener noreferrer';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
 }
 
 // ── LIVE DATA ───────────────────────────────────────────────────────────────
