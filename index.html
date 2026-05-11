@@ -148,6 +148,56 @@
             display: flex; align-items: center; gap: 5px; transition: background 0.15s;
         }
         .lock-btn:hover { background: var(--bg); }
+        .calc-btn {
+            background: none; border: 1px solid var(--border); border-radius: 10px;
+            padding: 6px 10px; color: var(--grey); font-size: 0.75rem; cursor: pointer;
+            display: flex; align-items: center; gap: 5px; transition: background 0.15s;
+        }
+        .calc-btn:hover { background: var(--bg); }
+
+        /* ── CURRENCY CALCULATOR ── */
+        #calc-overlay {
+            position: fixed; inset: 0; z-index: 500;
+            background: rgba(0,0,0,0.5);
+            display: flex; align-items: flex-end; justify-content: center;
+        }
+        #calc-overlay.hidden { display: none; }
+        .calc-sheet {
+            background: var(--surface); width: 100%; max-width: 500px;
+            border-radius: 24px 24px 0 0; padding: 20px;
+            box-shadow: 0 -8px 40px rgba(0,0,0,0.2);
+        }
+        .calc-header {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 16px;
+        }
+        .calc-title { font-weight: 900; font-size: 1rem; }
+        .calc-close {
+            background: var(--surface2); border: none; border-radius: 50%;
+            width: 30px; height: 30px; font-size: 1rem; cursor: pointer;
+            display: flex; align-items: center; justify-content: center; color: var(--grey);
+        }
+        .calc-display {
+            background: var(--surface2); border-radius: 16px; padding: 16px;
+            margin-bottom: 16px; text-align: right;
+        }
+        .calc-input {
+            font-size: 2.2rem; font-weight: 900; font-variant-numeric: tabular-nums;
+            color: var(--text); line-height: 1;
+        }
+        .calc-input span { color: var(--grey); font-size: 1.2rem; font-weight: 600; }
+        .calc-result { font-size: 1.1rem; font-weight: 700; color: var(--booked); margin-top: 6px; }
+        .calc-rate { font-size: 0.65rem; color: var(--grey); margin-top: 2px; }
+        .calc-pad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+        .calc-key {
+            background: var(--surface2); border: none; border-radius: 14px;
+            padding: 18px 0; font-size: 1.3rem; font-weight: 700; color: var(--text);
+            cursor: pointer; transition: background 0.1s, transform 0.1s;
+            touch-action: manipulation;
+        }
+        .calc-key:active { background: #d1d1d6; transform: scale(0.95); }
+        .calc-key.del   { font-size: 1.1rem; }
+        .calc-key.clear { background: #ff3b3020; color: var(--danger); }
 
         /* ── TIMEZONE STRIP ── */
         .tz-strip {
@@ -343,6 +393,35 @@
     <button class="a2hs-close" id="a2hs-close" aria-label="Dismiss">✕</button>
 </div>
 
+<!-- ── CURRENCY CALCULATOR ── -->
+<div id="calc-overlay" class="hidden" onclick="if(event.target===this)closeCal()">
+    <div class="calc-sheet">
+        <div class="calc-header">
+            <div class="calc-title">€ EUR → CAD</div>
+            <button class="calc-close" onclick="closeCal()">✕</button>
+        </div>
+        <div class="calc-display">
+            <div class="calc-input"><span>€</span> <span id="calc-eur">0</span></div>
+            <div class="calc-result" id="calc-cad">= CA$0.00</div>
+            <div class="calc-rate" id="calc-rate-label">1 EUR = 1.48 CAD</div>
+        </div>
+        <div class="calc-pad">
+            <button class="calc-key" onclick="calcPress('7')">7</button>
+            <button class="calc-key" onclick="calcPress('8')">8</button>
+            <button class="calc-key" onclick="calcPress('9')">9</button>
+            <button class="calc-key" onclick="calcPress('4')">4</button>
+            <button class="calc-key" onclick="calcPress('5')">5</button>
+            <button class="calc-key" onclick="calcPress('6')">6</button>
+            <button class="calc-key" onclick="calcPress('1')">1</button>
+            <button class="calc-key" onclick="calcPress('2')">2</button>
+            <button class="calc-key" onclick="calcPress('3')">3</button>
+            <button class="calc-key clear" onclick="calcClear()">C</button>
+            <button class="calc-key" onclick="calcPress('0')">0</button>
+            <button class="calc-key del" onclick="calcDel()">⌫</button>
+        </div>
+    </div>
+</div>
+
 <!-- ── MAIN APP ── -->
 <div class="container" id="app">
     <div class="header">
@@ -350,9 +429,14 @@
             <div class="header-title">JIVRAJ GRAND TOUR 2026</div>
             <div id="rate">1 EUR = 1.48 CAD</div>
         </div>
-        <button class="lock-btn" id="lock-btn" aria-label="Lock">
-            <i class="fa-solid fa-lock"></i> Lock
-        </button>
+        <div style="display:flex;gap:8px;align-items:center;">
+            <button class="calc-btn" id="calc-open-btn" aria-label="Currency calculator">
+                <i class="fa-solid fa-calculator"></i> € → CAD
+            </button>
+            <button class="lock-btn" id="lock-btn" aria-label="Lock">
+                <i class="fa-solid fa-lock"></i> Lock
+            </button>
+        </div>
     </div>
 
     <div class="desktop-body">
@@ -850,6 +934,39 @@
 })();
 
 
+// ── CURRENCY CALCULATOR ────────────────────────────────────────────────────
+(function () {
+    let eurBuf = '0';
+    let liveRate = 1.48;
+
+    function render() {
+        document.getElementById('calc-eur').textContent = eurBuf;
+        const cad = (parseFloat(eurBuf) || 0) * liveRate;
+        document.getElementById('calc-cad').textContent = `= CA$${cad.toFixed(2)}`;
+    }
+
+    window.calcPress = function (digit) {
+        if (eurBuf === '0' && digit !== '.') eurBuf = digit;
+        else if (digit === '.' && eurBuf.includes('.')) return;
+        else eurBuf += digit;
+        if (eurBuf.length > 10) return;
+        render();
+    };
+    window.calcDel   = function () { eurBuf = eurBuf.length > 1 ? eurBuf.slice(0,-1) : '0'; render(); };
+    window.calcClear = function () { eurBuf = '0'; render(); };
+    window.openCal   = function () { document.getElementById('calc-overlay').classList.remove('hidden'); render(); };
+    window.closeCal  = function () { document.getElementById('calc-overlay').classList.add('hidden'); };
+
+    document.getElementById('calc-open-btn').addEventListener('click', openCal);
+
+    window.addEventListener('rateUpdate', e => {
+        liveRate = e.detail;
+        document.getElementById('calc-rate-label').textContent = `1 EUR = ${liveRate.toFixed(2)} CAD`;
+        render();
+    });
+})();
+
+
 // ── APP DEEP LINKS ──────────────────────────────────────────────────────────
 function openFork(city, webUrl) {
     const start = Date.now();
@@ -864,13 +981,7 @@ function openTranslate(lang, webUrl) {
 }
 
 function openWeather(webUrl) {
-    const a = document.createElement('a');
-    a.href = webUrl;
-    a.target = '_blank';
-    a.rel = 'noopener noreferrer';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
+    window.open(webUrl, '_blank');
 }
 
 // ── LIVE DATA ───────────────────────────────────────────────────────────────
@@ -880,7 +991,9 @@ async function update() {
     try {
         const r = await fetch('https://open.er-api.com/v6/latest/EUR');
         const d = await r.json();
-        document.getElementById('rate').textContent = `1 EUR = ${d.rates.CAD.toFixed(2)} CAD`;
+        const rate = d.rates.CAD;
+        document.getElementById('rate').textContent = `1 EUR = ${rate.toFixed(2)} CAD`;
+        window.dispatchEvent(new CustomEvent('rateUpdate', { detail: rate }));
     } catch (err) {}
 
     const cities = [['Lisbon','w1'],['Albufeira','w2'],['Cordoba','w3'],['Barcelona','w4']];
