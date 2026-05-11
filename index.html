@@ -419,16 +419,16 @@
             </div>
 
             <div class="weather-hub">
-                <button class="w-btn" onclick="openWeather('en/pt/lisbon/274087/daily-weather-forecast/274087','https://www.accuweather.com/en/pt/lisbon/274087/daily-weather-forecast/274087')">
+                <button class="w-btn" onclick="openWeather('https://www.accuweather.com/en/pt/lisbon/274087/daily-weather-forecast/274087')">
                     <span class="w-city">Lisbon</span><span id="w1" class="w-temp">--°</span><span class="w-label">TAP FOR FORECAST</span>
                 </button>
-                <button class="w-btn" onclick="openWeather('en/pt/albufeira/273392/daily-weather-forecast/273392','https://www.accuweather.com/en/pt/albufeira/273392/daily-weather-forecast/273392')">
+                <button class="w-btn" onclick="openWeather('https://www.accuweather.com/en/pt/albufeira/273392/daily-weather-forecast/273392')">
                     <span class="w-city">Algarve</span><span id="w2" class="w-temp">--°</span><span class="w-label">TAP FOR FORECAST</span>
                 </button>
-                <button class="w-btn" onclick="openWeather('en/es/cordoba/307183/daily-weather-forecast/307183','https://www.accuweather.com/en/es/cordoba/307183/daily-weather-forecast/307183')">
+                <button class="w-btn" onclick="openWeather('https://www.accuweather.com/en/es/cordoba/307183/daily-weather-forecast/307183')">
                     <span class="w-city">Andalusia</span><span id="w3" class="w-temp">--°</span><span class="w-label">TAP FOR FORECAST</span>
                 </button>
-                <button class="w-btn" onclick="openWeather('en/es/barcelona/307297/daily-weather-forecast/307297','https://www.accuweather.com/en/es/barcelona/307297/daily-weather-forecast/307297')">
+                <button class="w-btn" onclick="openWeather('https://www.accuweather.com/en/es/barcelona/307297/daily-weather-forecast/307297')">
                     <span class="w-city">Barcelona</span><span id="w4" class="w-temp">--°</span><span class="w-label">TAP FOR FORECAST</span>
                 </button>
             </div>
@@ -479,7 +479,7 @@
                 </div>
             </div>
 
-            <!-- ALGARVE — Pine Cliffs ochre cliffs / Atlantic ocean -->
+            <!-- ALGARVE -->
             <div class="city-section">
                 <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&auto=format&fit=crop');">
                     <div class="hero-text">
@@ -524,7 +524,7 @@
                 </div>
             </div>
 
-            <!-- ANDALUSIA — Alhambra palace gardens, Granada -->
+            <!-- ANDALUSIA -->
             <div class="city-section">
                 <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?w=800&auto=format&fit=crop');">
                     <div class="hero-text">
@@ -863,10 +863,8 @@ function openTranslate(lang, webUrl) {
     setTimeout(() => { if (Date.now() - start < 2000) window.open(webUrl, '_blank'); }, 1500);
 }
 
-function openWeather(path, webUrl) {
-    const start = Date.now();
-    window.location = `accuweather://${path}`;
-    setTimeout(() => { if (Date.now() - start < 2000) window.open(webUrl, '_blank'); }, 1500);
+function openWeather(webUrl) {
+    window.location.href = webUrl;
 }
 
 // ── LIVE DATA ───────────────────────────────────────────────────────────────
