@@ -250,6 +250,7 @@
             transform-style: preserve-3d;
             transition: transform 0.45s ease;
             cursor: pointer;
+            min-height: 160px;
         }
         .lingo-wrap.flipped .lingo-inner { transform: rotateY(180deg); }
 
@@ -264,10 +265,11 @@
         .lingo-back {
             position: absolute; inset: 0;
             transform: rotateY(180deg);
-            display: flex; flex-direction: column; gap: 8px;
+            display: flex; flex-direction: column; gap: 10px;
+            justify-content: space-between;
         }
         .lingo-back-phrases {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 6px; flex: 1;
+            display: grid; grid-template-columns: 1fr 1fr; gap: 8px; flex: 1;
         }
         .lingo-pair { display: flex; flex-direction: column; gap: 2px; }
         .lingo-pair span   { font-size: 0.65rem; color: var(--grey); font-weight: 600; text-transform: uppercase; }
