@@ -22,6 +22,7 @@
             --border: #eeeeee;
             --text: #1c1c1e;
             --danger: #ff3b30;
+            --header-h: 65px;
         }
         @media (prefers-color-scheme: dark) {
             :root {
@@ -42,16 +43,11 @@
         }
         /* ── PIN OVERLAY ── */
         #pin-overlay {
-            position: fixed;
-            inset: 0;
-            z-index: 999;
+            position: fixed; inset: 0; z-index: 999;
             background: var(--surface);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 28px;
-            padding: 40px 24px;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            gap: 28px; padding: 40px 24px;
         }
         #pin-overlay.hidden { display: none; }
         .pin-icon {
@@ -103,19 +99,16 @@
         .pin-forgot     { background: none; border: none; color: var(--accent); font-size: 0.85rem; cursor: pointer; padding: 4px; }
         /* ── ADD TO HOME SCREEN BANNER ── */
         #a2hs-banner {
-            position: fixed;
-            bottom: 0; left: 50%; transform: translateX(-50%);
+            position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
             width: 100%; max-width: 500px;
-            background: var(--surface);
-            border-top: 1px solid var(--border);
+            background: var(--surface); border-top: 1px solid var(--border);
             padding: 14px 16px;
             display: flex; align-items: center; gap: 12px;
-            z-index: 200;
-            box-shadow: 0 -4px 20px rgba(0,0,0,0.12);
+            z-index: 200; box-shadow: 0 -4px 20px rgba(0,0,0,0.12);
         }
         #a2hs-banner.hidden { display: none; }
-        .a2hs-icon { font-size: 1.8rem; flex-shrink: 0; }
-        .a2hs-text { flex: 1; font-size: 0.8rem; line-height: 1.4; }
+        .a2hs-icon  { font-size: 1.8rem; flex-shrink: 0; }
+        .a2hs-text  { flex: 1; font-size: 0.8rem; line-height: 1.4; }
         .a2hs-text strong { display: block; font-size: 0.85rem; margin-bottom: 2px; }
         .a2hs-text span   { color: var(--grey); }
         .a2hs-btn {
@@ -124,19 +117,18 @@
             font-size: 0.8rem; font-weight: 700; cursor: pointer;
             white-space: nowrap; flex-shrink: 0;
         }
-        .a2hs-close {
-            background: none; border: none; color: var(--grey);
-            font-size: 1.2rem; cursor: pointer; padding: 4px; flex-shrink: 0;
-        }
-        /* ── MAIN APP ── */
+        .a2hs-close { background: none; border: none; color: var(--grey); font-size: 1.2rem; cursor: pointer; padding: 4px; flex-shrink: 0; }
+        /* ── MAIN CONTAINER ── */
         .container {
             max-width: 500px; margin: 0 auto;
             background: var(--surface); min-height: 100vh;
             box-shadow: 0 0 30px rgba(0,0,0,0.1);
         }
+        /* ── HEADER ── */
         .header {
-            padding: 16px 20px; display: flex;
-            justify-content: space-between; align-items: center;
+            height: var(--header-h);
+            padding: 0 20px;
+            display: flex; justify-content: space-between; align-items: center;
             border-bottom: 1px solid var(--border);
             background: var(--surface); position: sticky; top: 0; z-index: 100;
         }
@@ -144,22 +136,17 @@
         .header-title { font-weight: 900; font-size: 0.95rem; }
         #rate { color: var(--booked); font-weight: 800; font-size: 0.7rem; }
         .lock-btn {
-            background: none; border: 1px solid var(--border);
-            border-radius: 10px; padding: 6px 10px; color: var(--grey);
-            font-size: 0.75rem; cursor: pointer;
+            background: none; border: 1px solid var(--border); border-radius: 10px;
+            padding: 6px 10px; color: var(--grey); font-size: 0.75rem; cursor: pointer;
             display: flex; align-items: center; gap: 5px; transition: background 0.15s;
         }
         .lock-btn:hover { background: var(--bg); }
         /* ── TIMEZONE STRIP ── */
         .tz-strip {
             display: grid; grid-template-columns: 1fr 1fr;
-            background: var(--surface2);
-            border-bottom: 1px solid var(--border);
+            background: var(--surface2); border-bottom: 1px solid var(--border);
         }
-        .tz-cell {
-            padding: 10px 16px;
-            display: flex; flex-direction: column; gap: 1px;
-        }
+        .tz-cell { padding: 10px 16px; display: flex; flex-direction: column; gap: 1px; }
         .tz-cell:first-child { border-right: 1px solid var(--border); }
         .tz-label { font-size: 0.6rem; font-weight: 800; color: var(--grey); text-transform: uppercase; letter-spacing: 0.08em; }
         .tz-time  { font-size: 1.1rem; font-weight: 900; font-variant-numeric: tabular-nums; }
@@ -224,10 +211,9 @@
         .item i { color: var(--accent); width: 18px; text-align: center; }
         .item a { color: var(--text); text-decoration: none; border-bottom: 1px solid var(--border); }
         .item a:hover { border-bottom-color: var(--accent); color: var(--accent); }
-        /* ── ACTION BUTTONS ROW ── */
+        /* ── ACTION BUTTONS ── */
         .action-row {
-            display: flex; gap: 8px;
-            margin: 0 15px 15px; flex-wrap: wrap;
+            display: flex; gap: 8px; margin: 0 15px 15px; flex-wrap: wrap;
         }
         .action-btn {
             flex: 1; min-width: 120px;
@@ -249,6 +235,56 @@
         .lingo-pair { display: flex; flex-direction: column; gap: 2px; }
         .lingo-pair span   { font-size: 0.65rem; color: var(--grey); font-weight: 600; text-transform: uppercase; }
         .lingo-pair strong { font-size: 0.9rem; color: var(--text); }
+        /* ── DESKTOP TWO-COLUMN LAYOUT ── */
+        @media (min-width: 800px) {
+            body { padding-bottom: 0; background: var(--bg); }
+            .container {
+                max-width: 1140px;
+                display: flex;
+                flex-direction: column;
+                min-height: 100vh;
+            }
+            /* Header spans full width */
+            .header { position: sticky; top: 0; z-index: 100; }
+            /* Body splits into sidebar + cities */
+            .desktop-body {
+                display: grid;
+                grid-template-columns: 360px 1fr;
+                flex: 1;
+                align-items: start;
+            }
+            /* Sticky sidebar */
+            .sidebar {
+                position: sticky;
+                top: var(--header-h);
+                height: calc(100vh - var(--header-h));
+                overflow-y: auto;
+                border-right: 1px solid var(--border);
+            }
+            .sidebar::-webkit-scrollbar { width: 4px; }
+            .sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+            /* Weather hub — keep 2×2 inside narrow sidebar */
+            .weather-hub { grid-template-columns: repeat(2, 1fr); }
+            /* Cities — 2×2 grid */
+            .cities {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                align-content: start;
+            }
+            .city-section {
+                border-bottom: 1px solid var(--border);
+                padding-bottom: 8px;
+            }
+            .city-section:nth-child(odd)  { border-right: 1px solid var(--border); }
+            .city-section:last-child,
+            .city-section:nth-last-child(2):nth-child(odd) { border-bottom: none; }
+            .hero { height: 200px; margin-top: 0; }
+            .card        { margin: -15px 12px 8px; }
+            .action-row  { margin: 0 12px 12px; }
+            .lingo       { margin: 0 12px 20px; }
+            /* A2HS banner max width on desktop */
+            #a2hs-banner { max-width: 1140px; }
+        }
     </style>
 </head>
 <body>
@@ -295,173 +331,187 @@
 <div class="container" id="app">
     <div class="header">
         <div class="header-left">
-            <div class="header-title">JIVRAJ TOUR 2026</div>
+            <div class="header-title">JIVRAJ GRAND TOUR 2026</div>
             <div id="rate">1 EUR = 1.48 CAD</div>
         </div>
         <button class="lock-btn" id="lock-btn" aria-label="Lock">
             <i class="fa-solid fa-lock"></i> Lock
         </button>
     </div>
-    <!-- TIMEZONE STRIP -->
-    <div class="tz-strip">
-        <div class="tz-cell">
-            <span class="tz-label">🇨🇦 Vancouver</span>
-            <span class="tz-time" id="tz-van">--:--</span>
-            <span class="tz-date" id="tz-van-date"></span>
-        </div>
-        <div class="tz-cell">
-            <span class="tz-label" id="tz-dest-label">🇵🇹 Lisbon</span>
-            <span class="tz-time" id="tz-dest">--:--</span>
-            <span class="tz-date" id="tz-dest-date"></span>
-        </div>
-    </div>
-    <!-- LIVE COUNTDOWN TICKER -->
-    <div class="ticker" id="ticker">
-        <div>
-            <div class="ticker-label" id="ticker-label">Departure in</div>
-            <div class="ticker-value" id="ticker-value">--:--:--:--</div>
-            <div class="ticker-sub" id="ticker-sub"></div>
-        </div>
-        <div class="ticker-phase" id="ticker-phase"></div>
-    </div>
-    <div class="itinerary-container">
-        <div class="scroll-window">
-            <div class="row">
-                <span class="row-date">May 16</span>
-                <span class="row-text"><a href="https://www.flightaware.com/live/flight/AC812" target="_blank" rel="noopener noreferrer">AC812</a> (YVR➔LIS) • Moxy Lisbon City</span>
+    <div class="desktop-body">
+        <!-- ── SIDEBAR ── -->
+        <div class="sidebar">
+            <div class="tz-strip">
+                <div class="tz-cell">
+                    <span class="tz-label">🇨🇦 Vancouver</span>
+                    <span class="tz-time" id="tz-van">--:--</span>
+                    <span class="tz-date" id="tz-van-date"></span>
+                </div>
+                <div class="tz-cell">
+                    <span class="tz-label" id="tz-dest-label">🇵🇹 Lisbon</span>
+                    <span class="tz-time" id="tz-dest">--:--</span>
+                    <span class="tz-date" id="tz-dest-date"></span>
+                </div>
             </div>
-            <div class="row">
-                <span class="row-date">May 18</span>
-                <span class="row-text">Ismaili Centre Lisbon Guided Tour</span>
+            <div class="ticker" id="ticker">
+                <div>
+                    <div class="ticker-label" id="ticker-label">Departure in</div>
+                    <div class="ticker-value" id="ticker-value">--:--:--:--</div>
+                    <div class="ticker-sub" id="ticker-sub"></div>
+                </div>
+                <div class="ticker-phase" id="ticker-phase"></div>
             </div>
-            <div class="row">
-                <span class="row-date">May 19</span>
-                <span class="row-text">Avis Pick-up • Drive to Algarve • Pine Cliffs</span>
+            <div class="itinerary-container">
+                <div class="scroll-window">
+                    <div class="row">
+                        <span class="row-date">May 16</span>
+                        <span class="row-text"><a href="https://www.flightaware.com/live/flight/AC812" target="_blank" rel="noopener noreferrer">AC812</a> (YVR➔LIS) • Moxy Lisbon City</span>
+                    </div>
+                    <div class="row">
+                        <span class="row-date">May 18</span>
+                        <span class="row-text">Ismaili Centre Lisbon Guided Tour</span>
+                    </div>
+                    <div class="row">
+                        <span class="row-date">May 19</span>
+                        <span class="row-text">Avis Pick-up • Drive to Algarve • Pine Cliffs</span>
+                    </div>
+                    <div class="row">
+                        <span class="row-date">May 21</span>
+                        <span class="row-text">11:00 AM: Benagil Grottoes Kayak Adventure</span>
+                    </div>
+                    <div class="row">
+                        <span class="row-date">May 24</span>
+                        <span class="row-text">Drive to Cordoba • Mosque-Cathedral Visit</span>
+                    </div>
+                    <div class="row">
+                        <span class="row-date">May 26</span>
+                        <span class="row-text">Granada: Alhambra (12:00) • Hammam Spa (4:00)</span>
+                    </div>
+                    <div class="row">
+                        <span class="row-date">May 27</span>
+                        <span class="row-text"><a href="https://www.flightaware.com/live/flight/VY2013" target="_blank" rel="noopener noreferrer">VY2013</a> (GRX➔BCN) • Le Méridien Barcelona</span>
+                    </div>
+                    <div class="row">
+                        <span class="row-date">May 30</span>
+                        <span class="row-text">Return <a href="https://www.flightaware.com/live/flight/AC821" target="_blank" rel="noopener noreferrer">AC821</a> (BCN➔YVR) (1:15 PM)</span>
+                    </div>
+                </div>
             </div>
-            <div class="row">
-                <span class="row-date">May 21</span>
-                <span class="row-text">11:00 AM: Benagil Grottoes Kayak Adventure</span>
+            <div class="weather-hub">
+                <a href="https://www.accuweather.com/en/pt/lisbon/274087/daily-weather-forecast/274087" target="_blank" rel="noopener noreferrer" class="w-btn">
+                    <span class="w-city">Lisbon</span><span id="w1" class="w-temp">--°</span><span class="w-label">TAP FOR FORECAST</span>
+                </a>
+                <a href="https://www.accuweather.com/en/pt/albufeira/273392/daily-weather-forecast/273392" target="_blank" rel="noopener noreferrer" class="w-btn">
+                    <span class="w-city">Algarve</span><span id="w2" class="w-temp">--°</span><span class="w-label">TAP FOR FORECAST</span>
+                </a>
+                <a href="https://www.accuweather.com/en/es/cordoba/307183/daily-weather-forecast/307183" target="_blank" rel="noopener noreferrer" class="w-btn">
+                    <span class="w-city">Andalusia</span><span id="w3" class="w-temp">--°</span><span class="w-label">TAP FOR FORECAST</span>
+                </a>
+                <a href="https://www.accuweather.com/en/es/barcelona/307297/daily-weather-forecast/307297" target="_blank" rel="noopener noreferrer" class="w-btn">
+                    <span class="w-city">Barcelona</span><span id="w4" class="w-temp">--°</span><span class="w-label">TAP FOR FORECAST</span>
+                </a>
             </div>
-            <div class="row">
-                <span class="row-date">May 24</span>
-                <span class="row-text">Drive to Cordoba • Mosque-Cathedral Visit</span>
+        </div><!-- /sidebar -->
+        <!-- ── CITIES 2×2 GRID ── -->
+        <div class="cities">
+            <!-- LISBON -->
+            <div class="city-section">
+                <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1573843981267-be1999ff37cd?w=800&auto=format&fit=crop');">
+                    <div class="hero-text">
+                        <div class="hero-dates">May 16 – 18</div>
+                        <h2>Lisbon</h2>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="item"><i class="fa-solid fa-hotel"></i> <a href="https://maps.google.com/?q=Moxy+Lisbon+City" target="_blank" rel="noopener noreferrer">Moxy Lisbon City</a></div>
+                    <div class="item"><i class="fa-solid fa-mosque"></i> <a href="https://maps.google.com/?q=Ismaili+Centre+Lisbon" target="_blank" rel="noopener noreferrer">Ismaili Centre Tour</a></div>
+                </div>
+                <div class="action-row">
+                    <a class="action-btn btn-nearme" href="https://maps.google.com/?q=restaurants+near+Lisbon+city+centre" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-location-dot"></i> Near Me
+                    </a>
+                </div>
+                <div class="lingo">
+                    <div class="lingo-pair"><span>Thank you</span><strong>Obrigado</strong></div>
+                    <div class="lingo-pair"><span>Where is...?</span><strong>Onde fica...?</strong></div>
+                </div>
             </div>
-            <div class="row">
-                <span class="row-date">May 26</span>
-                <span class="row-text">Granada: Alhambra (12:00) • Hammam Spa (4:00)</span>
+            <!-- ALGARVE -->
+            <div class="city-section">
+                <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1591102972305-213abaa76d6f?w=800&auto=format&fit=crop');">
+                    <div class="hero-text">
+                        <div class="hero-dates">May 19 – 23</div>
+                        <h2>Algarve</h2>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="item"><i class="fa-solid fa-umbrella-beach"></i> <a href="https://maps.google.com/?q=Pine+Cliffs+Resort+Algarve" target="_blank" rel="noopener noreferrer">Pine Cliffs Resort</a></div>
+                    <div class="item"><i class="fa-solid fa-water"></i> <a href="https://maps.google.com/?q=Blue+Xperiences+Benagil" target="_blank" rel="noopener noreferrer">Benagil Kayak</a></div>
+                </div>
+                <div class="action-row">
+                    <a class="action-btn btn-nearme" href="https://maps.google.com/?q=restaurants+near+Albufeira+Algarve" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-location-dot"></i> Near Me
+                    </a>
+                    <a class="action-btn btn-drive" href="https://maps.google.com/?saddr=Moxy+Lisbon+City&daddr=Pine+Cliffs+Resort+Algarve" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-car"></i> Drive from Lisbon
+                    </a>
+                </div>
+                <div class="lingo">
+                    <div class="lingo-pair"><span>Excuse me</span><strong>Com licença</strong></div>
+                    <div class="lingo-pair"><span>How much?</span><strong>Quanto custa?</strong></div>
+                </div>
             </div>
-            <div class="row">
-                <span class="row-date">May 27</span>
-                <span class="row-text"><a href="https://www.flightaware.com/live/flight/VY2013" target="_blank" rel="noopener noreferrer">VY2013</a> (GRX➔BCN) • Le Méridien Barcelona</span>
+            <!-- ANDALUSIA -->
+            <div class="city-section">
+                <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1523528283115-9bf9b1699245?w=800&auto=format&fit=crop');">
+                    <div class="hero-text">
+                        <div class="hero-dates">May 24 – 26</div>
+                        <h2>Andalusia</h2>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="item"><i class="fa-solid fa-archway"></i> <a href="https://maps.google.com/?q=Mezquita+Catedral+Cordoba" target="_blank" rel="noopener noreferrer">Mosque-Cathedral (Cordoba)</a></div>
+                    <div class="item"><i class="fa-solid fa-landmark"></i> <a href="https://maps.google.com/?q=Alhambra+Granada" target="_blank" rel="noopener noreferrer">Alhambra Palace (Granada)</a></div>
+                    <div class="item"><i class="fa-solid fa-hot-tub-person"></i> <a href="https://maps.google.com/?q=Hammam+Al+Andalus+Granada" target="_blank" rel="noopener noreferrer">Hammam Al Ándalus</a></div>
+                </div>
+                <div class="action-row">
+                    <a class="action-btn btn-nearme" href="https://maps.google.com/?q=restaurants+near+Cordoba+Spain" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-location-dot"></i> Near Me
+                    </a>
+                    <a class="action-btn btn-drive" href="https://maps.google.com/?saddr=Pine+Cliffs+Resort+Algarve&daddr=Cordoba+Spain" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-car"></i> Drive from Algarve
+                    </a>
+                </div>
+                <div class="lingo">
+                    <div class="lingo-pair"><span>Hello</span><strong>Hola</strong></div>
+                    <div class="lingo-pair"><span>Thank you</span><strong>Gracias</strong></div>
+                </div>
             </div>
-            <div class="row">
-                <span class="row-date">May 30</span>
-                <span class="row-text">Return <a href="https://www.flightaware.com/live/flight/AC821" target="_blank" rel="noopener noreferrer">AC821</a> (BCN➔YVR) (1:15 PM)</span>
+            <!-- BARCELONA -->
+            <div class="city-section">
+                <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1539037116277-4db20889f2d4?w=800&auto=format&fit=crop');">
+                    <div class="hero-text">
+                        <div class="hero-dates">May 27 – 29</div>
+                        <h2>Barcelona</h2>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="item"><i class="fa-solid fa-hotel"></i> <a href="https://maps.google.com/?q=Le+Meridien+Barcelona" target="_blank" rel="noopener noreferrer">Le Méridien Barcelona</a></div>
+                    <div class="item"><i class="fa-solid fa-church"></i> <a href="https://maps.google.com/?q=Sagrada+Familia+Barcelona" target="_blank" rel="noopener noreferrer">Sagrada Família</a></div>
+                </div>
+                <div class="action-row">
+                    <a class="action-btn btn-nearme" href="https://maps.google.com/?q=restaurants+near+Barcelona+city+centre" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-location-dot"></i> Near Me
+                    </a>
+                </div>
+                <div class="lingo">
+                    <div class="lingo-pair"><span>Thank you</span><strong>Gràcies</strong></div>
+                    <div class="lingo-pair"><span>Good day</span><strong>Bon dia</strong></div>
+                </div>
             </div>
-        </div>
-    </div>
-    <div class="weather-hub">
-        <a href="https://www.accuweather.com/en/pt/lisbon/274087/daily-weather-forecast/274087" target="_blank" rel="noopener noreferrer" class="w-btn">
-            <span class="w-city">Lisbon</span><span id="w1" class="w-temp">--°</span><span class="w-label">TAP FOR FORECAST</span>
-        </a>
-        <a href="https://www.accuweather.com/en/pt/albufeira/273392/daily-weather-forecast/273392" target="_blank" rel="noopener noreferrer" class="w-btn">
-            <span class="w-city">Algarve</span><span id="w2" class="w-temp">--°</span><span class="w-label">TAP FOR FORECAST</span>
-        </a>
-        <a href="https://www.accuweather.com/en/es/cordoba/307183/daily-weather-forecast/307183" target="_blank" rel="noopener noreferrer" class="w-btn">
-            <span class="w-city">Andalusia</span><span id="w3" class="w-temp">--°</span><span class="w-label">TAP FOR FORECAST</span>
-        </a>
-        <a href="https://www.accuweather.com/en/es/barcelona/307297/daily-weather-forecast/307297" target="_blank" rel="noopener noreferrer" class="w-btn">
-            <span class="w-city">Barcelona</span><span id="w4" class="w-temp">--°</span><span class="w-label">TAP FOR FORECAST</span>
-        </a>
-    </div>
-    <!-- LISBON -->
-    <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1573843981267-be1999ff37cd?w=800&auto=format&fit=crop');">
-        <div class="hero-text">
-            <div class="hero-dates">May 16 – 18</div>
-            <h2>Lisbon</h2>
-        </div>
-    </div>
-    <div class="card">
-        <div class="item"><i class="fa-solid fa-hotel"></i> <a href="https://maps.google.com/?q=Moxy+Lisbon+City" target="_blank" rel="noopener noreferrer">Moxy Lisbon City</a></div>
-        <div class="item"><i class="fa-solid fa-mosque"></i> <a href="https://maps.google.com/?q=Ismaili+Centre+Lisbon" target="_blank" rel="noopener noreferrer">Ismaili Centre Tour</a></div>
-    </div>
-    <div class="action-row">
-        <a class="action-btn btn-nearme" href="https://maps.google.com/?q=restaurants+near+Lisbon+city+centre" target="_blank" rel="noopener noreferrer">
-            <i class="fa-solid fa-location-dot"></i> Near Me
-        </a>
-    </div>
-    <div class="lingo">
-        <div class="lingo-pair"><span>Thank you</span><strong>Obrigado</strong></div>
-        <div class="lingo-pair"><span>Where is...?</span><strong>Onde fica...?</strong></div>
-    </div>
-    <!-- ALGARVE -->
-    <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1591102972305-213abaa76d6f?w=800&auto=format&fit=crop');">
-        <div class="hero-text">
-            <div class="hero-dates">May 19 – 23</div>
-            <h2>Algarve</h2>
-        </div>
-    </div>
-    <div class="card">
-        <div class="item"><i class="fa-solid fa-umbrella-beach"></i> <a href="https://maps.google.com/?q=Pine+Cliffs+Resort+Algarve" target="_blank" rel="noopener noreferrer">Pine Cliffs Resort</a></div>
-        <div class="item"><i class="fa-solid fa-water"></i> <a href="https://maps.google.com/?q=Blue+Xperiences+Benagil" target="_blank" rel="noopener noreferrer">Benagil Kayak</a></div>
-    </div>
-    <div class="action-row">
-        <a class="action-btn btn-nearme" href="https://maps.google.com/?q=restaurants+near+Albufeira+Algarve" target="_blank" rel="noopener noreferrer">
-            <i class="fa-solid fa-location-dot"></i> Near Me
-        </a>
-        <a class="action-btn btn-drive" href="https://maps.google.com/?saddr=Moxy+Lisbon+City&daddr=Pine+Cliffs+Resort+Algarve" target="_blank" rel="noopener noreferrer">
-            <i class="fa-solid fa-car"></i> Drive from Lisbon
-        </a>
-    </div>
-    <div class="lingo">
-        <div class="lingo-pair"><span>Excuse me</span><strong>Com licença</strong></div>
-        <div class="lingo-pair"><span>How much?</span><strong>Quanto custa?</strong></div>
-    </div>
-    <!-- ANDALUSIA -->
-    <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1523528283115-9bf9b1699245?w=800&auto=format&fit=crop');">
-        <div class="hero-text">
-            <div class="hero-dates">May 24 – 26</div>
-            <h2>Andalusia</h2>
-        </div>
-    </div>
-    <div class="card">
-        <div class="item"><i class="fa-solid fa-archway"></i> <a href="https://maps.google.com/?q=Mezquita+Catedral+Cordoba" target="_blank" rel="noopener noreferrer">Mosque-Cathedral (Cordoba)</a></div>
-        <div class="item"><i class="fa-solid fa-landmark"></i> <a href="https://maps.google.com/?q=Alhambra+Granada" target="_blank" rel="noopener noreferrer">Alhambra Palace (Granada)</a></div>
-        <div class="item"><i class="fa-solid fa-hot-tub-person"></i> <a href="https://maps.google.com/?q=Hammam+Al+Andalus+Granada" target="_blank" rel="noopener noreferrer">Hammam Al Ándalus</a></div>
-    </div>
-    <div class="action-row">
-        <a class="action-btn btn-nearme" href="https://maps.google.com/?q=restaurants+near+Cordoba+Spain" target="_blank" rel="noopener noreferrer">
-            <i class="fa-solid fa-location-dot"></i> Near Me
-        </a>
-        <a class="action-btn btn-drive" href="https://maps.google.com/?saddr=Pine+Cliffs+Resort+Algarve&daddr=Cordoba+Spain" target="_blank" rel="noopener noreferrer">
-            <i class="fa-solid fa-car"></i> Drive from Algarve
-        </a>
-    </div>
-    <div class="lingo">
-        <div class="lingo-pair"><span>Hello</span><strong>Hola</strong></div>
-        <div class="lingo-pair"><span>Thank you</span><strong>Gracias</strong></div>
-    </div>
-    <!-- BARCELONA -->
-    <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1539037116277-4db20889f2d4?w=800&auto=format&fit=crop');">
-        <div class="hero-text">
-            <div class="hero-dates">May 27 – 29</div>
-            <h2>Barcelona</h2>
-        </div>
-    </div>
-    <div class="card">
-        <div class="item"><i class="fa-solid fa-hotel"></i> <a href="https://maps.google.com/?q=Le+Meridien+Barcelona" target="_blank" rel="noopener noreferrer">Le Méridien Barcelona</a></div>
-        <div class="item"><i class="fa-solid fa-church"></i> <a href="https://maps.google.com/?q=Sagrada+Familia+Barcelona" target="_blank" rel="noopener noreferrer">Sagrada Família</a></div>
-    </div>
-    <div class="action-row">
-        <a class="action-btn btn-nearme" href="https://maps.google.com/?q=restaurants+near+Barcelona+city+centre" target="_blank" rel="noopener noreferrer">
-            <i class="fa-solid fa-location-dot"></i> Near Me
-        </a>
-    </div>
-    <div class="lingo">
-        <div class="lingo-pair"><span>Thank you</span><strong>Gràcies</strong></div>
-        <div class="lingo-pair"><span>Good day</span><strong>Bon dia</strong></div>
-    </div>
-</div>
+        </div><!-- /cities -->
+    </div><!-- /desktop-body -->
+</div><!-- /app -->
 <script>
 'use strict';
 // ── PIN MODULE ──────────────────────────────────────────────────────────────
@@ -480,9 +530,7 @@
     const errorEl  = document.getElementById('pin-error');
     const forgotEl = document.getElementById('pin-forgot');
     const lockBtn  = document.getElementById('lock-btn');
-    let buffer   = '';
-    let phase    = 'verify';
-    let setupBuf = '';
+    let buffer = '', phase = 'verify', setupBuf = '';
     async function sha256(str) {
         const buf  = new TextEncoder().encode(str);
         const hash = await crypto.subtle.digest('SHA-256', buf);
@@ -491,15 +539,8 @@
     function savedHash() { return localStorage.getItem(STORE_KEY); }
     function failCount() { return parseInt(localStorage.getItem(FAIL_KEY) || '0', 10); }
     function coolUntil() { return parseInt(localStorage.getItem(COOL_KEY) || '0', 10); }
-    function showOverlay() {
-        overlay.classList.remove('hidden');
-        document.getElementById('app').style.visibility = 'hidden';
-    }
-    function hideOverlay() {
-        overlay.classList.add('hidden');
-        document.getElementById('app').style.visibility = '';
-        localStorage.removeItem(LOCK_KEY);
-    }
+    function showOverlay() { overlay.classList.remove('hidden'); document.getElementById('app').style.visibility = 'hidden'; }
+    function hideOverlay() { overlay.classList.add('hidden'); document.getElementById('app').style.visibility = ''; localStorage.removeItem(LOCK_KEY); }
     function renderDots(count, error = false) {
         dotsEl.querySelectorAll('.pin-dot').forEach((d, i) => {
             d.classList.toggle('filled', i < count && !error);
@@ -510,35 +551,23 @@
         renderDots(PIN_LEN, true);
         dotsEl.classList.add('shake');
         errorEl.textContent = msg;
-        dotsEl.addEventListener('animationend', () => {
-            dotsEl.classList.remove('shake');
-            buffer = '';
-            renderDots(0);
-        }, { once: true });
+        dotsEl.addEventListener('animationend', () => { dotsEl.classList.remove('shake'); buffer = ''; renderDots(0); }, { once: true });
     }
     function enterSetupMode() {
         phase = 'setup'; setupBuf = ''; buffer = '';
-        titleEl.textContent    = 'Create a PIN';
-        subEl.textContent      = 'Choose a 4-digit PIN';
-        forgotEl.style.display = 'none';
-        errorEl.textContent    = '';
-        renderDots(0);
+        titleEl.textContent = 'Create a PIN'; subEl.textContent = 'Choose a 4-digit PIN';
+        forgotEl.style.display = 'none'; errorEl.textContent = ''; renderDots(0);
     }
     function enterVerifyMode() {
         phase = 'verify'; buffer = '';
-        titleEl.textContent    = 'Welcome back';
-        subEl.textContent      = 'Enter your PIN to continue';
-        forgotEl.style.display = '';
-        errorEl.textContent    = '';
-        renderDots(0);
+        titleEl.textContent = 'Welcome back'; subEl.textContent = 'Enter your PIN to continue';
+        forgotEl.style.display = ''; errorEl.textContent = ''; renderDots(0);
     }
     async function handleComplete() {
         if (phase === 'setup') {
             setupBuf = buffer; phase = 'confirm'; buffer = '';
-            titleEl.textContent = 'Confirm PIN';
-            subEl.textContent   = 'Enter the same PIN again';
-            renderDots(0); errorEl.textContent = '';
-            return;
+            titleEl.textContent = 'Confirm PIN'; subEl.textContent = 'Enter the same PIN again';
+            renderDots(0); errorEl.textContent = ''; return;
         }
         if (phase === 'confirm') {
             if (buffer !== setupBuf) {
@@ -549,46 +578,32 @@
             }
             const hash = await sha256(buffer);
             localStorage.setItem(STORE_KEY, hash);
-            localStorage.removeItem(FAIL_KEY);
-            localStorage.removeItem(COOL_KEY);
-            hideOverlay();
-            return;
+            localStorage.removeItem(FAIL_KEY); localStorage.removeItem(COOL_KEY);
+            hideOverlay(); return;
         }
         const now = Date.now();
-        if (now < coolUntil()) {
-            shakeAndClear(`Too many attempts — wait ${Math.ceil((coolUntil() - now) / 1000)}s`);
-            buffer = ''; return;
-        }
+        if (now < coolUntil()) { shakeAndClear(`Too many attempts — wait ${Math.ceil((coolUntil()-now)/1000)}s`); buffer = ''; return; }
         const hash = await sha256(buffer);
         if (hash === savedHash()) {
-            localStorage.removeItem(FAIL_KEY);
-            localStorage.removeItem(COOL_KEY);
-            hideOverlay();
+            localStorage.removeItem(FAIL_KEY); localStorage.removeItem(COOL_KEY); hideOverlay();
         } else {
             const fails = failCount() + 1;
             localStorage.setItem(FAIL_KEY, fails);
             if (fails >= MAX_FAILS) {
-                localStorage.setItem(COOL_KEY, Date.now() + COOL_MS);
-                localStorage.setItem(FAIL_KEY, 0);
+                localStorage.setItem(COOL_KEY, Date.now() + COOL_MS); localStorage.setItem(FAIL_KEY, 0);
                 shakeAndClear('Too many attempts — locked for 30s');
-            } else {
-                shakeAndClear(`Incorrect PIN (${MAX_FAILS - fails} left)`);
-            }
+            } else { shakeAndClear(`Incorrect PIN (${MAX_FAILS - fails} left)`); }
         }
     }
     function press(digit) {
-        const now = Date.now();
-        if (now < coolUntil()) { errorEl.textContent = `Try again in ${Math.ceil((coolUntil() - now) / 1000)}s`; return; }
+        if (Date.now() < coolUntil()) { errorEl.textContent = `Try again in ${Math.ceil((coolUntil()-Date.now())/1000)}s`; return; }
         if (buffer.length >= PIN_LEN) return;
         buffer += digit; errorEl.textContent = ''; renderDots(buffer.length);
         if (buffer.length === PIN_LEN) setTimeout(handleComplete, 100);
     }
-    function del() {
-        if (buffer.length > 0) { buffer = buffer.slice(0, -1); renderDots(buffer.length); errorEl.textContent = ''; }
-    }
+    function del() { if (buffer.length > 0) { buffer = buffer.slice(0,-1); renderDots(buffer.length); errorEl.textContent = ''; } }
     document.getElementById('pin-pad').addEventListener('click', e => {
-        const btn = e.target.closest('.pin-key');
-        if (!btn) return;
+        const btn = e.target.closest('.pin-key'); if (!btn) return;
         if (btn.id === 'pin-del') { del(); return; }
         if (btn.dataset.k !== undefined) press(btn.dataset.k);
     });
@@ -599,13 +614,10 @@
     });
     forgotEl.addEventListener('click', () => {
         if (!confirm('Reset PIN? You will need to create a new one.')) return;
-        ['STORE_KEY','FAIL_KEY','COOL_KEY'].forEach(k => localStorage.removeItem(eval(k)));
+        [STORE_KEY, FAIL_KEY, COOL_KEY].forEach(k => localStorage.removeItem(k));
         enterSetupMode();
     });
-    lockBtn.addEventListener('click', () => {
-        localStorage.setItem(LOCK_KEY, '1');
-        enterVerifyMode(); showOverlay();
-    });
+    lockBtn.addEventListener('click', () => { localStorage.setItem(LOCK_KEY,'1'); enterVerifyMode(); showOverlay(); });
     if (!savedHash()) { enterSetupMode(); showOverlay(); }
     else              { enterVerifyMode(); showOverlay(); }
 })();
@@ -614,72 +626,57 @@
     const DEPARTURE = new Date('2026-05-16T16:00:00');
     const RETURN    = new Date('2026-05-30T13:15:00');
     const PHASES = [
-        { name: '✈️ Lisbon',    tz: 'Europe/Lisbon',  flag: '🇵🇹', start: new Date('2026-05-16'), end: new Date('2026-05-18T23:59:59') },
-        { name: '🏖️ Algarve',  tz: 'Europe/Lisbon',  flag: '🇵🇹', start: new Date('2026-05-19'), end: new Date('2026-05-23T23:59:59') },
-        { name: '🕌 Andalusia', tz: 'Europe/Madrid',  flag: '🇪🇸', start: new Date('2026-05-24'), end: new Date('2026-05-26T23:59:59') },
-        { name: '🏙️ Barcelona', tz: 'Europe/Madrid',  flag: '🇪🇸', start: new Date('2026-05-27'), end: new Date('2026-05-29T23:59:59') },
+        { name: '✈️ Lisbon',    tz: 'Europe/Lisbon', flag: '🇵🇹', start: new Date('2026-05-16'), end: new Date('2026-05-18T23:59:59') },
+        { name: '🏖️ Algarve',  tz: 'Europe/Lisbon', flag: '🇵🇹', start: new Date('2026-05-19'), end: new Date('2026-05-23T23:59:59') },
+        { name: '🕌 Andalusia', tz: 'Europe/Madrid', flag: '🇪🇸', start: new Date('2026-05-24'), end: new Date('2026-05-26T23:59:59') },
+        { name: '🏙️ Barcelona', tz: 'Europe/Madrid', flag: '🇪🇸', start: new Date('2026-05-27'), end: new Date('2026-05-29T23:59:59') },
     ];
     const vanTimeEl   = document.getElementById('tz-van');
     const vanDateEl   = document.getElementById('tz-van-date');
     const destLabelEl = document.getElementById('tz-dest-label');
     const destTimeEl  = document.getElementById('tz-dest');
     const destDateEl  = document.getElementById('tz-dest-date');
-    const labelEl  = document.getElementById('ticker-label');
-    const valueEl  = document.getElementById('ticker-value');
-    const subEl    = document.getElementById('ticker-sub');
-    const phaseEl  = document.getElementById('ticker-phase');
-    const tickerEl = document.getElementById('ticker');
-    function pad(n) { return String(n).padStart(2, '0'); }
-    function fmtTime(date, tz) {
-        return date.toLocaleTimeString('en-CA', { timeZone: tz, hour: '2-digit', minute: '2-digit', hour12: false });
-    }
-    function fmtDate(date, tz) {
-        return date.toLocaleDateString('en-CA', { timeZone: tz, weekday: 'short', month: 'short', day: 'numeric' });
-    }
+    const labelEl     = document.getElementById('ticker-label');
+    const valueEl     = document.getElementById('ticker-value');
+    const subEl       = document.getElementById('ticker-sub');
+    const phaseEl     = document.getElementById('ticker-phase');
+    const tickerEl    = document.getElementById('ticker');
+    function pad(n) { return String(n).padStart(2,'0'); }
+    function fmtTime(d,tz) { return d.toLocaleTimeString('en-CA',{timeZone:tz,hour:'2-digit',minute:'2-digit',hour12:false}); }
+    function fmtDate(d,tz) { return d.toLocaleDateString('en-CA',{timeZone:tz,weekday:'short',month:'short',day:'numeric'}); }
     function fmtCountdown(ms) {
         if (ms <= 0) return '00:00:00:00';
-        const s = Math.floor(ms / 1000);
+        const s = Math.floor(ms/1000);
         return `${pad(Math.floor(s/86400))}:${pad(Math.floor((s%86400)/3600))}:${pad(Math.floor((s%3600)/60))}:${pad(s%60)}`;
     }
     function tick() {
         const now = new Date();
-        // ── Timezone strip ──
         vanTimeEl.textContent = fmtTime(now, 'America/Vancouver');
         vanDateEl.textContent = fmtDate(now, 'America/Vancouver');
-        const activePhase = PHASES.find(p => now >= p.start && now <= p.end);
-        const destTz      = activePhase ? activePhase.tz : (now < DEPARTURE ? 'Europe/Lisbon' : 'Europe/Madrid');
-        const destFlag    = activePhase ? activePhase.flag : (now < DEPARTURE ? '🇵🇹' : '🇪🇸');
-        const destCity    = activePhase ? activePhase.name.split(' ').slice(1).join(' ') : (now < DEPARTURE ? 'Lisbon' : 'Barcelona');
+        const active   = PHASES.find(p => now >= p.start && now <= p.end);
+        const destTz   = active ? active.tz   : (now < DEPARTURE ? 'Europe/Lisbon' : 'Europe/Madrid');
+        const destFlag = active ? active.flag  : (now < DEPARTURE ? '🇵🇹' : '🇪🇸');
+        const destCity = active ? active.name.split(' ').slice(1).join(' ') : (now < DEPARTURE ? 'Lisbon' : 'Barcelona');
         destLabelEl.textContent = `${destFlag} ${destCity}`;
         destTimeEl.textContent  = fmtTime(now, destTz);
         destDateEl.textContent  = fmtDate(now, destTz);
-        // ── Countdown ticker ──
         if (now < DEPARTURE) {
-            tickerEl.style.background = 'linear-gradient(135deg, #0062cc, #007aff)';
-            labelEl.textContent = 'Departure in';
-            valueEl.textContent = fmtCountdown(DEPARTURE - now);
-            subEl.textContent   = 'D : H : M : S';
-            phaseEl.innerHTML   = '<div class="ticker-phase-name">YVR ✈ LIS</div><div class="ticker-phase-label">AC812 · May 16</div>';
+            tickerEl.style.background = 'linear-gradient(135deg,#0062cc,#007aff)';
+            labelEl.textContent = 'Departure in'; valueEl.textContent = fmtCountdown(DEPARTURE-now); subEl.textContent = 'D : H : M : S';
+            phaseEl.innerHTML = '<div class="ticker-phase-name">YVR ✈ LIS</div><div class="ticker-phase-label">AC812 · May 16</div>';
         } else if (now <= RETURN) {
-            tickerEl.style.background = 'linear-gradient(135deg, #1a7a3a, #28a745)';
-            if (activePhase) {
-                const nextPhase = PHASES[PHASES.indexOf(activePhase) + 1];
-                labelEl.textContent = 'Leaving in';
-                valueEl.textContent = fmtCountdown(activePhase.end - now);
-                subEl.textContent   = 'D : H : M : S';
-                phaseEl.innerHTML   = `<div class="ticker-phase-name">${activePhase.name}</div><div class="ticker-phase-label">${nextPhase ? `Next: ${nextPhase.name}` : 'Last stop!'}</div>`;
+            tickerEl.style.background = 'linear-gradient(135deg,#1a7a3a,#28a745)';
+            if (active) {
+                const next = PHASES[PHASES.indexOf(active)+1];
+                labelEl.textContent = 'Leaving in'; valueEl.textContent = fmtCountdown(active.end-now); subEl.textContent = 'D : H : M : S';
+                phaseEl.innerHTML = `<div class="ticker-phase-name">${active.name}</div><div class="ticker-phase-label">${next?`Next: ${next.name}`:'Last stop!'}</div>`;
             } else {
-                labelEl.textContent = 'In transit';
-                valueEl.textContent = '✈️';
-                subEl.textContent   = '';
-                phaseEl.innerHTML   = '';
+                labelEl.textContent = 'In transit'; valueEl.textContent = '✈️'; subEl.textContent = ''; phaseEl.innerHTML = '';
             }
         } else {
-            tickerEl.style.background = 'linear-gradient(135deg, #555, #888)';
-            labelEl.textContent = 'Grand Tour';
-            valueEl.textContent = '🏠 Complete';
-            subEl.textContent   = 'Welcome home, Jivraj family!';
-            phaseEl.innerHTML   = '';
+            tickerEl.style.background = 'linear-gradient(135deg,#555,#888)';
+            labelEl.textContent = 'Grand Tour'; valueEl.textContent = '🏠 Complete';
+            subEl.textContent = 'Welcome home, Jivraj family!'; phaseEl.innerHTML = '';
             clearInterval(interval);
         }
     }
@@ -688,23 +685,20 @@
 })();
 // ── ADD TO HOME SCREEN ──────────────────────────────────────────────────────
 (function () {
-    const A2HS_KEY = 'jgt2026_a2hs';
-    const banner   = document.getElementById('a2hs-banner');
+    const A2HS_KEY   = 'jgt2026_a2hs';
+    const banner     = document.getElementById('a2hs-banner');
     const installBtn = document.getElementById('a2hs-install');
     const closeBtn   = document.getElementById('a2hs-close');
     if (localStorage.getItem(A2HS_KEY)) return;
-    // Android / Chrome: capture the native install prompt
     let deferredPrompt = null;
     window.addEventListener('beforeinstallprompt', e => {
-        e.preventDefault();
-        deferredPrompt = e;
+        e.preventDefault(); deferredPrompt = e;
         document.getElementById('a2hs-sub').textContent = 'Install for quick access from your home screen';
         installBtn.style.display = '';
         banner.classList.remove('hidden');
     });
-    // iOS Safari: show manual instructions
-    const isIos     = /iphone|ipad|ipod/i.test(navigator.userAgent);
-    const isInApp   = window.matchMedia('(display-mode: standalone)').matches;
+    const isIos   = /iphone|ipad|ipod/i.test(navigator.userAgent);
+    const isInApp = window.matchMedia('(display-mode: standalone)').matches;
     if (isIos && !isInApp && !deferredPrompt) {
         document.getElementById('a2hs-sub').textContent = 'Tap the Share button ↑ then "Add to Home Screen"';
         installBtn.style.display = 'none';
@@ -715,13 +709,9 @@
         deferredPrompt.prompt();
         const { outcome } = await deferredPrompt.userChoice;
         if (outcome === 'accepted') localStorage.setItem(A2HS_KEY, '1');
-        deferredPrompt = null;
-        banner.classList.add('hidden');
+        deferredPrompt = null; banner.classList.add('hidden');
     });
-    closeBtn.addEventListener('click', () => {
-        banner.classList.add('hidden');
-        localStorage.setItem(A2HS_KEY, '1');
-    });
+    closeBtn.addEventListener('click', () => { banner.classList.add('hidden'); localStorage.setItem(A2HS_KEY,'1'); });
 })();
 // ── LIVE DATA ───────────────────────────────────────────────────────────────
 const weatherKey = 'ff6e4e362f0a4231841165933261005';
@@ -731,7 +721,7 @@ async function update() {
         const d = await r.json();
         document.getElementById('rate').textContent = `1 EUR = ${d.rates.CAD.toFixed(2)} CAD`;
     } catch (err) {}
-    const cities = [['Lisbon', 'w1'], ['Albufeira', 'w2'], ['Cordoba', 'w3'], ['Barcelona', 'w4']];
+    const cities = [['Lisbon','w1'],['Albufeira','w2'],['Cordoba','w3'],['Barcelona','w4']];
     await Promise.all(cities.map(async ([city, id]) => {
         try {
             const res  = await fetch(`https://api.weatherapi.com/v1/current.json?key=${weatherKey}&q=${city}`);
