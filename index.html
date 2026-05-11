@@ -134,8 +134,7 @@
 
         /* ── HEADER ── */
         .header {
-            height: var(--header-h);
-            padding: 0 20px;
+            height: var(--header-h); padding: 0 20px;
             display: flex; justify-content: space-between; align-items: center;
             border-bottom: 1px solid var(--border);
             background: var(--surface); position: sticky; top: 0; z-index: 100;
@@ -431,9 +430,9 @@
                     <a class="action-btn btn-nearme" href="https://maps.google.com/?q=restaurants+near+Lisbon+city+centre" target="_blank" rel="noopener noreferrer">
                         <i class="fa-solid fa-location-dot"></i> Near Me
                     </a>
-                    <a class="action-btn btn-fork" href="https://www.thefork.com/en/city/lisbon" target="_blank" rel="noopener noreferrer">
+                    <button class="action-btn btn-fork" onclick="openFork('lisbon','https://www.thefork.com/en/city/lisbon')">
                         <i class="fa-solid fa-utensils"></i> TheFork
-                    </a>
+                    </button>
                 </div>
                 <div class="lingo">
                     <div class="lingo-pair"><span>Thank you</span><strong>Obrigado</strong></div>
@@ -457,9 +456,9 @@
                     <a class="action-btn btn-nearme" href="https://maps.google.com/?q=restaurants+near+Albufeira+Algarve" target="_blank" rel="noopener noreferrer">
                         <i class="fa-solid fa-location-dot"></i> Near Me
                     </a>
-                    <a class="action-btn btn-fork" href="https://www.thefork.com/en/city/albufeira" target="_blank" rel="noopener noreferrer">
+                    <button class="action-btn btn-fork" onclick="openFork('albufeira','https://www.thefork.com/en/city/albufeira')">
                         <i class="fa-solid fa-utensils"></i> TheFork
-                    </a>
+                    </button>
                     <a class="action-btn btn-drive" href="https://maps.google.com/?saddr=Moxy+Lisbon+City&daddr=Pine+Cliffs+Resort+Algarve" target="_blank" rel="noopener noreferrer">
                         <i class="fa-solid fa-car"></i> Drive from Lisbon
                     </a>
@@ -487,9 +486,9 @@
                     <a class="action-btn btn-nearme" href="https://maps.google.com/?q=restaurants+near+Cordoba+Spain" target="_blank" rel="noopener noreferrer">
                         <i class="fa-solid fa-location-dot"></i> Near Me
                     </a>
-                    <a class="action-btn btn-fork" href="https://www.thefork.com/en/city/cordoba" target="_blank" rel="noopener noreferrer">
+                    <button class="action-btn btn-fork" onclick="openFork('cordoba','https://www.thefork.com/en/city/cordoba')">
                         <i class="fa-solid fa-utensils"></i> TheFork
-                    </a>
+                    </button>
                     <a class="action-btn btn-drive" href="https://maps.google.com/?saddr=Pine+Cliffs+Resort+Algarve&daddr=Cordoba+Spain" target="_blank" rel="noopener noreferrer">
                         <i class="fa-solid fa-car"></i> Drive from Algarve
                     </a>
@@ -516,9 +515,9 @@
                     <a class="action-btn btn-nearme" href="https://maps.google.com/?q=restaurants+near+Barcelona+city+centre" target="_blank" rel="noopener noreferrer">
                         <i class="fa-solid fa-location-dot"></i> Near Me
                     </a>
-                    <a class="action-btn btn-fork" href="https://www.thefork.com/en/city/barcelona" target="_blank" rel="noopener noreferrer">
+                    <button class="action-btn btn-fork" onclick="openFork('barcelona','https://www.thefork.com/en/city/barcelona')">
                         <i class="fa-solid fa-utensils"></i> TheFork
-                    </a>
+                    </button>
                 </div>
                 <div class="lingo">
                     <div class="lingo-pair"><span>Thank you</span><strong>Gràcies</strong></div>
@@ -760,6 +759,16 @@
     closeBtn.addEventListener('click', () => { banner.classList.add('hidden'); localStorage.setItem(A2HS_KEY,'1'); });
 })();
 
+
+// ── THEFORK DEEP LINK ──────────────────────────────────────────────────────
+function openFork(city, webUrl) {
+    const appUrl = `thefork://search?city=${city}`;
+    const start  = Date.now();
+    window.location = appUrl;
+    setTimeout(() => {
+        if (Date.now() - start < 2000) window.open(webUrl, '_blank');
+    }, 1500);
+}
 
 // ── LIVE DATA ───────────────────────────────────────────────────────────────
 const weatherKey = 'ff6e4e362f0a4231841165933261005';
