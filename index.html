@@ -10,226 +10,78 @@
     <meta name="apple-mobile-web-app-title" content="Europe 2026">
     <link rel="manifest" href="manifest.json">
     <link rel="apple-touch-icon" href="/europe-trip-2026/icon-192.png">
-    <title>Jivraj Grand Tour 2026</title>
+    <title>Europe 2026 — Portugal & Spain</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
     <style>
-        :root {
-            --accent: #007aff;
-            --booked: #28a745;
-            --bg: #f2f2f7;
-            --grey: #8e8e93;
-            --surface: #ffffff;
-            --surface2: #f9f9fb;
-            --border: #eeeeee;
-            --text: #1c1c1e;
-            --danger: #ff3b30;
-            --header-h: 65px;
-        }
-
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --bg: #000000;
-                --surface: #1c1c1e;
-                --surface2: #2c2c2e;
-                --border: #3a3a3c;
-                --text: #ffffff;
-            }
-        }
-
+        :root { --accent: #007aff; --booked: #28a745; --bg: #f2f2f7; --grey: #8e8e93; --surface: #ffffff; --surface2: #f9f9fb; --border: #eeeeee; --text: #1c1c1e; --danger: #ff3b30; --header-h: 65px; }
+        @media (prefers-color-scheme: dark) { :root { --bg: #000000; --surface: #1c1c1e; --surface2: #2c2c2e; --border: #3a3a3c; --text: #ffffff; } }
         *, *::before, *::after { box-sizing: border-box; }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            margin: 0;
-            background: var(--bg);
-            color: var(--text);
-            padding-bottom: 50px;
-        }
-
-        /* ── PIN OVERLAY ── */
-        #pin-overlay {
-            position: fixed; inset: 0; z-index: 999;
-            background: var(--surface);
-            display: flex; flex-direction: column;
-            align-items: center; justify-content: center;
-            gap: 28px; padding: 40px 24px;
-        }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; margin: 0; background: var(--bg); color: var(--text); padding-bottom: 50px; }
+        #pin-overlay { position: fixed; inset: 0; z-index: 999; background: var(--surface); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 28px; padding: 40px 24px; }
         #pin-overlay.hidden { display: none; }
-        .pin-icon {
-            width: 72px; height: 72px; border-radius: 20px;
-            background: var(--accent);
-            display: flex; align-items: center; justify-content: center;
-            font-size: 2rem; color: white;
-        }
+        .pin-icon { width: 72px; height: 72px; border-radius: 20px; background: var(--accent); display: flex; align-items: center; justify-content: center; font-size: 2rem; color: white; }
         .pin-title { font-size: 1.4rem; font-weight: 800; margin: 0; text-align: center; }
-        .pin-sub   { font-size: 0.85rem; color: var(--grey); margin: -16px 0 0; text-align: center; }
-        .pin-dots  { display: flex; gap: 16px; }
-        .pin-dot {
-            width: 14px; height: 14px; border-radius: 50%;
-            border: 2px solid var(--grey); background: transparent;
-            transition: background 0.15s, border-color 0.15s;
-        }
+        .pin-sub { font-size: 0.85rem; color: var(--grey); margin: -16px 0 0; text-align: center; }
+        .pin-dots { display: flex; gap: 16px; }
+        .pin-dot { width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--grey); background: transparent; transition: background 0.15s, border-color 0.15s; }
         .pin-dot.filled { background: var(--accent); border-color: var(--accent); }
-        .pin-dot.error  { background: var(--danger); border-color: var(--danger); }
-        @keyframes shake {
-            0%,100% { transform: translateX(0); }
-            20% { transform: translateX(-8px); }
-            40% { transform: translateX(8px); }
-            60% { transform: translateX(-6px); }
-            80% { transform: translateX(6px); }
-        }
+        .pin-dot.error { background: var(--danger); border-color: var(--danger); }
+        @keyframes shake { 0%,100% { transform: translateX(0); } 20% { transform: translateX(-8px); } 40% { transform: translateX(8px); } 60% { transform: translateX(-6px); } 80% { transform: translateX(6px); } }
         .pin-dots.shake { animation: shake 0.4s ease; }
-        .pin-pad {
-            display: grid;
-            grid-template-columns: repeat(3, 72px);
-            grid-template-rows: repeat(4, 72px);
-            gap: 12px;
-        }
-        .pin-key {
-            border: none; background: var(--surface2); border-radius: 50%;
-            font-size: 1.4rem; font-weight: 600; color: var(--text);
-            cursor: pointer; display: flex; flex-direction: column;
-            align-items: center; justify-content: center; line-height: 1;
-            transition: background 0.1s, transform 0.1s;
-            touch-action: manipulation; user-select: none; -webkit-user-select: none;
-        }
-        .pin-key sub {
-            font-size: 0.45rem; font-weight: 700; letter-spacing: 0.08em;
-            color: var(--grey); margin-top: 2px; text-transform: uppercase;
-        }
+        .pin-pad { display: grid; grid-template-columns: repeat(3, 72px); grid-template-rows: repeat(4, 72px); gap: 12px; }
+        .pin-key { border: none; background: var(--surface2); border-radius: 50%; font-size: 1.4rem; font-weight: 600; color: var(--text); cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1; transition: background 0.1s, transform 0.1s; touch-action: manipulation; user-select: none; -webkit-user-select: none; }
+        .pin-key sub { font-size: 0.45rem; font-weight: 700; letter-spacing: 0.08em; color: var(--grey); margin-top: 2px; text-transform: uppercase; }
         .pin-key:active { background: #d1d1d6; transform: scale(0.94); }
-        .pin-key.ghost  { background: transparent; cursor: default; }
-        .pin-key.del    { font-size: 1.1rem; }
-        .pin-error-msg  { font-size: 0.8rem; color: var(--danger); font-weight: 600; min-height: 1.2em; text-align: center; }
-        .pin-forgot     { background: none; border: none; color: var(--accent); font-size: 0.85rem; cursor: pointer; padding: 4px; }
-
-        /* ── ADD TO HOME SCREEN BANNER ── */
-        #a2hs-banner {
-            position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
-            width: 100%; max-width: 500px;
-            background: var(--surface); border-top: 1px solid var(--border);
-            padding: 14px 16px;
-            display: flex; align-items: center; gap: 12px;
-            z-index: 200; box-shadow: 0 -4px 20px rgba(0,0,0,0.12);
-        }
+        .pin-key.ghost { background: transparent; cursor: default; }
+        .pin-key.del { font-size: 1.1rem; }
+        .pin-error-msg { font-size: 0.8rem; color: var(--danger); font-weight: 600; min-height: 1.2em; text-align: center; }
+        .pin-forgot { background: none; border: none; color: var(--accent); font-size: 0.85rem; cursor: pointer; padding: 4px; }
+        #a2hs-banner { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 500px; background: var(--surface); border-top: 1px solid var(--border); padding: 14px 16px; display: flex; align-items: center; gap: 12px; z-index: 200; box-shadow: 0 -4px 20px rgba(0,0,0,0.12); }
         #a2hs-banner.hidden { display: none; }
-        .a2hs-icon  { font-size: 1.8rem; flex-shrink: 0; }
-        .a2hs-text  { flex: 1; font-size: 0.8rem; line-height: 1.4; }
+        .a2hs-icon { font-size: 1.8rem; flex-shrink: 0; }
+        .a2hs-text { flex: 1; font-size: 0.8rem; line-height: 1.4; }
         .a2hs-text strong { display: block; font-size: 0.85rem; margin-bottom: 2px; }
-        .a2hs-text span   { color: var(--grey); }
-        .a2hs-btn {
-            background: var(--accent); color: white; border: none;
-            border-radius: 10px; padding: 8px 14px;
-            font-size: 0.8rem; font-weight: 700; cursor: pointer;
-            white-space: nowrap; flex-shrink: 0;
-        }
+        .a2hs-text span { color: var(--grey); }
+        .a2hs-btn { background: var(--accent); color: white; border: none; border-radius: 10px; padding: 8px 14px; font-size: 0.8rem; font-weight: 700; cursor: pointer; white-space: nowrap; flex-shrink: 0; }
         .a2hs-close { background: none; border: none; color: var(--grey); font-size: 1.2rem; cursor: pointer; padding: 4px; flex-shrink: 0; }
-
-        /* ── MAIN CONTAINER ── */
-        .container {
-            max-width: 500px; margin: 0 auto;
-            background: var(--surface); min-height: 100vh;
-            box-shadow: 0 0 30px rgba(0,0,0,0.1);
-        }
-
-        /* ── HEADER ── */
-        .header {
-            height: var(--header-h); padding: 0 20px;
-            display: flex; justify-content: space-between; align-items: center;
-            border-bottom: 1px solid var(--border);
-            background: var(--surface); position: sticky; top: 0; z-index: 100;
-        }
+        .container { max-width: 500px; margin: 0 auto; background: var(--surface); min-height: 100vh; box-shadow: 0 0 30px rgba(0,0,0,0.1); }
+        .header { height: var(--header-h); padding: 0 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); background: var(--surface); position: sticky; top: 0; z-index: 100; }
         .header-left { display: flex; flex-direction: column; gap: 2px; }
         .header-title { font-weight: 900; font-size: 0.95rem; }
-        #rate { color: var(--booked); font-weight: 800; font-size: 0.7rem; }
-        .lock-btn {
-            background: none; border: 1px solid var(--border); border-radius: 10px;
-            padding: 6px 10px; color: var(--grey); font-size: 0.75rem; cursor: pointer;
-            display: flex; align-items: center; gap: 5px; transition: background 0.15s;
-        }
+        #rate { color: var(--booked); font-weight: 800; font-size: 0.7rem; cursor: pointer; border-bottom: 1px dashed var(--booked); padding-bottom: 1px; }
+        .lock-btn { background: none; border: 1px solid var(--border); border-radius: 10px; padding: 6px 10px; color: var(--grey); font-size: 0.75rem; cursor: pointer; display: flex; align-items: center; gap: 5px; transition: background 0.15s; }
         .lock-btn:hover { background: var(--bg); }
-        .calc-btn {
-            background: none; border: 1px solid var(--border); border-radius: 10px;
-            padding: 6px 10px; color: var(--grey); font-size: 0.75rem; cursor: pointer;
-            display: flex; align-items: center; gap: 5px; transition: background 0.15s;
-        }
-        .calc-btn:hover { background: var(--bg); }
-
-        /* ── CURRENCY CALCULATOR ── */
-        #calc-overlay {
-            position: fixed; inset: 0; z-index: 500;
-            background: rgba(0,0,0,0.5);
-            display: flex; align-items: flex-end; justify-content: center;
-        }
+        #calc-overlay { position: fixed; inset: 0; z-index: 500; background: rgba(0,0,0,0.5); display: flex; align-items: flex-end; justify-content: center; }
         #calc-overlay.hidden { display: none; }
-        .calc-sheet {
-            background: var(--surface); width: 100%; max-width: 500px;
-            border-radius: 24px 24px 0 0; padding: 20px;
-            box-shadow: 0 -8px 40px rgba(0,0,0,0.2);
-        }
-        .calc-header {
-            display: flex; justify-content: space-between; align-items: center;
-            margin-bottom: 16px;
-        }
+        .calc-sheet { background: var(--surface); width: 100%; max-width: 500px; border-radius: 24px 24px 0 0; padding: 16px; box-shadow: 0 -8px 40px rgba(0,0,0,0.2); }
+        .calc-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
         .calc-title { font-weight: 900; font-size: 1rem; }
-        .calc-close {
-            background: var(--surface2); border: none; border-radius: 50%;
-            width: 30px; height: 30px; font-size: 1rem; cursor: pointer;
-            display: flex; align-items: center; justify-content: center; color: var(--grey);
-        }
-        .calc-display {
-            background: var(--surface2); border-radius: 16px; padding: 16px;
-            margin-bottom: 16px; text-align: right;
-        }
-        .calc-input {
-            font-size: 2.2rem; font-weight: 900; font-variant-numeric: tabular-nums;
-            color: var(--text); line-height: 1;
-        }
-        .calc-input span { color: var(--grey); font-size: 1.2rem; font-weight: 600; }
-        .calc-result { font-size: 1.1rem; font-weight: 700; color: var(--booked); margin-top: 6px; }
-        .calc-rate { font-size: 0.65rem; color: var(--grey); margin-top: 2px; }
-        .calc-pad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-        .calc-key {
-            background: var(--surface2); border: none; border-radius: 14px;
-            padding: 18px 0; font-size: 1.3rem; font-weight: 700; color: var(--text);
-            cursor: pointer; transition: background 0.1s, transform 0.1s;
-            touch-action: manipulation;
-        }
+        .calc-close { background: var(--surface2); border: none; border-radius: 50%; width: 30px; height: 30px; font-size: 1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--grey); }
+        .calc-display { background: var(--surface2); border-radius: 12px; padding: 12px 14px; margin-bottom: 12px; text-align: right; }
+        .calc-input { font-size: 1.8rem; font-weight: 900; font-variant-numeric: tabular-nums; color: var(--text); line-height: 1; }
+        .calc-input span { color: var(--grey); font-size: 1rem; font-weight: 600; }
+        .calc-result { font-size: 1rem; font-weight: 700; color: var(--booked); margin-top: 4px; }
+        .calc-rate { font-size: 0.6rem; color: var(--grey); margin-top: 2px; }
+        .calc-pad { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+        .calc-key { background: var(--surface2); border: none; border-radius: 12px; padding: 14px 0; font-size: 1.1rem; font-weight: 700; color: var(--text); cursor: pointer; transition: background 0.1s, transform 0.1s; touch-action: manipulation; }
         .calc-key:active { background: #d1d1d6; transform: scale(0.95); }
-        .calc-key.del   { font-size: 1.1rem; }
+        .calc-key.del { font-size: 1rem; }
         .calc-key.clear { background: #ff3b3020; color: var(--danger); }
-
-        /* ── TIMEZONE STRIP ── */
-        .tz-strip {
-            display: grid; grid-template-columns: 1fr 1fr;
-            background: var(--surface2); border-bottom: 1px solid var(--border);
-        }
+        .tz-strip { display: grid; grid-template-columns: 1fr 1fr; background: var(--surface2); border-bottom: 1px solid var(--border); }
         .tz-cell { padding: 10px 16px; display: flex; flex-direction: column; gap: 1px; }
         .tz-cell:first-child { border-right: 1px solid var(--border); }
         .tz-label { font-size: 0.6rem; font-weight: 800; color: var(--grey); text-transform: uppercase; letter-spacing: 0.08em; }
-        .tz-time  { font-size: 1.1rem; font-weight: 900; font-variant-numeric: tabular-nums; }
-        .tz-date  { font-size: 0.65rem; color: var(--grey); font-weight: 600; }
-
-        /* ── COUNTDOWN TICKER ── */
-        .ticker {
-            background: linear-gradient(135deg, #0062cc, #007aff);
-            color: white; padding: 14px 20px;
-            display: flex; align-items: center; justify-content: space-between; gap: 10px;
-        }
+        .tz-time { font-size: 1.1rem; font-weight: 900; font-variant-numeric: tabular-nums; }
+        .tz-date { font-size: 0.65rem; color: var(--grey); font-weight: 600; }
+        .ticker { background: linear-gradient(135deg, #0062cc, #007aff); color: white; padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
         .ticker-label { font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8; }
         .ticker-value { font-size: 1.5rem; font-weight: 900; font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
-        .ticker-sub   { font-size: 0.7rem; font-weight: 600; opacity: 0.75; margin-top: 2px; }
+        .ticker-sub { font-size: 0.7rem; font-weight: 600; opacity: 0.75; margin-top: 2px; }
         .ticker-phase { text-align: right; min-width: 100px; }
-        .ticker-phase-name  { font-size: 0.85rem; font-weight: 800; }
+        .ticker-phase-name { font-size: 0.85rem; font-weight: 800; }
         .ticker-phase-label { font-size: 0.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; opacity: 0.7; }
-
-        /* ── ITINERARY SCROLL ── */
         .itinerary-container { background: #1c1c1e; color: white; padding: 20px; }
-        .scroll-window {
-            height: 180px; overflow-y: scroll; padding: 15px;
-            background: #2c2c2e; border-radius: 12px; border: 1px solid #3a3a3c;
-            -webkit-overflow-scrolling: touch;
-        }
+        .scroll-window { height: 180px; overflow-y: scroll; padding: 15px; background: #2c2c2e; border-radius: 12px; border: 1px solid #3a3a3c; -webkit-overflow-scrolling: touch; }
         .scroll-window::-webkit-scrollbar { width: 6px; display: block; }
         .scroll-window::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 10px; }
         .row { display: flex; gap: 15px; padding: 10px 0; border-bottom: 1px solid #333; }
@@ -238,785 +90,171 @@
         .row-text { font-size: 0.85rem; font-weight: 600; line-height: 1.3; }
         .row-text a { color: #6fb3ff; text-decoration: none; }
         .row-text a:hover { text-decoration: underline; }
-
-        /* ── WEATHER HUB ── */
         .weather-hub { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; padding: 15px; background: var(--bg); }
-        .w-btn {
-            background: var(--surface); padding: 15px 10px; border-radius: 16px;
-            text-align: center; border: 1px solid var(--border);
-            color: var(--text); transition: transform 0.15s; cursor: pointer;
-        }
+        .w-btn { background: var(--surface); padding: 15px 10px; border-radius: 16px; text-align: center; border: 1px solid var(--border); color: var(--text); transition: transform 0.15s; cursor: pointer; }
         .w-btn:active { transform: scale(0.97); }
-        .w-city  { font-size: 0.65rem; font-weight: 800; color: var(--grey); text-transform: uppercase; display: block; }
-        .w-temp  { font-size: 1.5rem; font-weight: 900; display: block; margin: 4px 0; }
+        .w-city { font-size: 0.65rem; font-weight: 800; color: var(--grey); text-transform: uppercase; display: block; }
+        .w-temp { font-size: 1.5rem; font-weight: 900; display: block; margin: 4px 0; }
         .w-label { font-size: 0.55rem; color: var(--accent); font-weight: 800; }
-
-        /* ── CITY SECTIONS ── */
-        .hero {
-            height: 240px; background-size: cover; background-position: center;
-            display: flex; align-items: flex-end; padding: 20px;
-            color: white; position: relative; margin-top: 20px;
-        }
-        .hero::after {
-            content: ''; position: absolute; inset: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
-        }
+        .hero { height: 240px; background-size: cover; background-position: center; display: flex; align-items: flex-end; padding: 20px; color: white; position: relative; margin-top: 20px; }
+        .hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); }
         .hero-text { position: relative; z-index: 1; }
         .hero-dates { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; opacity: 0.8; margin-bottom: 4px; }
-        .hero h2   { margin: 0; font-size: 2rem; font-weight: 800; }
-
-        .card {
-            padding: 15px; margin: -15px 15px 8px; border-radius: 18px;
-            background: var(--surface); border: 1px solid var(--border);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05); position: relative; z-index: 2;
-        }
+        .hero h2 { margin: 0; font-size: 2rem; font-weight: 800; }
+        .card { padding: 15px; margin: -15px 15px 8px; border-radius: 18px; background: var(--surface); border: 1px solid var(--border); box-shadow: 0 4px 12px rgba(0,0,0,0.05); position: relative; z-index: 2; }
         .item { display: flex; align-items: center; gap: 10px; margin: 8px 0; font-size: 0.9rem; }
         .item i { color: var(--accent); width: 18px; text-align: center; }
         .item a { color: var(--text); text-decoration: none; border-bottom: 1px solid var(--border); }
         .item a:hover { border-bottom-color: var(--accent); color: var(--accent); }
-
-        /* ── ACTION BUTTONS ── */
         .action-row { display: flex; gap: 8px; margin: 0 15px 15px; flex-wrap: wrap; }
-        .action-btn {
-            flex: 1; min-width: 120px;
-            display: flex; align-items: center; justify-content: center; gap: 6px;
-            padding: 10px 12px; border-radius: 12px; border: none;
-            font-size: 0.78rem; font-weight: 700; cursor: pointer;
-            text-decoration: none; transition: transform 0.12s, opacity 0.12s;
-            touch-action: manipulation;
-        }
+        .action-btn { flex: 1; min-width: 120px; display: flex; align-items: center; justify-content: center; gap: 6px; padding: 10px 12px; border-radius: 12px; border: none; font-size: 0.78rem; font-weight: 700; cursor: pointer; text-decoration: none; transition: transform 0.12s, opacity 0.12s; touch-action: manipulation; }
         .action-btn:active { transform: scale(0.96); opacity: 0.85; }
         .btn-nearme { background: var(--accent); color: white; }
-        .btn-drive  { background: #28a745; color: white; }
-        .btn-fork   { background: #f46f2f; color: white; }
-
-        /* ── LINGO CARDS ── */
+        .btn-drive { background: #28a745; color: white; }
+        .btn-fork { background: #f46f2f; color: white; }
         .lingo-wrap { margin: 0 15px 25px; perspective: 800px; }
-        .lingo-inner {
-            position: relative; transform-style: preserve-3d;
-            transition: transform 0.45s ease; cursor: pointer; min-height: 160px;
-        }
+        .lingo-inner { position: relative; transform-style: preserve-3d; transition: transform 0.45s ease; cursor: pointer; min-height: 160px; }
         .lingo-wrap.flipped .lingo-inner { transform: rotateY(180deg); }
-        .lingo-front, .lingo-back {
-            border-radius: 12px; border: 1px solid var(--border);
-            background: var(--surface2); padding: 12px 15px;
-            backface-visibility: hidden; -webkit-backface-visibility: hidden;
-        }
+        .lingo-front, .lingo-back { border-radius: 12px; border: 1px solid var(--border); background: var(--surface2); padding: 12px 15px; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
         .lingo-front { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        .lingo-back {
-            position: absolute; inset: 0; transform: rotateY(180deg);
-            display: flex; flex-direction: column; gap: 10px; justify-content: space-between;
-        }
+        .lingo-back { position: absolute; inset: 0; transform: rotateY(180deg); display: flex; flex-direction: column; gap: 10px; justify-content: space-between; }
         .lingo-back-phrases { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; flex: 1; }
         .lingo-pair { display: flex; flex-direction: column; gap: 2px; }
-        .lingo-pair span   { font-size: 0.65rem; color: var(--grey); font-weight: 600; text-transform: uppercase; }
+        .lingo-pair span { font-size: 0.65rem; color: var(--grey); font-weight: 600; text-transform: uppercase; }
         .lingo-pair strong { font-size: 0.9rem; color: var(--text); }
-        .lingo-hint {
-            font-size: 0.6rem; color: var(--grey); text-align: center;
-            font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; margin-top: 2px;
-        }
-        .lingo-translate {
-            display: flex; align-items: center; justify-content: center; gap: 6px;
-            background: #4285f4; color: white; border: none; border-radius: 8px;
-            padding: 7px 12px; font-size: 0.75rem; font-weight: 700;
-            cursor: pointer; text-decoration: none; margin-top: 2px; transition: opacity 0.15s;
-        }
+        .lingo-hint { font-size: 0.6rem; color: var(--grey); text-align: center; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; margin-top: 2px; }
+        .lingo-translate { display: flex; align-items: center; justify-content: center; gap: 6px; background: #4285f4; color: white; border: none; border-radius: 8px; padding: 7px 12px; font-size: 0.75rem; font-weight: 700; cursor: pointer; text-decoration: none; margin-top: 2px; transition: opacity 0.15s; }
         .lingo-translate:active { opacity: 0.8; }
-
-        /* ── DESKTOP TWO-COLUMN LAYOUT ── */
         @media (min-width: 800px) {
             body { padding-bottom: 0; background: var(--bg); }
             .container { max-width: 1140px; display: flex; flex-direction: column; min-height: 100vh; }
             .header { position: sticky; top: 0; z-index: 100; }
             .desktop-body { display: grid; grid-template-columns: 360px 1fr; flex: 1; align-items: start; }
-            .sidebar {
-                position: sticky; top: var(--header-h);
-                height: calc(100vh - var(--header-h)); overflow-y: auto;
-                border-right: 1px solid var(--border);
-            }
+            .sidebar { position: sticky; top: var(--header-h); height: calc(100vh - var(--header-h)); overflow-y: auto; border-right: 1px solid var(--border); }
             .sidebar::-webkit-scrollbar { width: 4px; }
             .sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
             .weather-hub { grid-template-columns: repeat(2, 1fr); }
             .cities { display: grid; grid-template-columns: 1fr 1fr; align-content: start; }
             .city-section { border-bottom: 1px solid var(--border); padding-bottom: 8px; }
             .city-section:nth-child(odd) { border-right: 1px solid var(--border); }
-            .city-section:last-child,
-            .city-section:nth-last-child(2):nth-child(odd) { border-bottom: none; }
+            .city-section:last-child, .city-section:nth-last-child(2):nth-child(odd) { border-bottom: none; }
             .hero { height: 200px; margin-top: 0; }
-            .card        { margin: -15px 12px 8px; }
-            .action-row  { margin: 0 12px 12px; }
-            .lingo-wrap  { margin: 0 12px 20px; }
+            .card { margin: -15px 12px 8px; }
+            .action-row { margin: 0 12px 12px; }
+            .lingo-wrap { margin: 0 12px 20px; }
             #a2hs-banner { max-width: 1140px; }
         }
     </style>
 </head>
 <body>
 <noscript><p style="text-align:center;padding:20px;color:#666;">Enable JavaScript for live weather, exchange rates, and PIN protection.</p></noscript>
-
-<!-- ── PIN OVERLAY ── -->
 <div id="pin-overlay">
     <div class="pin-icon">✈️</div>
     <h1 class="pin-title" id="pin-title">Welcome back</h1>
     <p class="pin-sub" id="pin-sub">Enter your PIN to continue</p>
-    <div class="pin-dots" id="pin-dots">
-        <div class="pin-dot" data-i="0"></div>
-        <div class="pin-dot" data-i="1"></div>
-        <div class="pin-dot" data-i="2"></div>
-        <div class="pin-dot" data-i="3"></div>
-    </div>
+    <div class="pin-dots" id="pin-dots"><div class="pin-dot" data-i="0"></div><div class="pin-dot" data-i="1"></div><div class="pin-dot" data-i="2"></div><div class="pin-dot" data-i="3"></div></div>
     <div class="pin-error-msg" id="pin-error"></div>
     <div class="pin-pad" id="pin-pad">
-        <button class="pin-key" data-k="1">1<sub></sub></button>
-        <button class="pin-key" data-k="2">2<sub>ABC</sub></button>
-        <button class="pin-key" data-k="3">3<sub>DEF</sub></button>
-        <button class="pin-key" data-k="4">4<sub>GHI</sub></button>
-        <button class="pin-key" data-k="5">5<sub>JKL</sub></button>
-        <button class="pin-key" data-k="6">6<sub>MNO</sub></button>
-        <button class="pin-key" data-k="7">7<sub>PQRS</sub></button>
-        <button class="pin-key" data-k="8">8<sub>TUV</sub></button>
-        <button class="pin-key" data-k="9">9<sub>WXYZ</sub></button>
-        <button class="pin-key ghost" aria-hidden="true"></button>
-        <button class="pin-key" data-k="0">0</button>
-        <button class="pin-key del" id="pin-del" aria-label="Delete">⌫</button>
+        <button class="pin-key" data-k="1">1<sub></sub></button><button class="pin-key" data-k="2">2<sub>ABC</sub></button><button class="pin-key" data-k="3">3<sub>DEF</sub></button>
+        <button class="pin-key" data-k="4">4<sub>GHI</sub></button><button class="pin-key" data-k="5">5<sub>JKL</sub></button><button class="pin-key" data-k="6">6<sub>MNO</sub></button>
+        <button class="pin-key" data-k="7">7<sub>PQRS</sub></button><button class="pin-key" data-k="8">8<sub>TUV</sub></button><button class="pin-key" data-k="9">9<sub>WXYZ</sub></button>
+        <button class="pin-key ghost" aria-hidden="true"></button><button class="pin-key" data-k="0">0</button><button class="pin-key del" id="pin-del" aria-label="Delete">⌫</button>
     </div>
     <button class="pin-forgot" id="pin-forgot">Forgot PIN?</button>
 </div>
-
-<!-- ── ADD TO HOME SCREEN BANNER ── -->
 <div id="a2hs-banner" class="hidden">
     <div class="a2hs-icon">📲</div>
-    <div class="a2hs-text">
-        <strong>Add to Home Screen</strong>
-        <span id="a2hs-sub">Tap Share → Add to Home Screen for quick access</span>
-    </div>
+    <div class="a2hs-text"><strong>Add to Home Screen</strong><span id="a2hs-sub">Tap Share → Add to Home Screen for quick access</span></div>
     <button class="a2hs-btn" id="a2hs-install">Install</button>
     <button class="a2hs-close" id="a2hs-close" aria-label="Dismiss">✕</button>
 </div>
-
-<!-- ── CURRENCY CALCULATOR ── -->
 <div id="calc-overlay" class="hidden" onclick="if(event.target===this)closeCal()">
     <div class="calc-sheet">
-        <div class="calc-header">
-            <div class="calc-title">€ EUR → CAD</div>
-            <button class="calc-close" onclick="closeCal()">✕</button>
-        </div>
+        <div class="calc-header"><div class="calc-title">€ EUR → CAD</div><button class="calc-close" onclick="closeCal()">✕</button></div>
         <div class="calc-display">
             <div class="calc-input"><span>€</span> <span id="calc-eur">0</span></div>
             <div class="calc-result" id="calc-cad">= CA$0.00</div>
             <div class="calc-rate" id="calc-rate-label">1 EUR = 1.48 CAD</div>
         </div>
         <div class="calc-pad">
-            <button class="calc-key" onclick="calcPress('7')">7</button>
-            <button class="calc-key" onclick="calcPress('8')">8</button>
-            <button class="calc-key" onclick="calcPress('9')">9</button>
-            <button class="calc-key" onclick="calcPress('4')">4</button>
-            <button class="calc-key" onclick="calcPress('5')">5</button>
-            <button class="calc-key" onclick="calcPress('6')">6</button>
-            <button class="calc-key" onclick="calcPress('1')">1</button>
-            <button class="calc-key" onclick="calcPress('2')">2</button>
-            <button class="calc-key" onclick="calcPress('3')">3</button>
-            <button class="calc-key clear" onclick="calcClear()">C</button>
-            <button class="calc-key" onclick="calcPress('0')">0</button>
-            <button class="calc-key del" onclick="calcDel()">⌫</button>
+            <button class="calc-key" onclick="calcPress('7')">7</button><button class="calc-key" onclick="calcPress('8')">8</button><button class="calc-key" onclick="calcPress('9')">9</button><button class="calc-key del" onclick="calcDel()">⌫</button>
+            <button class="calc-key" onclick="calcPress('4')">4</button><button class="calc-key" onclick="calcPress('5')">5</button><button class="calc-key" onclick="calcPress('6')">6</button><button class="calc-key clear" onclick="calcClear()">C</button>
+            <button class="calc-key" onclick="calcPress('1')">1</button><button class="calc-key" onclick="calcPress('2')">2</button><button class="calc-key" onclick="calcPress('3')">3</button><button class="calc-key" onclick="calcPress('0')">0</button>
+            <button class="calc-key" onclick="calcPress('.')">.</button>
         </div>
     </div>
 </div>
-
-<!-- ── MAIN APP ── -->
 <div class="container" id="app">
     <div class="header">
         <div class="header-left">
-            <div class="header-title">JIVRAJ GRAND TOUR 2026</div>
+            <div class="header-title">EUROPE 2026 — PORTUGAL & SPAIN</div>
             <div id="rate">1 EUR = 1.48 CAD</div>
         </div>
-        <div style="display:flex;gap:8px;align-items:center;">
-            <button class="calc-btn" id="calc-open-btn" aria-label="Currency calculator">
-                <i class="fa-solid fa-calculator"></i> € → CAD
-            </button>
-            <button class="lock-btn" id="lock-btn" aria-label="Lock">
-                <i class="fa-solid fa-lock"></i> Lock
-            </button>
-        </div>
+        <button class="lock-btn" id="lock-btn" aria-label="Lock"><i class="fa-solid fa-lock"></i> Lock</button>
     </div>
-
     <div class="desktop-body">
-
-        <!-- ── SIDEBAR ── -->
         <div class="sidebar">
             <div class="tz-strip">
-                <div class="tz-cell">
-                    <span class="tz-label">🇨🇦 Vancouver</span>
-                    <span class="tz-time" id="tz-van">--:--</span>
-                    <span class="tz-date" id="tz-van-date"></span>
-                </div>
-                <div class="tz-cell">
-                    <span class="tz-label" id="tz-dest-label">🇵🇹 Lisbon</span>
-                    <span class="tz-time" id="tz-dest">--:--</span>
-                    <span class="tz-date" id="tz-dest-date"></span>
-                </div>
+                <div class="tz-cell"><span class="tz-label">🇨🇦 Vancouver</span><span class="tz-time" id="tz-van">--:--</span><span class="tz-date" id="tz-van-date"></span></div>
+                <div class="tz-cell"><span class="tz-label" id="tz-dest-label">🇵🇹 Lisbon</span><span class="tz-time" id="tz-dest">--:--</span><span class="tz-date" id="tz-dest-date"></span></div>
             </div>
-
-            <div class="ticker" id="ticker">
-                <div>
-                    <div class="ticker-label" id="ticker-label">Departure in</div>
-                    <div class="ticker-value" id="ticker-value">--:--:--:--</div>
-                    <div class="ticker-sub" id="ticker-sub"></div>
-                </div>
-                <div class="ticker-phase" id="ticker-phase"></div>
-            </div>
-
-            <div class="itinerary-container">
-                <div class="scroll-window">
-                    <div class="row">
-                        <span class="row-date">May 16</span>
-                        <span class="row-text"><a href="https://www.flightaware.com/live/flight/AC812" target="_blank" rel="noopener noreferrer">AC812</a> (YVR➔LIS) • Moxy Lisbon City</span>
-                    </div>
-                    <div class="row">
-                        <span class="row-date">May 17</span>
-                        <span class="row-text">Ismaili Centre Lisbon Guided Tour</span>
-                    </div>
-                    <div class="row">
-                        <span class="row-date">May 19</span>
-                        <span class="row-text">Avis Pick-up • Drive to Algarve • Pine Cliffs</span>
-                    </div>
-                    <div class="row">
-                        <span class="row-date">May 21</span>
-                        <span class="row-text">11:00 AM: Benagil Grottoes Kayak Adventure</span>
-                    </div>
-                    <div class="row">
-                        <span class="row-date">May 24</span>
-                        <span class="row-text">Drive to Cordoba • Mosque-Cathedral Visit</span>
-                    </div>
-                    <div class="row">
-                        <span class="row-date">May 26</span>
-                        <span class="row-text">Granada: Alhambra (12:00) • Hammam Spa (4:00)</span>
-                    </div>
-                    <div class="row">
-                        <span class="row-date">May 27</span>
-                        <span class="row-text"><a href="https://www.flightaware.com/live/flight/VY2013" target="_blank" rel="noopener noreferrer">VY2013</a> (GRX➔BCN) • Le Méridien Barcelona</span>
-                    </div>
-                    <div class="row">
-                        <span class="row-date">May 30</span>
-                        <span class="row-text">Return <a href="https://www.flightaware.com/live/flight/AC821" target="_blank" rel="noopener noreferrer">AC821</a> (BCN➔YVR) (1:15 PM)</span>
-                    </div>
-                </div>
-            </div>
-
+            <div class="ticker" id="ticker"><div><div class="ticker-label" id="ticker-label">Departure in</div><div class="ticker-value" id="ticker-value">--:--:--:--</div><div class="ticker-sub" id="ticker-sub"></div></div><div class="ticker-phase" id="ticker-phase"></div></div>
+            <div class="itinerary-container"><div class="scroll-window">
+                <div class="row"><span class="row-date">May 16</span><span class="row-text"><a href="https://www.flightaware.com/live/flight/AC812" target="_blank" rel="noopener noreferrer">AC812</a> (YVR➔LIS) • Moxy Lisbon City</span></div>
+                <div class="row"><span class="row-date">May 17</span><span class="row-text">Ismaili Centre Lisbon Guided Tour</span></div>
+                <div class="row"><span class="row-date">May 19</span><span class="row-text">Avis Pick-up • Drive to Algarve • Pine Cliffs</span></div>
+                <div class="row"><span class="row-date">May 21</span><span class="row-text">11:00 AM: Benagil Grottoes Kayak Adventure</span></div>
+                <div class="row"><span class="row-date">May 24</span><span class="row-text">Drive to Cordoba • Mosque-Cathedral Visit</span></div>
+                <div class="row"><span class="row-date">May 26</span><span class="row-text">Granada: Alhambra (12:00) • Hammam Spa (4:00)</span></div>
+                <div class="row"><span class="row-date">May 27</span><span class="row-text"><a href="https://www.flightaware.com/live/flight/VY2013" target="_blank" rel="noopener noreferrer">VY2013</a> (GRX➔BCN) • Le Méridien Barcelona</span></div>
+                <div class="row"><span class="row-date">May 30</span><span class="row-text">Return <a href="https://www.flightaware.com/live/flight/AC821" target="_blank" rel="noopener noreferrer">AC821</a> (BCN➔YVR) (1:15 PM)</span></div>
+            </div></div>
             <div class="weather-hub">
-                <button class="w-btn" onclick="openWeather('https://www.accuweather.com/en/pt/lisbon/274087/daily-weather-forecast/274087')">
-                    <span class="w-city">Lisbon</span><span id="w1" class="w-temp">--°</span><span class="w-label">TAP FOR FORECAST</span>
-                </button>
-                <button class="w-btn" onclick="openWeather('https://www.accuweather.com/en/pt/albufeira/273392/daily-weather-forecast/273392')">
-                    <span class="w-city">Algarve</span><span id="w2" class="w-temp">--°</span><span class="w-label">TAP FOR FORECAST</span>
-                </button>
-                <button class="w-btn" onclick="openWeather('https://www.accuweather.com/en/es/cordoba/307183/daily-weather-forecast/307183')">
-                    <span class="w-city">Andalusia</span><span id="w3" class="w-temp">--°</span><span class="w-label">TAP FOR FORECAST</span>
-                </button>
-                <button class="w-btn" onclick="openWeather('https://www.accuweather.com/en/es/barcelona/307297/daily-weather-forecast/307297')">
-                    <span class="w-city">Barcelona</span><span id="w4" class="w-temp">--°</span><span class="w-label">TAP FOR FORECAST</span>
-                </button>
+                <button class="w-btn" onclick="openWeather('https://www.accuweather.com/en/pt/lisbon/274087/daily-weather-forecast/274087')"><span class="w-city">Lisbon</span><span id="w1" class="w-temp">--°</span><span class="w-label">TAP FOR FORECAST</span></button>
+                <button class="w-btn" onclick="openWeather('https://www.accuweather.com/en/pt/albufeira/273392/daily-weather-forecast/273392')"><span class="w-city">Algarve</span><span id="w2" class="w-temp">--°</span><span class="w-label">TAP FOR FORECAST</span></button>
+                <button class="w-btn" onclick="openWeather('https://www.accuweather.com/en/es/cordoba/307183/daily-weather-forecast/307183')"><span class="w-city">Andalusia</span><span id="w3" class="w-temp">--°</span><span class="w-label">TAP FOR FORECAST</span></button>
+                <button class="w-btn" onclick="openWeather('https://www.accuweather.com/en/es/barcelona/307297/daily-weather-forecast/307297')"><span class="w-city">Barcelona</span><span id="w4" class="w-temp">--°</span><span class="w-label">TAP FOR FORECAST</span></button>
             </div>
-        </div><!-- /sidebar -->
-
-        <!-- ── CITIES 2×2 GRID ── -->
+        </div>
         <div class="cities">
-
-            <!-- LISBON -->
             <div class="city-section">
-                <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1573843981267-be1999ff37cd?w=800&auto=format&fit=crop');">
-                    <div class="hero-text">
-                        <div class="hero-dates">May 16 – 18</div>
-                        <h2>Lisbon</h2>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="item"><i class="fa-solid fa-hotel"></i> <a href="https://maps.google.com/?q=Moxy+Lisbon+City" target="_blank" rel="noopener noreferrer">Moxy Lisbon City</a></div>
-                    <div class="item"><i class="fa-solid fa-mosque"></i> <a href="https://maps.google.com/?q=Ismaili+Centre+Lisbon" target="_blank" rel="noopener noreferrer">Ismaili Centre Tour</a></div>
-                </div>
-                <div class="action-row">
-                    <a class="action-btn btn-nearme" href="https://maps.google.com/?q=restaurants+near+Lisbon+city+centre" target="_blank" rel="noopener noreferrer">
-                        <i class="fa-solid fa-location-dot"></i> Near Me
-                    </a>
-                    <button class="action-btn btn-fork" onclick="openFork('lisbon','https://www.thefork.com/en/city/lisbon')">
-                        <i class="fa-solid fa-utensils"></i> TheFork
-                    </button>
-                </div>
-                <div class="lingo-wrap" onclick="this.classList.toggle('flipped')">
-                    <div class="lingo-inner">
-                        <div class="lingo-front">
-                            <div class="lingo-pair"><span>Thank you</span><strong>Obrigado</strong></div>
-                            <div class="lingo-pair"><span>Where is...?</span><strong>Onde fica...?</strong></div>
-                            <div class="lingo-hint" style="grid-column:1/-1">Tap to see more ↓</div>
-                        </div>
-                        <div class="lingo-back">
-                            <div class="lingo-back-phrases">
-                                <div class="lingo-pair"><span>Excuse me</span><strong>Com licença</strong></div>
-                                <div class="lingo-pair"><span>How much?</span><strong>Quanto custa?</strong></div>
-                                <div class="lingo-pair"><span>Do you speak English?</span><strong>Fala inglês?</strong></div>
-                                <div class="lingo-pair"><span>The bill please</span><strong>A conta, por favor</strong></div>
-                            </div>
-                            <button class="lingo-translate" onclick="event.stopPropagation(); openTranslate('pt','https://translate.google.com/?sl=en&tl=pt&op=translate')">
-                                <i class="fa-solid fa-language"></i> Google Translate (PT)
-                            </button>
-                        </div>
-                    </div>
-                </div>
+                <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1573843981267-be1999ff37cd?w=800&auto=format&fit=crop');"><div class="hero-text"><div class="hero-dates">May 16 – 18</div><h2>Lisbon</h2></div></div>
+                <div class="card"><div class="item"><i class="fa-solid fa-hotel"></i> <a href="https://maps.google.com/?q=Moxy+Lisbon+City" target="_blank" rel="noopener noreferrer">Moxy Lisbon City</a></div><div class="item"><i class="fa-solid fa-mosque"></i> <a href="https://maps.google.com/?q=Ismaili+Centre+Lisbon" target="_blank" rel="noopener noreferrer">Ismaili Centre Tour</a></div></div>
+                <div class="action-row"><a class="action-btn btn-nearme" href="https://maps.google.com/?q=restaurants+near+Lisbon+city+centre" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-location-dot"></i> Near Me</a><button class="action-btn btn-fork" onclick="openFork('lisbon','https://www.thefork.com/en/city/lisbon')"><i class="fa-solid fa-utensils"></i> TheFork</button></div>
+                <div class="lingo-wrap" onclick="this.classList.toggle('flipped')"><div class="lingo-inner"><div class="lingo-front"><div class="lingo-pair"><span>Thank you</span><strong>Obrigado</strong></div><div class="lingo-pair"><span>Where is...?</span><strong>Onde fica...?</strong></div><div class="lingo-hint" style="grid-column:1/-1">Tap to see more ↓</div></div><div class="lingo-back"><div class="lingo-back-phrases"><div class="lingo-pair"><span>Excuse me</span><strong>Com licença</strong></div><div class="lingo-pair"><span>How much?</span><strong>Quanto custa?</strong></div><div class="lingo-pair"><span>Do you speak English?</span><strong>Fala inglês?</strong></div><div class="lingo-pair"><span>The bill please</span><strong>A conta, por favor</strong></div></div><button class="lingo-translate" onclick="event.stopPropagation(); openTranslate('pt','https://translate.google.com/?sl=en&tl=pt&op=translate')"><i class="fa-solid fa-language"></i> Google Translate (PT)</button></div></div></div>
             </div>
-
-            <!-- ALGARVE -->
             <div class="city-section">
-                <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&auto=format&fit=crop');">
-                    <div class="hero-text">
-                        <div class="hero-dates">May 19 – 23</div>
-                        <h2>Algarve</h2>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="item"><i class="fa-solid fa-umbrella-beach"></i> <a href="https://maps.google.com/?q=Pine+Cliffs+Resort+Algarve" target="_blank" rel="noopener noreferrer">Pine Cliffs Resort</a></div>
-                    <div class="item"><i class="fa-solid fa-water"></i> <a href="https://maps.google.com/?q=Blue+Xperiences+Benagil" target="_blank" rel="noopener noreferrer">Benagil Kayak</a></div>
-                </div>
-                <div class="action-row">
-                    <a class="action-btn btn-nearme" href="https://maps.google.com/?q=restaurants+near+Albufeira+Algarve" target="_blank" rel="noopener noreferrer">
-                        <i class="fa-solid fa-location-dot"></i> Near Me
-                    </a>
-                    <button class="action-btn btn-fork" onclick="openFork('albufeira','https://www.thefork.com/en/city/albufeira')">
-                        <i class="fa-solid fa-utensils"></i> TheFork
-                    </button>
-                    <a class="action-btn btn-drive" href="https://maps.google.com/?saddr=Moxy+Lisbon+City&daddr=Pine+Cliffs+Resort+Algarve" target="_blank" rel="noopener noreferrer">
-                        <i class="fa-solid fa-car"></i> Drive from Lisbon
-                    </a>
-                </div>
-                <div class="lingo-wrap" onclick="this.classList.toggle('flipped')">
-                    <div class="lingo-inner">
-                        <div class="lingo-front">
-                            <div class="lingo-pair"><span>Excuse me</span><strong>Com licença</strong></div>
-                            <div class="lingo-pair"><span>How much?</span><strong>Quanto custa?</strong></div>
-                            <div class="lingo-hint" style="grid-column:1/-1">Tap to see more ↓</div>
-                        </div>
-                        <div class="lingo-back">
-                            <div class="lingo-back-phrases">
-                                <div class="lingo-pair"><span>Thank you</span><strong>Obrigado</strong></div>
-                                <div class="lingo-pair"><span>Where is...?</span><strong>Onde fica...?</strong></div>
-                                <div class="lingo-pair"><span>Help!</span><strong>Socorro!</strong></div>
-                                <div class="lingo-pair"><span>A table for two</span><strong>Uma mesa para dois</strong></div>
-                            </div>
-                            <button class="lingo-translate" onclick="event.stopPropagation(); openTranslate('pt','https://translate.google.com/?sl=en&tl=pt&op=translate')">
-                                <i class="fa-solid fa-language"></i> Google Translate (PT)
-                            </button>
-                        </div>
-                    </div>
-                </div>
+                <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&auto=format&fit=crop');"><div class="hero-text"><div class="hero-dates">May 19 – 23</div><h2>Algarve</h2></div></div>
+                <div class="card"><div class="item"><i class="fa-solid fa-umbrella-beach"></i> <a href="https://maps.google.com/?q=Pine+Cliffs+Resort+Algarve" target="_blank" rel="noopener noreferrer">Pine Cliffs Resort</a></div><div class="item"><i class="fa-solid fa-water"></i> <a href="https://maps.google.com/?q=Blue+Xperiences+Benagil" target="_blank" rel="noopener noreferrer">Benagil Kayak</a></div></div>
+                <div class="action-row"><a class="action-btn btn-nearme" href="https://maps.google.com/?q=restaurants+near+Albufeira+Algarve" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-location-dot"></i> Near Me</a><button class="action-btn btn-fork" onclick="openFork('albufeira','https://www.thefork.com/en/city/albufeira')"><i class="fa-solid fa-utensils"></i> TheFork</button><a class="action-btn btn-drive" href="https://maps.google.com/?saddr=Moxy+Lisbon+City&daddr=Pine+Cliffs+Resort+Algarve" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-car"></i> Drive from Lisbon</a></div>
+                <div class="lingo-wrap" onclick="this.classList.toggle('flipped')"><div class="lingo-inner"><div class="lingo-front"><div class="lingo-pair"><span>Excuse me</span><strong>Com licença</strong></div><div class="lingo-pair"><span>How much?</span><strong>Quanto custa?</strong></div><div class="lingo-hint" style="grid-column:1/-1">Tap to see more ↓</div></div><div class="lingo-back"><div class="lingo-back-phrases"><div class="lingo-pair"><span>Thank you</span><strong>Obrigado</strong></div><div class="lingo-pair"><span>Where is...?</span><strong>Onde fica...?</strong></div><div class="lingo-pair"><span>Help!</span><strong>Socorro!</strong></div><div class="lingo-pair"><span>A table for two</span><strong>Uma mesa para dois</strong></div></div><button class="lingo-translate" onclick="event.stopPropagation(); openTranslate('pt','https://translate.google.com/?sl=en&tl=pt&op=translate')"><i class="fa-solid fa-language"></i> Google Translate (PT)</button></div></div></div>
             </div>
-
-            <!-- ANDALUSIA -->
             <div class="city-section">
-                <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?w=800&auto=format&fit=crop');">
-                    <div class="hero-text">
-                        <div class="hero-dates">May 24 – 26</div>
-                        <h2>Andalusia</h2>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="item"><i class="fa-solid fa-archway"></i> <a href="https://maps.google.com/?q=Mezquita+Catedral+Cordoba" target="_blank" rel="noopener noreferrer">Mosque-Cathedral (Cordoba)</a></div>
-                    <div class="item"><i class="fa-solid fa-landmark"></i> <a href="https://maps.google.com/?q=Alhambra+Granada" target="_blank" rel="noopener noreferrer">Alhambra Palace (Granada)</a></div>
-                    <div class="item"><i class="fa-solid fa-hot-tub-person"></i> <a href="https://maps.google.com/?q=Hammam+Al+Andalus+Granada" target="_blank" rel="noopener noreferrer">Hammam Al Ándalus</a></div>
-                </div>
-                <div class="action-row">
-                    <a class="action-btn btn-nearme" href="https://maps.google.com/?q=restaurants+near+Cordoba+Spain" target="_blank" rel="noopener noreferrer">
-                        <i class="fa-solid fa-location-dot"></i> Near Me
-                    </a>
-                    <button class="action-btn btn-fork" onclick="openFork('cordoba','https://www.thefork.com/en/city/cordoba')">
-                        <i class="fa-solid fa-utensils"></i> TheFork
-                    </button>
-                    <a class="action-btn btn-drive" href="https://maps.google.com/?saddr=Pine+Cliffs+Resort+Algarve&daddr=Cordoba+Spain" target="_blank" rel="noopener noreferrer">
-                        <i class="fa-solid fa-car"></i> Drive from Algarve
-                    </a>
-                </div>
-                <div class="lingo-wrap" onclick="this.classList.toggle('flipped')">
-                    <div class="lingo-inner">
-                        <div class="lingo-front">
-                            <div class="lingo-pair"><span>Hello</span><strong>Hola</strong></div>
-                            <div class="lingo-pair"><span>Thank you</span><strong>Gracias</strong></div>
-                            <div class="lingo-hint" style="grid-column:1/-1">Tap to see more ↓</div>
-                        </div>
-                        <div class="lingo-back">
-                            <div class="lingo-back-phrases">
-                                <div class="lingo-pair"><span>Excuse me</span><strong>Perdona</strong></div>
-                                <div class="lingo-pair"><span>How much?</span><strong>¿Cuánto cuesta?</strong></div>
-                                <div class="lingo-pair"><span>Do you speak English?</span><strong>¿Habla inglés?</strong></div>
-                                <div class="lingo-pair"><span>The bill please</span><strong>La cuenta, por favor</strong></div>
-                            </div>
-                            <button class="lingo-translate" onclick="event.stopPropagation(); openTranslate('es','https://translate.google.com/?sl=en&tl=es&op=translate')">
-                                <i class="fa-solid fa-language"></i> Google Translate (ES)
-                            </button>
-                        </div>
-                    </div>
-                </div>
+                <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?w=800&auto=format&fit=crop');"><div class="hero-text"><div class="hero-dates">May 24 – 26</div><h2>Andalusia</h2></div></div>
+                <div class="card"><div class="item"><i class="fa-solid fa-archway"></i> <a href="https://maps.google.com/?q=Mezquita+Catedral+Cordoba" target="_blank" rel="noopener noreferrer">Mosque-Cathedral (Cordoba)</a></div><div class="item"><i class="fa-solid fa-landmark"></i> <a href="https://maps.google.com/?q=Alhambra+Granada" target="_blank" rel="noopener noreferrer">Alhambra Palace (Granada)</a></div><div class="item"><i class="fa-solid fa-hot-tub-person"></i> <a href="https://maps.google.com/?q=Hammam+Al+Andalus+Granada" target="_blank" rel="noopener noreferrer">Hammam Al Ándalus</a></div></div>
+                <div class="action-row"><a class="action-btn btn-nearme" href="https://maps.google.com/?q=restaurants+near+Cordoba+Spain" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-location-dot"></i> Near Me</a><button class="action-btn btn-fork" onclick="openFork('cordoba','https://www.thefork.com/en/city/cordoba')"><i class="fa-solid fa-utensils"></i> TheFork</button><a class="action-btn btn-drive" href="https://maps.google.com/?saddr=Pine+Cliffs+Resort+Algarve&daddr=Cordoba+Spain" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-car"></i> Drive from Algarve</a></div>
+                <div class="lingo-wrap" onclick="this.classList.toggle('flipped')"><div class="lingo-inner"><div class="lingo-front"><div class="lingo-pair"><span>Hello</span><strong>Hola</strong></div><div class="lingo-pair"><span>Thank you</span><strong>Gracias</strong></div><div class="lingo-hint" style="grid-column:1/-1">Tap to see more ↓</div></div><div class="lingo-back"><div class="lingo-back-phrases"><div class="lingo-pair"><span>Excuse me</span><strong>Perdona</strong></div><div class="lingo-pair"><span>How much?</span><strong>¿Cuánto cuesta?</strong></div><div class="lingo-pair"><span>Do you speak English?</span><strong>¿Habla inglés?</strong></div><div class="lingo-pair"><span>The bill please</span><strong>La cuenta, por favor</strong></div></div><button class="lingo-translate" onclick="event.stopPropagation(); openTranslate('es','https://translate.google.com/?sl=en&tl=es&op=translate')"><i class="fa-solid fa-language"></i> Google Translate (ES)</button></div></div></div>
             </div>
-
-            <!-- BARCELONA -->
             <div class="city-section">
-                <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1539037116277-4db20889f2d4?w=800&auto=format&fit=crop');">
-                    <div class="hero-text">
-                        <div class="hero-dates">May 27 – 29</div>
-                        <h2>Barcelona</h2>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="item"><i class="fa-solid fa-hotel"></i> <a href="https://maps.google.com/?q=Le+Meridien+Barcelona" target="_blank" rel="noopener noreferrer">Le Méridien Barcelona</a></div>
-                    <div class="item"><i class="fa-solid fa-church"></i> <a href="https://maps.google.com/?q=Sagrada+Familia+Barcelona" target="_blank" rel="noopener noreferrer">Sagrada Família</a></div>
-                </div>
-                <div class="action-row">
-                    <a class="action-btn btn-nearme" href="https://maps.google.com/?q=restaurants+near+Barcelona+city+centre" target="_blank" rel="noopener noreferrer">
-                        <i class="fa-solid fa-location-dot"></i> Near Me
-                    </a>
-                    <button class="action-btn btn-fork" onclick="openFork('barcelona','https://www.thefork.com/en/city/barcelona')">
-                        <i class="fa-solid fa-utensils"></i> TheFork
-                    </button>
-                </div>
-                <div class="lingo-wrap" onclick="this.classList.toggle('flipped')">
-                    <div class="lingo-inner">
-                        <div class="lingo-front">
-                            <div class="lingo-pair"><span>Thank you</span><strong>Gràcies</strong></div>
-                            <div class="lingo-pair"><span>Good day</span><strong>Bon dia</strong></div>
-                            <div class="lingo-hint" style="grid-column:1/-1">Tap to see more ↓</div>
-                        </div>
-                        <div class="lingo-back">
-                            <div class="lingo-back-phrases">
-                                <div class="lingo-pair"><span>Excuse me</span><strong>Perdona</strong></div>
-                                <div class="lingo-pair"><span>How much?</span><strong>¿Quant costa?</strong></div>
-                                <div class="lingo-pair"><span>Do you speak English?</span><strong>Parla anglès?</strong></div>
-                                <div class="lingo-pair"><span>The bill please</span><strong>El compte, si us plau</strong></div>
-                            </div>
-                            <button class="lingo-translate" onclick="event.stopPropagation(); openTranslate('ca','https://translate.google.com/?sl=en&tl=ca&op=translate')">
-                                <i class="fa-solid fa-language"></i> Google Translate (CA)
-                            </button>
-                            <button class="lingo-translate" style="background:#34a853;" onclick="event.stopPropagation(); openTranslate('es','https://translate.google.com/?sl=en&tl=es&op=translate')">
-                                <i class="fa-solid fa-language"></i> Google Translate (ES)
-                            </button>
-                        </div>
-                    </div>
-                </div>
+                <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1539037116277-4db20889f2d4?w=800&auto=format&fit=crop');"><div class="hero-text"><div class="hero-dates">May 27 – 29</div><h2>Barcelona</h2></div></div>
+                <div class="card"><div class="item"><i class="fa-solid fa-hotel"></i> <a href="https://maps.google.com/?q=Le+Meridien+Barcelona" target="_blank" rel="noopener noreferrer">Le Méridien Barcelona</a></div><div class="item"><i class="fa-solid fa-church"></i> <a href="https://maps.google.com/?q=Sagrada+Familia+Barcelona" target="_blank" rel="noopener noreferrer">Sagrada Família</a></div></div>
+                <div class="action-row"><a class="action-btn btn-nearme" href="https://maps.google.com/?q=restaurants+near+Barcelona+city+centre" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-location-dot"></i> Near Me</a><button class="action-btn btn-fork" onclick="openFork('barcelona','https://www.thefork.com/en/city/barcelona')"><i class="fa-solid fa-utensils"></i> TheFork</button></div>
+                <div class="lingo-wrap" onclick="this.classList.toggle('flipped')"><div class="lingo-inner"><div class="lingo-front"><div class="lingo-pair"><span>Thank you</span><strong>Gràcies</strong></div><div class="lingo-pair"><span>Good day</span><strong>Bon dia</strong></div><div class="lingo-hint" style="grid-column:1/-1">Tap to see more ↓</div></div><div class="lingo-back"><div class="lingo-back-phrases"><div class="lingo-pair"><span>Excuse me</span><strong>Perdona</strong></div><div class="lingo-pair"><span>How much?</span><strong>¿Quant costa?</strong></div><div class="lingo-pair"><span>Do you speak English?</span><strong>Parla anglès?</strong></div><div class="lingo-pair"><span>The bill please</span><strong>El compte, si us plau</strong></div></div><button class="lingo-translate" onclick="event.stopPropagation(); openTranslate('ca','https://translate.google.com/?sl=en&tl=ca&op=translate')"><i class="fa-solid fa-language"></i> Google Translate (CA)</button><button class="lingo-translate" style="background:#34a853;" onclick="event.stopPropagation(); openTranslate('es','https://translate.google.com/?sl=en&tl=es&op=translate')"><i class="fa-solid fa-language"></i> Google Translate (ES)</button></div></div></div>
             </div>
-
-        </div><!-- /cities -->
-    </div><!-- /desktop-body -->
-</div><!-- /app -->
-
+        </div>
+    </div>
+</div>
 <script>
 'use strict';
-
-// ── PIN MODULE ──────────────────────────────────────────────────────────────
-(function () {
-    const STORE_KEY = 'jgt2026_pin';
-    const LOCK_KEY  = 'jgt2026_locked';
-    const FAIL_KEY  = 'jgt2026_fails';
-    const COOL_KEY  = 'jgt2026_cool';
-    const MAX_FAILS = 5;
-    const COOL_MS   = 30_000;
-    const PIN_LEN   = 4;
-
-    const overlay  = document.getElementById('pin-overlay');
-    const titleEl  = document.getElementById('pin-title');
-    const subEl    = document.getElementById('pin-sub');
-    const dotsEl   = document.getElementById('pin-dots');
-    const errorEl  = document.getElementById('pin-error');
-    const forgotEl = document.getElementById('pin-forgot');
-    const lockBtn  = document.getElementById('lock-btn');
-
-    let buffer = '', phase = 'verify', setupBuf = '';
-
-    async function sha256(str) {
-        const buf  = new TextEncoder().encode(str);
-        const hash = await crypto.subtle.digest('SHA-256', buf);
-        return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2, '0')).join('');
-    }
-
-    function savedHash() { return localStorage.getItem(STORE_KEY); }
-    function failCount() { return parseInt(localStorage.getItem(FAIL_KEY) || '0', 10); }
-    function coolUntil() { return parseInt(localStorage.getItem(COOL_KEY) || '0', 10); }
-
-    function showOverlay() { overlay.classList.remove('hidden'); document.getElementById('app').style.visibility = 'hidden'; }
-    function hideOverlay() { overlay.classList.add('hidden'); document.getElementById('app').style.visibility = ''; localStorage.removeItem(LOCK_KEY); }
-
-    function renderDots(count, error = false) {
-        dotsEl.querySelectorAll('.pin-dot').forEach((d, i) => {
-            d.classList.toggle('filled', i < count && !error);
-            d.classList.toggle('error',  i < count && error);
-        });
-    }
-
-    function shakeAndClear(msg) {
-        renderDots(PIN_LEN, true);
-        dotsEl.classList.add('shake');
-        errorEl.textContent = msg;
-        dotsEl.addEventListener('animationend', () => { dotsEl.classList.remove('shake'); buffer = ''; renderDots(0); }, { once: true });
-    }
-
-    function enterSetupMode() {
-        phase = 'setup'; setupBuf = ''; buffer = '';
-        titleEl.textContent = 'Create a PIN'; subEl.textContent = 'Choose a 4-digit PIN';
-        forgotEl.style.display = 'none'; errorEl.textContent = ''; renderDots(0);
-    }
-
-    function enterVerifyMode() {
-        phase = 'verify'; buffer = '';
-        titleEl.textContent = 'Welcome back'; subEl.textContent = 'Enter your PIN to continue';
-        forgotEl.style.display = ''; errorEl.textContent = ''; renderDots(0);
-    }
-
-    async function handleComplete() {
-        if (phase === 'setup') {
-            setupBuf = buffer; phase = 'confirm'; buffer = '';
-            titleEl.textContent = 'Confirm PIN'; subEl.textContent = 'Enter the same PIN again';
-            renderDots(0); errorEl.textContent = ''; return;
-        }
-        if (phase === 'confirm') {
-            if (buffer !== setupBuf) {
-                shakeAndClear("PINs don't match — try again");
-                phase = 'setup'; setupBuf = '';
-                setTimeout(() => { titleEl.textContent = 'Create a PIN'; subEl.textContent = 'Choose a 4-digit PIN'; }, 450);
-                return;
-            }
-            const hash = await sha256(buffer);
-            localStorage.setItem(STORE_KEY, hash);
-            localStorage.removeItem(FAIL_KEY); localStorage.removeItem(COOL_KEY);
-            hideOverlay(); return;
-        }
-        const now = Date.now();
-        if (now < coolUntil()) { shakeAndClear(`Too many attempts — wait ${Math.ceil((coolUntil()-now)/1000)}s`); buffer = ''; return; }
-        const hash = await sha256(buffer);
-        if (hash === savedHash()) {
-            localStorage.removeItem(FAIL_KEY); localStorage.removeItem(COOL_KEY); hideOverlay();
-        } else {
-            const fails = failCount() + 1;
-            localStorage.setItem(FAIL_KEY, fails);
-            if (fails >= MAX_FAILS) {
-                localStorage.setItem(COOL_KEY, Date.now() + COOL_MS); localStorage.setItem(FAIL_KEY, 0);
-                shakeAndClear('Too many attempts — locked for 30s');
-            } else { shakeAndClear(`Incorrect PIN (${MAX_FAILS - fails} left)`); }
-        }
-    }
-
-    function press(digit) {
-        if (Date.now() < coolUntil()) { errorEl.textContent = `Try again in ${Math.ceil((coolUntil()-Date.now())/1000)}s`; return; }
-        if (buffer.length >= PIN_LEN) return;
-        buffer += digit; errorEl.textContent = ''; renderDots(buffer.length);
-        if (buffer.length === PIN_LEN) setTimeout(handleComplete, 100);
-    }
-
-    function del() { if (buffer.length > 0) { buffer = buffer.slice(0,-1); renderDots(buffer.length); errorEl.textContent = ''; } }
-
-    document.getElementById('pin-pad').addEventListener('click', e => {
-        const btn = e.target.closest('.pin-key'); if (!btn) return;
-        if (btn.id === 'pin-del') { del(); return; }
-        if (btn.dataset.k !== undefined) press(btn.dataset.k);
-    });
-    document.addEventListener('keydown', e => {
-        if (overlay.classList.contains('hidden')) return;
-        if (e.key >= '0' && e.key <= '9') press(e.key);
-        if (e.key === 'Backspace') del();
-    });
-    forgotEl.addEventListener('click', () => {
-        if (!confirm('Reset PIN? You will need to create a new one.')) return;
-        [STORE_KEY, FAIL_KEY, COOL_KEY].forEach(k => localStorage.removeItem(k));
-        enterSetupMode();
-    });
-    lockBtn.addEventListener('click', () => { localStorage.setItem(LOCK_KEY,'1'); enterVerifyMode(); showOverlay(); });
-
-    if (!savedHash()) { enterSetupMode(); showOverlay(); }
-    else              { enterVerifyMode(); showOverlay(); }
-})();
-
-
-// ── TIMEZONE STRIP + COUNTDOWN TICKER ──────────────────────────────────────
-(function () {
-    const DEPARTURE = new Date('2026-05-16T16:00:00');
-    const RETURN    = new Date('2026-05-30T13:15:00');
-    const PHASES = [
-        { name: '✈️ Lisbon',    tz: 'Europe/Lisbon', flag: '🇵🇹', start: new Date('2026-05-16'), end: new Date('2026-05-18T23:59:59') },
-        { name: '🏖️ Algarve',  tz: 'Europe/Lisbon', flag: '🇵🇹', start: new Date('2026-05-19'), end: new Date('2026-05-23T23:59:59') },
-        { name: '🕌 Andalusia', tz: 'Europe/Madrid', flag: '🇪🇸', start: new Date('2026-05-24'), end: new Date('2026-05-26T23:59:59') },
-        { name: '🏙️ Barcelona', tz: 'Europe/Madrid', flag: '🇪🇸', start: new Date('2026-05-27'), end: new Date('2026-05-29T23:59:59') },
-    ];
-
-    const vanTimeEl   = document.getElementById('tz-van');
-    const vanDateEl   = document.getElementById('tz-van-date');
-    const destLabelEl = document.getElementById('tz-dest-label');
-    const destTimeEl  = document.getElementById('tz-dest');
-    const destDateEl  = document.getElementById('tz-dest-date');
-    const labelEl     = document.getElementById('ticker-label');
-    const valueEl     = document.getElementById('ticker-value');
-    const subEl       = document.getElementById('ticker-sub');
-    const phaseEl     = document.getElementById('ticker-phase');
-    const tickerEl    = document.getElementById('ticker');
-
-    function pad(n) { return String(n).padStart(2,'0'); }
-    function fmtTime(d,tz) { return d.toLocaleTimeString('en-CA',{timeZone:tz,hour:'2-digit',minute:'2-digit',hour12:false}); }
-    function fmtDate(d,tz) { return d.toLocaleDateString('en-CA',{timeZone:tz,weekday:'short',month:'short',day:'numeric'}); }
-    function fmtCountdown(ms) {
-        if (ms <= 0) return '00:00:00:00';
-        const s = Math.floor(ms/1000);
-        return `${pad(Math.floor(s/86400))}:${pad(Math.floor((s%86400)/3600))}:${pad(Math.floor((s%3600)/60))}:${pad(s%60)}`;
-    }
-
-    function tick() {
-        const now = new Date();
-        vanTimeEl.textContent = fmtTime(now, 'America/Vancouver');
-        vanDateEl.textContent = fmtDate(now, 'America/Vancouver');
-
-        const active   = PHASES.find(p => now >= p.start && now <= p.end);
-        const destTz   = active ? active.tz   : (now < DEPARTURE ? 'Europe/Lisbon' : 'Europe/Madrid');
-        const destFlag = active ? active.flag  : (now < DEPARTURE ? '🇵🇹' : '🇪🇸');
-        const destCity = active ? active.name.split(' ').slice(1).join(' ') : (now < DEPARTURE ? 'Lisbon' : 'Barcelona');
-        destLabelEl.textContent = `${destFlag} ${destCity}`;
-        destTimeEl.textContent  = fmtTime(now, destTz);
-        destDateEl.textContent  = fmtDate(now, destTz);
-
-        if (now < DEPARTURE) {
-            tickerEl.style.background = 'linear-gradient(135deg,#0062cc,#007aff)';
-            labelEl.textContent = 'Departure in'; valueEl.textContent = fmtCountdown(DEPARTURE-now); subEl.textContent = 'D : H : M : S';
-            phaseEl.innerHTML = '<div class="ticker-phase-name">YVR ✈ LIS</div><div class="ticker-phase-label">AC812 · May 16</div>';
-        } else if (now <= RETURN) {
-            tickerEl.style.background = 'linear-gradient(135deg,#1a7a3a,#28a745)';
-            if (active) {
-                const next = PHASES[PHASES.indexOf(active)+1];
-                labelEl.textContent = 'Leaving in'; valueEl.textContent = fmtCountdown(active.end-now); subEl.textContent = 'D : H : M : S';
-                phaseEl.innerHTML = `<div class="ticker-phase-name">${active.name}</div><div class="ticker-phase-label">${next?`Next: ${next.name}`:'Last stop!'}</div>`;
-            } else {
-                labelEl.textContent = 'In transit'; valueEl.textContent = '✈️'; subEl.textContent = ''; phaseEl.innerHTML = '';
-            }
-        } else {
-            tickerEl.style.background = 'linear-gradient(135deg,#555,#888)';
-            labelEl.textContent = 'Grand Tour'; valueEl.textContent = '🏠 Complete';
-            subEl.textContent = 'Welcome home, Jivraj family!'; phaseEl.innerHTML = '';
-            clearInterval(interval);
-        }
-    }
-    tick();
-    const interval = setInterval(tick, 1000);
-})();
-
-
-// ── ADD TO HOME SCREEN ──────────────────────────────────────────────────────
-(function () {
-    const A2HS_KEY   = 'jgt2026_a2hs';
-    const banner     = document.getElementById('a2hs-banner');
-    const installBtn = document.getElementById('a2hs-install');
-    const closeBtn   = document.getElementById('a2hs-close');
-
-    if (localStorage.getItem(A2HS_KEY)) return;
-
-    let deferredPrompt = null;
-    window.addEventListener('beforeinstallprompt', e => {
-        e.preventDefault(); deferredPrompt = e;
-        document.getElementById('a2hs-sub').textContent = 'Install for quick access from your home screen';
-        installBtn.style.display = '';
-        banner.classList.remove('hidden');
-    });
-
-    const isIos   = /iphone|ipad|ipod/i.test(navigator.userAgent);
-    const isInApp = window.matchMedia('(display-mode: standalone)').matches;
-    if (isIos && !isInApp && !deferredPrompt) {
-        document.getElementById('a2hs-sub').textContent = 'Tap the Share button ↑ then "Add to Home Screen"';
-        installBtn.style.display = 'none';
-        banner.classList.remove('hidden');
-    }
-
-    installBtn.addEventListener('click', async () => {
-        if (!deferredPrompt) return;
-        deferredPrompt.prompt();
-        const { outcome } = await deferredPrompt.userChoice;
-        if (outcome === 'accepted') localStorage.setItem(A2HS_KEY, '1');
-        deferredPrompt = null; banner.classList.add('hidden');
-    });
-    closeBtn.addEventListener('click', () => { banner.classList.add('hidden'); localStorage.setItem(A2HS_KEY,'1'); });
-})();
-
-
-// ── CURRENCY CALCULATOR ────────────────────────────────────────────────────
-(function () {
-    let eurBuf = '0';
-    let liveRate = 1.48;
-
-    function render() {
-        document.getElementById('calc-eur').textContent = eurBuf;
-        const cad = (parseFloat(eurBuf) || 0) * liveRate;
-        document.getElementById('calc-cad').textContent = `= CA$${cad.toFixed(2)}`;
-    }
-
-    window.calcPress = function (digit) {
-        if (eurBuf === '0' && digit !== '.') eurBuf = digit;
-        else if (digit === '.' && eurBuf.includes('.')) return;
-        else eurBuf += digit;
-        if (eurBuf.length > 10) return;
-        render();
-    };
-    window.calcDel   = function () { eurBuf = eurBuf.length > 1 ? eurBuf.slice(0,-1) : '0'; render(); };
-    window.calcClear = function () { eurBuf = '0'; render(); };
-    window.openCal   = function () { document.getElementById('calc-overlay').classList.remove('hidden'); render(); };
-    window.closeCal  = function () { document.getElementById('calc-overlay').classList.add('hidden'); };
-
-    document.getElementById('calc-open-btn').addEventListener('click', openCal);
-
-    window.addEventListener('rateUpdate', e => {
-        liveRate = e.detail;
-        document.getElementById('calc-rate-label').textContent = `1 EUR = ${liveRate.toFixed(2)} CAD`;
-        render();
-    });
-})();
-
-
-// ── APP DEEP LINKS ──────────────────────────────────────────────────────────
-function openFork(city, webUrl) {
-    const start = Date.now();
-    window.location = `thefork://search?city=${city}`;
-    setTimeout(() => { if (Date.now() - start < 2000) window.open(webUrl, '_blank'); }, 1500);
-}
-
-function openTranslate(lang, webUrl) {
-    const start = Date.now();
-    window.location = `googletranslate://`;
-    setTimeout(() => { if (Date.now() - start < 2000) window.open(webUrl, '_blank'); }, 1500);
-}
-
-function openWeather(webUrl) {
-    window.open(webUrl, '_blank');
-}
-
-// ── LIVE DATA ───────────────────────────────────────────────────────────────
-const weatherKey = 'ff6e4e362f0a4231841165933261005';
-
-async function update() {
-    try {
-        const r = await fetch('https://open.er-api.com/v6/latest/EUR');
-        const d = await r.json();
-        const rate = d.rates.CAD;
-        document.getElementById('rate').textContent = `1 EUR = ${rate.toFixed(2)} CAD`;
-        window.dispatchEvent(new CustomEvent('rateUpdate', { detail: rate }));
-    } catch (err) {}
-
-    const cities = [['Lisbon','w1'],['Albufeira','w2'],['Cordoba','w3'],['Barcelona','w4']];
-    await Promise.all(cities.map(async ([city, id]) => {
-        try {
-            const res  = await fetch(`https://api.weatherapi.com/v1/current.json?key=${weatherKey}&q=${city}`);
-            const data = await res.json();
-            const code = data.current.condition.code;
-            let icon;
-            if      (code === 1000)                                   icon = '☀️';
-            else if (code === 1003)                                   icon = '⛅';
-            else if (code === 1006 || code === 1009)                  icon = '☁️';
-            else if (code === 1030 || code === 1135 || code === 1147) icon = '🌫️';
-            else if (code >= 1063 && code <= 1087)                    icon = '⛈️';
-            else if (code >= 1150 && code <= 1201)                    icon = '🌧️';
-            else if (code >= 1210 && code <= 1237)                    icon = '🌨️';
-            else if (code >= 1240 && code <= 1282)                    icon = '🌦️';
-            else                                                       icon = '🌡️';
-            document.getElementById(id).textContent = `${icon} ${Math.round(data.current.temp_c)}°`;
-        } catch (err) {}
-    }));
-}
-
+(function(){const S='jgt2026_pin',L='jgt2026_locked',F='jgt2026_fails',C='jgt2026_cool',M=5,CM=30000,P=4;const o=document.getElementById('pin-overlay'),t=document.getElementById('pin-title'),s=document.getElementById('pin-sub'),d=document.getElementById('pin-dots'),e=document.getElementById('pin-error'),f=document.getElementById('pin-forgot'),lb=document.getElementById('lock-btn');let b='',ph='verify',sb='';async function h(x){const u=new TextEncoder().encode(x),r=await crypto.subtle.digest('SHA-256',u);return Array.from(new Uint8Array(r)).map(v=>v.toString(16).padStart(2,'0')).join('')}function gH(){return localStorage.getItem(S)}function fC(){return parseInt(localStorage.getItem(F)||'0',10)}function cU(){return parseInt(localStorage.getItem(C)||'0',10)}function sO(){o.classList.remove('hidden');document.getElementById('app').style.visibility='hidden'}function hO(){o.classList.add('hidden');document.getElementById('app').style.visibility='';localStorage.removeItem(L)}function rD(c,er=false){d.querySelectorAll('.pin-dot').forEach((x,i)=>{x.classList.toggle('filled',i<c&&!er);x.classList.toggle('error',i<c&&er)})}function sC(m){rD(P,true);d.classList.add('shake');e.textContent=m;d.addEventListener('animationend',()=>{d.classList.remove('shake');b='';rD(0)},{once:true})}function eS(){ph='setup';sb='';b='';t.textContent='Create a PIN';s.textContent='Choose a 4-digit PIN';f.style.display='none';e.textContent='';rD(0)}function eV(){ph='verify';b='';t.textContent='Welcome back';s.textContent='Enter your PIN to continue';f.style.display='';e.textContent='';rD(0)}async function hC(){if(ph==='setup'){sb=b;ph='confirm';b='';t.textContent='Confirm PIN';s.textContent='Enter the same PIN again';rD(0);e.textContent='';return}if(ph==='confirm'){if(b!==sb){sC("PINs don't match — try again");ph='setup';sb='';setTimeout(()=>{t.textContent='Create a PIN';s.textContent='Choose a 4-digit PIN'},450);return}const x=await h(b);localStorage.setItem(S,x);localStorage.removeItem(F);localStorage.removeItem(C);hO();return}const n=Date.now();if(n<cU()){sC(`Too many attempts — wait ${Math.ceil((cU()-n)/1000)}s`);b='';return}const x=await h(b);if(x===gH()){localStorage.removeItem(F);localStorage.removeItem(C);hO()}else{const fl=fC()+1;localStorage.setItem(F,fl);if(fl>=M){localStorage.setItem(C,Date.now()+CM);localStorage.setItem(F,0);sC('Too many attempts — locked for 30s')}else{sC(`Incorrect PIN (${M-fl} left)`)}}}function pr(dig){if(Date.now()<cU()){e.textContent=`Try again in ${Math.ceil((cU()-Date.now())/1000)}s`;return}if(b.length>=P)return;b+=dig;e.textContent='';rD(b.length);if(b.length===P)setTimeout(hC,100)}function dl(){if(b.length>0){b=b.slice(0,-1);rD(b.length);e.textContent=''}}document.getElementById('pin-pad').addEventListener('click',ev=>{const btn=ev.target.closest('.pin-key');if(!btn)return;if(btn.id==='pin-del'){dl();return}if(btn.dataset.k!==undefined)pr(btn.dataset.k)});document.addEventListener('keydown',ev=>{if(o.classList.contains('hidden'))return;if(ev.key>='0'&&ev.key<='9')pr(ev.key);if(ev.key==='Backspace')dl()});f.addEventListener('click',()=>{if(!confirm('Reset PIN? You will need to create a new one.'))return;[S,F,C].forEach(k=>localStorage.removeItem(k));eS()});lb.addEventListener('click',()=>{localStorage.setItem(L,'1');eV();sO()});if(!gH()){eS();sO()}else{eV();sO()}})();
+(function(){const D=new Date('2026-05-16T16:00:00'),R=new Date('2026-05-30T13:15:00'),PH=[{name:'✈️ Lisbon',tz:'Europe/Lisbon',flag:'🇵🇹',start:new Date('2026-05-16'),end:new Date('2026-05-18T23:59:59')},{name:'🏖️ Algarve',tz:'Europe/Lisbon',flag:'🇵🇹',start:new Date('2026-05-19'),end:new Date('2026-05-23T23:59:59')},{name:'🕌 Andalusia',tz:'Europe/Madrid',flag:'🇪🇸',start:new Date('2026-05-24'),end:new Date('2026-05-26T23:59:59')},{name:'🏙️ Barcelona',tz:'Europe/Madrid',flag:'🇪🇸',start:new Date('2026-05-27'),end:new Date('2026-05-29T23:59:59')}];const vT=document.getElementById('tz-van'),vD=document.getElementById('tz-van-date'),dL=document.getElementById('tz-dest-label'),dT=document.getElementById('tz-dest'),dD=document.getElementById('tz-dest-date'),lE=document.getElementById('ticker-label'),vE=document.getElementById('ticker-value'),sE=document.getElementById('ticker-sub'),pE=document.getElementById('ticker-phase'),tE=document.getElementById('ticker');function p(n){return String(n).padStart(2,'0')}function fT(d,tz){return d.toLocaleTimeString('en-CA',{timeZone:tz,hour:'2-digit',minute:'2-digit',hour12:false})}function fD(d,tz){return d.toLocaleDateString('en-CA',{timeZone:tz,weekday:'short',month:'short',day:'numeric'})}function fC(ms){if(ms<=0)return'00:00:00:00';const s=Math.floor(ms/1000);return`${p(Math.floor(s/86400))}:${p(Math.floor((s%86400)/3600))}:${p(Math.floor((s%3600)/60))}:${p(s%60)}`}function tick(){const now=new Date();vT.textContent=fT(now,'America/Vancouver');vD.textContent=fD(now,'America/Vancouver');const a=PH.find(x=>now>=x.start&&now<=x.end),tz=a?a.tz:(now<D?'Europe/Lisbon':'Europe/Madrid'),fl=a?a.flag:(now<D?'🇵🇹':'🇪🇸'),ct=a?a.name.split(' ').slice(1).join(' '):(now<D?'Lisbon':'Barcelona');dL.textContent=`${fl} ${ct}`;dT.textContent=fT(now,tz);dD.textContent=fD(now,tz);if(now<D){tE.style.background='linear-gradient(135deg,#0062cc,#007aff)';lE.textContent='Departure in';vE.textContent=fC(D-now);sE.textContent='D : H : M : S';pE.innerHTML='<div class="ticker-phase-name">YVR ✈ LIS</div><div class="ticker-phase-label">AC812 · May 16</div>'}else if(now<=R){tE.style.background='linear-gradient(135deg,#1a7a3a,#28a745)';if(a){const nx=PH[PH.indexOf(a)+1];lE.textContent='Leaving in';vE.textContent=fC(a.end-now);sE.textContent='D : H : M : S';pE.innerHTML=`<div class="ticker-phase-name">${a.name}</div><div class="ticker-phase-label">${nx?`Next: ${nx.name}`:'Last stop!'}</div>`}else{lE.textContent='In transit';vE.textContent='✈️';sE.textContent='';pE.innerHTML=''}}else{tE.style.background='linear-gradient(135deg,#555,#888)';lE.textContent='Grand Tour';vE.textContent='🏠 Complete';sE.textContent='Welcome home, Jivraj family!';pE.innerHTML='';clearInterval(iv)}}tick();const iv=setInterval(tick,1000)})();
+(function(){const K='jgt2026_a2hs',b=document.getElementById('a2hs-banner'),i=document.getElementById('a2hs-install'),c=document.getElementById('a2hs-close');if(localStorage.getItem(K))return;let dp=null;window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();dp=e;document.getElementById('a2hs-sub').textContent='Install for quick access from your home screen';i.style.display='';b.classList.remove('hidden')});if(/iphone|ipad|ipod/i.test(navigator.userAgent)&&!window.matchMedia('(display-mode: standalone)').matches&&!dp){document.getElementById('a2hs-sub').textContent='Tap the Share button ↑ then "Add to Home Screen"';i.style.display='none';b.classList.remove('hidden')}i.addEventListener('click',async()=>{if(!dp)return;dp.prompt();const{outcome}=await dp.userChoice;if(outcome==='accepted')localStorage.setItem(K,'1');dp=null;b.classList.add('hidden')});c.addEventListener('click',()=>{b.classList.add('hidden');localStorage.setItem(K,'1')})})();
+(function(){let buf='0',rate=1.48;function render(){document.getElementById('calc-eur').textContent=buf;document.getElementById('calc-cad').textContent=`= CA$${((parseFloat(buf)||0)*rate).toFixed(2)}`}window.calcPress=function(d){if(buf==='0'&&d!=='.')buf=d;else if(d==='.'&&buf.includes('.'))return;else buf+=d;if(buf.length>10)return;render()};window.calcDel=function(){buf=buf.length>1?buf.slice(0,-1):'0';render()};window.calcClear=function(){buf='0';render()};window.openCal=function(){document.getElementById('calc-overlay').classList.remove('hidden');render()};window.closeCal=function(){document.getElementById('calc-overlay').classList.add('hidden')};document.getElementById('rate').addEventListener('click',openCal);window.addEventListener('rateUpdate',e=>{rate=e.detail;document.getElementById('calc-rate-label').textContent=`1 EUR = ${rate.toFixed(2)} CAD`;render()})})();
+function openFork(c,w){const s=Date.now();window.location=`thefork://search?city=${c}`;setTimeout(()=>{if(Date.now()-s<2000)window.open(w,'_blank')},1500)}
+function openTranslate(l,w){const s=Date.now();window.location='googletranslate://';setTimeout(()=>{if(Date.now()-s<2000)window.open(w,'_blank')},1500)}
+function openWeather(w){window.open(w,'_blank')}
+const weatherKey='ff6e4e362f0a4231841165933261005';
+async function update(){try{const r=await fetch('https://open.er-api.com/v6/latest/EUR'),d=await r.json(),rate=d.rates.CAD;document.getElementById('rate').textContent=`1 EUR = ${rate.toFixed(2)} CAD`;window.dispatchEvent(new CustomEvent('rateUpdate',{detail:rate}))}catch(e){}const cities=[['Lisbon','w1'],['Albufeira','w2'],['Cordoba','w3'],['Barcelona','w4']];await Promise.all(cities.map(async([c,id])=>{try{const r=await fetch(`https://api.weatherapi.com/v1/current.json?key=${weatherKey}&q=${c}`),d=await r.json(),code=d.current.condition.code;let icon;if(code===1000)icon='☀️';else if(code===1003)icon='⛅';else if(code===1006||code===1009)icon='☁️';else if(code===1030||code===1135||code===1147)icon='🌫️';else if(code>=1063&&code<=1087)icon='⛈️';else if(code>=1150&&code<=1201)icon='🌧️';else if(code>=1210&&code<=1237)icon='🌨️';else if(code>=1240&&code<=1282)icon='🌦️';else icon='🌡️';document.getElementById(id).textContent=`${icon} ${Math.round(d.current.temp_c)}°`}catch(e){}}))}
 update();
 </script>
 </body>
