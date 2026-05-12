@@ -26,7 +26,7 @@
         .pin-dot { width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--grey); background: transparent; transition: background 0.15s, border-color 0.15s; }
         .pin-dot.filled { background: var(--accent); border-color: var(--accent); }
         .pin-dot.error { background: var(--danger); border-color: var(--danger); }
-        @keyframes shake { 0%,100% { transform: translateX(0); } 20% { transform: translateX(-8px); } 40% { transform: translateX(8px); } 60% { transform: translateX(-6px); } 80% { transform: translateX(6px); } }
+        @keyframes shake { 0%,100%{transform:translateX(0)} 20%{transform:translateX(-8px)} 40%{transform:translateX(8px)} 60%{transform:translateX(-6px)} 80%{transform:translateX(6px)} }
         .pin-dots.shake { animation: shake 0.4s ease; }
         .pin-pad { display: grid; grid-template-columns: repeat(3, 72px); grid-template-rows: repeat(4, 72px); gap: 12px; }
         .pin-key { border: none; background: var(--surface2); border-radius: 50%; font-size: 1.4rem; font-weight: 600; color: var(--text); cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1; transition: background 0.1s, transform 0.1s; touch-action: manipulation; user-select: none; -webkit-user-select: none; }
@@ -38,10 +38,7 @@
         .pin-forgot { background: none; border: none; color: var(--accent); font-size: 0.85rem; cursor: pointer; padding: 4px; }
         #a2hs-banner { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 500px; background: var(--surface); border-top: 1px solid var(--border); padding: 14px 16px; display: flex; align-items: center; gap: 12px; z-index: 200; box-shadow: 0 -4px 20px rgba(0,0,0,0.12); }
         #a2hs-banner.hidden { display: none; }
-        .a2hs-icon { font-size: 1.8rem; flex-shrink: 0; }
-        .a2hs-text { flex: 1; font-size: 0.8rem; line-height: 1.4; }
-        .a2hs-text strong { display: block; font-size: 0.85rem; margin-bottom: 2px; }
-        .a2hs-text span { color: var(--grey); }
+        .a2hs-icon { font-size: 1.8rem; flex-shrink: 0; } .a2hs-text { flex: 1; font-size: 0.8rem; line-height: 1.4; } .a2hs-text strong { display: block; font-size: 0.85rem; margin-bottom: 2px; } .a2hs-text span { color: var(--grey); }
         .a2hs-btn { background: var(--accent); color: white; border: none; border-radius: 10px; padding: 8px 14px; font-size: 0.8rem; font-weight: 700; cursor: pointer; white-space: nowrap; flex-shrink: 0; }
         .a2hs-close { background: none; border: none; color: var(--grey); font-size: 1.2rem; cursor: pointer; padding: 4px; flex-shrink: 0; }
         .container { max-width: 500px; margin: 0 auto; background: var(--surface); min-height: 100vh; box-shadow: 0 0 30px rgba(0,0,0,0.1); }
@@ -88,8 +85,7 @@
         .row:last-child { border-bottom: none; }
         .row-date { font-size: 0.7rem; font-weight: 800; color: var(--accent); text-transform: uppercase; min-width: 50px; }
         .row-text { font-size: 0.85rem; font-weight: 600; line-height: 1.3; }
-        .row-text a { color: #6fb3ff; text-decoration: none; }
-        .row-text a:hover { text-decoration: underline; }
+        .row-text a { color: #6fb3ff; text-decoration: none; } .row-text a:hover { text-decoration: underline; }
         .weather-hub { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; padding: 15px; background: var(--bg); }
         .w-btn { background: var(--surface); padding: 15px 10px; border-radius: 16px; text-align: center; border: 1px solid var(--border); color: var(--text); transition: transform 0.15s; cursor: pointer; }
         .w-btn:active { transform: scale(0.97); }
@@ -109,12 +105,10 @@
         .action-row { display: flex; gap: 8px; margin: 0 15px 15px; flex-wrap: wrap; }
         .action-btn { flex: 1; min-width: 120px; display: flex; align-items: center; justify-content: center; gap: 6px; padding: 10px 12px; border-radius: 12px; border: none; font-size: 0.78rem; font-weight: 700; cursor: pointer; text-decoration: none; transition: transform 0.12s, opacity 0.12s; touch-action: manipulation; }
         .action-btn:active { transform: scale(0.96); opacity: 0.85; }
-        .btn-nearme { background: var(--accent); color: white; }
-        .btn-drive { background: #28a745; color: white; }
-        .btn-fork { background: #f46f2f; color: white; }
-        .lingo-wrap { margin: 0 15px 25px; perspective: 800px; }
-        .lingo-inner { position: relative; transform-style: preserve-3d; transition: transform 0.45s ease; cursor: pointer; min-height: 160px; }
-        .lingo-wrap.flipped .lingo-inner { transform: rotateY(180deg); }
+        .btn-nearme { background: var(--accent); color: white; } .btn-drive { background: #28a745; color: white; } .btn-fork { background: #f46f2f; color: white; }
+        .lingo-wrap { margin: 0 15px 12px; perspective: 800px; }
+        .lingo-inner { position: relative; transform-style: preserve-3d; transition: transform 0.45s ease; cursor: pointer; }
+        .lingo-wrap.flipped .lingo-inner { transform: rotateY(180deg); min-height: 160px; }
         .lingo-front, .lingo-back { border-radius: 12px; border: 1px solid var(--border); background: var(--surface2); padding: 12px 15px; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
         .lingo-front { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
         .lingo-back { position: absolute; inset: 0; transform: rotateY(180deg); display: flex; flex-direction: column; gap: 10px; justify-content: space-between; }
@@ -131,73 +125,28 @@
             .header { position: sticky; top: 0; z-index: 100; }
             .desktop-body { display: grid; grid-template-columns: 360px 1fr; flex: 1; align-items: start; }
             .sidebar { position: sticky; top: var(--header-h); height: calc(100vh - var(--header-h)); overflow-y: auto; border-right: 1px solid var(--border); }
-            .sidebar::-webkit-scrollbar { width: 4px; }
-            .sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+            .sidebar::-webkit-scrollbar { width: 4px; } .sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
             .weather-hub { grid-template-columns: repeat(2, 1fr); }
             .cities { display: grid; grid-template-columns: 1fr 1fr; align-content: start; }
             .city-section { border-bottom: 1px solid var(--border); padding-bottom: 8px; }
             .city-section:nth-child(odd) { border-right: 1px solid var(--border); }
             .city-section:last-child, .city-section:nth-last-child(2):nth-child(odd) { border-bottom: none; }
             .hero { height: 200px; margin-top: 0; }
-            .card { margin: -15px 12px 8px; }
-            .action-row { margin: 0 12px 12px; }
-            .lingo-wrap { margin: 0 12px 20px; }
+            .card { margin: -15px 12px 8px; } .action-row { margin: 0 12px 12px; } .lingo-wrap { margin: 0 12px 20px; }
             #a2hs-banner { max-width: 1140px; }
         }
     </style>
 </head>
 <body>
 <noscript><p style="text-align:center;padding:20px;color:#666;">Enable JavaScript for live weather, exchange rates, and PIN protection.</p></noscript>
-<div id="pin-overlay">
-    <div class="pin-icon">✈️</div>
-    <h1 class="pin-title" id="pin-title">Welcome back</h1>
-    <p class="pin-sub" id="pin-sub">Enter your PIN to continue</p>
-    <div class="pin-dots" id="pin-dots"><div class="pin-dot" data-i="0"></div><div class="pin-dot" data-i="1"></div><div class="pin-dot" data-i="2"></div><div class="pin-dot" data-i="3"></div></div>
-    <div class="pin-error-msg" id="pin-error"></div>
-    <div class="pin-pad" id="pin-pad">
-        <button class="pin-key" data-k="1">1<sub></sub></button><button class="pin-key" data-k="2">2<sub>ABC</sub></button><button class="pin-key" data-k="3">3<sub>DEF</sub></button>
-        <button class="pin-key" data-k="4">4<sub>GHI</sub></button><button class="pin-key" data-k="5">5<sub>JKL</sub></button><button class="pin-key" data-k="6">6<sub>MNO</sub></button>
-        <button class="pin-key" data-k="7">7<sub>PQRS</sub></button><button class="pin-key" data-k="8">8<sub>TUV</sub></button><button class="pin-key" data-k="9">9<sub>WXYZ</sub></button>
-        <button class="pin-key ghost" aria-hidden="true"></button><button class="pin-key" data-k="0">0</button><button class="pin-key del" id="pin-del" aria-label="Delete">⌫</button>
-    </div>
-    <button class="pin-forgot" id="pin-forgot">Forgot PIN?</button>
-</div>
-<div id="a2hs-banner" class="hidden">
-    <div class="a2hs-icon">📲</div>
-    <div class="a2hs-text"><strong>Add to Home Screen</strong><span id="a2hs-sub">Tap Share → Add to Home Screen for quick access</span></div>
-    <button class="a2hs-btn" id="a2hs-install">Install</button>
-    <button class="a2hs-close" id="a2hs-close" aria-label="Dismiss">✕</button>
-</div>
-<div id="calc-overlay" class="hidden" onclick="if(event.target===this)closeCal()">
-    <div class="calc-sheet">
-        <div class="calc-header"><div class="calc-title">€ EUR → CAD</div><button class="calc-close" onclick="closeCal()">✕</button></div>
-        <div class="calc-display">
-            <div class="calc-input"><span>€</span> <span id="calc-eur">0</span></div>
-            <div class="calc-result" id="calc-cad">= CA$0.00</div>
-            <div class="calc-rate" id="calc-rate-label">1 EUR = 1.48 CAD</div>
-        </div>
-        <div class="calc-pad">
-            <button class="calc-key" onclick="calcPress('7')">7</button><button class="calc-key" onclick="calcPress('8')">8</button><button class="calc-key" onclick="calcPress('9')">9</button><button class="calc-key del" onclick="calcDel()">⌫</button>
-            <button class="calc-key" onclick="calcPress('4')">4</button><button class="calc-key" onclick="calcPress('5')">5</button><button class="calc-key" onclick="calcPress('6')">6</button><button class="calc-key clear" onclick="calcClear()">C</button>
-            <button class="calc-key" onclick="calcPress('1')">1</button><button class="calc-key" onclick="calcPress('2')">2</button><button class="calc-key" onclick="calcPress('3')">3</button><button class="calc-key" onclick="calcPress('0')">0</button>
-            <button class="calc-key" onclick="calcPress('.')">.</button>
-        </div>
-    </div>
-</div>
+<div id="pin-overlay"><div class="pin-icon">✈️</div><h1 class="pin-title" id="pin-title">Welcome back</h1><p class="pin-sub" id="pin-sub">Enter your PIN to continue</p><div class="pin-dots" id="pin-dots"><div class="pin-dot" data-i="0"></div><div class="pin-dot" data-i="1"></div><div class="pin-dot" data-i="2"></div><div class="pin-dot" data-i="3"></div></div><div class="pin-error-msg" id="pin-error"></div><div class="pin-pad" id="pin-pad"><button class="pin-key" data-k="1">1<sub></sub></button><button class="pin-key" data-k="2">2<sub>ABC</sub></button><button class="pin-key" data-k="3">3<sub>DEF</sub></button><button class="pin-key" data-k="4">4<sub>GHI</sub></button><button class="pin-key" data-k="5">5<sub>JKL</sub></button><button class="pin-key" data-k="6">6<sub>MNO</sub></button><button class="pin-key" data-k="7">7<sub>PQRS</sub></button><button class="pin-key" data-k="8">8<sub>TUV</sub></button><button class="pin-key" data-k="9">9<sub>WXYZ</sub></button><button class="pin-key ghost" aria-hidden="true"></button><button class="pin-key" data-k="0">0</button><button class="pin-key del" id="pin-del" aria-label="Delete">⌫</button></div><button class="pin-forgot" id="pin-forgot">Forgot PIN?</button></div>
+<div id="a2hs-banner" class="hidden"><div class="a2hs-icon">📲</div><div class="a2hs-text"><strong>Add to Home Screen</strong><span id="a2hs-sub">Tap Share → Add to Home Screen for quick access</span></div><button class="a2hs-btn" id="a2hs-install">Install</button><button class="a2hs-close" id="a2hs-close" aria-label="Dismiss">✕</button></div>
+<div id="calc-overlay" class="hidden" onclick="if(event.target===this)closeCal()"><div class="calc-sheet"><div class="calc-header"><div class="calc-title">€ EUR → CAD</div><button class="calc-close" onclick="closeCal()">✕</button></div><div class="calc-display"><div class="calc-input"><span>€</span> <span id="calc-eur">0</span></div><div class="calc-result" id="calc-cad">= CA$0.00</div><div class="calc-rate" id="calc-rate-label">1 EUR = 1.48 CAD</div></div><div class="calc-pad"><button class="calc-key" onclick="calcPress('7')">7</button><button class="calc-key" onclick="calcPress('8')">8</button><button class="calc-key" onclick="calcPress('9')">9</button><button class="calc-key del" onclick="calcDel()">⌫</button><button class="calc-key" onclick="calcPress('4')">4</button><button class="calc-key" onclick="calcPress('5')">5</button><button class="calc-key" onclick="calcPress('6')">6</button><button class="calc-key clear" onclick="calcClear()">C</button><button class="calc-key" onclick="calcPress('1')">1</button><button class="calc-key" onclick="calcPress('2')">2</button><button class="calc-key" onclick="calcPress('3')">3</button><button class="calc-key" onclick="calcPress('0')">0</button><button class="calc-key" onclick="calcPress('.')">.</button></div></div></div>
 <div class="container" id="app">
-    <div class="header">
-        <div class="header-left">
-            <div class="header-title">EUROPE 2026 — PORTUGAL & SPAIN</div>
-            <div id="rate">1 EUR = 1.48 CAD</div>
-        </div>
-        <button class="lock-btn" id="lock-btn" aria-label="Lock"><i class="fa-solid fa-lock"></i> Lock</button>
-    </div>
+    <div class="header"><div class="header-left"><div class="header-title">EUROPE 2026 — PORTUGAL & SPAIN</div><div id="rate">1 EUR = 1.48 CAD</div></div><button class="lock-btn" id="lock-btn" aria-label="Lock"><i class="fa-solid fa-lock"></i> Lock</button></div>
     <div class="desktop-body">
         <div class="sidebar">
-            <div class="tz-strip">
-                <div class="tz-cell"><span class="tz-label">🇨🇦 Vancouver</span><span class="tz-time" id="tz-van">--:--</span><span class="tz-date" id="tz-van-date"></span></div>
-                <div class="tz-cell"><span class="tz-label" id="tz-dest-label">🇵🇹 Lisbon</span><span class="tz-time" id="tz-dest">--:--</span><span class="tz-date" id="tz-dest-date"></span></div>
-            </div>
+            <div class="tz-strip"><div class="tz-cell"><span class="tz-label">🇨🇦 Vancouver</span><span class="tz-time" id="tz-van">--:--</span><span class="tz-date" id="tz-van-date"></span></div><div class="tz-cell"><span class="tz-label" id="tz-dest-label">🇵🇹 Lisbon</span><span class="tz-time" id="tz-dest">--:--</span><span class="tz-date" id="tz-dest-date"></span></div></div>
             <div class="ticker" id="ticker"><div><div class="ticker-label" id="ticker-label">Departure in</div><div class="ticker-value" id="ticker-value">--:--:--:--</div><div class="ticker-sub" id="ticker-sub"></div></div><div class="ticker-phase" id="ticker-phase"></div></div>
             <div class="itinerary-container"><div class="scroll-window">
                 <div class="row"><span class="row-date">May 16</span><span class="row-text"><a href="https://www.flightaware.com/live/flight/AC812" target="_blank" rel="noopener noreferrer">AC812</a> (YVR➔LIS) • Moxy Lisbon City</span></div>
@@ -218,28 +167,28 @@
         </div>
         <div class="cities">
             <div class="city-section">
-                <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1573843981267-be1999ff37cd?w=800&auto=format&fit=crop');"><div class="hero-text"><div class="hero-dates">May 16 – 18</div><h2>Lisbon</h2></div></div>
+                <div class="hero" style="background-image:url('https://images.unsplash.com/photo-1573843981267-be1999ff37cd?w=800&auto=format&fit=crop')"><div class="hero-text"><div class="hero-dates">May 16 – 18</div><h2>Lisbon</h2></div></div>
                 <div class="card"><div class="item"><i class="fa-solid fa-hotel"></i> <a href="https://maps.google.com/?q=Moxy+Lisbon+City" target="_blank" rel="noopener noreferrer">Moxy Lisbon City</a></div><div class="item"><i class="fa-solid fa-mosque"></i> <a href="https://maps.google.com/?q=Ismaili+Centre+Lisbon" target="_blank" rel="noopener noreferrer">Ismaili Centre Tour</a></div></div>
                 <div class="action-row"><a class="action-btn btn-nearme" href="https://maps.google.com/?q=restaurants+near+Lisbon+city+centre" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-location-dot"></i> Near Me</a><button class="action-btn btn-fork" onclick="openFork('lisbon','https://www.thefork.com/en/city/lisbon')"><i class="fa-solid fa-utensils"></i> TheFork</button></div>
-                <div class="lingo-wrap" onclick="this.classList.toggle('flipped')"><div class="lingo-inner"><div class="lingo-front"><div class="lingo-pair"><span>Thank you</span><strong>Obrigado</strong></div><div class="lingo-pair"><span>Where is...?</span><strong>Onde fica...?</strong></div><div class="lingo-hint" style="grid-column:1/-1">Tap to see more ↓</div></div><div class="lingo-back"><div class="lingo-back-phrases"><div class="lingo-pair"><span>Excuse me</span><strong>Com licença</strong></div><div class="lingo-pair"><span>How much?</span><strong>Quanto custa?</strong></div><div class="lingo-pair"><span>Do you speak English?</span><strong>Fala inglês?</strong></div><div class="lingo-pair"><span>The bill please</span><strong>A conta, por favor</strong></div></div><button class="lingo-translate" onclick="event.stopPropagation(); openTranslate('pt','https://translate.google.com/?sl=en&tl=pt&op=translate')"><i class="fa-solid fa-language"></i> Google Translate (PT)</button></div></div></div>
+                <div class="lingo-wrap" onclick="this.classList.toggle('flipped')"><div class="lingo-inner"><div class="lingo-front"><div class="lingo-pair"><span>Thank you</span><strong>Obrigado</strong></div><div class="lingo-pair"><span>Where is...?</span><strong>Onde fica...?</strong></div><div class="lingo-hint" style="grid-column:1/-1">Tap to see more ↓</div></div><div class="lingo-back"><div class="lingo-back-phrases"><div class="lingo-pair"><span>Excuse me</span><strong>Com licença</strong></div><div class="lingo-pair"><span>How much?</span><strong>Quanto custa?</strong></div><div class="lingo-pair"><span>Do you speak English?</span><strong>Fala inglês?</strong></div><div class="lingo-pair"><span>The bill please</span><strong>A conta, por favor</strong></div></div><button class="lingo-translate" onclick="event.stopPropagation();openTranslate('pt','https://translate.google.com/?sl=en&tl=pt&op=translate')"><i class="fa-solid fa-language"></i> Google Translate (PT)</button></div></div></div>
             </div>
             <div class="city-section">
-                <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&auto=format&fit=crop');"><div class="hero-text"><div class="hero-dates">May 19 – 23</div><h2>Algarve</h2></div></div>
+                <div class="hero" style="background-image:url('https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&auto=format&fit=crop')"><div class="hero-text"><div class="hero-dates">May 19 – 23</div><h2>Algarve</h2></div></div>
                 <div class="card"><div class="item"><i class="fa-solid fa-umbrella-beach"></i> <a href="https://maps.google.com/?q=Pine+Cliffs+Resort+Algarve" target="_blank" rel="noopener noreferrer">Pine Cliffs Resort</a></div><div class="item"><i class="fa-solid fa-water"></i> <a href="https://maps.google.com/?q=Blue+Xperiences+Benagil" target="_blank" rel="noopener noreferrer">Benagil Kayak</a></div></div>
                 <div class="action-row"><a class="action-btn btn-nearme" href="https://maps.google.com/?q=restaurants+near+Albufeira+Algarve" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-location-dot"></i> Near Me</a><button class="action-btn btn-fork" onclick="openFork('albufeira','https://www.thefork.com/en/city/albufeira')"><i class="fa-solid fa-utensils"></i> TheFork</button><a class="action-btn btn-drive" href="https://maps.google.com/?saddr=Moxy+Lisbon+City&daddr=Pine+Cliffs+Resort+Algarve" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-car"></i> Drive from Lisbon</a></div>
-                <div class="lingo-wrap" onclick="this.classList.toggle('flipped')"><div class="lingo-inner"><div class="lingo-front"><div class="lingo-pair"><span>Excuse me</span><strong>Com licença</strong></div><div class="lingo-pair"><span>How much?</span><strong>Quanto custa?</strong></div><div class="lingo-hint" style="grid-column:1/-1">Tap to see more ↓</div></div><div class="lingo-back"><div class="lingo-back-phrases"><div class="lingo-pair"><span>Thank you</span><strong>Obrigado</strong></div><div class="lingo-pair"><span>Where is...?</span><strong>Onde fica...?</strong></div><div class="lingo-pair"><span>Help!</span><strong>Socorro!</strong></div><div class="lingo-pair"><span>A table for two</span><strong>Uma mesa para dois</strong></div></div><button class="lingo-translate" onclick="event.stopPropagation(); openTranslate('pt','https://translate.google.com/?sl=en&tl=pt&op=translate')"><i class="fa-solid fa-language"></i> Google Translate (PT)</button></div></div></div>
+                <div class="lingo-wrap" onclick="this.classList.toggle('flipped')"><div class="lingo-inner"><div class="lingo-front"><div class="lingo-pair"><span>Excuse me</span><strong>Com licença</strong></div><div class="lingo-pair"><span>How much?</span><strong>Quanto custa?</strong></div><div class="lingo-hint" style="grid-column:1/-1">Tap to see more ↓</div></div><div class="lingo-back"><div class="lingo-back-phrases"><div class="lingo-pair"><span>Thank you</span><strong>Obrigado</strong></div><div class="lingo-pair"><span>Where is...?</span><strong>Onde fica...?</strong></div><div class="lingo-pair"><span>Help!</span><strong>Socorro!</strong></div><div class="lingo-pair"><span>A table for two</span><strong>Uma mesa para dois</strong></div></div><button class="lingo-translate" onclick="event.stopPropagation();openTranslate('pt','https://translate.google.com/?sl=en&tl=pt&op=translate')"><i class="fa-solid fa-language"></i> Google Translate (PT)</button></div></div></div>
             </div>
             <div class="city-section">
-                <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?w=800&auto=format&fit=crop');"><div class="hero-text"><div class="hero-dates">May 24 – 26</div><h2>Andalusia</h2></div></div>
+                <div class="hero" style="background-image:url('https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?w=800&auto=format&fit=crop')"><div class="hero-text"><div class="hero-dates">May 24 – 26</div><h2>Andalusia</h2></div></div>
                 <div class="card"><div class="item"><i class="fa-solid fa-archway"></i> <a href="https://maps.google.com/?q=Mezquita+Catedral+Cordoba" target="_blank" rel="noopener noreferrer">Mosque-Cathedral (Cordoba)</a></div><div class="item"><i class="fa-solid fa-landmark"></i> <a href="https://maps.google.com/?q=Alhambra+Granada" target="_blank" rel="noopener noreferrer">Alhambra Palace (Granada)</a></div><div class="item"><i class="fa-solid fa-hot-tub-person"></i> <a href="https://maps.google.com/?q=Hammam+Al+Andalus+Granada" target="_blank" rel="noopener noreferrer">Hammam Al Ándalus</a></div></div>
                 <div class="action-row"><a class="action-btn btn-nearme" href="https://maps.google.com/?q=restaurants+near+Cordoba+Spain" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-location-dot"></i> Near Me</a><button class="action-btn btn-fork" onclick="openFork('cordoba','https://www.thefork.com/en/city/cordoba')"><i class="fa-solid fa-utensils"></i> TheFork</button><a class="action-btn btn-drive" href="https://maps.google.com/?saddr=Pine+Cliffs+Resort+Algarve&daddr=Cordoba+Spain" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-car"></i> Drive from Algarve</a></div>
-                <div class="lingo-wrap" onclick="this.classList.toggle('flipped')"><div class="lingo-inner"><div class="lingo-front"><div class="lingo-pair"><span>Hello</span><strong>Hola</strong></div><div class="lingo-pair"><span>Thank you</span><strong>Gracias</strong></div><div class="lingo-hint" style="grid-column:1/-1">Tap to see more ↓</div></div><div class="lingo-back"><div class="lingo-back-phrases"><div class="lingo-pair"><span>Excuse me</span><strong>Perdona</strong></div><div class="lingo-pair"><span>How much?</span><strong>¿Cuánto cuesta?</strong></div><div class="lingo-pair"><span>Do you speak English?</span><strong>¿Habla inglés?</strong></div><div class="lingo-pair"><span>The bill please</span><strong>La cuenta, por favor</strong></div></div><button class="lingo-translate" onclick="event.stopPropagation(); openTranslate('es','https://translate.google.com/?sl=en&tl=es&op=translate')"><i class="fa-solid fa-language"></i> Google Translate (ES)</button></div></div></div>
+                <div class="lingo-wrap" onclick="this.classList.toggle('flipped')"><div class="lingo-inner"><div class="lingo-front"><div class="lingo-pair"><span>Hello</span><strong>Hola</strong></div><div class="lingo-pair"><span>Thank you</span><strong>Gracias</strong></div><div class="lingo-hint" style="grid-column:1/-1">Tap to see more ↓</div></div><div class="lingo-back"><div class="lingo-back-phrases"><div class="lingo-pair"><span>Excuse me</span><strong>Perdona</strong></div><div class="lingo-pair"><span>How much?</span><strong>¿Cuánto cuesta?</strong></div><div class="lingo-pair"><span>Do you speak English?</span><strong>¿Habla inglés?</strong></div><div class="lingo-pair"><span>The bill please</span><strong>La cuenta, por favor</strong></div></div><button class="lingo-translate" onclick="event.stopPropagation();openTranslate('es','https://translate.google.com/?sl=en&tl=es&op=translate')"><i class="fa-solid fa-language"></i> Google Translate (ES)</button></div></div></div>
             </div>
             <div class="city-section">
-                <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1539037116277-4db20889f2d4?w=800&auto=format&fit=crop');"><div class="hero-text"><div class="hero-dates">May 27 – 29</div><h2>Barcelona</h2></div></div>
+                <div class="hero" style="background-image:url('https://images.unsplash.com/photo-1539037116277-4db20889f2d4?w=800&auto=format&fit=crop')"><div class="hero-text"><div class="hero-dates">May 27 – 29</div><h2>Barcelona</h2></div></div>
                 <div class="card"><div class="item"><i class="fa-solid fa-hotel"></i> <a href="https://maps.google.com/?q=Le+Meridien+Barcelona" target="_blank" rel="noopener noreferrer">Le Méridien Barcelona</a></div><div class="item"><i class="fa-solid fa-church"></i> <a href="https://maps.google.com/?q=Sagrada+Familia+Barcelona" target="_blank" rel="noopener noreferrer">Sagrada Família</a></div></div>
                 <div class="action-row"><a class="action-btn btn-nearme" href="https://maps.google.com/?q=restaurants+near+Barcelona+city+centre" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-location-dot"></i> Near Me</a><button class="action-btn btn-fork" onclick="openFork('barcelona','https://www.thefork.com/en/city/barcelona')"><i class="fa-solid fa-utensils"></i> TheFork</button></div>
-                <div class="lingo-wrap" onclick="this.classList.toggle('flipped')"><div class="lingo-inner"><div class="lingo-front"><div class="lingo-pair"><span>Thank you</span><strong>Gràcies</strong></div><div class="lingo-pair"><span>Good day</span><strong>Bon dia</strong></div><div class="lingo-hint" style="grid-column:1/-1">Tap to see more ↓</div></div><div class="lingo-back"><div class="lingo-back-phrases"><div class="lingo-pair"><span>Excuse me</span><strong>Perdona</strong></div><div class="lingo-pair"><span>How much?</span><strong>¿Quant costa?</strong></div><div class="lingo-pair"><span>Do you speak English?</span><strong>Parla anglès?</strong></div><div class="lingo-pair"><span>The bill please</span><strong>El compte, si us plau</strong></div></div><button class="lingo-translate" onclick="event.stopPropagation(); openTranslate('ca','https://translate.google.com/?sl=en&tl=ca&op=translate')"><i class="fa-solid fa-language"></i> Google Translate (CA)</button><button class="lingo-translate" style="background:#34a853;" onclick="event.stopPropagation(); openTranslate('es','https://translate.google.com/?sl=en&tl=es&op=translate')"><i class="fa-solid fa-language"></i> Google Translate (ES)</button></div></div></div>
+                <div class="lingo-wrap" onclick="this.classList.toggle('flipped')"><div class="lingo-inner"><div class="lingo-front"><div class="lingo-pair"><span>Thank you</span><strong>Gràcies</strong></div><div class="lingo-pair"><span>Good day</span><strong>Bon dia</strong></div><div class="lingo-hint" style="grid-column:1/-1">Tap to see more ↓</div></div><div class="lingo-back"><div class="lingo-back-phrases"><div class="lingo-pair"><span>Excuse me</span><strong>Perdona</strong></div><div class="lingo-pair"><span>How much?</span><strong>¿Quant costa?</strong></div><div class="lingo-pair"><span>Do you speak English?</span><strong>Parla anglès?</strong></div><div class="lingo-pair"><span>The bill please</span><strong>El compte, si us plau</strong></div></div><button class="lingo-translate" onclick="event.stopPropagation();openTranslate('ca','https://translate.google.com/?sl=en&tl=ca&op=translate')"><i class="fa-solid fa-language"></i> Google Translate (CA)</button><button class="lingo-translate" style="background:#34a853" onclick="event.stopPropagation();openTranslate('es','https://translate.google.com/?sl=en&tl=es&op=translate')"><i class="fa-solid fa-language"></i> Google Translate (ES)</button></div></div></div>
             </div>
         </div>
     </div>
