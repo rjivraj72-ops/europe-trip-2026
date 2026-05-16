@@ -17,34 +17,27 @@
         @media (prefers-color-scheme: dark) { :root { --bg: #000000; --surface: #1c1c1e; --surface2: #2c2c2e; --border: #3a3a3c; --text: #ffffff; } }
         *, *::before, *::after { box-sizing: border-box; }
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; margin: 0; background: var(--bg); color: var(--text); padding-bottom: 50px; }
-        #pin-overlay { position: fixed; inset: 0; z-index: 999; background: var(--surface); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 28px; padding: 40px 24px; }
-        #pin-overlay.hidden { display: none; }
+        #pin-overlay { position: fixed; inset: 0; z-index: 999; background: var(--surface); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 28px; padding: 40px 24px; } #pin-overlay.hidden { display: none; }
         .pin-icon { width: 72px; height: 72px; border-radius: 20px; background: var(--accent); display: flex; align-items: center; justify-content: center; font-size: 2rem; color: white; }
         .pin-title { font-size: 1.4rem; font-weight: 800; margin: 0; text-align: center; } .pin-sub { font-size: 0.85rem; color: var(--grey); margin: -16px 0 0; text-align: center; }
-        .pin-dots { display: flex; gap: 16px; }
-        .pin-dot { width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--grey); background: transparent; transition: background 0.15s, border-color 0.15s; }
+        .pin-dots { display: flex; gap: 16px; } .pin-dot { width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--grey); background: transparent; transition: background 0.15s, border-color 0.15s; }
         .pin-dot.filled { background: var(--accent); border-color: var(--accent); } .pin-dot.error { background: var(--danger); border-color: var(--danger); }
-        @keyframes shake { 0%,100%{transform:translateX(0)} 20%{transform:translateX(-8px)} 40%{transform:translateX(8px)} 60%{transform:translateX(-6px)} 80%{transform:translateX(6px)} }
-        .pin-dots.shake { animation: shake 0.4s ease; }
+        @keyframes shake { 0%,100%{transform:translateX(0)} 20%{transform:translateX(-8px)} 40%{transform:translateX(8px)} 60%{transform:translateX(-6px)} 80%{transform:translateX(6px)} } .pin-dots.shake { animation: shake 0.4s ease; }
         .pin-pad { display: grid; grid-template-columns: repeat(3, 72px); grid-template-rows: repeat(4, 72px); gap: 12px; }
         .pin-key { border: none; background: var(--surface2); border-radius: 50%; font-size: 1.4rem; font-weight: 600; color: var(--text); cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1; transition: background 0.1s, transform 0.1s; touch-action: manipulation; user-select: none; -webkit-user-select: none; }
         .pin-key sub { font-size: 0.45rem; font-weight: 700; letter-spacing: 0.08em; color: var(--grey); margin-top: 2px; text-transform: uppercase; }
         .pin-key:active { background: #d1d1d6; transform: scale(0.94); } .pin-key.ghost { background: transparent; cursor: default; } .pin-key.del { font-size: 1.1rem; }
-        .pin-error-msg { font-size: 0.8rem; color: var(--danger); font-weight: 600; min-height: 1.2em; text-align: center; }
-        .pin-forgot { background: none; border: none; color: var(--accent); font-size: 0.85rem; cursor: pointer; padding: 4px; }
-        #a2hs-banner { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 500px; background: var(--surface); border-top: 1px solid var(--border); padding: 14px 16px; display: flex; align-items: center; gap: 12px; z-index: 200; box-shadow: 0 -4px 20px rgba(0,0,0,0.12); }
-        #a2hs-banner.hidden { display: none; }
+        .pin-error-msg { font-size: 0.8rem; color: var(--danger); font-weight: 600; min-height: 1.2em; text-align: center; } .pin-forgot { background: none; border: none; color: var(--accent); font-size: 0.85rem; cursor: pointer; padding: 4px; }
+        #a2hs-banner { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 500px; background: var(--surface); border-top: 1px solid var(--border); padding: 14px 16px; display: flex; align-items: center; gap: 12px; z-index: 200; box-shadow: 0 -4px 20px rgba(0,0,0,0.12); } #a2hs-banner.hidden { display: none; }
         .a2hs-icon { font-size: 1.8rem; flex-shrink: 0; } .a2hs-text { flex: 1; font-size: 0.8rem; line-height: 1.4; } .a2hs-text strong { display: block; font-size: 0.85rem; margin-bottom: 2px; } .a2hs-text span { color: var(--grey); }
-        .a2hs-btn { background: var(--accent); color: white; border: none; border-radius: 10px; padding: 8px 14px; font-size: 0.8rem; font-weight: 700; cursor: pointer; white-space: nowrap; flex-shrink: 0; }
-        .a2hs-close { background: none; border: none; color: var(--grey); font-size: 1.2rem; cursor: pointer; padding: 4px; flex-shrink: 0; }
+        .a2hs-btn { background: var(--accent); color: white; border: none; border-radius: 10px; padding: 8px 14px; font-size: 0.8rem; font-weight: 700; cursor: pointer; white-space: nowrap; flex-shrink: 0; } .a2hs-close { background: none; border: none; color: var(--grey); font-size: 1.2rem; cursor: pointer; padding: 4px; flex-shrink: 0; }
         .container { max-width: 500px; margin: 0 auto; background: var(--surface); min-height: 100vh; box-shadow: 0 0 30px rgba(0,0,0,0.1); }
         .header { height: var(--header-h); padding: 0 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); background: var(--surface); position: sticky; top: 0; z-index: 100; }
         .header-left { display: flex; flex-direction: column; gap: 2px; } .header-title { font-weight: 900; font-size: 0.95rem; }
         #rate { color: var(--booked); font-weight: 800; font-size: 0.7rem; cursor: pointer; border-bottom: 1px dashed var(--booked); padding-bottom: 1px; }
         .lock-btn { background: none; border: 1px solid var(--border); border-radius: 10px; padding: 6px 10px; color: var(--grey); font-size: 0.75rem; cursor: pointer; display: flex; align-items: center; gap: 5px; transition: background 0.15s; } .lock-btn:hover { background: var(--bg); }
         .theme-btn { background: none; border: 1px solid var(--border); border-radius: 10px; width: 34px; height: 34px; color: var(--grey); font-size: 0.9rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.15s; } .theme-btn:hover { background: var(--bg); }
-        html.dark { --bg: #000000; --surface: #1c1c1e; --surface2: #2c2c2e; --border: #3a3a3c; --text: #ffffff; }
-        html.light { --bg: #f2f2f7; --surface: #ffffff; --surface2: #f9f9fb; --border: #eeeeee; --text: #1c1c1e; }
+        html.dark { --bg: #000000; --surface: #1c1c1e; --surface2: #2c2c2e; --border: #3a3a3c; --text: #ffffff; } html.light { --bg: #f2f2f7; --surface: #ffffff; --surface2: #f9f9fb; --border: #eeeeee; --text: #1c1c1e; }
         #calc-overlay { position: fixed; inset: 0; z-index: 500; background: rgba(0,0,0,0.5); display: flex; align-items: flex-end; justify-content: center; } #calc-overlay.hidden { display: none; }
         .calc-sheet { background: var(--surface); width: 100%; max-width: 500px; border-radius: 24px 24px 0 0; padding: 16px; box-shadow: 0 -8px 40px rgba(0,0,0,0.2); }
         .calc-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; } .calc-title { font-weight: 900; font-size: 1rem; }
@@ -57,22 +50,18 @@
         .calc-key:active { background: #d1d1d6; transform: scale(0.95); } .calc-key.del { font-size: 1rem; } .calc-key.clear { background: #ff3b3020; color: var(--danger); }
         .tz-strip { display: grid; grid-template-columns: 1fr 1fr; background: var(--surface2); border-bottom: 1px solid var(--border); }
         .tz-cell { padding: 10px 16px; display: flex; flex-direction: column; gap: 1px; } .tz-cell:first-child { border-right: 1px solid var(--border); }
-        .tz-label { font-size: 0.6rem; font-weight: 800; color: var(--grey); text-transform: uppercase; letter-spacing: 0.08em; }
-        .tz-time { font-size: 1.1rem; font-weight: 900; font-variant-numeric: tabular-nums; } .tz-date { font-size: 0.65rem; color: var(--grey); font-weight: 600; }
+        .tz-label { font-size: 0.6rem; font-weight: 800; color: var(--grey); text-transform: uppercase; letter-spacing: 0.08em; } .tz-time { font-size: 1.1rem; font-weight: 900; font-variant-numeric: tabular-nums; } .tz-date { font-size: 0.65rem; color: var(--grey); font-weight: 600; }
         .jetlag-tip { padding: 10px 16px; background: var(--surface); border-bottom: 1px solid var(--border); display: flex; align-items: flex-start; gap: 10px; } .jetlag-tip.hidden { display: none; }
         .jetlag-tip-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 1px; } .jetlag-tip-text { font-size: 0.75rem; line-height: 1.5; color: var(--text); }
         .jetlag-tip-title { font-weight: 800; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--accent); margin-bottom: 2px; }
         .ticker { background: linear-gradient(135deg, #0062cc, #007aff); color: white; padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
-        .ticker-label { font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8; }
-        .ticker-value { font-size: 1.5rem; font-weight: 900; font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
-        .ticker-sub { font-size: 0.7rem; font-weight: 600; opacity: 0.75; margin-top: 2px; }
+        .ticker-label { font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8; } .ticker-value { font-size: 1.5rem; font-weight: 900; font-variant-numeric: tabular-nums; letter-spacing: -0.02em; } .ticker-sub { font-size: 0.7rem; font-weight: 600; opacity: 0.75; margin-top: 2px; }
         .ticker-phase { text-align: right; min-width: 100px; } .ticker-phase-name { font-size: 0.85rem; font-weight: 800; } .ticker-phase-label { font-size: 0.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; opacity: 0.7; }
         .itinerary-container { background: #1c1c1e; color: white; padding: 20px; }
         .scroll-window { height: 180px; overflow-y: scroll; padding: 15px; background: #2c2c2e; border-radius: 12px; border: 1px solid #3a3a3c; -webkit-overflow-scrolling: touch; }
         .scroll-window::-webkit-scrollbar { width: 6px; display: block; } .scroll-window::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 10px; }
         .row { display: flex; gap: 15px; padding: 10px 0; border-bottom: 1px solid #333; } .row:last-child { border-bottom: none; }
-        .row-date { font-size: 0.7rem; font-weight: 800; color: var(--accent); text-transform: uppercase; min-width: 50px; }
-        .row-text { font-size: 0.85rem; font-weight: 600; line-height: 1.3; } .row-text a { color: #6fb3ff; text-decoration: none; } .row-text a:hover { text-decoration: underline; }
+        .row-date { font-size: 0.7rem; font-weight: 800; color: var(--accent); text-transform: uppercase; min-width: 50px; } .row-text { font-size: 0.85rem; font-weight: 600; line-height: 1.3; } .row-text a { color: #6fb3ff; text-decoration: none; } .row-text a:hover { text-decoration: underline; }
         .weather-hub { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; padding: 15px; background: var(--bg); }
         .w-btn { background: var(--surface); padding: 15px 10px; border-radius: 16px; text-align: center; border: 1px solid var(--border); color: var(--text); transition: transform 0.15s; cursor: pointer; } .w-btn:active { transform: scale(0.97); }
         .w-city { font-size: 0.65rem; font-weight: 800; color: var(--grey); text-transform: uppercase; display: block; } .w-temp { font-size: 1.5rem; font-weight: 900; display: block; margin: 4px 0; } .w-label { font-size: 0.55rem; color: var(--accent); font-weight: 800; }
@@ -85,8 +74,7 @@
         .action-row { display: flex; gap: 8px; margin: 0 15px 15px; flex-wrap: wrap; }
         .action-btn { flex: 1; min-width: 120px; display: flex; align-items: center; justify-content: center; gap: 6px; padding: 10px 12px; border-radius: 12px; border: none; font-size: 0.78rem; font-weight: 700; cursor: pointer; text-decoration: none; transition: transform 0.12s, opacity 0.12s; touch-action: manipulation; }
         .action-btn:active { transform: scale(0.96); opacity: 0.85; } .btn-nearme { background: var(--accent); color: white; } .btn-drive { background: #28a745; color: white; } .btn-fork { background: #f46f2f; color: white; }
-        .lingo-wrap { margin: 0 15px 12px; perspective: 800px; }
-        .lingo-inner { position: relative; transform-style: preserve-3d; transition: transform 0.45s ease; cursor: pointer; min-height: 160px; }
+        .lingo-wrap { margin: 0 15px 12px; perspective: 800px; } .lingo-inner { position: relative; transform-style: preserve-3d; transition: transform 0.45s ease; cursor: pointer; min-height: 160px; }
         .lingo-wrap.flipped .lingo-inner { transform: rotateY(180deg); }
         .lingo-front, .lingo-back { border-radius: 12px; border: 1px solid var(--border); background: var(--surface2); padding: 12px 15px; backface-visibility: hidden; -webkit-backface-visibility: hidden; min-height: 160px; }
         .lingo-front { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; align-content: center; }
@@ -96,19 +84,14 @@
         .lingo-hint { font-size: 0.55rem; color: var(--accent); text-align: center; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; }
         .lingo-translate { display: flex; align-items: center; justify-content: center; gap: 6px; background: #4285f4; color: white; border: none; border-radius: 8px; padding: 7px 12px; font-size: 0.75rem; font-weight: 700; cursor: pointer; text-decoration: none; margin-top: 2px; transition: opacity 0.15s; } .lingo-translate:active { opacity: 0.8; }
         @media (min-width: 800px) {
-            body { padding-bottom: 0; background: var(--bg); }
-            .container { max-width: 1140px; display: flex; flex-direction: column; min-height: 100vh; }
-            .header { position: sticky; top: 0; z-index: 100; }
-            .desktop-body { display: grid; grid-template-columns: 360px 1fr; flex: 1; align-items: start; }
+            body { padding-bottom: 0; background: var(--bg); } .container { max-width: 1140px; display: flex; flex-direction: column; min-height: 100vh; }
+            .header { position: sticky; top: 0; z-index: 100; } .desktop-body { display: grid; grid-template-columns: 360px 1fr; flex: 1; align-items: start; }
             .sidebar { position: sticky; top: var(--header-h); height: calc(100vh - var(--header-h)); overflow-y: auto; border-right: 1px solid var(--border); }
             .sidebar::-webkit-scrollbar { width: 4px; } .sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
-            .weather-hub { grid-template-columns: repeat(2, 1fr); }
-            .cities { display: grid; grid-template-columns: 1fr 1fr; align-content: start; }
-            .city-section { border-bottom: 1px solid var(--border); padding-bottom: 8px; }
-            .city-section:nth-child(odd) { border-right: 1px solid var(--border); }
+            .weather-hub { grid-template-columns: repeat(2, 1fr); } .cities { display: grid; grid-template-columns: 1fr 1fr; align-content: start; }
+            .city-section { border-bottom: 1px solid var(--border); padding-bottom: 8px; } .city-section:nth-child(odd) { border-right: 1px solid var(--border); }
             .city-section:last-child, .city-section:nth-last-child(2):nth-child(odd) { border-bottom: none; }
-            .hero { height: 200px; margin-top: 0; }
-            .card { margin: -15px 12px 8px; } .action-row { margin: 0 12px 12px; } .lingo-wrap { margin: 0 12px 20px; }
+            .hero { height: 200px; margin-top: 0; } .card { margin: -15px 12px 8px; } .action-row { margin: 0 12px 12px; } .lingo-wrap { margin: 0 12px 20px; }
             #a2hs-banner { max-width: 1140px; }
         }
     </style>
@@ -126,14 +109,14 @@
             <div class="ticker" id="ticker"><div><div class="ticker-label" id="ticker-label">Departure in</div><div class="ticker-value" id="ticker-value">--:--:--:--</div><div class="ticker-sub" id="ticker-sub"></div></div><div class="ticker-phase" id="ticker-phase"></div></div>
             <div class="jetlag-tip" id="jetlag-tip"><div class="jetlag-tip-icon">🕐</div><div><div class="jetlag-tip-title">Adjusting to local time</div><div class="jetlag-tip-text">Set your watch to Lisbon at boarding. Sleep on the plane. Stay awake until 10 PM on arrival — morning sunlight does the rest.</div></div></div>
             <div class="itinerary-container"><div class="scroll-window">
-                <div class="row"><span class="row-date">May 16</span><span class="row-text"><a href="https://www.google.com/travel/flights?q=AC 306" target="_blank" rel="noopener noreferrer">AC 306</a> • <a href="https://www.google.com/travel/flights?q=AC 812" target="_blank" rel="noopener noreferrer">AC 812</a> (YVR➔LIS) • Moxy Lisbon City</span></div>
+                <div class="row"><span class="row-date">May 16</span><span class="row-text"><a href="https://www.google.com/search?q=AC+306+flight+status" target="_blank" rel="noopener noreferrer">AC 306</a> • <a href="https://www.google.com/search?q=AC+812+flight+status" target="_blank" rel="noopener noreferrer">AC 812</a> (YVR➔LIS) • Moxy Lisbon City</span></div>
                 <div class="row"><span class="row-date">May 17</span><span class="row-text">Ismaili Centre Lisbon Guided Tour</span></div>
                 <div class="row"><span class="row-date">May 19</span><span class="row-text">Avis Pick-up • Drive to Algarve • Pine Cliffs</span></div>
                 <div class="row"><span class="row-date">May 21</span><span class="row-text">11:00 AM: Benagil Grottoes Kayak Adventure</span></div>
                 <div class="row"><span class="row-date">May 24</span><span class="row-text">Drive to Cordoba • Mosque-Cathedral Visit</span></div>
                 <div class="row"><span class="row-date">May 26</span><span class="row-text">Granada: Alhambra (12:00) • Hammam Spa (4:00)</span></div>
-                <div class="row"><span class="row-date">May 27</span><span class="row-text"><a href="https://www.google.com/travel/flights?q=VY 2013" target="_blank" rel="noopener noreferrer">VY 2013</a> (GRX➔BCN) • Le Méridien Barcelona</span></div>
-                <div class="row"><span class="row-date">May 30</span><span class="row-text">Return <a href="https://www.google.com/travel/flights?q=AC 821" target="_blank" rel="noopener noreferrer">AC 821</a> • <a href="https://www.google.com/travel/flights?q=AC 33" target="_blank" rel="noopener noreferrer">AC 33</a> (BCN➔YVR)</span></div>
+                <div class="row"><span class="row-date">May 27</span><span class="row-text"><a href="https://www.google.com/search?q=VY+2013+flight+status" target="_blank" rel="noopener noreferrer">VY 2013</a> (GRX➔BCN) • Le Méridien Barcelona</span></div>
+                <div class="row"><span class="row-date">May 30</span><span class="row-text">Return <a href="https://www.google.com/search?q=AC+821+flight+status" target="_blank" rel="noopener noreferrer">AC 821</a> • <a href="https://www.google.com/search?q=AC+33+flight+status" target="_blank" rel="noopener noreferrer">AC 33</a> (BCN➔YVR)</span></div>
             </div></div>
             <div class="weather-hub">
                 <button class="w-btn" onclick="openWeather('https://www.accuweather.com/en/pt/lisbon/274087/daily-weather-forecast/274087')"><span class="w-city">Lisbon</span><span id="w1" class="w-temp">--°</span><span class="w-label">TAP FOR FORECAST</span></button>
