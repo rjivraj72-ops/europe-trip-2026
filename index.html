@@ -377,10 +377,8 @@
                 min-height: 100vh;
             }
 
-            /* Header spans full width */
             .header { position: sticky; top: 0; z-index: 100; }
 
-            /* Body splits into sidebar + cities */
             .desktop-body {
                 display: grid;
                 grid-template-columns: 360px 1fr;
@@ -388,7 +386,6 @@
                 align-items: start;
             }
 
-            /* Sticky sidebar */
             .sidebar {
                 position: sticky;
                 top: var(--header-h);
@@ -399,10 +396,8 @@
             .sidebar::-webkit-scrollbar { width: 4px; }
             .sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
 
-            /* Weather hub — keep 2×2 inside narrow sidebar */
             .weather-hub { grid-template-columns: repeat(2, 1fr); }
 
-            /* Cities — 2×2 grid */
             .cities {
                 display: grid;
                 grid-template-columns: 1fr 1fr;
@@ -423,7 +418,6 @@
             .action-row  { margin: 0 12px 12px; }
             .lingo-wrap  { margin: 0 12px 20px; }
 
-            /* A2HS banner max width on desktop */
             #a2hs-banner { max-width: 1140px; }
         }
     </style>
@@ -509,9 +503,9 @@
             <div id="rate">1 EUR = 1.48 CAD</div>
         </div>
         <div style="display:flex;gap:6px;align-items:center;">
-            <button class="theme-btn" id="chatgpt-btn" aria-label="ChatGPT" onclick="openChatGPT()"><i class="fa-solid fa-robot"></i></button>
-            <button class="theme-btn" id="theme-btn" aria-label="Toggle dark mode"><i class="fa-solid fa-moon"></i></button>
-            <button class="lock-btn" id="lock-btn" aria-label="Lock"><i class="fa-solid fa-lock"></i> Lock</button>
+            <button class="theme-btn" id="chatgpt-btn" aria-label="ChatGPT" onclick="openChatGPT()">🤖</button>
+            <button class="theme-btn" id="theme-btn" aria-label="Toggle dark mode">🌙</button>
+            <button class="lock-btn" id="lock-btn" aria-label="Lock">🔒 Lock</button>
         </div>
     </div>
 
@@ -653,7 +647,7 @@
                 </div>
             </div>
 
-            <!-- ALGARVE — Pine Cliffs ochre cliffs / Atlantic ocean -->
+            <!-- ALGARVE -->
             <div class="city-section">
                 <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&auto=format&fit=crop');">
                     <div class="hero-text">
@@ -1095,7 +1089,7 @@
 
 // ── DAILY ACCENT COLOUR ────────────────────────────────────────────────────
 // ── DARK MODE TOGGLE ───────────────────────────────────────────────────────
-(function(){const K='jgt2026_theme',btn=document.getElementById('theme-btn'),icon=btn.querySelector('i');function apply(t){document.documentElement.classList.remove('light','dark');document.documentElement.classList.add(t);icon.className=t==='dark'?'fa-solid fa-sun':'fa-solid fa-moon';localStorage.setItem(K,t)}const saved=localStorage.getItem(K);if(saved){apply(saved)}else{apply(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}btn.addEventListener('click',()=>{const cur=document.documentElement.classList.contains('dark')?'light':'dark';apply(cur)})})();
+(function(){const K='jgt2026_theme',btn=document.getElementById('theme-btn');function apply(t){document.documentElement.classList.remove('light','dark');document.documentElement.classList.add(t);btn.textContent=t==='dark'?'☀️':'🌙';localStorage.setItem(K,t)}const saved=localStorage.getItem(K);if(saved){apply(saved)}else{apply(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}btn.addEventListener('click',()=>{const cur=document.documentElement.classList.contains('dark')?'light':'dark';apply(cur)})})();
 
 (function(){const palette=['#007aff','#5856d6','#af52de','#ff2d55','#ff9500','#34c759','#00c7be'];document.documentElement.style.setProperty('--accent',palette[new Date().getDay()])})();
 
