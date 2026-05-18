@@ -921,7 +921,6 @@
 
 // ── TIMEZONE STRIP + SIMPLE DAY BANNER ─────────────────────────────────────
 (function () {
-    // Simple day-based lookup — no countdowns, no UTC math
     const DAYS = [
         { day: 16, text: '✈️ Travel Day — YVR → Lisbon',        tz: 'Europe/Lisbon',  flag: '🇵🇹', city: 'Lisbon' },
         { day: 17, text: '🙏🏾 Day 2 — Lisbon · Ismaili Centre',  tz: 'Europe/Lisbon',  flag: '🇵🇹', city: 'Lisbon' },
@@ -960,7 +959,7 @@
         vanDateEl.textContent = fmtDate(now, 'America/Vancouver');
 
         const mayDay = now.getDate();
-        const month  = now.getMonth(); // 0-indexed, May = 4
+        const month  = now.getMonth();
         const entry  = (month === 4) ? DAYS.find(d => d.day === mayDay) : null;
 
         if (entry) {
@@ -971,7 +970,6 @@
             labelEl.textContent = ''; valueEl.textContent = ''; subEl.textContent = '';
             phaseEl.innerHTML = `<div class="ticker-phase-name" style="font-size:0.8rem;text-align:center;width:100%">${entry.text}</div>`;
         } else if (month === 4 && mayDay < 16) {
-            // Pre-trip
             destLabelEl.textContent = '🇵🇹 Lisbon';
             destTimeEl.textContent  = fmtTime(now, 'Europe/Lisbon');
             destDateEl.textContent  = fmtDate(now, 'Europe/Lisbon');
@@ -980,7 +978,6 @@
             labelEl.textContent = ''; valueEl.textContent = ''; subEl.textContent = '';
             phaseEl.innerHTML = `<div class="ticker-phase-name" style="font-size:0.8rem;text-align:center;width:100%">✈️ ${daysLeft} day${daysLeft>1?'s':''} until departure</div>`;
         } else {
-            // Post-trip
             destLabelEl.textContent = '🇨🇦 Vancouver';
             destTimeEl.textContent  = fmtTime(now, 'America/Vancouver');
             destDateEl.textContent  = fmtDate(now, 'America/Vancouver');
@@ -1063,7 +1060,6 @@
 
     document.getElementById('rate').addEventListener('click', openCal);
 
-    // Keep rate in sync with live fetch
     window.addEventListener('rateUpdate', e => {
         liveRate = e.detail;
         document.getElementById('calc-rate-label').textContent = `1 EUR = ${liveRate.toFixed(2)} CAD`;
@@ -1072,7 +1068,6 @@
 })();
 
 // ── APP DEEP LINKS ──────────────────────────────────────────────────────────
-// ── JET LAG TIP AUTO-HIDE ──────────────────────────────────────────────────
 // ── DAILY FUN FACT ─────────────────────────────────────────────────────────
 (function(){
     const FACTS={
