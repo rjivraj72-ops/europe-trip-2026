@@ -202,6 +202,7 @@
         <div class="header-left"><div class="header-title">EUROPE 2026</div><div id="rate">1 EUR = 1.48 CAD</div></div>
         <div style="display:flex;gap:6px;align-items:center;">
             <button class="theme-btn" id="chatgpt-btn" aria-label="ChatGPT" onclick="openChatGPT()">🤖</button>
+            <button class="theme-btn" id="refresh-btn" aria-label="Refresh" onclick="update()">🔄</button>
             <button class="theme-btn" id="theme-btn" aria-label="Toggle dark mode">🌙</button>
             <button class="lock-btn" id="lock-btn" aria-label="Lock">🔒 Lock</button>
         </div>
@@ -232,12 +233,10 @@
                 <button class="w-btn" onclick="openWeather()"><span class="w-city">Córdoba</span><span id="w3" class="w-temp">--°</span><span class="w-label">TAP FOR FORECAST</span></button>
                 <button class="w-btn" onclick="openWeather()"><span class="w-city">Granada</span><span id="w4" class="w-temp">--°</span><span class="w-label">TAP FOR FORECAST</span></button>
                 <button class="w-btn" onclick="openWeather()"><span class="w-city">Barcelona</span><span id="w5" class="w-temp">--°</span><span class="w-label">TAP FOR FORECAST</span></button>
-                <button class="w-refresh" onclick="update()" style="grid-column:1/-1;background:none;border:1px solid var(--border);border-radius:10px;padding:8px;font-size:0.75rem;font-weight:700;color:var(--accent);cursor:pointer;transition:opacity 0.15s;">🔄 Refresh</button>
             </div>
         </div>
 
         <div class="cities">
-            <!-- LISBON -->
             <div class="city-section">
                 <div class="hero" style="background-image:url('https://images.unsplash.com/photo-1573843981267-be1999ff37cd?w=800&auto=format&fit=crop');"><div class="hero-text"><div class="hero-dates">May 16 – 19</div><h2>Lisbon</h2></div></div>
                 <div class="card">
@@ -253,7 +252,6 @@
                 <div class="lingo-wrap" onclick="this.classList.toggle('flipped')"><div class="lingo-inner"><div class="lingo-front"><div class="lingo-pair"><span>Thank you</span><strong>Obrigado</strong></div><div class="lingo-pair"><span>Where is...?</span><strong>Onde fica...?</strong></div><div class="lingo-hint" style="grid-column:1/-1">Tap for more & translate</div></div><div class="lingo-back"><div class="lingo-back-phrases"><div class="lingo-pair"><span>Excuse me</span><strong>Com licença</strong></div><div class="lingo-pair"><span>How much?</span><strong>Quanto custa?</strong></div><div class="lingo-pair"><span>Do you speak English?</span><strong>Fala inglês?</strong></div><div class="lingo-pair"><span>The bill please</span><strong>A conta, por favor</strong></div></div><button class="lingo-translate" onclick="event.stopPropagation(); openTranslate('pt','https://translate.google.com/?sl=en&tl=pt&op=translate')"><i class="fa-solid fa-language"></i> Google Translate (PT)</button></div></div></div>
             </div>
 
-            <!-- ALGARVE -->
             <div class="city-section">
                 <div class="hero" style="background-image:url('https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&auto=format&fit=crop');"><div class="hero-text"><div class="hero-dates">May 20 – 24</div><h2>Algarve</h2></div></div>
                 <div class="card">
@@ -268,7 +266,6 @@
                 <div class="lingo-wrap" onclick="this.classList.toggle('flipped')"><div class="lingo-inner"><div class="lingo-front"><div class="lingo-pair"><span>Excuse me</span><strong>Com licença</strong></div><div class="lingo-pair"><span>How much?</span><strong>Quanto custa?</strong></div><div class="lingo-hint" style="grid-column:1/-1">Tap for more & translate</div></div><div class="lingo-back"><div class="lingo-back-phrases"><div class="lingo-pair"><span>Thank you</span><strong>Obrigado</strong></div><div class="lingo-pair"><span>Where is...?</span><strong>Onde fica...?</strong></div><div class="lingo-pair"><span>Help!</span><strong>Socorro!</strong></div><div class="lingo-pair"><span>A table for two</span><strong>Uma mesa para dois</strong></div></div><button class="lingo-translate" onclick="event.stopPropagation(); openTranslate('pt','https://translate.google.com/?sl=en&tl=pt&op=translate')"><i class="fa-solid fa-language"></i> Google Translate (PT)</button></div></div></div>
             </div>
 
-            <!-- CÓRDOBA -->
             <div class="city-section">
                 <div class="hero" style="background-image:url('https://images.unsplash.com/photo-1570698473651-b2de99bae12f?w=800&auto=format&fit=crop');"><div class="hero-text"><div class="hero-dates">May 24 – 25</div><h2>Córdoba</h2></div></div>
                 <div class="card">
@@ -283,7 +280,6 @@
                 <div class="lingo-wrap" onclick="this.classList.toggle('flipped')"><div class="lingo-inner"><div class="lingo-front"><div class="lingo-pair"><span>Hello</span><strong>Hola</strong></div><div class="lingo-pair"><span>Thank you</span><strong>Gracias</strong></div><div class="lingo-hint" style="grid-column:1/-1">Tap for more & translate</div></div><div class="lingo-back"><div class="lingo-back-phrases"><div class="lingo-pair"><span>Excuse me</span><strong>Perdona</strong></div><div class="lingo-pair"><span>How much?</span><strong>¿Cuánto cuesta?</strong></div><div class="lingo-pair"><span>Do you speak English?</span><strong>¿Habla inglés?</strong></div><div class="lingo-pair"><span>The bill please</span><strong>La cuenta, por favor</strong></div></div><button class="lingo-translate" onclick="event.stopPropagation(); openTranslate('es','https://translate.google.com/?sl=en&tl=es&op=translate')"><i class="fa-solid fa-language"></i> Google Translate (ES)</button></div></div></div>
             </div>
 
-            <!-- GRANADA -->
             <div class="city-section">
                 <div class="hero" style="background-image:url('https://images.unsplash.com/photo-1526392060635-9d6019884377?w=800&auto=format&fit=crop');"><div class="hero-text"><div class="hero-dates">May 25 – 27</div><h2>Granada</h2></div></div>
                 <div class="card">
@@ -298,7 +294,6 @@
                 <div class="lingo-wrap" onclick="this.classList.toggle('flipped')"><div class="lingo-inner"><div class="lingo-front"><div class="lingo-pair"><span>Good morning</span><strong>Buenos días</strong></div><div class="lingo-pair"><span>Please</span><strong>Por favor</strong></div><div class="lingo-hint" style="grid-column:1/-1">Tap for more & translate</div></div><div class="lingo-back"><div class="lingo-back-phrases"><div class="lingo-pair"><span>Where is...?</span><strong>¿Dónde está...?</strong></div><div class="lingo-pair"><span>Water please</span><strong>Agua, por favor</strong></div><div class="lingo-pair"><span>It's beautiful</span><strong>Es hermoso</strong></div><div class="lingo-pair"><span>Help!</span><strong>¡Ayuda!</strong></div></div><button class="lingo-translate" onclick="event.stopPropagation(); openTranslate('es','https://translate.google.com/?sl=en&tl=es&op=translate')"><i class="fa-solid fa-language"></i> Google Translate (ES)</button></div></div></div>
             </div>
 
-            <!-- BARCELONA -->
             <div class="city-section">
                 <div class="hero" style="background-image:url('https://images.unsplash.com/photo-1539037116277-4db20889f2d4?w=800&auto=format&fit=crop');"><div class="hero-text"><div class="hero-dates">May 27 – 30</div><h2>Barcelona</h2></div></div>
                 <div class="card">
