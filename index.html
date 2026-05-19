@@ -53,6 +53,8 @@
         .lock-btn:hover{background:var(--bg)}
         .theme-btn{background:none;border:1px solid var(--border);border-radius:12px;width:42px;height:42px;color:var(--grey);font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background 0.15s}
         .theme-btn:hover{background:var(--bg)}
+        @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+        .theme-btn.spinning{animation:spin 0.8s ease}
         html.dark{--bg:#000000;--surface:#1c1c1e;--surface2:#2c2c2e;--border:#3a3a3c;--text:#ffffff}
         html.light{--bg:#f2f2f7;--surface:#ffffff;--surface2:#f9f9fb;--border:#eeeeee;--text:#1c1c1e}
         #calc-overlay{position:fixed;inset:0;z-index:500;background:rgba(0,0,0,0.5);display:flex;align-items:flex-end;justify-content:center}
@@ -332,9 +334,22 @@ function openWeather(){window.location.href='weather://'}
 function openChatGPT(){const start=Date.now();window.location='chatgpt://';setTimeout(()=>{if(Date.now()-start<2000)window.open('https://chat.openai.com','_blank')},1500)}
 
 const weatherKey='ff6e4e362f0a4231841165933261005';
-async function update(){try{const r=await fetch('https://open.er-api.com/v6/latest/EUR');const d=await r.json();const rate=d.rates.CAD;document.getElementById('rate').textContent=`1 EUR = ${rate.toFixed(2)} CAD`;window.dispatchEvent(new CustomEvent('rateUpdate',{detail:rate}))}catch(err){}const cities=[['Lisbon','w1'],['Albufeira','w2'],['Cordoba,Spain','w3'],['Granada,Spain','w4'],['Barcelona','w5']];await Promise.all(cities.map(async([city,id])=>{try{const res=await fetch(`https://api.weatherapi.com/v1/current.json?key=${weatherKey}&q=${city}`);const data=await res.json();const code=data.current.condition.code;let icon;if(code===1000)icon='☀️';else if(code===1003)icon='⛅';else if(code===1006||code===1009)icon='☁️';else if(code===1030||code===1135||code===1147)icon='🌫️';else if(code>=1063&&code<=1087)icon='⛈️';else if(code>=1150&&code<=1201)icon='🌧️';else if(code>=1210&&code<=1237)icon='🌨️';else if(code>=1240&&code<=1282)icon='🌦️';else icon='🌡️';document.getElementById(id).textContent=`${icon} ${Math.round(data.current.temp_c)}°`}catch(err){}}))}
+async function update(){
+    const btn=document.getElementById('refresh-btn');
+    if(btn){btn.classList.add('spinning');btn.addEventListener('animationend',()=>btn.classList.remove('spinning'),{once:true})}
+    try{const r=await fetch('https://open.er-api.com/v6/latest/EUR');const d=await r.json();const rate=d.rates.CAD;document.getElementById('rate').textContent=`1 EUR = ${rate.toFixed(2)} CAD`;window.dispatchEvent(new CustomEvent('rateUpdate',{detail:rate}))}catch(err){}
+    const cities=[['Lisbon','w1'],['Albufeira','w2'],['Cordoba,Spain','w3'],['Granada,Spain','w4'],['Barcelona','w5']];
+    await Promise.all(cities.map(async([city,id])=>{try{const res=await fetch(`https://api.weatherapi.com/v1/current.json?key=${weatherKey}&q=${city}`);const data=await res.json();const code=data.current.condition.code;let icon;if(code===1000)icon='☀️';else if(code===1003)icon='⛅';else if(code===1006||code===1009)icon='☁️';else if(code===1030||code===1135||code===1147)icon='🌫️';else if(code>=1063&&code<=1087)icon='⛈️';else if(code>=1150&&code<=1201)icon='🌧️';else if(code>=1210&&code<=1237)icon='🌨️';else if(code>=1240&&code<=1282)icon='🌦️';else icon='🌡️';document.getElementById(id).textContent=`${icon} ${Math.round(data.current.temp_c)}°`}catch(err){}}))
+}
 update();
 setInterval(update,1800000);
+
+(function(){
+    let startY=0,pulling=false;
+    document.addEventListener('touchstart',e=>{if(window.scrollY===0){startY=e.touches[0].clientY;pulling=true}},{passive:true});
+    document.addEventListener('touchmove',e=>{if(!pulling)return;const diff=e.touches[0].clientY-startY;if(diff>80){pulling=false;update()}},{passive:true});
+    document.addEventListener('touchend',()=>{pulling=false},{passive:true});
+})();
 </script>
 </body>
 </html>
