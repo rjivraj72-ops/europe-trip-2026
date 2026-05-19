@@ -219,9 +219,9 @@
         }
         .tz-cell { padding: 10px 16px; display: flex; flex-direction: column; gap: 1px; }
         .tz-cell:first-child { border-right: 1px solid var(--border); }
-        .tz-label { font-size: 0.6rem; font-weight: 800; color: var(--grey); text-transform: uppercase; letter-spacing: 0.08em; }
-        .tz-time  { font-size: 1.1rem; font-weight: 900; font-variant-numeric: tabular-nums; }
-        .tz-date  { font-size: 0.65rem; color: var(--grey); font-weight: 600; }
+        .tz-label { font-size: 0.75rem; font-weight: 800; color: var(--grey); text-transform: uppercase; letter-spacing: 0.08em; }
+        .tz-time  { font-size: 1.3rem; font-weight: 900; font-variant-numeric: tabular-nums; }
+        .tz-date  { font-size: 0.8rem; color: var(--grey); font-weight: 600; }
 
         /* ── COUNTDOWN TICKER ── */
         /* ── JET LAG TIP ── */
@@ -232,21 +232,21 @@
             display: flex; align-items: flex-start; gap: 10px;
         }
         .jetlag-tip.hidden { display: none; }
-        .jetlag-tip-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 1px; }
-        .jetlag-tip-text { font-size: 0.75rem; line-height: 1.5; color: var(--text); }
-        .jetlag-tip-title { font-weight: 800; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--accent); margin-bottom: 2px; }
+        .jetlag-tip-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 1px; }
+        .jetlag-tip-text { font-size: 0.9rem; line-height: 1.5; color: var(--text); }
+        .jetlag-tip-title { font-weight: 800; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--accent); margin-bottom: 2px; }
 
         .ticker {
             background: linear-gradient(135deg, #0062cc, #007aff);
             color: white; padding: 14px 20px;
-            display: flex; align-items: center; justify-content: space-between; gap: 10px;
+            display: flex; align-items: center; justify-content: center; gap: 10px;
         }
-        .ticker-label { font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8; }
+        .ticker-label { font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8; }
         .ticker-value { font-size: 1.5rem; font-weight: 900; font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
-        .ticker-sub   { font-size: 0.7rem; font-weight: 600; opacity: 0.75; margin-top: 2px; }
-        .ticker-phase { text-align: right; min-width: 100px; }
-        .ticker-phase-name  { font-size: 0.85rem; font-weight: 800; }
-        .ticker-phase-label { font-size: 0.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; opacity: 0.7; }
+        .ticker-sub   { font-size: 0.8rem; font-weight: 600; opacity: 0.75; margin-top: 2px; }
+        .ticker-phase { text-align: center; min-width: 100px; }
+        .ticker-phase-name  { font-size: 0.95rem; font-weight: 800; }
+        .ticker-phase-label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; opacity: 0.7; }
 
         /* ── ITINERARY SCROLL ── */
         .itinerary-container { background: #1c1c1e; color: white; padding: 20px; }
@@ -1061,7 +1061,6 @@
     });
 })();
 
-// ── APP DEEP LINKS ──────────────────────────────────────────────────────────
 // ── DAILY FUN FACT ─────────────────────────────────────────────────────────
 (function(){
     const FACTS={
@@ -1087,10 +1086,10 @@
     else{document.getElementById('daily-fact').style.display='none'}
 })();
 
-// ── DAILY ACCENT COLOUR ────────────────────────────────────────────────────
 // ── DARK MODE TOGGLE ───────────────────────────────────────────────────────
 (function(){const K='jgt2026_theme',btn=document.getElementById('theme-btn');function apply(t){document.documentElement.classList.remove('light','dark');document.documentElement.classList.add(t);btn.textContent=t==='dark'?'☀️':'🌙';localStorage.setItem(K,t)}const saved=localStorage.getItem(K);if(saved){apply(saved)}else{apply(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}btn.addEventListener('click',()=>{const cur=document.documentElement.classList.contains('dark')?'light':'dark';apply(cur)})})();
 
+// ── DAILY ACCENT COLOUR ────────────────────────────────────────────────────
 (function(){const palette=['#007aff','#5856d6','#af52de','#ff2d55','#ff9500','#34c759','#00c7be'];document.documentElement.style.setProperty('--accent',palette[new Date().getDay()])})();
 
 function openFork(city, webUrl) {
