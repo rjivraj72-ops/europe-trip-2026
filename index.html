@@ -46,7 +46,6 @@
             padding-bottom: 50px;
         }
 
-        /* ── PIN OVERLAY ── */
         #pin-overlay {
             position: fixed; inset: 0; z-index: 999;
             background: var(--surface);
@@ -103,7 +102,6 @@
         .pin-error-msg  { font-size: 0.8rem; color: var(--danger); font-weight: 600; min-height: 1.2em; text-align: center; }
         .pin-forgot     { background: none; border: none; color: var(--accent); font-size: 0.85rem; cursor: pointer; padding: 4px; }
 
-        /* ── ADD TO HOME SCREEN BANNER ── */
         #a2hs-banner {
             position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
             width: 100%; max-width: 500px;
@@ -125,14 +123,12 @@
         }
         .a2hs-close { background: none; border: none; color: var(--grey); font-size: 1.2rem; cursor: pointer; padding: 4px; flex-shrink: 0; }
 
-        /* ── MAIN CONTAINER ── */
         .container {
             max-width: 500px; margin: 0 auto;
             background: var(--surface); min-height: 100vh;
             box-shadow: 0 0 30px rgba(0,0,0,0.1);
         }
 
-        /* ── HEADER ── */
         .header {
             height: var(--header-h);
             padding: 0 20px;
@@ -163,7 +159,6 @@
         html.dark { --bg: #000000; --surface: #1c1c1e; --surface2: #2c2c2e; --border: #3a3a3c; --text: #ffffff; }
         html.light { --bg: #f2f2f7; --surface: #ffffff; --surface2: #f9f9fb; --border: #eeeeee; --text: #1c1c1e; }
 
-        /* ── CURRENCY CALCULATOR ── */
         #calc-overlay {
             position: fixed; inset: 0; z-index: 500;
             background: rgba(0,0,0,0.5);
@@ -212,7 +207,6 @@
         .calc-key.del   { font-size: 1rem; }
         .calc-key.clear { background: #ff3b3020; color: var(--danger); }
 
-        /* ── TIMEZONE STRIP ── */
         .tz-strip {
             display: grid; grid-template-columns: 1fr 1fr;
             background: var(--surface2); border-bottom: 1px solid var(--border);
@@ -223,8 +217,6 @@
         .tz-time  { font-size: 1.3rem; font-weight: 900; font-variant-numeric: tabular-nums; }
         .tz-date  { font-size: 0.8rem; color: var(--grey); font-weight: 600; }
 
-        /* ── COUNTDOWN TICKER ── */
-        /* ── JET LAG TIP ── */
         .jetlag-tip {
             padding: 10px 16px;
             background: var(--surface);
@@ -248,7 +240,6 @@
         .ticker-phase-name  { font-size: 0.95rem; font-weight: 800; }
         .ticker-phase-label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; opacity: 0.7; }
 
-        /* ── ITINERARY SCROLL ── */
         .itinerary-container { background: #1c1c1e; color: white; padding: 20px; }
         .scroll-window {
             height: 180px; overflow-y: scroll; padding: 15px;
@@ -264,7 +255,6 @@
         .row-text a { color: #6fb3ff; text-decoration: none; }
         .row-text a:hover { text-decoration: underline; }
 
-        /* ── WEATHER HUB ── */
         .weather-hub { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; padding: 15px; background: var(--bg); }
         .w-btn {
             background: var(--surface); padding: 15px 10px; border-radius: 16px;
@@ -276,7 +266,6 @@
         .w-temp  { font-size: 1.5rem; font-weight: 900; display: block; margin: 4px 0; }
         .w-label { font-size: 0.55rem; color: var(--accent); font-weight: 800; }
 
-        /* ── CITY SECTIONS ── */
         .hero {
             height: 240px; background-size: cover; background-position: center;
             display: flex; align-items: flex-end; padding: 20px;
@@ -300,7 +289,6 @@
         .item a { color: var(--text); text-decoration: none; border-bottom: 1px solid var(--border); }
         .item a:hover { border-bottom-color: var(--accent); color: var(--accent); }
 
-        /* ── ACTION BUTTONS ── */
         .action-row {
             display: flex; gap: 8px; margin: 0 15px 15px; flex-wrap: wrap;
         }
@@ -317,7 +305,6 @@
         .btn-drive  { background: #28a745; color: white; }
         .btn-fork   { background: #f46f2f; color: white; }
 
-        /* ── LINGO CARDS ── */
         .lingo-wrap {
             margin: 0 15px 12px;
             perspective: 800px;
@@ -366,7 +353,6 @@
         }
         .lingo-translate:active { opacity: 0.8; }
 
-        /* ── DESKTOP TWO-COLUMN LAYOUT ── */
         @media (min-width: 800px) {
             body { padding-bottom: 0; background: var(--bg); }
 
@@ -425,7 +411,6 @@
 <body>
 <noscript><p style="text-align:center;padding:20px;color:#666;">Enable JavaScript for live weather, exchange rates, and PIN protection.</p></noscript>
 
-<!-- ── PIN OVERLAY ── -->
 <div id="pin-overlay">
     <div class="pin-icon">✈️</div>
     <h1 class="pin-title" id="pin-title">Welcome back</h1>
@@ -454,7 +439,6 @@
     <button class="pin-forgot" id="pin-forgot">Forgot PIN?</button>
 </div>
 
-<!-- ── ADD TO HOME SCREEN BANNER ── -->
 <div id="a2hs-banner" class="hidden">
     <div class="a2hs-icon">📲</div>
     <div class="a2hs-text">
@@ -465,7 +449,6 @@
     <button class="a2hs-close" id="a2hs-close" aria-label="Dismiss">✕</button>
 </div>
 
-<!-- ── CURRENCY CALCULATOR ── -->
 <div id="calc-overlay" class="hidden" onclick="if(event.target===this)closeCal()">
     <div class="calc-sheet">
         <div class="calc-header">
@@ -495,7 +478,6 @@
     </div>
 </div>
 
-<!-- ── MAIN APP ── -->
 <div class="container" id="app">
     <div class="header">
         <div class="header-left">
@@ -511,7 +493,6 @@
 
     <div class="desktop-body">
 
-        <!-- ── SIDEBAR ── -->
         <div class="sidebar">
             <div class="tz-strip">
                 <div class="tz-cell">
@@ -597,13 +578,12 @@
                 <button class="w-btn" onclick="openWeather('https://www.accuweather.com/en/es/barcelona/307297/daily-weather-forecast/307297')">
                     <span class="w-city">Barcelona</span><span id="w4" class="w-temp">--°</span><span class="w-label">TAP FOR FORECAST</span>
                 </button>
+                <button class="w-refresh" onclick="update()" style="grid-column:1/-1;background:none;border:1px solid var(--border);border-radius:10px;padding:8px;font-size:0.75rem;font-weight:700;color:var(--accent);cursor:pointer;transition:opacity 0.15s;">🔄 Refresh Weather & Rate</button>
             </div>
-        </div><!-- /sidebar -->
+        </div>
 
-        <!-- ── CITIES 2×2 GRID ── -->
         <div class="cities">
 
-            <!-- LISBON -->
             <div class="city-section">
                 <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1573843981267-be1999ff37cd?w=800&auto=format&fit=crop');">
                     <div class="hero-text">
@@ -647,7 +627,6 @@
                 </div>
             </div>
 
-            <!-- ALGARVE -->
             <div class="city-section">
                 <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&auto=format&fit=crop');">
                     <div class="hero-text">
@@ -692,7 +671,6 @@
                 </div>
             </div>
 
-            <!-- ANDALUSIA -->
             <div class="city-section">
                 <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?w=800&auto=format&fit=crop');">
                     <div class="hero-text">
@@ -738,7 +716,6 @@
                 </div>
             </div>
 
-            <!-- BARCELONA -->
             <div class="city-section">
                 <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1539037116277-4db20889f2d4?w=800&auto=format&fit=crop');">
                     <div class="hero-text">
@@ -783,14 +760,13 @@
                 </div>
             </div>
 
-        </div><!-- /cities -->
-    </div><!-- /desktop-body -->
-</div><!-- /app -->
+        </div>
+    </div>
+</div>
 
 <script>
 'use strict';
 
-// ── PIN MODULE ──────────────────────────────────────────────────────────────
 (function () {
     const STORE_KEY = 'jgt2026_pin';
     const LOCK_KEY  = 'jgt2026_locked';
@@ -912,8 +888,6 @@
     else              { enterVerifyMode(); showOverlay(); }
 })();
 
-
-// ── TIMEZONE STRIP + SIMPLE DAY BANNER ─────────────────────────────────────
 (function () {
     const DAYS = [
         { day: 16, text: '✈️ Travel Day — YVR → Lisbon',        tz: 'Europe/Lisbon',  flag: '🇵🇹', city: 'Lisbon' },
@@ -984,8 +958,6 @@
     setInterval(tick, 60000);
 })();
 
-
-// ── ADD TO HOME SCREEN ──────────────────────────────────────────────────────
 (function () {
     const A2HS_KEY   = 'jgt2026_a2hs';
     const banner     = document.getElementById('a2hs-banner');
@@ -1020,8 +992,6 @@
     closeBtn.addEventListener('click', () => { banner.classList.add('hidden'); localStorage.setItem(A2HS_KEY,'1'); });
 })();
 
-
-// ── CURRENCY CALCULATOR ────────────────────────────────────────────────────
 (function () {
     let eurBuf = '0';
     let liveRate = 1.48;
@@ -1061,7 +1031,6 @@
     });
 })();
 
-// ── DAILY FUN FACT ─────────────────────────────────────────────────────────
 (function(){
     const FACTS={
         16:{icon:'✈️',text:'Your flight covers 8,800 km — roughly the same distance as walking the Great Wall of China end to end.'},
@@ -1086,10 +1055,8 @@
     else{document.getElementById('daily-fact').style.display='none'}
 })();
 
-// ── DARK MODE TOGGLE ───────────────────────────────────────────────────────
 (function(){const K='jgt2026_theme',btn=document.getElementById('theme-btn');function apply(t){document.documentElement.classList.remove('light','dark');document.documentElement.classList.add(t);btn.textContent=t==='dark'?'☀️':'🌙';localStorage.setItem(K,t)}const saved=localStorage.getItem(K);if(saved){apply(saved)}else{apply(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}btn.addEventListener('click',()=>{const cur=document.documentElement.classList.contains('dark')?'light':'dark';apply(cur)})})();
 
-// ── DAILY ACCENT COLOUR ────────────────────────────────────────────────────
 (function(){const palette=['#007aff','#5856d6','#af52de','#ff2d55','#ff9500','#34c759','#00c7be'];document.documentElement.style.setProperty('--accent',palette[new Date().getDay()])})();
 
 function openFork(city, webUrl) {
@@ -1114,7 +1081,6 @@ function openChatGPT() {
     setTimeout(() => { if (Date.now() - start < 2000) window.open('https://chat.openai.com', '_blank'); }, 1500);
 }
 
-// ── LIVE DATA ───────────────────────────────────────────────────────────────
 const weatherKey = 'ff6e4e362f0a4231841165933261005';
 
 async function update() {
