@@ -546,29 +546,36 @@
 
             <div id="trip-map" style="padding:12px 16px;background:var(--surface);border-bottom:1px solid var(--border);">
                 <div style="font-size:0.7rem;font-weight:800;text-transform:uppercase;letter-spacing:0.05em;color:var(--accent);margin-bottom:8px;">Route Map</div>
-                <svg viewBox="0 0 400 200" style="width:100%;height:auto;display:block;" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Flight path YVR to Lisbon -->
-                    <path d="M 30 60 Q 120 20 175 95" fill="none" stroke="#ccc" stroke-width="1.5" stroke-dasharray="4 3" id="route-flight"/>
-                    <!-- Driving route -->
-                    <path d="M 175 95 L 195 155 L 255 145 L 275 140 L 350 105" fill="none" stroke="#ccc" stroke-width="2" stroke-dasharray="0" id="route-drive"/>
-                    <!-- Flight BCN to YVR -->
-                    <path d="M 350 105 Q 300 40 30 60" fill="none" stroke="#ccc" stroke-width="1.5" stroke-dasharray="4 3" id="route-return"/>
+                <svg viewBox="0 0 440 210" style="width:100%;height:auto;display:block;" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Flight: YVR → YUL → Lisbon -->
+                    <path d="M 30 55 Q 60 35 90 45" fill="none" stroke="#ccc" stroke-width="1.5" stroke-dasharray="4 3" id="route-flight1"/>
+                    <path d="M 90 45 Q 140 15 190 90" fill="none" stroke="#ccc" stroke-width="1.5" stroke-dasharray="4 3" id="route-flight2"/>
+                    <!-- Driving: Lisbon → Cascais → Lisbon → Algarve → Córdoba → Granada → Barcelona -->
+                    <path d="M 190 90 L 175 110" fill="none" stroke="#ccc" stroke-width="2" id="route-cascais"/>
+                    <path d="M 190 90 L 210 155 L 275 145 L 295 138 L 375 100" fill="none" stroke="#ccc" stroke-width="2" id="route-drive"/>
+                    <!-- Flight: BCN → YVR -->
+                    <path d="M 375 100 Q 320 35 30 55" fill="none" stroke="#ccc" stroke-width="1.5" stroke-dasharray="4 3" id="route-return"/>
                     <!-- City dots -->
-                    <circle id="dot-yvr" cx="30" cy="60" r="6" fill="#ccc"/>
-                    <circle id="dot-lisbon" cx="175" cy="95" r="6" fill="#ccc"/>
-                    <circle id="dot-algarve" cx="195" cy="155" r="6" fill="#ccc"/>
-                    <circle id="dot-cordoba" cx="255" cy="145" r="6" fill="#ccc"/>
-                    <circle id="dot-granada" cx="275" cy="140" r="6" fill="#ccc"/>
-                    <circle id="dot-barcelona" cx="350" cy="105" r="6" fill="#ccc"/>
+                    <circle id="dot-yvr" cx="30" cy="55" r="6" fill="#ccc"/>
+                    <circle id="dot-yul" cx="90" cy="45" r="4" fill="#ccc"/>
+                    <circle id="dot-lisbon" cx="190" cy="90" r="6" fill="#ccc"/>
+                    <circle id="dot-cascais" cx="175" cy="110" r="4" fill="#ccc"/>
+                    <circle id="dot-algarve" cx="210" cy="155" r="6" fill="#ccc"/>
+                    <circle id="dot-cordoba" cx="275" cy="145" r="6" fill="#ccc"/>
+                    <circle id="dot-granada" cx="295" cy="138" r="6" fill="#ccc"/>
+                    <circle id="dot-barcelona" cx="375" cy="100" r="6" fill="#ccc"/>
                     <!-- City labels -->
-                    <text x="30" y="78" text-anchor="middle" style="font-size:9px;font-weight:700;fill:var(--grey);">YVR</text>
-                    <text x="175" y="85" text-anchor="middle" style="font-size:9px;font-weight:700;fill:var(--grey);">Lisbon</text>
-                    <text x="195" y="172" text-anchor="middle" style="font-size:9px;font-weight:700;fill:var(--grey);">Algarve</text>
-                    <text x="255" y="162" text-anchor="middle" style="font-size:9px;font-weight:700;fill:var(--grey);">Córdoba</text>
-                    <text x="275" y="128" text-anchor="middle" style="font-size:9px;font-weight:700;fill:var(--grey);">Granada</text>
-                    <text x="350" y="95" text-anchor="middle" style="font-size:9px;font-weight:700;fill:var(--grey);">Barcelona</text>
-                    <!-- Plane icon on flight path -->
-                    <text x="100" y="48" style="font-size:14px;" transform="rotate(-15 100 48)">✈️</text>
+                    <text x="30" y="72" text-anchor="middle" style="font-size:8px;font-weight:700;fill:var(--grey);">YVR</text>
+                    <text x="90" y="58" text-anchor="middle" style="font-size:7px;font-weight:700;fill:var(--grey);">YUL</text>
+                    <text x="190" y="80" text-anchor="middle" style="font-size:8px;font-weight:700;fill:var(--grey);">Lisbon</text>
+                    <text x="162" y="120" text-anchor="middle" style="font-size:7px;font-weight:700;fill:var(--grey);">Cascais</text>
+                    <text x="210" y="172" text-anchor="middle" style="font-size:8px;font-weight:700;fill:var(--grey);">Algarve</text>
+                    <text x="275" y="162" text-anchor="middle" style="font-size:8px;font-weight:700;fill:var(--grey);">Córdoba</text>
+                    <text x="295" y="126" text-anchor="middle" style="font-size:8px;font-weight:700;fill:var(--grey);">Granada</text>
+                    <text x="375" y="90" text-anchor="middle" style="font-size:8px;font-weight:700;fill:var(--grey);">Barcelona</text>
+                    <!-- Icons -->
+                    <text x="140" y="38" style="font-size:12px;">➡️✈️</text>
+                    <text x="200" y="130" style="font-size:10px;">🚗</text>
                 </svg>
                 <div id="map-stats" style="font-size:0.75rem;color:var(--text);margin-top:6px;font-weight:600;text-align:center;"></div>
             </div>
@@ -1253,7 +1260,9 @@ setInterval(update, 1800000);
     const accent=getComputedStyle(document.documentElement).getPropertyValue('--accent').trim()||'#007aff';
     const stops=[
         {id:'dot-yvr',from:16},
+        {id:'dot-yul',from:16},
         {id:'dot-lisbon',from:16},
+        {id:'dot-cascais',from:19},
         {id:'dot-algarve',from:20},
         {id:'dot-cordoba',from:24},
         {id:'dot-granada',from:25},
@@ -1262,19 +1271,19 @@ setInterval(update, 1800000);
     stops.forEach(s=>{
         if(day>=s.from){
             const el=document.getElementById(s.id);
-            if(el){el.setAttribute('fill',accent);el.setAttribute('r','7');}
+            if(el){el.setAttribute('fill',accent);const r=parseInt(el.getAttribute('r'));el.setAttribute('r',String(r+1));}
         }
     });
-    if(day>=16)document.getElementById('route-flight').setAttribute('stroke',accent);
+    if(day>=16){document.getElementById('route-flight1').setAttribute('stroke',accent);document.getElementById('route-flight2').setAttribute('stroke',accent);}
+    if(day>=19)document.getElementById('route-cascais').setAttribute('stroke',accent);
     if(day>=20){
         const drive=document.getElementById('route-drive');
-        const pts=[[175,95],[195,155],[255,145],[275,140],[350,105]];
-        let activePath='M 175 95';
-        if(day>=20)activePath+=' L 195 155';
-        if(day>=24)activePath+=' L 255 145';
-        if(day>=25)activePath+=' L 275 140';
-        if(day>=27)activePath+=' L 350 105';
-        drive.setAttribute('d',activePath);
+        let p='M 190 90';
+        if(day>=20)p+=' L 210 155';
+        if(day>=24)p+=' L 275 145';
+        if(day>=25)p+=' L 295 138';
+        if(day>=27)p+=' L 375 100';
+        drive.setAttribute('d',p);
         drive.setAttribute('stroke',accent);
     }
     if(day>=30)document.getElementById('route-return').setAttribute('stroke',accent);
