@@ -199,7 +199,32 @@
                 <div class="tz-cell"><span class="tz-label" id="tz-dest-label">🇵🇹 Lisbon</span><span class="tz-time" id="tz-dest">--:--</span><span class="tz-date" id="tz-dest-date"></span></div>
             </div>
             <div class="ticker" id="ticker"><div><div class="ticker-label" id="ticker-label">Departure in</div><div class="ticker-value" id="ticker-value">--:--:--:--</div><div class="ticker-sub" id="ticker-sub"></div></div><div class="ticker-phase" id="ticker-phase"></div></div>
+
+            <div id="trip-map" style="padding:12px 16px;background:var(--surface);border-bottom:1px solid var(--border);">
+                <div style="font-size:0.7rem;font-weight:800;text-transform:uppercase;letter-spacing:0.05em;color:var(--accent);margin-bottom:8px;">Route Map</div>
+                <svg viewBox="0 0 400 200" style="width:100%;height:auto;display:block;" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M 30 60 Q 120 20 175 95" fill="none" stroke="#ccc" stroke-width="1.5" stroke-dasharray="4 3" id="route-flight"/>
+                    <path d="M 175 95 L 195 155 L 255 145 L 275 140 L 350 105" fill="none" stroke="#ccc" stroke-width="2" id="route-drive"/>
+                    <path d="M 350 105 Q 300 40 30 60" fill="none" stroke="#ccc" stroke-width="1.5" stroke-dasharray="4 3" id="route-return"/>
+                    <circle id="dot-yvr" cx="30" cy="60" r="6" fill="#ccc"/>
+                    <circle id="dot-lisbon" cx="175" cy="95" r="6" fill="#ccc"/>
+                    <circle id="dot-algarve" cx="195" cy="155" r="6" fill="#ccc"/>
+                    <circle id="dot-cordoba" cx="255" cy="145" r="6" fill="#ccc"/>
+                    <circle id="dot-granada" cx="275" cy="140" r="6" fill="#ccc"/>
+                    <circle id="dot-barcelona" cx="350" cy="105" r="6" fill="#ccc"/>
+                    <text x="30" y="78" text-anchor="middle" style="font-size:9px;font-weight:700;fill:var(--grey);">YVR</text>
+                    <text x="175" y="85" text-anchor="middle" style="font-size:9px;font-weight:700;fill:var(--grey);">Lisbon</text>
+                    <text x="195" y="172" text-anchor="middle" style="font-size:9px;font-weight:700;fill:var(--grey);">Algarve</text>
+                    <text x="255" y="162" text-anchor="middle" style="font-size:9px;font-weight:700;fill:var(--grey);">Córdoba</text>
+                    <text x="275" y="128" text-anchor="middle" style="font-size:9px;font-weight:700;fill:var(--grey);">Granada</text>
+                    <text x="350" y="95" text-anchor="middle" style="font-size:9px;font-weight:700;fill:var(--grey);">Barcelona</text>
+                    <text x="100" y="48" style="font-size:14px;">✈️</text>
+                </svg>
+                <div id="map-stats" style="font-size:0.75rem;color:var(--text);margin-top:6px;font-weight:600;text-align:center;"></div>
+            </div>
+
             <div class="jetlag-tip" id="daily-fact"><div class="jetlag-tip-icon" id="fact-icon">💡</div><div><div class="jetlag-tip-title">Did you know?</div><div class="jetlag-tip-text" id="fact-text"></div></div></div>
+
             <div class="itinerary-container"><div class="scroll-window">
                 <div class="row"><span class="row-date">May 16</span><span class="row-text"><a href="https://www.google.com/search?q=AC+306+flight+status" target="_blank" rel="noopener noreferrer">AC 306</a> • <a href="https://www.google.com/search?q=AC+812+flight+status" target="_blank" rel="noopener noreferrer">AC 812</a> (YVR➔LIS) • Moxy Lisbon City</span></div>
                 <div class="row"><span class="row-date">May 17</span><span class="row-text">Ismaili Centre Lisbon Guided Tour</span></div>
@@ -211,6 +236,7 @@
                 <div class="row"><span class="row-date">May 27</span><span class="row-text"><a href="https://www.google.com/search?q=VY+2013+flight+status" target="_blank" rel="noopener noreferrer">VY 2013</a> (GRX➔BCN) • Le Méridien Barcelona</span></div>
                 <div class="row"><span class="row-date">May 30</span><span class="row-text">Return <a href="https://www.google.com/search?q=AC+821+flight+status" target="_blank" rel="noopener noreferrer">AC 821</a> • <a href="https://www.google.com/search?q=AC+33+flight+status" target="_blank" rel="noopener noreferrer">AC 33</a> (BCN➔YVR)</span></div>
             </div></div>
+
             <div class="weather-hub">
                 <button class="w-btn" onclick="openWeather()"><span class="w-city">Lisbon</span><span id="w1" class="w-temp">--°</span><span class="w-label">TAP FOR FORECAST</span></button>
                 <button class="w-btn" onclick="openWeather()"><span class="w-city">Algarve</span><span id="w2" class="w-temp">--°</span><span class="w-label">TAP FOR FORECAST</span></button>
@@ -289,8 +315,45 @@ const weatherKey='ff6e4e362f0a4231841165933261005';
 async function update(){const btn=document.getElementById('refresh-btn');if(btn){btn.classList.add('spinning');btn.addEventListener('animationend',()=>btn.classList.remove('spinning'),{once:true})}try{const r=await fetch('https://open.er-api.com/v6/latest/EUR');const d=await r.json();const rate=d.rates.CAD;document.getElementById('rate').textContent=`1 EUR = ${rate.toFixed(2)} CAD`;window.dispatchEvent(new CustomEvent('rateUpdate',{detail:rate}))}catch(err){}const cities=[['Lisbon','w1'],['Albufeira','w2'],['Cordoba,Spain','w3'],['Granada,Spain','w4'],['Barcelona','w5']];await Promise.all(cities.map(async([city,id])=>{try{const res=await fetch(`https://api.weatherapi.com/v1/current.json?key=${weatherKey}&q=${city}`);const data=await res.json();const code=data.current.condition.code;let icon;if(code===1000)icon='☀️';else if(code===1003)icon='⛅';else if(code===1006||code===1009)icon='☁️';else if(code===1030||code===1135||code===1147)icon='🌫️';else if(code>=1063&&code<=1087)icon='⛈️';else if(code>=1150&&code<=1201)icon='🌧️';else if(code>=1210&&code<=1237)icon='🌨️';else if(code>=1240&&code<=1282)icon='🌦️';else icon='🌡️';document.getElementById(id).textContent=`${icon} ${Math.round(data.current.temp_c)}°`}catch(err){}}))}
 update();setInterval(update,1800000);
 
-(function(){const now=new Date();if(now.getMonth()!==4)return;const day=now.getDate();const container=document.querySelector('.cities');const sections=[...container.querySelectorAll('.city-section')];sections.sort((a,b)=>{const aStart=parseInt(a.dataset.start),aEnd=parseInt(a.dataset.end);const bStart=parseInt(b.dataset.start),bEnd=parseInt(b.dataset.end);const aActive=(day>=aStart&&day<=aEnd)?0:(day>aEnd)?1:-1;const bActive=(day>=bStart&&day<=bEnd)?0:(day>bEnd)?1:-1;if(aActive!==bActive)return aActive-bActive;return aStart-bStart});sections.forEach(s=>container.appendChild(s))})();
+// ── ROUTE MAP ──────────────────────────────────────────────────────────────
+(function(){
+    const now=new Date();
+    if(now.getMonth()!==4)return;
+    const day=now.getDate();
+    if(day<16)return;
+    const accent=getComputedStyle(document.documentElement).getPropertyValue('--accent').trim()||'#007aff';
+    const stops=[{id:'dot-yvr',from:16},{id:'dot-lisbon',from:16},{id:'dot-algarve',from:20},{id:'dot-cordoba',from:24},{id:'dot-granada',from:25},{id:'dot-barcelona',from:27}];
+    stops.forEach(s=>{if(day>=s.from){const el=document.getElementById(s.id);if(el){el.setAttribute('fill',accent);el.setAttribute('r','7')}}});
+    if(day>=16)document.getElementById('route-flight').setAttribute('stroke',accent);
+    if(day>=20){const drive=document.getElementById('route-drive');let activePath='M 175 95';if(day>=20)activePath+=' L 195 155';if(day>=24)activePath+=' L 255 145';if(day>=25)activePath+=' L 275 140';if(day>=27)activePath+=' L 350 105';drive.setAttribute('d',activePath);drive.setAttribute('stroke',accent)}
+    if(day>=30)document.getElementById('route-return').setAttribute('stroke',accent);
+    const daysIn=Math.min(day-16+1,15);
+    let km=8800;if(day>=20)km+=300;if(day>=24)km+=450;if(day>=25)km+=200;
+    document.getElementById('map-stats').textContent=`Day ${daysIn} of 15 • ${km.toLocaleString()} km covered`;
+})();
 
+// ── AUTO-REORDER CITIES ────────────────────────────────────────────────────
+(function(){
+    const now=new Date();
+    if(now.getMonth()!==4)return;
+    const day=now.getDate();
+    if(day<16)return;
+    const container=document.querySelector('.cities');
+    const sections=[...container.querySelectorAll('.city-section')];
+    const order=[{start:16,end:19},{start:20,end:24},{start:24,end:25},{start:25,end:27},{start:27,end:30}];
+    sections.sort((a,b)=>{
+        const ai=order.findIndex(o=>parseInt(a.dataset.start)===o.start);
+        const bi=order.findIndex(o=>parseInt(b.dataset.start)===o.start);
+        const aEnd=order[ai]?.end||30,bEnd=order[bi]?.end||30;
+        const aDone=day>aEnd,bDone=day>bEnd;
+        if(aDone&&!bDone)return 1;
+        if(!aDone&&bDone)return -1;
+        return ai-bi;
+    });
+    sections.forEach(s=>container.appendChild(s));
+})();
+
+// ── PULL TO REFRESH ────────────────────────────────────────────────────────
 (function(){let startY=0,pulling=false;document.addEventListener('touchstart',e=>{if(window.scrollY===0){startY=e.touches[0].clientY;pulling=true}},{passive:true});document.addEventListener('touchmove',e=>{if(!pulling)return;const diff=e.touches[0].clientY-startY;if(diff>80){pulling=false;update()}},{passive:true});document.addEventListener('touchend',()=>{pulling=false},{passive:true})})();
 </script>
 </body>
