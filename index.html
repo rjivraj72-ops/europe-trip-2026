@@ -544,9 +544,9 @@
                 <div class="ticker-phase" id="ticker-phase"></div>
             </div>
 
-            <div id="trip-map" style="padding:12px 16px;background:var(--surface);border-bottom:1px solid var(--border);">
-                <div style="font-size:0.7rem;font-weight:800;text-transform:uppercase;letter-spacing:0.05em;color:var(--accent);margin-bottom:8px;">Route Map</div>
-                <svg viewBox="0 0 440 210" style="width:100%;height:auto;display:block;" xmlns="http://www.w3.org/2000/svg">
+            <div id="trip-map" style="padding:16px;background:var(--surface);border-bottom:1px solid var(--border);">
+                <div style="font-size:0.8rem;font-weight:800;text-transform:uppercase;letter-spacing:0.05em;color:var(--accent);margin-bottom:10px;">Route Map</div>
+                <svg viewBox="0 0 440 210" style="width:100%;min-height:160px;height:auto;display:block;" xmlns="http://www.w3.org/2000/svg">
                     <!-- Flight: YVR → YUL → Lisbon -->
                     <path d="M 30 55 Q 60 35 90 45" fill="none" stroke="#ccc" stroke-width="1.5" stroke-dasharray="4 3" id="route-flight1"/>
                     <path d="M 90 45 Q 140 15 190 90" fill="none" stroke="#ccc" stroke-width="1.5" stroke-dasharray="4 3" id="route-flight2"/>
@@ -573,11 +573,8 @@
                     <text x="275" y="162" text-anchor="middle" style="font-size:8px;font-weight:700;fill:var(--grey);">Córdoba</text>
                     <text x="295" y="126" text-anchor="middle" style="font-size:8px;font-weight:700;fill:var(--grey);">Granada</text>
                     <text x="375" y="90" text-anchor="middle" style="font-size:8px;font-weight:700;fill:var(--grey);">Barcelona</text>
-                    <!-- Icons -->
-                    <text x="135" y="32" style="font-size:12px;" transform="rotate(25 135 32)">✈️</text>
-                    <text x="200" y="130" style="font-size:10px;">🚗</text>
                 </svg>
-                <div id="map-stats" style="font-size:0.75rem;color:var(--text);margin-top:6px;font-weight:600;text-align:center;"></div>
+                <div id="map-stats" style="font-size:0.85rem;color:var(--text);margin-top:10px;font-weight:700;text-align:center;"></div>
             </div>
 
             <div class="jetlag-tip" id="daily-fact">
