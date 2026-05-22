@@ -550,11 +550,14 @@
                     <!-- Flight: YVR → YUL → Lisbon -->
                     <path d="M 30 55 Q 60 35 90 45" fill="none" stroke="#ccc" stroke-width="1.5" stroke-dasharray="4 3" id="route-flight1"/>
                     <path d="M 90 45 Q 140 15 190 90" fill="none" stroke="#ccc" stroke-width="1.5" stroke-dasharray="4 3" id="route-flight2"/>
-                    <!-- Driving: Lisbon → Cascais → Lisbon → Algarve → Córdoba → Granada → Barcelona -->
+                    <!-- Driving: Lisbon → Cascais, Lisbon → Algarve → Córdoba → Granada -->
                     <path d="M 190 90 L 175 110" fill="none" stroke="#ccc" stroke-width="2" id="route-cascais"/>
-                    <path d="M 190 90 L 210 155 L 275 145 L 295 138 L 375 100" fill="none" stroke="#ccc" stroke-width="2" id="route-drive"/>
-                    <!-- Flight: BCN → YVR -->
-                    <path d="M 375 100 Q 320 35 30 55" fill="none" stroke="#ccc" stroke-width="1.5" stroke-dasharray="4 3" id="route-return"/>
+                    <path d="M 190 90 L 210 155 L 275 145 L 295 138" fill="none" stroke="#ccc" stroke-width="2" id="route-drive"/>
+                    <!-- Flight: Granada → Barcelona -->
+                    <path d="M 295 138 Q 335 105 375 100" fill="none" stroke="#ccc" stroke-width="1.5" stroke-dasharray="4 3" id="route-grx-bcn"/>
+                    <!-- Flight: BCN → YYZ → YVR -->
+                    <path d="M 375 100 Q 300 30 60 50" fill="none" stroke="#ccc" stroke-width="1.5" stroke-dasharray="4 3" id="route-return1"/>
+                    <path d="M 60 50 Q 45 52 30 55" fill="none" stroke="#ccc" stroke-width="1.5" stroke-dasharray="4 3" id="route-return2"/>
                     <!-- City dots -->
                     <circle id="dot-yvr" cx="30" cy="55" r="6" fill="#ccc"/>
                     <circle id="dot-yul" cx="90" cy="45" r="4" fill="#ccc"/>
@@ -564,6 +567,7 @@
                     <circle id="dot-cordoba" cx="275" cy="145" r="6" fill="#ccc"/>
                     <circle id="dot-granada" cx="295" cy="138" r="6" fill="#ccc"/>
                     <circle id="dot-barcelona" cx="375" cy="100" r="6" fill="#ccc"/>
+                    <circle id="dot-yyz" cx="60" cy="50" r="4" fill="#ccc"/>
                     <!-- City labels -->
                     <text x="30" y="72" text-anchor="middle" style="font-size:8px;font-weight:700;fill:var(--grey);">YVR</text>
                     <text x="90" y="58" text-anchor="middle" style="font-size:7px;font-weight:700;fill:var(--grey);">YUL</text>
@@ -573,6 +577,7 @@
                     <text x="275" y="162" text-anchor="middle" style="font-size:8px;font-weight:700;fill:var(--grey);">Córdoba</text>
                     <text x="295" y="126" text-anchor="middle" style="font-size:8px;font-weight:700;fill:var(--grey);">Granada</text>
                     <text x="375" y="90" text-anchor="middle" style="font-size:8px;font-weight:700;fill:var(--grey);">Barcelona</text>
+                    <text x="60" y="63" text-anchor="middle" style="font-size:7px;font-weight:700;fill:var(--grey);">YYZ</text>
                 </svg>
                 <div id="map-stats" style="font-size:0.85rem;color:var(--text);margin-top:10px;font-weight:700;text-align:center;"></div>
             </div>
@@ -1263,7 +1268,8 @@ setInterval(update, 1800000);
         {id:'dot-algarve',from:20},
         {id:'dot-cordoba',from:24},
         {id:'dot-granada',from:25},
-        {id:'dot-barcelona',from:27}
+        {id:'dot-barcelona',from:27},
+        {id:'dot-yyz',from:30}
     ];
     stops.forEach(s=>{
         if(day>=s.from){
@@ -1279,11 +1285,11 @@ setInterval(update, 1800000);
         if(day>=20)p+=' L 210 155';
         if(day>=24)p+=' L 275 145';
         if(day>=25)p+=' L 295 138';
-        if(day>=27)p+=' L 375 100';
         drive.setAttribute('d',p);
         drive.setAttribute('stroke',accent);
     }
-    if(day>=30)document.getElementById('route-return').setAttribute('stroke',accent);
+    if(day>=27)document.getElementById('route-grx-bcn').setAttribute('stroke',accent);
+    if(day>=30){document.getElementById('route-return1').setAttribute('stroke',accent);document.getElementById('route-return2').setAttribute('stroke',accent);}
     const daysIn=Math.min(day-16+1,15);
     let km=8800;
     if(day>=19)km+=70;
