@@ -546,38 +546,38 @@
 
             <div id="trip-map" style="padding:16px;background:var(--surface);border-bottom:1px solid var(--border);">
                 <div style="font-size:0.8rem;font-weight:800;text-transform:uppercase;letter-spacing:0.05em;color:var(--accent);margin-bottom:10px;">Route Map</div>
-                <svg viewBox="0 0 440 210" style="width:100%;min-height:160px;height:auto;display:block;" xmlns="http://www.w3.org/2000/svg">
+                <svg viewBox="0 0 440 210" style="width:100%;min-height:220px;height:auto;display:block;" xmlns="http://www.w3.org/2000/svg">
                     <!-- Flight: YVR → YUL → Lisbon -->
-                    <path d="M 30 55 Q 60 35 90 45" fill="none" stroke="#ccc" stroke-width="1.5" stroke-dasharray="4 3" id="route-flight1"/>
-                    <path d="M 90 45 Q 140 15 190 90" fill="none" stroke="#ccc" stroke-width="1.5" stroke-dasharray="4 3" id="route-flight2"/>
+                    <path d="M 30 55 Q 60 35 90 45" fill="none" stroke="#ccc" stroke-width="2" stroke-dasharray="5 3" id="route-flight1"/>
+                    <path d="M 90 45 Q 140 15 190 90" fill="none" stroke="#ccc" stroke-width="2" stroke-dasharray="5 3" id="route-flight2"/>
                     <!-- Driving: Lisbon → Cascais, Lisbon → Algarve → Córdoba → Granada -->
-                    <path d="M 190 90 L 175 110" fill="none" stroke="#ccc" stroke-width="2" id="route-cascais"/>
-                    <path d="M 190 90 L 210 155 L 275 145 L 295 138" fill="none" stroke="#ccc" stroke-width="2" id="route-drive"/>
+                    <path d="M 190 90 L 175 110" fill="none" stroke="#ccc" stroke-width="2.5" id="route-cascais"/>
+                    <path d="M 190 90 L 210 155 L 275 145 L 295 138" fill="none" stroke="#ccc" stroke-width="2.5" id="route-drive"/>
                     <!-- Flight: Granada → Barcelona -->
-                    <path d="M 295 138 Q 335 105 375 100" fill="none" stroke="#ccc" stroke-width="1.5" stroke-dasharray="4 3" id="route-grx-bcn"/>
+                    <path d="M 295 138 Q 335 105 375 100" fill="none" stroke="#ccc" stroke-width="2" stroke-dasharray="5 3" id="route-grx-bcn"/>
                     <!-- Flight: BCN → YYZ → YVR -->
-                    <path d="M 375 100 Q 300 30 60 50" fill="none" stroke="#ccc" stroke-width="1.5" stroke-dasharray="4 3" id="route-return1"/>
-                    <path d="M 60 50 Q 45 52 30 55" fill="none" stroke="#ccc" stroke-width="1.5" stroke-dasharray="4 3" id="route-return2"/>
+                    <path d="M 375 100 Q 300 30 60 50" fill="none" stroke="#ccc" stroke-width="2" stroke-dasharray="5 3" id="route-return1"/>
+                    <path d="M 60 50 Q 45 52 30 55" fill="none" stroke="#ccc" stroke-width="2" stroke-dasharray="5 3" id="route-return2"/>
                     <!-- City dots -->
-                    <circle id="dot-yvr" cx="30" cy="55" r="6" fill="#ccc"/>
-                    <circle id="dot-yul" cx="90" cy="45" r="4" fill="#ccc"/>
-                    <circle id="dot-lisbon" cx="190" cy="90" r="6" fill="#ccc"/>
-                    <circle id="dot-cascais" cx="175" cy="110" r="4" fill="#ccc"/>
-                    <circle id="dot-algarve" cx="210" cy="155" r="6" fill="#ccc"/>
-                    <circle id="dot-cordoba" cx="275" cy="145" r="6" fill="#ccc"/>
-                    <circle id="dot-granada" cx="295" cy="138" r="6" fill="#ccc"/>
-                    <circle id="dot-barcelona" cx="375" cy="100" r="6" fill="#ccc"/>
-                    <circle id="dot-yyz" cx="60" cy="50" r="4" fill="#ccc"/>
+                    <circle id="dot-yvr" cx="30" cy="55" r="8" fill="#ccc"/>
+                    <circle id="dot-yul" cx="90" cy="45" r="5" fill="#ccc"/>
+                    <circle id="dot-lisbon" cx="190" cy="90" r="8" fill="#ccc"/>
+                    <circle id="dot-cascais" cx="175" cy="110" r="5" fill="#ccc"/>
+                    <circle id="dot-algarve" cx="210" cy="155" r="8" fill="#ccc"/>
+                    <circle id="dot-cordoba" cx="275" cy="145" r="8" fill="#ccc"/>
+                    <circle id="dot-granada" cx="295" cy="138" r="8" fill="#ccc"/>
+                    <circle id="dot-barcelona" cx="375" cy="100" r="8" fill="#ccc"/>
+                    <circle id="dot-yyz" cx="60" cy="50" r="5" fill="#ccc"/>
                     <!-- City labels -->
-                    <text x="30" y="72" text-anchor="middle" style="font-size:8px;font-weight:700;fill:var(--grey);">YVR</text>
-                    <text x="90" y="58" text-anchor="middle" style="font-size:7px;font-weight:700;fill:var(--grey);">YUL</text>
-                    <text x="190" y="80" text-anchor="middle" style="font-size:8px;font-weight:700;fill:var(--grey);">Lisbon</text>
-                    <text x="162" y="120" text-anchor="middle" style="font-size:7px;font-weight:700;fill:var(--grey);">Cascais</text>
-                    <text x="210" y="172" text-anchor="middle" style="font-size:8px;font-weight:700;fill:var(--grey);">Algarve</text>
-                    <text x="275" y="162" text-anchor="middle" style="font-size:8px;font-weight:700;fill:var(--grey);">Córdoba</text>
-                    <text x="295" y="126" text-anchor="middle" style="font-size:8px;font-weight:700;fill:var(--grey);">Granada</text>
-                    <text x="375" y="90" text-anchor="middle" style="font-size:8px;font-weight:700;fill:var(--grey);">Barcelona</text>
-                    <text x="60" y="63" text-anchor="middle" style="font-size:7px;font-weight:700;fill:var(--grey);">YYZ</text>
+                    <text x="30" y="74" text-anchor="middle" style="font-size:11px;font-weight:700;fill:var(--grey);">YVR</text>
+                    <text x="90" y="60" text-anchor="middle" style="font-size:9px;font-weight:700;fill:var(--grey);">YUL</text>
+                    <text x="190" y="78" text-anchor="middle" style="font-size:11px;font-weight:700;fill:var(--grey);">Lisbon</text>
+                    <text x="162" y="122" text-anchor="middle" style="font-size:9px;font-weight:700;fill:var(--grey);">Cascais</text>
+                    <text x="210" y="174" text-anchor="middle" style="font-size:11px;font-weight:700;fill:var(--grey);">Algarve</text>
+                    <text x="275" y="164" text-anchor="middle" style="font-size:11px;font-weight:700;fill:var(--grey);">Córdoba</text>
+                    <text x="295" y="126" text-anchor="middle" style="font-size:11px;font-weight:700;fill:var(--grey);">Granada</text>
+                    <text x="375" y="88" text-anchor="middle" style="font-size:11px;font-weight:700;fill:var(--grey);">Barcelona</text>
+                    <text x="60" y="64" text-anchor="middle" style="font-size:9px;font-weight:700;fill:var(--grey);">YYZ</text>
                 </svg>
                 <div id="map-stats" style="font-size:0.85rem;color:var(--text);margin-top:10px;font-weight:700;text-align:center;"></div>
             </div>
