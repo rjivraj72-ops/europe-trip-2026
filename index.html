@@ -745,7 +745,7 @@
 
             <!-- CÓRDOBA -->
             <div class="city-section" data-start="24" data-end="24">
-                <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1570698473651-b2de99bae12f?w=800&auto=format&fit=crop');">
+                <div class="hero" style="background-image: url('photos/cordoba.jpg');">
                     <div class="hero-text">
                         <div class="hero-dates">May 24 – 25</div>
                         <h2>Córdoba</h2>
@@ -790,7 +790,7 @@
 
             <!-- GRANADA -->
             <div class="city-section" data-start="25" data-end="26">
-                <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1526392060635-9d6019884377?w=800&auto=format&fit=crop');">
+                <div class="hero" style="background-image: url('photos/granada.jpg');">
                     <div class="hero-text">
                         <div class="hero-dates">May 25 – 27</div>
                         <h2>Granada</h2>
@@ -1297,6 +1297,8 @@ setInterval(update, 1800000);
     if(day>=20)km+=300;
     if(day>=24)km+=450;
     if(day>=25)km+=200;
+    if(day>=27)km+=650;
+    if(day>=30)km+=8800;
     document.getElementById('map-stats').textContent=`Day ${daysIn} of 15 • ${km.toLocaleString()} km covered`;
 })();
 
